@@ -30,7 +30,7 @@
 <meta property="og:description" content="Gao, Guoju, et al. &quot;Auction-based VM allocation for deadline-sensitive tasks in distributed edge cloud.&quot; IEEE Transactions on Services Computing (2019).   我们形式化了三层边缘云结构中对期限敏感的任务的竞争性虚拟机资源分配问题，并提出了基于拍卖">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-02T02:36:11.000Z">
-<meta property="article:modified_time" content="2022-05-06T15:51:48.276Z">
+<meta property="article:modified_time" content="2022-05-09T10:11:06.839Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="INFOCOM">
 <meta name="twitter:card" content="summary">
@@ -196,7 +196,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-06 23:51:48" itemprop="dateModified" datetime="2022-05-06T23:51:48+08:00">2022-05-06</time>
+                <time title="Modified: 2022-05-09 18:11:06" itemprop="dateModified" datetime="2022-05-09T18:11:06+08:00">2022-05-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -310,9 +310,11 @@ v_{ij}-p_{ij}(v_{ij}) &gt; v_{ij}-p_{ij}(b_{ij})
 <h2 id="ava-机制">AVA 机制</h2>
 <h3 id="证明是np-hard问题">证明是NP-Hard问题</h3>
 <p>假设只有一个ECN。并且该ECN无法上传CC，公式限制如下： <span class="math display">\[
-max \sum_{b_{i1} \in \Phi^E}(b_{i1}-A_i·c_1^v)\\
+max \sum_{b_{i1} \in \Phi^E}(b_{i1}-A_i·c_1^v)
+\]</span> <span class="math display">\[
 \sum_{b_{i1} \in \Phi^E}A_i &lt;L_1
-\]</span> 这个可以直接映射到0-1背包问题，所以最简单的情况就是NP难问题，复杂情况一定是NP难问题。</p>
+\]</span></p>
+<p>这个可以直接映射到0-1背包问题，所以最简单的情况就是NP难问题，复杂情况一定是NP难问题。</p>
 <h3 id="wbs问题的基础解">WBS问题的基础解</h3>
 <h4 id="first-phase">First Phase</h4>
 <p>由于上传CC的传输耗时肯定高于上传ECN的耗时，所以我们将上传ECN为good传输延迟，而CC为bad传输延迟，根据T<sub>i</sub>与两个传输延时的关系，我们可以更新<span class="math inline">\(B\)</span>、<span class="math inline">\(S\)</span>集合</p>

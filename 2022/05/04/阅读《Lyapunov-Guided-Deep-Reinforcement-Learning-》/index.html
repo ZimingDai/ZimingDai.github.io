@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205091657934.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205091729042.png">
 <meta property="article:published_time" content="2022-05-04T08:14:07.000Z">
-<meta property="article:modified_time" content="2022-05-09T09:56:42.075Z">
+<meta property="article:modified_time" content="2022-05-09T10:09:56.021Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="INFOCOM">
 <meta name="twitter:card" content="summary">
@@ -204,7 +204,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-09 17:56:42" itemprop="dateModified" datetime="2022-05-09T17:56:42+08:00">2022-05-09</time>
+                <time title="Modified: 2022-05-09 18:09:56" itemprop="dateModified" datetime="2022-05-09T18:09:56+08:00">2022-05-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -290,7 +290,9 @@ p(t) = P(w(t),\alpha(t))
 \]</span> 系统中的一系列变量<span class="math inline">\(y_k(t)\)</span>也会收到采取的决策的影响，可以描述为： <span class="math display">\[
 y_k(t)=Y_k(w(t),\alpha(t))
 \]</span> 在随机优化问题中，优化目标应该在time average中表现，所以优化问题标准式子为： <span class="math display">\[
-min_{\alpha(t)\in A^m}lim_{T\to \infty}\frac{1}{T}\sum_{t=0}^{T-1}E[p(t)]\\
+min_{\alpha(t)\in A^m}lim_{T\to \infty}\frac{1}{T}\sum_{t=0}^{T-1}E[p(t)]
+\]</span></p>
+<p><span class="math display">\[
 s.t.\space lim_{T\to \infty}\frac{1}{T}\sum_{t=0}^{T-1}E[y_k(t)]\leq0
 \]</span></p>
 <hr />
@@ -329,7 +331,13 @@ min_{\alpha(t)\in A^m}E[B+V·p(t)+\sum_{k=1}^KQ_k(t)y_k(t)|\Theta(t)]
 </ul></li>
 </ul>
 <p>本地处理的原始数据 (以位为单位) 和时间范围内消耗的能量是： <span class="math display">\[
-D^t_{i,L}=f_i^t\frac{T}{\phi} \\ E_{i,L}t=\kappa(f^t_i)T \\ \forall x_i^t=0
+D^t_{i,L}=f_i^t\frac{T}{\phi}
+\]</span></p>
+<p><span class="math display">\[
+E_{i,L}t=\kappa(f^t_i)T
+\]</span></p>
+<p><span class="math display">\[
+\forall x_i^t=0
 \]</span></p>
 <ul>
 <li><span class="math inline">\(f_i^t\)</span>：本地CPU的处理数据速率</li>
@@ -346,7 +354,9 @@ D^t_{i,L}=f_i^t\frac{T}{\phi} \\ E_{i,L}t=\kappa(f^t_i)T \\ \forall x_i^t=0
 D_{i,O}^t=\frac{W\tau_i^tT}{v_u}log_2(1+\frac{E_{i,O}^th^t_i}{\tau^t_iTN_0})
 \]</span> <span class="math inline">\(v_u\geq 1\)</span>表示计算开销，<span class="math inline">\(N_0\)</span>表示噪声</p>
 <p>所以我们表示在时间t内总共的比特计算和能量消耗： <span class="math display">\[
-D_i^t=(1-x)D_{i,L}+xD_{i,O}\\
+D_i^t=(1-x)D_{i,L}+xD_{i,O}
+\]</span></p>
+<p><span class="math display">\[
 E_i^t=(1-x)E_{i,L}+xE_{i,O}
 \]</span></p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20220504151327870.png"/></p>
@@ -387,13 +397,17 @@ Q_i(t+1) = Q_i(t)-D^t_i+A^t_i
 \]</span></p>
 <h3 id="求drift-plus-penalty的上界">求<kbd>drift-plus-penalty</kbd>的上界</h3>
 <p><span class="math display">\[
-Q_i(t+1)^2=Q_i(t)^2+2Q_i(t)(A_i^t-D_i^t)+(A_i^t-D_i^t)^2\\
+Q_i(t+1)^2=Q_i(t)^2+2Q_i(t)(A_i^t-D_i^t)+(A_i^t-D_i^t)^2
+\]</span></p>
+<p><span class="math display">\[
 Y_i(t+1)^2=Y_i(t)^2+2Y_i(t)(e_i^t-\gamma_i)+(e_i^t-\gamma_i)^2
 \]</span></p>
 <p>之后两边同时对N个队列进行求和，并将带有<span class="math inline">\(Q\)</span>和<span class="math inline">\(Y\)</span>的平方项合并到等式左侧，得到 <span class="math display">\[
-0.5\sum_{i=1}^NQ_i(t+1)^2-0.5\sum_{i=1}^NQ_i(t)^2 =\sum_{i=1}^NQ_i(t)(A_i^t-D_i^t)+0.5\sum_{i=1}^N(A_i^t-D_i^t)^2\\
+0.5\sum_{i=1}^NQ_i(t+1)^2-0.5\sum_{i=1}^NQ_i(t)^2 =\sum_{i=1}^NQ_i(t)(A_i^t-D_i^t)+0.5\sum_{i=1}^N(A_i^t-D_i^t)^2
+\]</span> <span class="math display">\[
 0.5\sum_{i=1}^NY_i(t+1)^2-0.5\sum_{i=1}^NY_i(t)^2=\sum_{i=1}^NY_i(t)(e_i^t-\gamma_i)+0.5\sum_{i=1}^N(e_i^t-\gamma_i)^2
-\]</span> 我们定义<span class="math inline">\(L(Q(t))=0.5\sum_{i=1}^NQ_i(t)^2\)</span>，并且<span class="math inline">\(\Delta L(Q(t)) = \mathbb{E}\{L(Q(t+1))-L(Q(t))|Z(t)\}\)</span></p>
+\]</span></p>
+<p>我们定义<span class="math inline">\(L(Q(t))=0.5\sum_{i=1}^NQ_i(t)^2\)</span>，并且<span class="math inline">\(\Delta L(Q(t)) = \mathbb{E}\{L(Q(t+1))-L(Q(t))|Z(t)\}\)</span></p>
 <p>对15式子两边同时取期望可以得到 <span class="math display">\[
 \Delta L(Q(t)) \leq B_1 +\sum_{i=1}^NQ_i(t) \mathbb{E}\{A_i^t-D_i^t|Z(t)\}
 \]</span> 类似的能获得： <span class="math display">\[
@@ -415,7 +429,9 @@ Y_i(t+1)^2=Y_i(t)^2+2Y_i(t)(e_i^t-\gamma_i)+(e_i^t-\gamma_i)^2
 <li><span class="math inline">\(Q_i(t),Y_i(t)\)</span>：队列信息</li>
 </ul>
 <p>通过这个我们得出最后的控制动作：是否卸载、持续资源分配 <span class="math display">\[
-\{x^t,y^t\}\\
+\{x^t,y^t\}
+\]</span></p>
+<p><span class="math display">\[
 y^t=\{\tau_i^t,f_i^t,e_{i,O}^t,r_{i,O}^t\}
 \]</span></p>
 <p>我们发现，虽然最后的公式不是一个凸优化，但是如果<span class="math inline">\(X\)</span>的状态是确定的，那么上述公式就会转变成凸优化，所以我们要先去确定<span class="math inline">\(X\)</span>。一般来说，枚举获得<span class="math inline">\(X\)</span>是需要枚举<span class="math inline">\(N^2\)</span>个决策，这样的复杂度很高，所以我们使用DRL来构建一个策略<span class="math inline">\(\pi\)</span>，通过这个策略来将输入映射到最优的动作<span class="math inline">\(x^t\)</span>上。</p>
