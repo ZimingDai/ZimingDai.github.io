@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Phoenix-Logo-16B.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Phoenix-Logo-16B.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Bi, Suzhi, et al. &quot;Lyapunov-guided deep reinforcement learning for stable online computation offloading in mobile-edge computing networks.&quot; IEEE Transactions on Wireless Communications 20.11 (2021):">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阅读《Lyapunov-Guided Deep Reinforcement Learning...》">
+<meta property="og:url" content="http://example.com/2022/05/04/%E9%98%85%E8%AF%BB%E3%80%8ALyapunov-Guided-Deep-Reinforcement-Learning-%E3%80%8B/index.html">
+<meta property="og:site_name" content="Sycamore">
+<meta property="og:description" content="Bi, Suzhi, et al. &quot;Lyapunov-guided deep reinforcement learning for stable online computation offloading in mobile-edge computing networks.&quot; IEEE Transactions on Wireless Communications 20.11 (2021):">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/20220504125540.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20220504151327870.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20220504153135305.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20220504160018485.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205091640571.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205091657934.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205091729042.png">
+<meta property="article:published_time" content="2022-05-04T08:14:07.000Z">
+<meta property="article:modified_time" content="2022-05-09T09:56:42.075Z">
+<meta property="article:author" content="PhoenixDai">
+<meta property="article:tag" content="INFOCOM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/20220504125540.png">
+
+<link rel="canonical" href="http://example.com/2022/05/04/%E9%98%85%E8%AF%BB%E3%80%8ALyapunov-Guided-Deep-Reinforcement-Learning-%E3%80%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>阅读《Lyapunov-Guided Deep Reinforcement Learning...》 | Sycamore</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sycamore</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Phoenix reborns from the ashe</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/04/%E9%98%85%E8%AF%BB%E3%80%8ALyapunov-Guided-Deep-Reinforcement-Learning-%E3%80%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Phoenix-Logo-White.png">
+      <meta itemprop="name" content="PhoenixDai">
+      <meta itemprop="description" content="Anything that doesn't kill me makes me stronger">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sycamore">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          阅读《Lyapunov-Guided Deep Reinforcement Learning...》
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-04 16:14:07" itemprop="dateCreated datePublished" datetime="2022-05-04T16:14:07+08:00">2022-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-09 17:56:42" itemprop="dateModified" datetime="2022-05-09T17:56:42+08:00">2022-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/XF-TANK/" itemprop="url" rel="index"><span itemprop="name">XF-TANK</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>Bi, Suzhi, et al. "Lyapunov-guided deep reinforcement learning for stable online computation offloading in mobile-edge computing networks." <em>IEEE Transactions on Wireless Communications</em> 20.11 (2021): 7519-7537.</p>
+</blockquote>
+<p>机会计算卸载是提高动态边缘环境下移动边缘计算（MEC）网络计算性能的有效方法。</p>
+<p>在本文中，我们考虑了<strong>一个多用户 MEC 网络</strong>，该网络具有随时间变化的无线信道和在连续时间帧中随机用户任务数据到达。</p>
+<p>特别是，我们旨在设计一种在线计算负载算法，以在长期数据队列稳定性和平均功率约束下最大化网络数据处理能力。我们将问题表述为一个多阶段随机混合整数非线性规划 (MINLP) 问题，该问题共同决定了二进制卸载（每个用户在本地或在边缘服务器上计算任务）和系统资源分配决策在连续的时间范围内。</p>
+<p>为了解决不同时间框架决策中的耦合问题，我们提出了一个名为 <strong>LyDROO</strong> 的新框架，它结合了 Lyapunov 优化和深度强化学习 (DRL) 的优势。</p>
+<p><span id="more"></span></p>
+<table>
+<thead>
+<tr class="header">
+<th>缩略单词</th>
+<th>英文</th>
+<th>中文</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MEC</td>
+<td>mobile-edge computing</td>
+<td>移动边缘计算</td>
+</tr>
+<tr class="even">
+<td>WD</td>
+<td>wireless devices</td>
+<td>无线设备</td>
+</tr>
+<tr class="odd">
+<td>ES</td>
+<td>edge server</td>
+<td>边缘服务器</td>
+</tr>
+<tr class="even">
+<td>MINLP</td>
+<td>mixed integer non-liner programming</td>
+<td>非线性整数规划</td>
+</tr>
+<tr class="odd">
+<td>DRL</td>
+<td>deep reinforcement learning</td>
+<td>深度强化学习</td>
+</tr>
+</tbody>
+</table>
+<h2 id="预知识">预知识</h2>
+<p>一般来说，边缘计算系统有两种常见的加载模型：</p>
+<ol type="1">
+<li>Binary：要求将计算任务的<strong>整个</strong>数据集作为一个整体在无线设备上本地处理或者在边缘服务器上远程处理</li>
+<li>Partial：允许在无线设备和边缘服务器上对数据集进行分区并行处理</li>
+</ol>
+<h3 id="lyapunov">Lyapunov</h3>
+<blockquote>
+<p>参考 <a target="_blank" rel="noopener" href="http://cslabcms.nju.edu.cn/problem_solving/images/c/c0/2018-zhao.pdf">Lyapunov Optimization: An Introduction</a></p>
+</blockquote>
+<p>使用function来优化控制一个动态的系统，系统在某一个特定的时间节点的状态是可以使用一个<strong>多维向量</strong>来描述，而funcion则是对这个多维向量所表达的状态的一个<strong>非负的、标量的描述</strong>，我们常常采用：<em>所有状态在各自权重下的平方和</em> 来实行这一点。</p>
+<p>如果系统的状态朝向一个不被期望的方向发展，那么function的数值就会变大，这样我们就可以将function沿着x轴的负方向逼近0使系统趋于稳定。</p>
+<h4 id="例">例</h4>
+<p>不妨将第t个time slot内产生的随机事件标为<span class="math inline">\(w(t) = [w_1(t),w_2(t),...,w_n(t)]\in \Omega^n\)</span>，每一个w是满足独立同分布的，<span class="math inline">\(\Omega\)</span>为随机事件集合；系统在每个时间片使用的策略为<span class="math inline">\(\alpha(t) = [\alpha_1(t),...,\alpha_n(t)]\in A^m\)</span>，A为控制决策集合。</p>
+<p>在第t个time slot，根绝发生的随机事件采取一系列的控制决策，所以对于优化的目标函数<span class="math inline">\(p(t)\)</span>而言，会生成相应的数值 <span class="math display">\[
+p(t) = P(w(t),\alpha(t))
+\]</span> 系统中的一系列变量<span class="math inline">\(y_k(t)\)</span>也会收到采取的决策的影响，可以描述为： <span class="math display">\[
+y_k(t)=Y_k(w(t),\alpha(t))
+\]</span> 在随机优化问题中，优化目标应该在time average中表现，所以优化问题标准式子为： <span class="math display">\[
+min_{\alpha(t)\in A^m}lim_{T\to \infty}\frac{1}{T}\sum_{t=0}^{T-1}E[p(t)]\\
+s.t.\space lim_{T\to \infty}\frac{1}{T}\sum_{t=0}^{T-1}E[y_k(t)]\leq0
+\]</span></p>
+<hr />
+<p><strong>我们希望把满足这些长期的约束 条件所应当采取的操作分解到每每一个时间片内进行</strong>所以要建立虚拟队列</p>
+<p>因此，对每一个约束条件<span class="math inline">\(y_k(t)\)</span>定义一个对应的、初始值为0的队列<span class="math inline">\(Q_k(t)\)</span> <span class="math display">\[
+Q_k(t+1)=max\{Q_k(t)+y_k(t),0\}
+\]</span></p>
+<ul>
+<li>这里的Q并不是队列本身，而是队列的储备量</li>
+<li>这里就可以看出队列有进有出，我们总是希望<strong>能处理的尽可能大于新抵达的</strong>，因为约束条件希望y不大于0</li>
+</ul>
+<p>上式可以推到出 <span class="math display">\[
+lim_{T\to\infty}\frac{E(Q_k(T))}{T}=0
+\]</span> (5)将代替(3)中的约束成为新的约束</p>
+<hr />
+<p>Lyapunov function 定义为： <span class="math display">\[
+L(\Theta(t))=\frac{1}{2}\sum_{k=1}^KQ_k(t)^2
+\]</span> 我们可以使用<span class="math inline">\(\Delta(\Theta(t))=L(\Theta(t+1))-L(\Theta(t))\)</span>来表示从t到t+1全体队列的增加量，这也叫<strong>Lyapunov漂移</strong></p>
+<p>要在每一个时间片内求解<span class="math inline">\(\Delta(\Theta(t))+V·p(t)\)</span>的最小值，也就是分别求两者的最小值，借助V来控制对二者的重视程度。</p>
+<p>最后的最终式子为： <span class="math display">\[
+min_{\alpha(t)\in A^m}E[B+V·p(t)+\sum_{k=1}^KQ_k(t)y_k(t)|\Theta(t)]
+\]</span></p>
+<h2 id="model-problem-formulation">Model &amp; Problem Formulation</h2>
+<h3 id="model">Model</h3>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/20220504125540.png"/></p>
+<p>如上图所示，我们考虑一个ES在相等的连续时间T中帮助N个WD</p>
+<ul>
+<li><p><span class="math inline">\(A^t_i\)</span>：我们定义<span class="math inline">\(A^t_i\)</span>为在第t个时间点原始任务到达第<span class="math inline">\(i\)</span>个WD的队列中，每个<span class="math inline">\(A_i\)</span>是独立同分布的，并且<span class="math inline">\(E((A_i^t)^2) = \eta_i\)</span>，这里的<span class="math inline">\(\eta_i\)</span>是已知的。</p></li>
+<li><p><span class="math inline">\(h_i^t\)</span>：我们定义在第i个WD和ES中间的信道增益为<span class="math inline">\(h_i^t\)</span>，该信道增益在一个时间帧内保持不变，但是在不同的帧之间独立变化</p></li>
+<li><p><span class="math inline">\(D_i^t\)</span>：表示在t时间帧内，第i个WD处理了<span class="math inline">\(D_i^t\)</span>个bits，并在时间帧的最后输出</p>
+<p><strong>注意：这里只考虑Binary卸载规则，即智能选择WD或ES进行处理</strong></p></li>
+<li><p><span class="math inline">\(x_i^t\)</span>：表示卸载决策</p>
+<ul>
+<li>​ 1：计算卸载，分配给ES</li>
+<li>0：本地计算</li>
+</ul></li>
+</ul>
+<p>本地处理的原始数据 (以位为单位) 和时间范围内消耗的能量是： <span class="math display">\[
+D^t_{i,L}=f_i^t\frac{T}{\phi} \\ E_{i,L}t=\kappa(f^t_i)T \\ \forall x_i^t=0
+\]</span></p>
+<ul>
+<li><span class="math inline">\(f_i^t\)</span>：本地CPU的处理数据速率</li>
+<li><span class="math inline">\(\phi &gt;0\)</span>：表示处理1<em>bit</em> 所需要的计算周期</li>
+<li><span class="math inline">\(\kappa &gt; 0\)</span>：表示计算能效参数</li>
+</ul>
+<p>当我们把数据卸载到边缘处理的时候：</p>
+<ul>
+<li><span class="math inline">\(P_i^t\)</span>：表示传输功率</li>
+<li><span class="math inline">\(\tau^t_iT\)</span>：表示分配给第i个WD用于卸载的时间，<span class="math inline">\(\tau\in[0,1] \&amp;\sum_{i=1}^N\tau_i^t \leq1\)</span></li>
+</ul>
+<hr />
+<p>在时间范围内边缘处理的数据量为： <span class="math display">\[
+D_{i,O}^t=\frac{W\tau_i^tT}{v_u}log_2(1+\frac{E_{i,O}^th^t_i}{\tau^t_iTN_0})
+\]</span> <span class="math inline">\(v_u\geq 1\)</span>表示计算开销，<span class="math inline">\(N_0\)</span>表示噪声</p>
+<p>所以我们表示在时间t内总共的比特计算和能量消耗： <span class="math display">\[
+D_i^t=(1-x)D_{i,L}+xD_{i,O}\\
+E_i^t=(1-x)E_{i,L}+xE_{i,O}
+\]</span></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20220504151327870.png"/></p>
+<ul>
+<li><span class="math inline">\(r\)</span>代表计算速度</li>
+<li><span class="math inline">\(e\)</span>代表功率消耗</li>
+<li>我们假设T = 1</li>
+</ul>
+<hr />
+<p>我们定义WD的队列长度为Q，那么对于一个队列：</p>
+<p>​ <span class="math inline">\(t+1\)</span>时刻的队列长度为t时刻的队列长度 - <span class="math inline">\(t\)</span>时刻WD能处理的数据量 + 到来的数据量。（大于0的数） <span class="math display">\[
+Q_i(t+1) = max\{Q_i(t)-\tilde{D}^t_i+A^t_i,0\}
+\]</span> 其中<span class="math inline">\(\tilde{D}^t_i=min(Q_i(t),D_i^t)\)</span>，即处理量最多就是队列中的数据量，因为我们假设这个队列是无限长的，所以<span class="math inline">\(D &lt; Q\)</span>，所以动态队列被简化成以下形式： <span class="math display">\[
+Q_i(t+1) = Q_i(t)-D^t_i+A^t_i
+\]</span> <strong>根据利特尔定律，平均延迟与平均队列长度成正比。因此，强稳定的数据队列转化为每个任务数据bit的有限处理延迟。</strong></p>
+<h3 id="问题表述">问题表述</h3>
+<p>在本文中，我们旨在设计一种在线算法，以<strong>在数据队列稳定性和平均功率约束下，最大化所有 WD 的<kbd>long-term average weighted sum compution rate</kbd></strong>。特别是，我们在每个时间帧内做出在线决策，我们<strong>在不假设知道随机信道条件和数据到达的未来情况下，优化任务卸载和特定时间帧的资源分配决策</strong>。</p>
+<p>多层级随机MINLP问题表述如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20220504153135305.png" alt="image-20220504153135305"  /></p>
+<ul>
+<li><span class="math inline">\(c_i\)</span>表示WD的固定权重，<span class="math inline">\(r^t_i\)</span>代表WD在每一时刻的计算速度</li>
+<li>(6a)表示卸载时间限制，即在一个时间帧之内，每一个WD所获得的卸载时间比例的和不能超过1</li>
+<li>(6b) 对应于数据因果约束，数据处理不完：处理数据量<span class="math inline">\(D\)</span> &lt; 队列数据量<span class="math inline">\(Q\)</span></li>
+<li>(6c) 对应于平均功率约束，<span class="math inline">\(γ_i\)</span> 是功率阈值。</li>
+<li>(6d) 是数据队列稳定性约束。</li>
+</ul>
+<p>在不知道随机信道条件和未来数据到达量的情况下在时间帧之内做出决策是很难满足长期约束的。此外，快速变化的信道条件需要在每个短时间帧内（例如，在信道相干时间内）进行实时决策。</p>
+<h2 id="基于-lyapunov-的多级-minlp-解耦">基于 LYAPUNOV 的多级 MINLP 解耦</h2>
+<blockquote>
+<p>我们应用 Lyapunov 优化将 (P1) 解耦为每帧确定性问题</p>
+</blockquote>
+<p>为了解决平均功率约束(6c)，文章定义了N个虚拟的能量队列<span class="math inline">\(Y_i(t)\)</span>，每个WD有一个虚拟队列，队列的初始化为0，更新公式为<span class="math inline">\(Y_i(t+1)=max(Y_i(t)+ve_i^t-v\gamma_i,0)\)</span>；<span class="math inline">\(v\)</span>是正比例因子，<span class="math inline">\(e\)</span>是在t时间帧的能量消耗。</p>
+<p>这个队列可以被看做是具有随机“能量到达”和固定的“服务比率”，当虚拟能量队列稳定的时候，平均功率<span class="math inline">\(e\)</span>不会超过<span class="math inline">\(\gamma\)</span></p>
+<p>我们把数据队列<span class="math inline">\(Q\)</span>和虚拟的能量队列<span class="math inline">\(Y\)</span>放到一起，然后引入Lyapunov方程和Lyapunov漂移</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20220504160018485.png" /></p>
+<p>为了在稳定队列<span class="math inline">\(Z(t)\)</span>的同时最大化时间平均计算率，我们使用最小化<kbd>drift-plus-penalty</kbd>的办法。具体来说就是要在每个时间帧下最小化<kbd>drift-plus-penalty</kbd>的上界。<kbd>drift-plus-penalty</kbd>的表达式如下： <span class="math display">\[
+\Lambda(Z(t))=\Delta L(Z(t))-V·\sum_{i=1}^N\mathbb{E}\{c_ir_i^t|Z(t)\}
+\]</span></p>
+<h3 id="求drift-plus-penalty的上界">求<kbd>drift-plus-penalty</kbd>的上界</h3>
+<p><span class="math display">\[
+Q_i(t+1)^2=Q_i(t)^2+2Q_i(t)(A_i^t-D_i^t)+(A_i^t-D_i^t)^2\\
+Y_i(t+1)^2=Y_i(t)^2+2Y_i(t)(e_i^t-\gamma_i)+(e_i^t-\gamma_i)^2
+\]</span></p>
+<p>之后两边同时对N个队列进行求和，并将带有<span class="math inline">\(Q\)</span>和<span class="math inline">\(Y\)</span>的平方项合并到等式左侧，得到 <span class="math display">\[
+0.5\sum_{i=1}^NQ_i(t+1)^2-0.5\sum_{i=1}^NQ_i(t)^2 =\sum_{i=1}^NQ_i(t)(A_i^t-D_i^t)+0.5\sum_{i=1}^N(A_i^t-D_i^t)^2\\
+0.5\sum_{i=1}^NY_i(t+1)^2-0.5\sum_{i=1}^NY_i(t)^2=\sum_{i=1}^NY_i(t)(e_i^t-\gamma_i)+0.5\sum_{i=1}^N(e_i^t-\gamma_i)^2
+\]</span> 我们定义<span class="math inline">\(L(Q(t))=0.5\sum_{i=1}^NQ_i(t)^2\)</span>，并且<span class="math inline">\(\Delta L(Q(t)) = \mathbb{E}\{L(Q(t+1))-L(Q(t))|Z(t)\}\)</span></p>
+<p>对15式子两边同时取期望可以得到 <span class="math display">\[
+\Delta L(Q(t)) \leq B_1 +\sum_{i=1}^NQ_i(t) \mathbb{E}\{A_i^t-D_i^t|Z(t)\}
+\]</span> 类似的能获得： <span class="math display">\[
+\Delta L(Y(t)) \leq B_2 +\sum_{i=1}^NY_i(t) \mathbb{E}\{e_i^t-\gamma_i|Z(t)\}
+\]</span> 结合（16）（17）能得到最后的式子 <span class="math display">\[
+\Delta L(Z(t)) \leq \hat{B}+\sum_{i=1}^NQ_i(t) \mathbb{E}\{A_i^t-D_i^t|Z(t)\} +\sum_{i=1}^NY_i(t) \mathbb{E}\{e_i^t-\gamma_i|Z(t)\}
+\]</span> 因此这个<kbd>drift-plus-penalty</kbd>的上界就是等式右侧的式子。通过移除常数项，最后算法通过最大化如下式子来决定action： <span class="math display">\[
+\sum_{i=1}^N(Q_i(t) +Vc_i)r_i^t-\sum^N_{i=1}Y_i(t)e_i^t
+\]</span></p>
+<hr />
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205091640571.png" style="zoom: 67%;" /></p>
+<p>最后将<a href="#问题表述">上文的式子</a>，转化成了这个式子，可以看出，在这个式子中没有对于<span class="math inline">\(t\)</span>的积分了，就简化了计算。</p>
+<h2 id="lyapunov指导的drl">Lyapunov指导的DRL</h2>
+<p>在每一个时间帧中我们观察到的数据是 <span class="math display">\[
+\xi^t=\{h^t_i,Q_i(t),Y_i(t)\}_{i=1}^N
+\]</span></p>
+<ul>
+<li><span class="math inline">\(h^t_i\)</span>：信道收益</li>
+<li><span class="math inline">\(Q_i(t),Y_i(t)\)</span>：队列信息</li>
+</ul>
+<p>通过这个我们得出最后的控制动作：是否卸载、持续资源分配 <span class="math display">\[
+\{x^t,y^t\}\\
+y^t=\{\tau_i^t,f_i^t,e_{i,O}^t,r_{i,O}^t\}
+\]</span></p>
+<p>我们发现，虽然最后的公式不是一个凸优化，但是如果<span class="math inline">\(X\)</span>的状态是确定的，那么上述公式就会转变成凸优化，所以我们要先去确定<span class="math inline">\(X\)</span>。一般来说，枚举获得<span class="math inline">\(X\)</span>是需要枚举<span class="math inline">\(N^2\)</span>个决策，这样的复杂度很高，所以我们使用DRL来构建一个策略<span class="math inline">\(\pi\)</span>，通过这个策略来将输入映射到最优的动作<span class="math inline">\(x^t\)</span>上。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205091657934.png" /></p>
+<h3 id="actor">actor：</h3>
+<p>接受输入的<span class="math inline">\(\xi\)</span>并输出候选的卸载动作<span class="math inline">\(x_i^t\)</span></p>
+<p>Actor模块由一个DNN和一个动作量化器组成。 在第 t 个时间帧的开始，我们将 DNN 的参数表示为<span class="math inline">\(θ_t\)</span>，当<span class="math inline">\(t =1\)</span>时按照标准正态分布随机初始化。以观测值<span class="math inline">\(ξ_t\)</span>作为输入，DNN 输出一个松弛的卸载决策<span class="math inline">\(\hat{x}^t\in [0, 1]^N\)</span>，这个决策稍后将被量化为可行的二元动作。<strong>此时是连续变量</strong></p>
+<p>之后将连续的<span class="math inline">\(\hat{x}^t\)</span>量化为可行的卸载动作<span class="math inline">\(\Omega_t\)</span>，<span class="math inline">\(x_j^t\in\{0,1\}^N\)</span>，<strong>为离散变量数组</strong></p>
+<p>对于前<span class="math inline">\(\frac{M_t}{2}\)</span>个变量，我们按照如下策略<strong>(NOP)</strong>进行赋值：</p>
+<p>对于第一个变量，很简单的赋值就是，如果其大于0.5，就是1，否则就是0；剩下的变量将其按照到0.5的距离进行有大到小的排序，获得<span class="math inline">\(\hat{x}_{(n)}^t\)</span>序列，这些将会用做判断阈值：</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205091729042.png" style="zoom:50%;" /></p>
+<hr />
+<p>对于剩下的一半变量，我们给其一个噪声，然后用<code>sigmoid</code>进行激活：<span class="math inline">\(x^t=sigmoid(x^t+n)\)</span>，激活后重复前一半的步骤</p>
+<blockquote>
+<p>第一次得到的是一个连续值一维数组，每一个用户对应一个连续值；之后变成了一个二维数组，每一个用户对应着一维数组（每个数组的元素都是离散值）</p>
+</blockquote>
+<h3 id="critic">critic:</h3>
+<p>测评输出的<span class="math inline">\(x_i^t\)</span>并选择最优的卸载动作<span class="math inline">\(x^t\)</span>。</p>
+<p>其实就是通过最后的方程进行反向推导，此时已经知道<span class="math inline">\(x\)</span>的值了，就可以进行凸函数优化了。 <span class="math display">\[
+x^t=arg max_{x_j^t\in \Omega_t}G(x_j^t,\xi^t)
+\]</span></p>
+<h3 id="policy-update">policy update：</h3>
+<p>提升actor模块的策略</p>
+<h3 id="queue">queue：</h3>
+<p>在卸载策略已经执行过后更新系统队列</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/INFOCOM/" rel="tag"># INFOCOM</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/02/%E9%98%85%E8%AF%BB%E3%80%8AAuction-Based-VM-Allocation-%E3%80%8B/" rel="prev" title="阅读《Auction-Based VM Allocation...》">
+      <i class="fa fa-chevron-left"></i> 阅读《Auction-Based VM Allocation...》
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/06/%E9%98%85%E8%AF%BB%E3%80%8AA-Survey-on-Deep-Learning-for-NER%E3%80%8B/" rel="next" title="阅读《A Survey on Deep Learning for NER》">
+      阅读《A Survey on Deep Learning for NER》 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">预知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lyapunov"><span class="nav-number">1.1.</span> <span class="nav-text">Lyapunov</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B"><span class="nav-number">1.1.1.</span> <span class="nav-text">例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#model-problem-formulation"><span class="nav-number">2.</span> <span class="nav-text">Model &amp; Problem Formulation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#model"><span class="nav-number">2.1.</span> <span class="nav-text">Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%A1%A8%E8%BF%B0"><span class="nav-number">2.2.</span> <span class="nav-text">问题表述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-lyapunov-%E7%9A%84%E5%A4%9A%E7%BA%A7-minlp-%E8%A7%A3%E8%80%A6"><span class="nav-number">3.</span> <span class="nav-text">基于 LYAPUNOV 的多级 MINLP 解耦</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82drift-plus-penalty%E7%9A%84%E4%B8%8A%E7%95%8C"><span class="nav-number">3.1.</span> <span class="nav-text">求drift-plus-penalty的上界</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lyapunov%E6%8C%87%E5%AF%BC%E7%9A%84drl"><span class="nav-number">4.</span> <span class="nav-text">Lyapunov指导的DRL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#actor"><span class="nav-number">4.1.</span> <span class="nav-text">actor：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#critic"><span class="nav-number">4.2.</span> <span class="nav-text">critic:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#policy-update"><span class="nav-number">4.3.</span> <span class="nav-text">policy update：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#queue"><span class="nav-number">4.4.</span> <span class="nav-text">queue：</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="PhoenixDai"
+      src="/images/Phoenix-Logo-White.png">
+  <p class="site-author-name" itemprop="name">PhoenixDai</p>
+  <div class="site-description" itemprop="description">Anything that doesn't kill me makes me stronger</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2022-01 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PhoenixDai</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='48,0,65' opacity='0.9' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

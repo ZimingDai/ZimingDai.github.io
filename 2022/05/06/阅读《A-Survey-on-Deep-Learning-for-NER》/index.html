@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Phoenix-Logo-16B.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Phoenix-Logo-16B.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Li, Jing, et al. &quot;A survey on deep learning for named entity recognition.&quot; IEEE Transactions on Knowledge and Data Engineering 34.1 (2020): 50-70.   我们将深入研究深度学习技术在NER中的应用，以启发和指导该领域的研究人员和从业人员。 我们以表格形式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阅读《A Survey on Deep Learning for NER》">
+<meta property="og:url" content="http://example.com/2022/05/06/%E9%98%85%E8%AF%BB%E3%80%8AA-Survey-on-Deep-Learning-for-NER%E3%80%8B/index.html">
+<meta property="og:site_name" content="Sycamore">
+<meta property="og:description" content="Li, Jing, et al. &quot;A survey on deep learning for named entity recognition.&quot; IEEE Transactions on Knowledge and Data Engineering 34.1 (2020): 50-70.   我们将深入研究深度学习技术在NER中的应用，以启发和指导该领域的研究人员和从业人员。 我们以表格形式">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205061024751.png">
+<meta property="og:image" content="http://example.com/2022/Library/Application%20Support/typora-user-images/image-20220507083943009.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205061528670.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205061543428.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205061643457.png">
+<meta property="article:published_time" content="2022-05-06T09:01:31.000Z">
+<meta property="article:modified_time" content="2022-05-07T00:46:36.391Z">
+<meta property="article:author" content="PhoenixDai">
+<meta property="article:tag" content="overview">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205061024751.png">
+
+<link rel="canonical" href="http://example.com/2022/05/06/%E9%98%85%E8%AF%BB%E3%80%8AA-Survey-on-Deep-Learning-for-NER%E3%80%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>阅读《A Survey on Deep Learning for NER》 | Sycamore</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sycamore</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Phoenix reborns from the ashe</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/06/%E9%98%85%E8%AF%BB%E3%80%8AA-Survey-on-Deep-Learning-for-NER%E3%80%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Phoenix-Logo-White.png">
+      <meta itemprop="name" content="PhoenixDai">
+      <meta itemprop="description" content="Anything that doesn't kill me makes me stronger">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sycamore">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          阅读《A Survey on Deep Learning for NER》
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-06 17:01:31" itemprop="dateCreated datePublished" datetime="2022-05-06T17:01:31+08:00">2022-05-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-07 08:46:36" itemprop="dateModified" datetime="2022-05-07T08:46:36+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Wenge/" itemprop="url" rel="index"><span itemprop="name">Wenge</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>Li, Jing, et al. "A survey on deep learning for named entity recognition." <em>IEEE Transactions on Knowledge and Data Engineering</em> 34.1 (2020): 50-70.</p>
+</blockquote>
+<ul>
+<li>我们将深入研究深度学习技术在NER中的应用，以启发和指导该领域的研究人员和从业人员。</li>
+<li>我们以表格形式整合了NER语料库，即现成的NER系统 (来自学术界和工业界)，为NER研究社区提供有用的资源。</li>
+<li>我们提出了一种新的分类法，该分类法沿着三个轴系统地组织基于DL的NER方法: 输入的分布式表示，上下文编码器 (用于捕获标签解码器的上下文相关性) 和标签解码器 (用于预测给定序列中的单词标签)。</li>
+<li>此外，我们还调查了在新的NER问题设置和应用程序中最近应用的深度学习技术的最具代表性的方法。</li>
+<li>最后，我们向读者介绍了NER系统面临的挑战，并概述了该领域的未来方向。</li>
+</ul>
+<p><span id="more"></span></p>
+<table>
+<thead>
+<tr class="header">
+<th>英文简称</th>
+<th>英文全称</th>
+<th>中文</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>NER</td>
+<td>Named Entity Recognition</td>
+<td>命名实体识别</td>
+</tr>
+<tr class="even">
+<td>NE</td>
+<td>Named Entity</td>
+<td>命名实体</td>
+</tr>
+<tr class="odd">
+<td>DL</td>
+<td>Deep Learning</td>
+<td>深度学习</td>
+</tr>
+</tbody>
+</table>
+<h2 id="背景">背景</h2>
+<p><strong>应用与NER的技术：</strong></p>
+<ol type="1">
+<li>基于规则的方法，它们不需要带注释的数据，因为它们依赖于手工编制的规则；</li>
+<li>无监督学习方法，依赖无监督算法，无需手动标记训练示例；</li>
+<li>基于特征的监督学习方法，依赖于监督学习算法和仔细的特征工程；</li>
+<li>基于深度学习的方法，自动从原始输入中以端到端的方式发现分类和/或检测所需的表示。我</li>
+</ol>
+<p><strong>什么是NER？</strong></p>
+<p>命名实体是一个单词或短语，可以从一组具有相似属性的其他项目中清楚地识别一个项目。</p>
+<p>命名实体的示例是一般域中的组织、人员和位置名称；生物医学领域的基因、蛋白质、药物和疾病名称。</p>
+<p><strong>NER 是将文本中的命名实体定位和分类为预定义实体类别的过程。</strong></p>
+<blockquote>
+<p>例如给了一个序列<span class="math inline">\(s = &lt;w_1,w_2,...,w_N&gt;\)</span>，NER是一个tuples <span class="math inline">\(&lt;I_s,I_e,t&gt;\)</span>。</p>
+<p><span class="math inline">\(I_s,I_e\)</span>分别表示这个NE的起始和结束的index</p>
+<p><span class="math inline">\(t\)</span>代表这个NE属于哪一类</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205061024751.png" /></p>
+</blockquote>
+<h3 id="ner-评估指标">NER 评估指标</h3>
+<h4 id="精确匹配评估">精确匹配评估</h4>
+<p>NER涉及到识别实体边界和实体类型：当使用”精确匹配评估“时，只有边界和类型都正确的时候才算识别正确。</p>
+<ul>
+<li>真阳性<strong>(TP)</strong>：被NER识别并符合基本事实的实体。</li>
+<li><img src="../../../Library/Application%20Support/typora-user-images/image-20220507083943009.png" alt="image-20220507083943009" />假阳性<strong>(FP)</strong>：被NER识别但不符合基本事实的实体。</li>
+<li>假阴性<strong>(FN)</strong>：在基本事实中注释的实体，未被NER识别。</li>
+</ul>
+<p><strong>Precision 衡量NER系统呈现正确实体的能力</strong> <span class="math display">\[
+Precision = \frac{TP}{TP+FP}
+\]</span> <strong>Recall 衡量NER系统识别语料库中所有实体的能力</strong> <span class="math display">\[
+Recall = \frac{TP}{TP+FN}
+\]</span> <strong>F-Score是Precision和Recall的调和平均值</strong> <span class="math display">\[
+F-score = 2\times \frac{Precision \times Recall}{Precision + Recall}
+\]</span> 由于大多数NER系统涉及多种实体类型，因此需要评估所有实体类的性能。目前有两种测量方法：</p>
+<ol type="1">
+<li><p>宏观平均F-score</p>
+<p>独立计算每一个实体类型的F-score，最后去平均值（同等对待所有的实体类型）</p></li>
+<li><p>微观平均F-score</p>
+<p>聚合来自所有类的实体的贡献来计算平均值（平等对待所有实体），<strong>可能会受到大类实体识别质量的严重影响</strong></p></li>
+</ol>
+<h4 id="宽松匹配评估">宽松匹配评估</h4>
+<p>如果一个实体被分配了其正确的类型，不管其边界，只要与真实情况的边界冲得，就认为正确类型是可信的；无论实体的类型分配，都计入了正确的边界。</p>
+<h3 id="ner的传统方法">NER的传统方法</h3>
+<ol type="1">
+<li>基于规则</li>
+<li>无监督学习</li>
+<li>基于特征的监督学习</li>
+</ol>
+<h4 id="基于规则">基于规则</h4>
+<p>基于规则的 NER 系统依赖于手工制定的规则，可以根据特定领域的地名词典和句法词汇模式设计规则。</p>
+<ul>
+<li>使用 Brill 规则推理方法进行语音输入：该系统根据 Brill 的词性标注器自动生成规则。</li>
+<li>在生物医学领域，提出了 ProMiner，它利用预处理的同义词词典来识别生物医学文本中的蛋白质提及和潜在基因。</li>
+<li>在电子健康记录中提出了一种基于字典的 NER 方法。实验结果表明，该方法提高了召回率，同时对精度的影响有限。</li>
+</ul>
+<p>这些系统<kbd>LaSIE-II, NetOwl, Facile, SAR, FASTUS, LTG</kbd>主要是基于手工编制的语义和语法字典来识别实体。当字典非常详细时，基于规则的系统工作得很好；由于特定领域的规则和不完整的字典，系统通常有高精度和低召回率，并且无法转移到其他领域</p>
+<h4 id="无监督">无监督</h4>
+<p>无监督学习的一种典型方法是聚类。 基于聚类的 NER 系统根据上下文相似性从聚类组中提取命名实体。 关键思想是，在大型语料库上计算的词汇资源、词汇模式和统计数据可用于推断命名实体的提及。</p>
+<ul>
+<li>柯林斯等人观察到，使用未标记数据将监督要求减少到仅 7 个简单的“种子”规则。 然后，提出了两种用于命名实体分类的无监督算法。</li>
+<li>KNOWITALL利用一组谓词名称作为输入，并从一小组通用提取模式中引导其识别过程</li>
+<li>Nadeau 等人提出了一种用于地名录构建和命名实体歧义解决的无监督系统。该系统基于简单而高效的启发式方法结合了实体提取和消歧。</li>
+<li>Zhang 和 Elhadad提出了一种从生物医学文本中提取命名实体的无监督方法。他们的模型不是监督，而是使用术语、语料库统计（例如，逆文档频率和上下文向量）和浅句法知识（例如，名词短语分块）</li>
+</ul>
+<h4 id="基于特征的监督学习">基于特征的监督学习</h4>
+<p>NER 被转换为多类分类或序列标记任务。给定带注释的数据样本，精心设计特征来表示每个训练示例。然后使用机器学习算法来学习一个模型，以从看不见的数据中识别出相似的模式。</p>
+<p><strong>特征向量表示的是对文本的抽象，其中一个词由一个或多个布尔值、数字或标称值表示。</strong></p>
+<p>许多机器学习算法已应用于监督 NER：</p>
+<ol type="1">
+<li>隐马尔可夫模型 <strong>(HMM)</strong></li>
+<li>决策树</li>
+<li>最大熵模型</li>
+<li>支持向量机 <strong>(SVM)</strong></li>
+<li>条件随机场 <strong>((CRF)</strong>。</li>
+</ol>
+<ul>
+<li><p>比克尔等人提出了第一个<strong>基于 HMM</strong> 的 NER 系统，名为 IdentiFinder，用于识别和分类名称、日期、时间表达式和数字量</p></li>
+<li><p>Szarvas 等人使用 <strong>C4.5 决策树</strong>和 <strong>AdaBoostM1 学习算法</strong>开发了一个多语言 NER 系统。一个主要优点是它提供了一个机会，可以通过不同的特征子集训练几个独立的决策树分类器，然后通过多数投票方案组合它们的决策。</p></li>
+<li><p>Borthwick 等人通过应用最大熵理论提出了<strong>“最大熵命名实体”（MENE）</strong>。 MENE 能够在做出标记决策时利用极其多样化的知识源。</p></li>
+<li><p>McNamee和Mayfield训练<strong>SVM分类器</strong>。每个分类器都会做出二进制决定，当前令牌是否属于八个类之一，SVM在预测实体标签时不考虑 “相邻” 词；CRF考虑了上下文。</p></li>
+<li><p>McCallum和Li提出了NER中<strong>CRFs</strong>的特征归纳法。</p></li>
+<li><p>Krishnan和Manning提出了一种<strong>基于两个耦合CRF分类器的两阶段方法</strong>。第二个CRF利用从第一个CRF的输出导出的潜在表示</p></li>
+</ul>
+<h2 id="ner中的深度学习">NER中的深度学习</h2>
+<p><strong>三大优势：</strong></p>
+<ol type="1">
+<li>NER受益于非线性变换，该变换生成从输入到输出的非线性映射。与线性模型（如对数线性HMM和线性链CRF）相比，基于DL的模型能够通过非线性激活函数从数据中学习复杂的特征。</li>
+<li>深度学习节省了大量设计NER功能的精力。传统的基于特征的方法需要大量的工程技能和领域专业知识。另一方面，基于DL的模型可以有效地从原始数据中自动学习有用的表示和潜在因素。</li>
+<li>通过梯度下降，可以在端到端的范例中训练深层神经网络模型。这个特性使我们能够设计可能复杂的NER系统。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205061528670.png" /></p>
+<p>上图就是基于DL的NER的分类</p>
+<ol type="1">
+<li><p>输入的分布式表示考虑了单词和字符级别的嵌入，以及结合了在特征方面有效的附加特征</p></li>
+<li><p>上下文编码器是使用 CNN、RNN 或其他网络来捕获上下文依赖关系</p></li>
+<li><p>标签解码器预测输入序列中标记的标签</p></li>
+</ol>
+<h4 id="输入的分布式表示">输入的分布式表示</h4>
+<p>最简单的单词表示是利用one-hot向量：该向量两两正交并且每个单词还唯一</p>
+<h5 id="单词级别表示">单词级别表示</h5>
+<blockquote>
+<p><strong>什么是word embedding（词嵌入）</strong></p>
+<p>Embedding在数学上表示一个maping, f: X -&gt; Y， 也就是一个function，其中该函数是injective（就是我们所说的单射函数，每个Y只有唯一的X对应，反之亦然）和structure-preserving (结构保存，比如在X所属的空间上X1 &lt; X2,那么映射后在Y所属空间上同理 Y1 &lt; Y2</p>
+<p>通俗的翻译可以认为是单词嵌入，就是把X所属空间的单词映射为到Y空间的多维向量，那么该多维向量相当于嵌入到Y所属空间中，一个萝卜一个坑。</p>
+<p>word embedding，就是找到一个映射或者函数，生成在一个新的空间上的表达，该表达就是word representation。</p>
+</blockquote>
+<p>常用的词嵌入：Google Word2Vec、Stanford GloVe、Facebook fastText、SENNA</p>
+<h5 id="字符级别表示">字符级别表示</h5>
+<p>字符级表示对于利用显式子词级信息（例如前缀和后缀）很有用。字符级表示的另一个优点是它自然地处理词汇外。因此，基于字符的模型能够推断未见过单词的表示并共享语素级规则的信息。</p>
+<p>提取字符级表示有两种广泛使用的架构：基于 CNN 的模型和基于 RNN 的模型。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205061543428.png" /></p>
+<p>对于基于 RNN 的模型，长短期记忆 (LSTM) 和门控循环单元 (GRU) 是基本单元的两个典型选择。</p>
+<h5 id="混合表示">混合表示</h5>
+<p>基于 DL 的表示与基于特征的方法以混合方式相结合。 添加额外信息可能会提高 NER 性能，但代价是损害这些系统的通用性。</p>
+<h4 id="上下文encoder">上下文Encoder</h4>
+<p>广泛使用的上下文编码器体系结构: 卷积神经网络，循环神经网络，递归神经网络和深度Transformer</p>
+<h5 id="神经语言模型">神经语言模型</h5>
+<p>语言模型是描述序列生成的一系列模型，给定一个序列<span class="math inline">\((t_1,t_2,..t_N)\)</span>，通过前向语言模型计算给定历史序列<span class="math inline">\((t_1,t_2,...t_{k-1})\)</span>下<span class="math inline">\(t_k\)</span>的概率 <span class="math display">\[
+{p(t_1,t_2,..t_N) = \prod_{k=1}^Np(t_k|t_1,...t_{k-1}})
+\]</span> 后向语言模型和前向语言模型很像，只不过是相反的顺序 <span class="math display">\[
+{p(t_1,t_2,..t_N) = \prod_{k=1}^Np(t_k|t_{k+1},...t_{N}})
+\]</span> 对于神经语言模型，token<span class="math inline">\(t_k\)</span>的概率可以通过递归神经网络的输出来计算。在每个位置 k，我们可以获得两个上下文相关的表示（前向和后向），然后将它们组合为令牌<span class="math inline">\(t_k\)</span>的最终语言模型嵌入。这种语言模型增强的知识已被经验证明有助于许多序列标记任务。</p>
+<h5 id="深度transformer">深度Transformer</h5>
+<p>神经序列标记模型通常基于复杂的卷积或递归网络，该网络由编码器和解码器组成。由Vaswani等人提出的Transformer<strong>完全免除递归和卷积</strong>。Transformer利用堆叠的自我注意和逐点的全连接层来构建编码器和解码器的基本块。对各种任务的实验表明Transformer在质量上优越，同时需要更少的时间来训练。</p>
+<h4 id="标签解码器">标签解码器</h4>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205061643457.png" /></p>
+<p>标签解码器是 NER 模型的最后阶段。它将上下文相关的表示作为输入，并生成与输入序列相对应的标签序列。总结了标签解码器的四种架构：</p>
+<ol type="1">
+<li>MLP + softmax 层</li>
+<li>条件随机场 (CRF)</li>
+<li>循环神经网络</li>
+<li>指针网络。</li>
+</ol>
+<p>NER 通常被表述为一个序列标记问题。 使用多层 Perceptron + Softmax 层作为标签解码器层，将序列标注任务转换为多类分类问题。 每个单词的标签是根据上下文相关的表示独立预测的，而不考虑其邻居。</p>
+<p>条件随机场是全局以观测序列为条件的随机场。CRF已广泛用于基于特征的监督学习方法。许多基于深度学习的NER模型使用CRF层作为标签解码器。然而，CRF 不能充分利用段级信息，因为段的内部属性不能用词级表示完全编码</p>
+<p>RNN标签解码器的性能优于CRF，并且在实体类型数量较多时训练速度更快，其用作贪婪地产生标签序列的语言模型。</p>
+<p>指针网络应用 RNN 来学习输出序列的条件概率，其元素是与输入序列中的位置相对应的离散标记。 它通过使用 softmax 概率分布作为“指针”来表示可变长度字典。</p>
+<h2 id="ner最新技术">NER最新技术</h2>
+<h4 id="ner深度多任务学习">NER深度多任务学习</h4>
+<p>多任务学习是一种将一组相关任务一起学习的方法。通过考虑不同任务之间的关系，多任务学习算法有望获得比单独学习每个任务的算法更好的结果。</p>
+<p>除了与其他序列标记任务一起考虑神经网络误差外，多任务学习框架可用于实体和关系的联合提取，或者将神经网络建模为两个相关的子任务：实体分割和实体类别预测。</p>
+<h4 id="ner深度迁移学习">NER深度迁移学习</h4>
+<p>迁移学习旨在通过利用从源域学习的知识在目标域上执行机器学习任务。 在 NLP 中，迁移学习也称为域适应。</p>
+<h4 id="ner深度主动学习">NER深度主动学习</h4>
+<p>主动学习背后的关键思想是：如果允许机器学习算法选择从中学习的数据，那么机器学习算法可以用更少的训练数据表现得更好。</p>
+<p>深度学习通常需要大量的训练数据，这些数据的获取成本很高。因此，将深度学习与主动学习相结合有望减少数据注释工作。</p>
+<h4 id="ner深度强化学习">NER深度强化学习</h4>
+<p>强化学习 (RL) 是受行为主义心理学启发的机器学习的一个分支，它关注软件代理如何在环境中采取行动以最大化一些累积奖励。</p>
+<p>这个想法是一个代理将通过与环境交互并获得执行动作的奖励来从环境中学习。</p>
+<p>具体来说，RL 问题可以表述如下：环境被建模为具有输入（来自代理的动作）和输出（对代理的观察和奖励）的随机有限状态机。 它由三个关键部分组成：</p>
+<ol type="1">
+<li>状态转换函数</li>
+<li>观察（即输出）函数</li>
+<li>奖励函数。</li>
+</ol>
+<p>代理也被建模为具有输入（来自环境的观察/奖励）和输出（对环境的动作）的随机有限状态机。 它由两部分组成：</p>
+<ol type="1">
+<li>状态转换函数</li>
+<li>策略/输出函数。</li>
+</ol>
+<p><strong>代理的最终目标是通过尝试最大化累积奖励来学习良好的状态更新函数和策略。</strong></p>
+<h4 id="ner深度对抗网络">NER深度对抗网络</h4>
+<p>对抗性学习是明确训练对抗性示例模型的过程。<strong>目的是使模型更易于攻击或减少其在干净输入上的测试误差</strong>。</p>
+<p>对抗性网络通过2人游戏学习从训练分发中生成: 一个网络生成候选人 (生成网络)，另一个对其进行评估 (判别网络)。</p>
+<p>生成网络学习从潜在空间映射到感兴趣的特定数据分布，而判别网络区分由生成器生成的候选和来自现实世界数据分布的实例。</p>
+<h4 id="ner神经注意">NER神经注意</h4>
+<p><strong>注意机制</strong>基于人类中发现的视觉注意机制。例如，人们通常以“高分辨率”关注图像的某个区域，而以“低分辨率”感知周围区域。神经注意力机制允许神经网络有能力专注于其输入的一个子集。通过应用注意力机制，NER 模型可以捕获输入中信息量最大的元素。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/overview/" rel="tag"># overview</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/04/%E9%98%85%E8%AF%BB%E3%80%8ALyapunov-Guided-Deep-Reinforcement-Learning-%E3%80%8B/" rel="prev" title="阅读《Lyapunov-Guided Deep Reinforcement Learning...》">
+      <i class="fa fa-chevron-left"></i> 阅读《Lyapunov-Guided Deep Reinforcement Learning...》
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/06/%E9%98%85%E8%AF%BB%E3%80%8ASource-of-Transfer-in-Multilingual-NER%E3%80%8B/" rel="next" title="阅读《Sources of Transfer in Multilingual NER》">
+      阅读《Sources of Transfer in Multilingual NER》 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ner-%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87"><span class="nav-number">1.1.</span> <span class="nav-text">NER 评估指标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B2%BE%E7%A1%AE%E5%8C%B9%E9%85%8D%E8%AF%84%E4%BC%B0"><span class="nav-number">1.1.1.</span> <span class="nav-text">精确匹配评估</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%BD%E6%9D%BE%E5%8C%B9%E9%85%8D%E8%AF%84%E4%BC%B0"><span class="nav-number">1.1.2.</span> <span class="nav-text">宽松匹配评估</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ner%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">NER的传统方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E8%A7%84%E5%88%99"><span class="nav-number">1.2.1.</span> <span class="nav-text">基于规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E7%9B%91%E7%9D%A3"><span class="nav-number">1.2.2.</span> <span class="nav-text">无监督</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E7%9A%84%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.2.3.</span> <span class="nav-text">基于特征的监督学习</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ner%E4%B8%AD%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span class="nav-number">2.</span> <span class="nav-text">NER中的深度学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.0.1.</span> <span class="nav-text">输入的分布式表示</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%95%E8%AF%8D%E7%BA%A7%E5%88%AB%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.0.1.1.</span> <span class="nav-text">单词级别表示</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E7%BA%A7%E5%88%AB%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.0.1.2.</span> <span class="nav-text">字符级别表示</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%B7%E5%90%88%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.0.1.3.</span> <span class="nav-text">混合表示</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87encoder"><span class="nav-number">2.0.2.</span> <span class="nav-text">上下文Encoder</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">神经语言模型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6transformer"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">深度Transformer</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E8%A7%A3%E7%A0%81%E5%99%A8"><span class="nav-number">2.0.3.</span> <span class="nav-text">标签解码器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ner%E6%9C%80%E6%96%B0%E6%8A%80%E6%9C%AF"><span class="nav-number">3.</span> <span class="nav-text">NER最新技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ner%E6%B7%B1%E5%BA%A6%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.0.1.</span> <span class="nav-text">NER深度多任务学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ner%E6%B7%B1%E5%BA%A6%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.0.2.</span> <span class="nav-text">NER深度迁移学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ner%E6%B7%B1%E5%BA%A6%E4%B8%BB%E5%8A%A8%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.0.3.</span> <span class="nav-text">NER深度主动学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ner%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.0.4.</span> <span class="nav-text">NER深度强化学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ner%E6%B7%B1%E5%BA%A6%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C"><span class="nav-number">3.0.5.</span> <span class="nav-text">NER深度对抗网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ner%E7%A5%9E%E7%BB%8F%E6%B3%A8%E6%84%8F"><span class="nav-number">3.0.6.</span> <span class="nav-text">NER神经注意</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="PhoenixDai"
+      src="/images/Phoenix-Logo-White.png">
+  <p class="site-author-name" itemprop="name">PhoenixDai</p>
+  <div class="site-description" itemprop="description">Anything that doesn't kill me makes me stronger</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2022-01 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PhoenixDai</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='48,0,65' opacity='0.9' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

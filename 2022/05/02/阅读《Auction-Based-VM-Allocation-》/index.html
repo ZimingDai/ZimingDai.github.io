@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Phoenix-Logo-16B.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Phoenix-Logo-16B.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Gao, Guoju, et al. &quot;Auction-based VM allocation for deadline-sensitive tasks in distributed edge cloud.&quot; IEEE Transactions on Services Computing (2019).   我们形式化了三层边缘云结构中对期限敏感的任务的竞争性虚拟机资源分配问题，并提出了基于拍卖">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阅读《Auction-Based VM Allocation...》">
+<meta property="og:url" content="http://example.com/2022/05/02/%E9%98%85%E8%AF%BB%E3%80%8AAuction-Based-VM-Allocation-%E3%80%8B/index.html">
+<meta property="og:site_name" content="Sycamore">
+<meta property="og:description" content="Gao, Guoju, et al. &quot;Auction-based VM allocation for deadline-sensitive tasks in distributed edge cloud.&quot; IEEE Transactions on Services Computing (2019).   我们形式化了三层边缘云结构中对期限敏感的任务的竞争性虚拟机资源分配问题，并提出了基于拍卖">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-02T02:36:11.000Z">
+<meta property="article:modified_time" content="2022-05-06T15:51:48.276Z">
+<meta property="article:author" content="PhoenixDai">
+<meta property="article:tag" content="INFOCOM">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/05/02/%E9%98%85%E8%AF%BB%E3%80%8AAuction-Based-VM-Allocation-%E3%80%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>阅读《Auction-Based VM Allocation...》 | Sycamore</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sycamore</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Phoenix reborns from the ashe</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/02/%E9%98%85%E8%AF%BB%E3%80%8AAuction-Based-VM-Allocation-%E3%80%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Phoenix-Logo-White.png">
+      <meta itemprop="name" content="PhoenixDai">
+      <meta itemprop="description" content="Anything that doesn't kill me makes me stronger">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sycamore">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          阅读《Auction-Based VM Allocation...》
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-02 10:36:11" itemprop="dateCreated datePublished" datetime="2022-05-02T10:36:11+08:00">2022-05-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-06 23:51:48" itemprop="dateModified" datetime="2022-05-06T23:51:48+08:00">2022-05-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/XF-TANK/" itemprop="url" rel="index"><span itemprop="name">XF-TANK</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>Gao, Guoju, et al. "Auction-based VM allocation for deadline-sensitive tasks in distributed edge cloud." <em>IEEE Transactions on Services Computing</em> (2019).</p>
+</blockquote>
+<ol type="1">
+<li>我们形式化了三层边缘云结构中对期限敏感的任务的竞争性虚拟机资源分配问题，并提出了基于拍卖的虚拟机资源分配（AVA）机制，该机制主要由<strong>贪婪中标选择算法</strong>和<strong>支付确定算法</strong>组成.</li>
+<li>我们证明了AVA的中标选择问题是NP难问题。我们首先去除最后期限约束，然后将三层边缘云结构转换为两层边缘云结构。在此基础上，提出了一种贪婪中标选择算法，并进一步分析了其近似比。</li>
+<li>我们还设计了一个真实支付判定算法。然后，我们证明了AVA机制具有真实性、个体合理性和计算效率。</li>
+<li>我们对真实轨迹进行了广泛的模拟，以评估所提出的 AVA 机制的性能。结果表明，AVA不仅比对比算法取得了更好的社会福利性能，而且保证了真实性、个体理性和计算效率。</li>
+</ol>
+<p><span id="more"></span></p>
+<h2 id="模型-问题描述">模型 &amp; 问题描述</h2>
+<p><strong>三个身份</strong></p>
+<ol type="1">
+<li>ECN（CC）</li>
+<li>platform</li>
+<li>users</li>
+</ol>
+<h3 id="三方交互">三方交互</h3>
+<ol type="1">
+<li><p>当移动用户希望租用虚拟机资源来运行其对期限敏感的云计算应用程序时，它首先会生成一个请求，然后将请求提交给平台。 该请求由用户的<strong>最大可容忍延迟（即截止日期）、所需的 VM 资源量和输入数据量</strong>组成。</p>
+<p>我们使用<span class="math inline">\(r_i = \{T_i,A_i,I_i\}\)</span>来表示第 i 个移动用户的请求，其中 T<sub>i</sub>、A<sub>i</sub> 和 I<sub>i</sub> 表示截止日期、VM 资源总量和输入数据量。 此外，所有请求的集合用 R 表示。 <span class="math display">\[
+r_i = \{T_i,A_i,I_i\}
+\]</span></p></li>
+<li><p>平台会定期收集每个ECN的状态信息，然后公示给提交请求的移动用户。状态信息包括几个主要参数：<strong>VM资源容量、带宽、租用VM资源的单位成本和向CC传输数据的单位成本</strong>。</p>
+<blockquote>
+<p>这里，ECN的带宽包括与CC相关的带宽和与移动用户相关的带宽。</p>
+</blockquote>
+<p><span class="math display">\[
+s_j=\{L_j,c_j^v,c_j^t,b_j^上,b_j^下\}
+\]</span></p>
+<p>我们用<span class="math inline">\(s_j=\{L_j,c_j^v,c_j^t,b_j^上,b_j^下\}\)</span>表示第 j 个 ECN 的状态信息，其中 L<sub>j</sub> 表示 ECN (s<sub>j</sub>) 的 VM 资源容量。<span class="math inline">\(c_j^v\)</span>和<span class="math inline">\(c_j^t\)</span>表示 VM 资源的单位成本、分别为向CC传输数据的单位成本。<span class="math inline">\(b_j^上\)</span>表示VM to CC的带宽，而<span class="math inline">\(b_j^下\)</span>表示s<sub>j</sub>和用户之间的带宽。所有 ECN 的集合用 S 表示。此外，我们让 <span class="math inline">\(c^v_0\)</span>表示 CC 中 VM 资源的单位成本。这里，<span class="math inline">\(c^v_0\)</span> 远小于$ c^v_j<span class="math inline">\(（对于S中的所有\)</span>s_j$）。</p></li>
+<li><p>然后，移动用户根据状态信息对ecn进行不同的取值。同时，移动用户确定每个ECN的出价。对于每个请求r<sub>i</sub>，<strong>我们使用<span class="math inline">\(b_{ij}\)</span>和<span class="math inline">\(v_{ij}\)</span>分别表示第i个移动用户对第j个ECN的出价和估值。</strong>所有出价的集合由B表示。移动用户将向平台发送他们的出价。</p>
+<blockquote>
+<p>注意：</p>
+<p>这里的b<sub>ij</sub>是用户为了得到ECN的资源锁支付的金额，v<sub>ij</sub>是用户在进行使用时对于这些资源的真实评估值，这个值只有用户自身知道，用户可能会操纵b<sub>ij</sub>，导致平台和ECN获得更少的奖励，所以整个Model要满足移动用户不会操纵其出价</p>
+</blockquote></li>
+<li><p>该平台根据收到的来自移动用户的出价和请求，确定拍卖的获胜者，为获胜者做出调度决策，并计算相应的付款。</p>
+<blockquote>
+<p>注意：</p>
+<ul>
+<li>每个请求只能分配给一个ECN</li>
+<li>每个ECN在容量和期限限制下可以服务多个请求</li>
+<li>中标：首先上传的ECN，然后ECN要么自己完成任务，要么上传CC</li>
+</ul>
+</blockquote></li>
+<li><p>移动用户将输入数据上传到 ECN 以运行他们的云计算应用程序，然后支付相应的奖励。 根据中标的调度决策，ECN决定将一些任务上传到CC并支付CC</p></li>
+</ol>
+<p>为了方便处理，我们只允许一个用户在一个拍卖环节内发送一个请求（如果有多个请求的需求，可以等价为多个虚拟用户）我们使用d<sub>ij</sub>来表示请求与ECN之间的延迟，计算公式如下： <span class="math display">\[
+d_{ij}=\left\{
+\begin{aligned}
+&amp;\frac{I_i}{b_j^下}；&amp;(r_i \to s_j)\\
+&amp;\frac{I_i}{b_j^下}+\frac{I_i}{b_j^上}；&amp;(r_i \to s_j \to CC)
+\end{aligned}
+\right.
+\]</span> 上式表明ECN可以单独完成任务，并不需要进行上传；下式表示ECN无法单独完成任务，需要CC的参与；<strong><span class="math inline">\(I_i\)</span>指的是输入数据量+输出数据量。</strong>所以<span class="math inline">\(d_{ij}\)</span>包括了从ECN(CC)下载数据到user的延迟。</p>
+<h3 id="中标选择问题wbs">中标选择问题WBS</h3>
+<ul>
+<li>我们定义<span class="math inline">\(\Phi\)</span>为WBS问题的解集，称为中标集<span class="math inline">\(b_{ij} \in \Phi\)</span></li>
+<li><span class="math inline">\(\Phi^E\)</span>为ECN可以单独解决的中标集合</li>
+<li><span class="math inline">\(\Phi^C\)</span>表示需要上传到CC的中标集合</li>
+<li><span class="math inline">\(\Phi^C \bigcap \Phi^E = \oslash\)</span></li>
+<li><span class="math inline">\(\Phi^C \bigcup \Phi^E = \Phi\)</span></li>
+</ul>
+<h4 id="social-welfare">Social Welfare</h4>
+<p><strong>中标的总估值 - 总成本</strong> <span class="math display">\[
+\sum_{b_{ij} \in \Phi^E}(v_{ij}-A_i·c_j^v) + \sum_{b_{ij} \in \Phi^C}(v_{ij}-A_i·(c_j^t+c_0^v) )
+\]</span></p>
+<ul>
+<li><p>$A_i·c_j^v $ 表示ECN节点s<sub>j</sub>执行请求r<sub>i</sub>的花费</p></li>
+<li><p><span class="math inline">\(A_i·(c_j^t+c_0^v)\)</span>表示请求传输到CC以及CC计算的成本</p></li>
+</ul>
+<p><span class="math display">\[
+max \sum_{b_{ij} \in \Phi^E}(v_{ij}-A_i·c_j^v) + \sum_{b_{ij} \in \Phi^C}(v_{ij}-A_i·(c_j^t+c_0^v) )
+\]</span> 方程4可以等价为： <span class="math display">\[
+max \sum_{b_{ij} \in \Phi^E}(b_{ij}-A_i·c_j^v) + \sum_{b_{ij} \in \Phi^C}(b_{ij}-A_i·(c_j^t+c_0^v) )
+\]</span></p>
+<h3 id="pd问题">PD问题</h3>
+<p>PD问题是确定每次中标的付款，使整个拍卖模型满足真实性和个体理性</p>
+<h4 id="truthfulness">Truthfulness</h4>
+<p><strong>定义<span class="math inline">\(p_{ij}(b_{ij})\)</span>为由拍卖机制的支付计算算法确定的相应支付</strong></p>
+<p>用户对真实出价和不真实出价的报酬率分别为<span class="math inline">\(v_{ij}-p_{ij}(v_{ij})\)</span>，<span class="math inline">\(v_{ij}-p_{ij}(b_{ij})\)</span> <span class="math display">\[
+v_{ij}-p_{ij}(v_{ij}) &gt; v_{ij}-p_{ij}(b_{ij})
+\]</span> 拍卖机制的真实性可以确保每个用户报告其真实估值，因为不真实的出价将导致更糟糕的回报。</p>
+<h4 id="individual-reationality">Individual Reationality</h4>
+<p>user的支付不应该超过其对应的估计值，即<span class="math inline">\(v_{ij} &gt; p_{ij}(b_{ij})\)</span></p>
+<p>在这里，每个移动用户的真实估值必须涵盖其相应的支付。</p>
+<h4 id="efficiency">Efficiency</h4>
+<p>具有计算效率的算法比具有高计算复杂度的最优算法==更重要==</p>
+<h2 id="ava-机制">AVA 机制</h2>
+<h3 id="证明是np-hard问题">证明是NP-Hard问题</h3>
+<p>假设只有一个ECN。并且该ECN无法上传CC，公式限制如下： <span class="math display">\[
+max \sum_{b_{i1} \in \Phi^E}(b_{i1}-A_i·c_1^v)\\
+\sum_{b_{i1} \in \Phi^E}A_i &lt;L_1
+\]</span> 这个可以直接映射到0-1背包问题，所以最简单的情况就是NP难问题，复杂情况一定是NP难问题。</p>
+<h3 id="wbs问题的基础解">WBS问题的基础解</h3>
+<h4 id="first-phase">First Phase</h4>
+<p>由于上传CC的传输耗时肯定高于上传ECN的耗时，所以我们将上传ECN为good传输延迟，而CC为bad传输延迟，根据T<sub>i</sub>与两个传输延时的关系，我们可以更新<span class="math inline">\(B\)</span>、<span class="math inline">\(S\)</span>集合</p>
+<p>我们将移除那些不能满足ddl限制的bid，并且添加一些虚拟bids和ECNs，如果这个ddl比bad传输延迟要大。主要有以下三种情况</p>
+<ol type="1">
+<li><p>如果<span class="math inline">\(ddl &lt; good\)</span>，就删除这个bid，因为无论如何不能满足截止时间约束</p></li>
+<li><p>如果<span class="math inline">\(good &lt; ddl &lt; bad\)</span>，我们不做处理</p></li>
+<li><p>如果<span class="math inline">\(ddl &gt; bad\)</span>，我们就会创建一个虚拟的ECN(<span class="math inline">\(s_{j*}\)</span>)和虚拟的投标(<span class="math inline">\(b_{ij*}\)</span>) <span class="math display">\[
+s_{j*}=\{L_{j*}=A_i，c_{j*}^v=c_j^t+c_o^v，c_{j*}^t = b_{j*}^上= b_{j*}^下 = 0\}
+\]</span> 新添加的ECN，资源容量 = 请求i所需要的容量，VM资源成本为一开始的上传CC成本+CC中的VM资源成本，虚拟的上传CC成本 = 0，<strong>带宽都为0</strong>。</p>
+<p>在这里，生成虚拟ECN和bid的过程意味着从边缘云计算场景中删除CC，并将三层边缘云结构转换为两层结构。</p></li>
+</ol>
+<h4 id="second-phase">Second Phase</h4>
+<p>我们集中讨论了具有容量限制的WBS问题。我们首先将中标选择建模为一个<strong>带有0-1背包约束的n对1加权二部图</strong>匹配问题。由于容量限制，该问题是NP难问题，因此我们采用贪婪策略来确定最大匹配，其总权重约为最大。</p>
+<p>建立图： <span class="math display">\[
+G = \{R,\widehat{S},\varepsilon:\widehat{B}\}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(R\)</span>和<span class="math inline">\(\widehat{S}\)</span>是两个独立的点集；</p></li>
+<li><p><span class="math inline">\(\varepsilon\)</span>指的是图中的边，其中包含了边<span class="math inline">\(&lt;r_i,s_j&gt;\)</span></p></li>
+<li><p><span class="math inline">\(\widehat{B}\)</span>是<span class="math inline">\(b_{ij}\)</span>的集合，每一个bid对应一个边</p></li>
+<li><p>对于每一个请求r，其需要的资源容量就是背包问题中每个物品的重量</p></li>
+<li><p>每一个s的VM资源容量就相当于背包的大小</p></li>
+<li><p>每一条边都有自己的权重，即weight（每个资源的social welfare） <span class="math display">\[
+w_{ij} = \frac{b_{ij}}{A_i} - c_j^v
+\]</span></p></li>
+</ul>
+<blockquote>
+<p>每一个unit的需求得到的利益（目标函数÷<span class="math inline">\(A_i\)</span>）</p>
+</blockquote>
+<p>由于我们在前文已经将虚拟的ECN和bid放入，将CC排除，所以<span class="math inline">\(\Phi^C = \oslash\)</span>，<span class="math inline">\(\Phi^E = \Phi\)</span></p>
+<p>WBS目标函数转换如下： <span class="math display">\[
+max \sum_{b_{ij} \in \Phi}(b_{ij}-A_i·c_j^v)
+\]</span></p>
+<p>第二步，就是在图的基础上，我们贪婪的选择一些边来形成具有<strong>近似最大权重</strong>的G的最大匹配：在每一轮中，我们选择权重最大的边。由以下两种情况：</p>
+<ol type="1">
+<li><span class="math inline">\(A_i &lt; L_j\)</span>：即ECN的剩余容量大于该请求所需要的VM容量。
+<ol type="1">
+<li>我们就要将相应的<span class="math inline">\(b_{ij}\)</span>放到最后的解决方案<span class="math inline">\(\Phi\)</span>中；</li>
+<li>同时要从<span class="math inline">\(R\)</span>中删除该请求节点<span class="math inline">\(r_i\)</span>，并且在图中的<span class="math inline">\(\varepsilon\)</span>中删除所有与<span class="math inline">\(r_i\)</span>有关的边；</li>
+<li>更新顶点<span class="math inline">\(s_j\)</span>的<span class="math inline">\(L_j = L_j - A_i\)</span></li>
+</ol></li>
+<li><span class="math inline">\(A_i&gt;L_j\)</span>：删除边<span class="math inline">\(&lt;r_i,s_j&gt;\)</span>，继续寻找下一个最大的权重</li>
+</ol>
+<p>直到<span class="math inline">\(R\)</span>、<span class="math inline">\(\widehat{B}\)</span>、<span class="math inline">\(\varepsilon\)</span>为空，最后得到<span class="math inline">\(\Phi\)</span>就是最终解，如果<span class="math inline">\(b_{ij} \in \Phi\)</span>则说明投标成功。</p>
+<p>得到中标集后，在对每一个中标进行调度，是让ECN完成还是让CC完成</p>
+<h3 id="pd问题基础解">PD问题基础解</h3>
+<h4 id="critical-payment"><a href="#Truthfulness">Critical Payment</a></h4>
+<p>对投标<span class="math inline">\(b_{ij}\)</span>的付款<span class="math inline">\(p_{ij(b_{ij})}\)</span>为临界值，如果用户宣布的投标小于该临界值，则一定不会中标。</p>
+<p>为了能确定<span class="math inline">\(b_{ij}\)</span>的<kbd>critical payment</kbd>，我们首先要确定<span class="math inline">\(b_{ij}\)</span>的<strong>代替投标</strong>（当我们从<span class="math inline">\(\widehat{B}\)</span>中删除<span class="math inline">\(b_{ij}\)</span>的时候，它将取代其成为中标）</p>
+<p>步骤如下：</p>
+<ol type="1">
+<li>我们首先删除<span class="math inline">\(&lt;r_i,s_j&gt;\)</span>的边，来获得一个没有<span class="math inline">\(b_{ij}\)</span>的新加权二分图</li>
+<li>为了方便，我们使用<span class="math inline">\(\varepsilon_{-ij}\)</span>来表示更新后的边，<span class="math inline">\(G_{-ij}\)</span>来表示新的二分图</li>
+<li>利用之前的算法重新再找最大的权重边，获得中标；<span class="math inline">\(\Phi_{-ij}\)</span>表示新的分配解决问题方案。<span class="math inline">\(b_{ij}\)</span>的备选bid一定在<span class="math inline">\(\Phi_{-ij}\)</span>内</li>
+</ol>
+<p>现在有两种情况：</p>
+<ol type="1">
+<li>需求<span class="math inline">\(r_i\)</span>被分配到了其他的ECN<span class="math inline">\(s_{j&#39;}\)</span></li>
+<li>ECN已经拥有了很多的需求，导致没有过多的资源提供给<span class="math inline">\(r_i\)</span></li>
+</ol>
+<p>对于备选中标，我们假设<span class="math inline">\(b_{ij&#39;}\)</span>为是<span class="math inline">\(r_i\)</span>的相关赢家；<span class="math inline">\(b_{i_1j},b_{i_2j}...\)</span>为ECN<span class="math inline">\(s_j\)</span>接受到的赢家</p>
+<p>对于第一种情况，<span class="math inline">\(b_{ij&#39;}\)</span>是<span class="math inline">\(b_{ij}\)</span>的候选</p>
+<p>对于第二种情况，我们可以找到ECN的<kbd>critical payment</kbd>，表示为<span class="math inline">\(b_{i_{min}j}\)</span> <span class="math display">\[
+b_{i_{min}j} = min\{ w_{i_1j},w_{i_2j}...:L_j-\sum_{w_{i_{x}j}-w_{i_{y}j}}A_{i_{x}} \geq A_i\}
+\]</span> <span class="math inline">\(s_j\)</span>总是选择权重相对较大的请求，直到它没有足够的剩余容量来满足请求<span class="math inline">\(r_i\)</span>。因此，<span class="math inline">\(b_{i_{min}j}\)</span>投标正是<span class="math inline">\(b_{ij}\)</span>的另一个备选投标。</p>
+<p>此外，如果<span class="math inline">\(w_{ij&#39;}\geq w_{i_{min}j}\)</span>，<span class="math inline">\(b_{ij&#39;}\)</span>将成为<span class="math inline">\(b_{ij}\)</span>的替代出价。否则，如果<span class="math inline">\(w_{ij&#39;}&lt; w_{i_{min}j}\)</span>，<span class="math inline">\(b_{ij}\)</span>的备选投标将为<span class="math inline">\(b_{i_{min}j}\)</span>。 <span class="math display">\[
+p_{ij}(b_{ij})=A_i·(C_j^v+max\{w_{ij&#39;},w_{i_{min}j}\})
+\]</span></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/INFOCOM/" rel="tag"># INFOCOM</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/04/%E9%98%85%E8%AF%BB%E3%80%8ALyapunov-Guided-Deep-Reinforcement-Learning-%E3%80%8B/" rel="next" title="阅读《Lyapunov-Guided Deep Reinforcement Learning...》">
+      阅读《Lyapunov-Guided Deep Reinforcement Learning...》 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B-%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">模型 &amp; 问题描述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E6%96%B9%E4%BA%A4%E4%BA%92"><span class="nav-number">1.1.</span> <span class="nav-text">三方交互</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E6%A0%87%E9%80%89%E6%8B%A9%E9%97%AE%E9%A2%98wbs"><span class="nav-number">1.2.</span> <span class="nav-text">中标选择问题WBS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#social-welfare"><span class="nav-number">1.2.1.</span> <span class="nav-text">Social Welfare</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pd%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.</span> <span class="nav-text">PD问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#truthfulness"><span class="nav-number">1.3.1.</span> <span class="nav-text">Truthfulness</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#individual-reationality"><span class="nav-number">1.3.2.</span> <span class="nav-text">Individual Reationality</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#efficiency"><span class="nav-number">1.3.3.</span> <span class="nav-text">Efficiency</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ava-%E6%9C%BA%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text">AVA 机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E%E6%98%AFnp-hard%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">证明是NP-Hard问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wbs%E9%97%AE%E9%A2%98%E7%9A%84%E5%9F%BA%E7%A1%80%E8%A7%A3"><span class="nav-number">2.2.</span> <span class="nav-text">WBS问题的基础解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#first-phase"><span class="nav-number">2.2.1.</span> <span class="nav-text">First Phase</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#second-phase"><span class="nav-number">2.2.2.</span> <span class="nav-text">Second Phase</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pd%E9%97%AE%E9%A2%98%E5%9F%BA%E7%A1%80%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">PD问题基础解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#critical-payment"><span class="nav-number">2.3.1.</span> <span class="nav-text">Critical Payment</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="PhoenixDai"
+      src="/images/Phoenix-Logo-White.png">
+  <p class="site-author-name" itemprop="name">PhoenixDai</p>
+  <div class="site-description" itemprop="description">Anything that doesn't kill me makes me stronger</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2022-01 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PhoenixDai</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='48,0,65' opacity='0.9' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
