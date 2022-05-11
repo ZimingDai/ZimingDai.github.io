@@ -22,21 +22,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Mueller, David, Nicholas Andrews, and Mark Dredze. &quot;Sources of transfer in multilingual named entity recognition.&quot; arXiv preprint arXiv:2005.00847 (2020).  命名实体本质上是多语言的，任何给定语言的注释都可能受到限制。这促使我们考虑多语言命名实">
+  <meta name="description" content="自然语言处理以及其中涉及到的机器学习、数学知识整理。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="阅读《Sources of Transfer in Multilingual NER》">
+<meta property="og:title" content="NLP领域背景知识Tutorial">
 <meta property="og:url" content="http://example.com/2022/05/06/%E9%98%85%E8%AF%BB%E3%80%8ASource-of-Transfer-in-Multilingual-NER%E3%80%8B/index.html">
 <meta property="og:site_name" content="Sycamore">
-<meta property="og:description" content="Mueller, David, Nicholas Andrews, and Mark Dredze. &quot;Sources of transfer in multilingual named entity recognition.&quot; arXiv preprint arXiv:2005.00847 (2020).  命名实体本质上是多语言的，任何给定语言的注释都可能受到限制。这促使我们考虑多语言命名实">
+<meta property="og:description" content="自然语言处理以及其中涉及到的机器学习、数学知识整理。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205062241917.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205062328986.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205062331071.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205062340513.png">
 <meta property="article:published_time" content="2022-05-06T15:45:29.000Z">
-<meta property="article:modified_time" content="2022-05-09T10:02:24.278Z">
+<meta property="article:modified_time" content="2022-05-10T11:51:04.444Z">
 <meta property="article:author" content="PhoenixDai">
-<meta property="article:tag" content="MNER">
+<meta property="article:tag" content="Base">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205062241917.png">
 
@@ -53,7 +53,7 @@
   };
 </script>
 
-  <title>阅读《Sources of Transfer in Multilingual NER》 | Sycamore</title>
+  <title>NLP领域背景知识Tutorial | Sycamore</title>
   
 
 
@@ -184,7 +184,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          阅读《Sources of Transfer in Multilingual NER》
+          NLP领域背景知识Tutorial
         </h1>
 
         <div class="post-meta">
@@ -201,7 +201,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-09 18:02:24" itemprop="dateModified" datetime="2022-05-09T18:02:24+08:00">2022-05-09</time>
+                <time title="Modified: 2022-05-10 19:51:04" itemprop="dateModified" datetime="2022-05-10T19:51:04+08:00">2022-05-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -224,24 +224,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <blockquote>
-<p>Mueller, David, Nicholas Andrews, and Mark Dredze. "Sources of transfer in multilingual named entity recognition." <em>arXiv preprint arXiv:2005.00847</em> (2020).</p>
-</blockquote>
-<p>命名实体本质上是多语言的，任何给定语言的注释都可能受到限制。这促使我们考虑多语言命名实体识别 (NER)，其中一个模型使用从一种以上语言中提取的注释数据进行训练。然而，这个简单想法的直接实现在实践中并不总是有效：<strong>尽管可以访问更多的训练数据，但使用从多种语言中提取的注释数据对 NER 模型的朴素训练始终低于仅在单语数据上训练的模型。</strong></p>
-<p>本文的出发点是对这个问题的一个简单解决方案，其中通过在多语种模型的单语数据上进行微调，来始终如一地优于单语模型。为了解释这种现象，我们探索了多语言 NER 模型中多语言迁移的来源，并比较了多语言模型与单语言模型的权重结构。我们发现多语言模型有效地跨语言共享许多参数，并且微调可能会利用大量这些参数。</p>
-<p><span id="more"></span></p>
-<h4 id="文章贡献">文章贡献</h4>
-<p>我们的第一个贡献是一种技术，<strong>通过对单语数据进行微调，可以使多语言NER模型适应目标语言。</strong>在神经机器翻译中，已经探索了一种类似的转移持续训练方法，用于领域适应；我们表明，它可以与NER的多语言模型一起工作，在单语baseline上提高性能达3倍的F1参数。</p>
-<p>我们的第二个贡献是通过对 NER 多语言模型的广泛实证研究，解释了这种技术的有效性。我们比较了几种类型的神经 NER 模型，包括三个字符（或字节）级架构，并评估跨小和大语言集的迁移。特别是，我们发现：</p>
-<ol type="1">
-<li><p>除了 Byte-to-Span (BTS)，大多数 NER 架构都没有从多语言训练中受益。 尽管如此，比 BTS 更简单的模型，具有更多的归纳偏置，在单语和多语种设置中都可以胜过 BTS。</p>
-<blockquote>
-<p>归纳偏置可以理解为，从现实生活中观察到的现象中归纳出一定的规则，然后对模型做一定的约束，从而可以起到“模型选择”的作用，即从假设空间中选择出更符合现实规则的模型。<strong>褒义词</strong></p>
-</blockquote></li>
-<li><p>多语言模型比单语模型更有效，因为对于给定的性能水平，它们需要的参数要少得多。 这表明许多参数是跨语言共享的。</p></li>
-<li><p>多语言权重转移到看不见的语言，结果好坏参半。特别是，当多语言训练集中存在高度词汇重叠或密切相关的语言时，可能会发生迁移。</p></li>
-<li><p>在多语言模型中，语言之间共享大量重要参数，微调可以利用这些参数来增强其性能。</p></li>
-</ol>
+        <p>自然语言处理以及其中涉及到的机器学习、数学知识整理。</p>
+<span id="more"></span>
 <h2 id="预知识">预知识</h2>
 <h3 id="crf">CRF</h3>
 <p>CRF，全称 Conditional Random Fields，中文名：条件随机场。</p>
@@ -388,27 +372,6 @@ LossFunction = \frac{P_{RealPath}}{P_1+P_2+...+P_N}
 <p>初始节点的概率计算为：<span class="math inline">\(Π(B-P) \times P(小|B-P)\)</span></p>
 <p>迭代方式是：$ P_{上一层} P_{转移概率} P(明|B-P)$</p>
 <p>最后选取概率最大的路径。</p>
-<h2 id="model">Model</h2>
-<h3 id="词级别crf">词级别CRF</h3>
-<p>文章中的实现遵循了Lample的描述(<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1603.01360">Neural Architectures for Named Entity Recognition</a>)，并在此基础上提出了三种变体</p>
-<p>前两个是字符级和字节级模型。多语言传输可能会发生在字节级表示中，作者感兴趣的是：当涉及更多不同的语言时，字符级是否会产生相似的结果。每个单词通过多层 BiLSTM 作为字符或字节序列生成单词级表示。词级表示输入句子级的BiLSTM后，它在每个时间步输出所有可能标签的 logits。然后将 logits 输入到 CRF 模型中，该模型经过训练以最大化”gold标签序列的对数似然性“。</p>
-<p>该模型的第三个变体使用来自多语言 BERT (mBERT) 的上下文表示。 该模型与上述模型相似，主要区别在于词级表示是使用预训练的子词级 BERT 模型获得的，而不是从原始字符/字节构建的。 正如在原始 BERT 论文中所做的那样，我们将每个单词的第一个子词的表示视为该词的表示，并将该子词位置的最后 4 层输出串联起来作为我们的最终单词表示。</p>
-<h3 id="charner">CharNER</h3>
-<p>CharNER是一种深度神经序列标记体系结构，其在训练期间严格在字符级别上操作，但在推理期间使用词级别的边界。该模型在字符序列上运行5层BiLSTM，并经过训练以预测序列中每个字符的NER标签。在推理过程中，具有未经训练的过渡参数的Viterbi解码器在每个单词上强制执行一致的字符级别标签；获得单词级别的BIO标签不需要启发式方法和很少的后处理。</p>
-<h3 id="bts">BTS</h3>
-<p>BTS是一种在字节序列上操作的seq2seq模型。输入包括了一个UFT-8字节的窗口，输出是一个带有充足统计信息的序列，这些信息是在输入序列中出现的标记实体跨度</p>
-<p>因为字节序列很长，BTS 在 60 字节的滑动窗口上运行，独立处理每个段； 模型的整个上下文总是限制在 60 字节。</p>
-<h2 id="试验结论">试验结论</h2>
-<p>尽管使用了4倍或10倍的标记数据，但Polyglot-NER模型未能比单语模型有所改善。语言之间标签优先级的差异本身并不能解释这一点。</p>
-<p>多语言模型实际上从观察多种语言中学到了更多，并且这些信息可以转移到每种语言。 此外，在不观察其他语言的情况下，使用标准训练目标可能无法实现单语模型的理想最优值； 我们发现更多的正则化对单语模型没有帮助。 然而，朴素联合优化所有语言可能会提供过于具有挑战性的优化环境，无法同时获得每种语言的最优值。</p>
-<p>多语言参数到看不见的语言的可迁移性取决于多种因素。推测这些因素部分与原始多语言训练集中的语言相关性有关。</p>
-<h2 id="polyglot模型">Polyglot模型</h2>
-<h3 id="错误分析">错误分析</h3>
-<p>多种语言模型倾向于在O型标签上犯更多的错误，这表明有<strong>产生精度错误的趋势</strong>，但微调倾向于纠正这一趋势，回到单语性能。我们还发现，与单语模型相比，微调模型的PER和ORG标签更加出色。然而，多语言LORELEI模型并非如此，这表明这种转移来自多种语言和微调训练的结合。</p>
-<p>多语言微调模型可能比单语模型表现更好的一个原因<strong>是它们在训练期间看到的实体数量更多。</strong> 许多语言在其验证集中包含实体，这些实体出现在其他语言的训练集中。 我们将此类“常见实体”识别为语言<span class="math inline">\(l\)</span>的验证集中的实体，它们共享某种程度的表面形式重叠并出现在语言<span class="math inline">\(l’ \neq l\)</span>的训练集中的实体类型。</p>
-<p>发现多语言模型在“常见实体”上的错误率较低 ”，这表明这些实体是多语言 NER 中的迁移来源。 并且特定于语言的微调往往会增加错误率，这要么是由于遗忘，要么只是因为在微调期间减少了“非常见实体”上的错误。</p>
-<hr />
-<p>神经网络需要大量的参数，但是并不是所有的参数都需要对目标函数进行建模。假设学习语言<span class="math inline">\(l\)</span>的单语言NER模型需要<span class="math inline">\(M^l\)</span>个参数，那么学习对多种语言<span class="math inline">\(L\)</span>建立单语言模型，则需要<span class="math inline">\(M&#39;=\sum_{l\in L}^l\)</span>个参数，因为单语言模型之间参数不会共享。在这种情况下，多语言学习的负面结果可以通过模型的参数化不足来解释。相反，本模型可以跨多种语言共享参数，从而有效地学习跨语言表示。在这种情况下，我们预计模型需要的参数比<span class="math inline">\(M&#39;\)</span>少得多，并且跨语言过度共享参数可以解释多语言性能不佳的原因。</p>
 
     </div>
 
@@ -418,7 +381,7 @@ LossFunction = \frac{P_{RealPath}}{P_1+P_2+...+P_N}
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/MNER/" rel="tag"># MNER</a>
+              <a href="/tags/Base/" rel="tag"># Base</a>
           </div>
 
         
@@ -427,10 +390,13 @@ LossFunction = \frac{P_{RealPath}}{P_1+P_2+...+P_N}
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/05/06/%E9%98%85%E8%AF%BB%E3%80%8AA-Survey-on-Deep-Learning-for-NER%E3%80%8B/" rel="prev" title="阅读《A Survey on Deep Learning for NER》">
-      <i class="fa fa-chevron-left"></i> 阅读《A Survey on Deep Learning for NER》
+    <a href="/2022/05/06/Deep-Learning-for-NER%E7%BB%BC%E8%BF%B0/" rel="prev" title="Deep Learning for NER 综述">
+      <i class="fa fa-chevron-left"></i> Deep Learning for NER 综述
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/09/digital-stippling-%E7%BB%BC%E8%BF%B0/" rel="next" title="Digital Stippling 综述">
+      Digital Stippling 综述 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -489,7 +455,7 @@ LossFunction = \frac{P_{RealPath}}{P_1+P_2+...+P_N}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E8%B4%A1%E7%8C%AE"><span class="nav-number">1.</span> <span class="nav-text">文章贡献</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E7%9F%A5%E8%AF%86"><span class="nav-number"></span> <span class="nav-text">预知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#crf"><span class="nav-number"></span> <span class="nav-text">CRF</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8crf"><span class="nav-number">1.</span> <span class="nav-text">什么时候用CRF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%9A%8F%E6%9C%BA%E5%9C%BA"><span class="nav-number">2.</span> <span class="nav-text">什么是随机场</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AB%E6%9D%A1%E4%BB%B6%E9%9A%8F%E6%9C%BA%E5%9C%BA"><span class="nav-number">3.</span> <span class="nav-text">为什么叫条件随机场</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#crf%E5%A6%82%E4%BD%95%E6%8F%90%E5%8F%96%E7%89%B9%E5%BE%81"><span class="nav-number">4.</span> <span class="nav-text">CRF如何提取特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E5%AE%9E%E4%BD%93%E8%AF%86%E5%88%AB%E4%B8%AD%E7%9A%84bert%E5%92%8Ccrf%E6%98%AF%E6%80%8E%E4%B9%88%E9%85%8D%E5%90%88%E7%9A%84"><span class="nav-number">5.</span> <span class="nav-text">命名实体识别中的BERT和CRF是怎么配合的</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#viterbi%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95"><span class="nav-number"></span> <span class="nav-text">Viterbi(维特比)算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#model"><span class="nav-number"></span> <span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E7%BA%A7%E5%88%ABcrf"><span class="nav-number"></span> <span class="nav-text">词级别CRF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#charner"><span class="nav-number"></span> <span class="nav-text">CharNER</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bts"><span class="nav-number"></span> <span class="nav-text">BTS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%95%E9%AA%8C%E7%BB%93%E8%AE%BA"><span class="nav-number"></span> <span class="nav-text">试验结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#polyglot%E6%A8%A1%E5%9E%8B"><span class="nav-number"></span> <span class="nav-text">Polyglot模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90"><span class="nav-number"></span> <span class="nav-text">错误分析</span></a></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">预知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#crf"><span class="nav-number">1.1.</span> <span class="nav-text">CRF</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8crf"><span class="nav-number">1.1.1.</span> <span class="nav-text">什么时候用CRF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%9A%8F%E6%9C%BA%E5%9C%BA"><span class="nav-number">1.1.2.</span> <span class="nav-text">什么是随机场</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AB%E6%9D%A1%E4%BB%B6%E9%9A%8F%E6%9C%BA%E5%9C%BA"><span class="nav-number">1.1.3.</span> <span class="nav-text">为什么叫条件随机场</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#crf%E5%A6%82%E4%BD%95%E6%8F%90%E5%8F%96%E7%89%B9%E5%BE%81"><span class="nav-number">1.1.4.</span> <span class="nav-text">CRF如何提取特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E5%AE%9E%E4%BD%93%E8%AF%86%E5%88%AB%E4%B8%AD%E7%9A%84bert%E5%92%8Ccrf%E6%98%AF%E6%80%8E%E4%B9%88%E9%85%8D%E5%90%88%E7%9A%84"><span class="nav-number">1.1.5.</span> <span class="nav-text">命名实体识别中的BERT和CRF是怎么配合的</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#viterbi%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">Viterbi(维特比)算法</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -505,14 +471,14 @@ LossFunction = \frac{P_{RealPath}}{P_1+P_2+...+P_N}
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Phoenix-Logo-16B.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Phoenix-Logo-16B.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Martín, Domingo, et al. &quot;A survey of digital stippling.&quot; Computers &amp; Graphics 67 (2017): 24-44.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Digital Stippling 综述">
+<meta property="og:url" content="http://example.com/2022/05/09/digital-stippling-%E7%BB%BC%E8%BF%B0/index.html">
+<meta property="og:site_name" content="Sycamore">
+<meta property="og:description" content="Martín, Domingo, et al. &quot;A survey of digital stippling.&quot; Computers &amp; Graphics 67 (2017): 24-44.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205091938072.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205101547051.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205101601277.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205101649573.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205101656670.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205101806374.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205101809281.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205101937995.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205102015127.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205102048762.png">
+<meta property="article:published_time" content="2022-05-09T10:13:27.000Z">
+<meta property="article:modified_time" content="2022-05-10T13:19:19.813Z">
+<meta property="article:author" content="PhoenixDai">
+<meta property="article:tag" content="overview">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205091938072.png">
+
+<link rel="canonical" href="http://example.com/2022/05/09/digital-stippling-%E7%BB%BC%E8%BF%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Digital Stippling 综述 | Sycamore</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sycamore</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Phoenix reborns from the ashe</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/09/digital-stippling-%E7%BB%BC%E8%BF%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Phoenix-Logo-White.png">
+      <meta itemprop="name" content="PhoenixDai">
+      <meta itemprop="description" content="Anything that doesn't kill me makes me stronger">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sycamore">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Digital Stippling 综述
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-09 18:13:27" itemprop="dateCreated datePublished" datetime="2022-05-09T18:13:27+08:00">2022-05-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-10 21:19:19" itemprop="dateModified" datetime="2022-05-10T21:19:19+08:00">2022-05-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vis-Lab/" itemprop="url" rel="index"><span itemprop="name">Vis_Lab</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>Martín, Domingo, et al. "A survey of digital stippling." <em>Computers &amp; Graphics</em> 67 (2017): 24-44.</p>
+</blockquote>
+<p><span id="more"></span></p>
+<h2 id="传统点画">传统点画</h2>
+<p>传统的点画的目标是：<strong>使用点来表示主题的色调、形状、纹理等</strong></p>
+<p>但是这是一个耗时的过程，需要大量小时才能得出结果，这也就导致了点画艺术品的大小相对较小。并且点画的观察是需要有35cm-65cm的观看距离，在这个距离上，<strong>点的颜色和形状都是可以被辨别的</strong>。——艺术家秉承着<strong>“每一个点都自己的目的”</strong></p>
+<p>这种对单个点的点画和与放置更多点、像素的半色调形成对比。</p>
+<p>在半色调中：<strong>每一个点、像素都应该不被观察到，这样只有他对色调的贡献才是最重要的</strong></p>
+<p>点画图像是静态的，在创建之后不能更改，这就意味着点画的<strong>布局模式</strong>非常重要，它传达了图像中的局部色调。<strong>点画艺术家通常旨在避免任何可见的点图案</strong>，但是一些特征可以有意地以线的形式进行放置点，比如说<code>hedcut</code>变体。</p>
+<p>点画艺术家经常将“点画”和“线条”组合在一起，用点画来表现色调和纹理、用线条来强调边缘和轮廓</p>
+<h2 id="数字点画">数字点画</h2>
+<h3 id="点的排列">点的排列</h3>
+<p>点放置的基本特征是：</p>
+<ol type="1">
+<li>对于给定的色调，点应该均匀放置</li>
+<li>点的放置不能规则，要保持随机</li>
+<li>点的密度表示图像中给定区域的阴影强度</li>
+</ol>
+<hr />
+<p>在第一条特征中，默认是点与点不应该重叠，但是后来NPAR发现，某些传统点画技术依赖色调范围内点画的重叠和合并</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205091938072.png" style="zoom:67%;" /></p>
+<p>早期的点画还是会在放置的点画上产生了规则的<strong>伪影（人为制造出来的pattern）</strong>。由于 Lloyd 方法的固有特性以及使用其未加权和加权质心 Voronoi 图进行点分布的点画。</p>
+<blockquote>
+<p>伪影一般是不可取的，因为他们暗示了一些不存在的结构</p>
+</blockquote>
+<p>现在避免伪影的办法有如下几种：</p>
+<ol type="1">
+<li><p>随机性/噪声</p></li>
+<li><p>概率密度函数</p></li>
+<li><p>泊松盘分布</p></li>
+<li><p>非重复平铺</p></li>
+<li><p>容量受限的松弛</p></li>
+<li><p>基于示例的点放置：这种方法试图从真实示例中复制分布特征，不仅可以捕捉个别点画艺术家的风格，还避免了纯粹算法点画放置可能传达的过于完美的印象。例如泊松盘，虽然具有均匀但随机的点分布，但是在黑暗区域，点的灵活度较低，导致产生“自动放置”的印象。</p>
+<p>但是为了能匹配真实图片，必须考虑示例的原始尺寸和数字输出的尺寸和分辨率，所以<strong>这种办法不能选择任意数量的点画点</strong>，而是基于示例的点画密度从预期输出图像的空间大小中导出。</p></li>
+</ol>
+<p>但是也可以有意引入伪影来强调线性特征，比如图像或线条中的边缘。</p>
+<p>在采取预防措施后，点会自动、或多或少沿着特征排列。例如：Deussen通过使用色调阈值来实现这个效果。</p>
+<p>在加权的Voronoi点画中，可以通过增加源图像的对比度实现边缘。</p>
+<p>还有一种是将此类线放置作为算法的一部分，比如说<code>hedcut</code>点画就是一种几乎完全依赖于沿线性结构排列的点画的特殊形式</p>
+<p>除去这个方面，数字点画为动态交互开辟了很多可能，人们可以通过放大点画图像来获得更多的细节，但是这个目标需要一种在适当点添加或删除点画的方法，从而不引入可见的伪影。</p>
+<h3 id="点的特征">点的特征</h3>
+<p>一般来说，大多数数字点画方法都是假设所有点都是白纸上的黑色标记，许多早期的方法都是将点画点当做理想圆圈。</p>
+<p>不使用圆圈的第一步是：使用任意点画形状来代替圆圈的位置（直接替换），但是对于一些考虑到点形状的算法不再适用：比如，Hiller扩展了Lloyd的方法来考虑点画标记的形状，Dalal使用了基于频率的包装方法来放置任意点</p>
+<p>其他人一般使用平面图案的一般分布的创建，或者放置一些类似于特定类型的hatch插图的短标记，这些短标记是支持overlap的。这些技术都不需要形状感知。</p>
+<p>除了上述的形式，很多研究人员将点画点用<strong>像素</strong>表示，渲染像素点是不需要复杂的计算的，并且提供了一种将点画点减少到只有其分布能被感知到的可能</p>
+<p>还有一种方法不仅考虑点画的位置，还要尝试将形状建立在手工点画的基础上；最近的工作认为，还需要考虑点的灰度和颜色纹理。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205101547051.png" /></p>
+<h2 id="点画技术">点画技术</h2>
+<h3 id="质心voronoi图">质心Voronoi图</h3>
+<p>这一类方法的主要目标：<strong>均匀分布点画点，同时避免他们彼此靠得太近</strong></p>
+<p>Lloyd方法提供了一个机制：</p>
+<ol type="1">
+<li>计算初始点分布的Voronoi图</li>
+<li>将点移动到Voronoi图的质心</li>
+<li>迭代1,2步骤</li>
+</ol>
+<p>但是会出现一些链伪影。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205101601277.png" style="zoom:50%;" /></p>
+<p>Deussen是第一个将这种方法应用与点画的人：如果有参考图像则先生成一个半色调的图（图像的黑暗部分是密集区域，较亮的部分是稀疏的区域），如果没就通过特殊的<code>brush</code>手动添加点， 然后在这个半色调的基础上利用手动控制的<code>brush</code>进行基于CVD的松弛。</p>
+<p><strong>brush的种类：</strong></p>
+<ol type="1">
+<li><p>Edit brush</p>
+<p>添加或删除点是在逐点的基础上完成的，也可以通过在每个时间步长以给定数量的点进行操作的画笔来完成的。也可以将点标记为固定的，这可以防止它们受到后续移动操作的影响。</p></li>
+<li><p>Relaxation brush</p>
+<p>使用此刷子，用户能够放松点画点的位置，以实现均匀分布。</p></li>
+<li><p>Jitter brush</p>
+<p>有时候点太规则了，如果用户想要消除视觉边界或更改区域中的均匀间距，就可以使用该<code>brush</code>来获得一个小的随机偏移（点到点距离的百分比）</p></li>
+<li><p>Shape brush</p>
+<p>形状画笔允许修改点的参数。 用户可以按给定的百分比放大/缩小点或直接设置它们的大小。 这有助于稍微改变区域的色调或生成强烈的深色边框。</p></li>
+</ol>
+<hr />
+<p>Secord将Deussen的方法进行了更新：<strong>根据要复制的图像的色调来权衡Voronoi区域的计算</strong>。</p>
+<p>使用这种加权的质心Voronoi图 (wcvd) 的主要优点是：现在在迭代放置点画时会自动考虑图像的颜色/灰度值——不再需要交互式使用<code>brush</code>。</p>
+<p>这种方法引入了密度函数，也就是每一个图像的位置根据初始图像的深浅会给定一个密度值，那么质心的位置就应该是 <span class="math display">\[
+C_i=\frac{\int_Ax\rho(x,y)dA}{\int_A\rho(x,y)dA}
+\]</span> <strong>这里的<span class="math inline">\(\rho(x,y)\)</span>是每个像素点的密度值</strong></p>
+<p>这样再迭代过程中，质心会不断向高密度区域靠拢，会导致点不断在高密度区域聚集，这样就能区别高低密度的区域。</p>
+<p>Secord还提出了一个基于预先计算点画点分布的快速点画过程。</p>
+<p>将恒定色调的图像结果成为点画等级：<span class="math inline">\(0\leq t \leq 1\)</span>，最高的度是纯黑色的度，其余逐渐递减</p>
+<p>下图是一个从黑色到白色的九个等级，分布有1000个点画，每个图相差125个点。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205101649573.png" style="zoom:50%;" /></p>
+<p>在预先计算好的点画等级，就可以快速stipple一个图像：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for all pixel positions (x,y) ∈ [0,1]×[0,1] do</span><br><span class="line">	Map image value at (x,y) to stipple level l</span><br><span class="line">	Copy stipples on level l inside (x − 1/2, y − 1/2) × (x + 1/2, y + 1/2)</span><br><span class="line">	to output</span><br><span class="line">end for</span><br></pre></td></tr></table></figure>
+<p>将图像切分成很多小region，然后检查每个像素的值，确定哪个点画的级别是合适的，并将落在像素覆盖区域的所有点画复制输出。</p>
+<blockquote>
+<p>会降低图像的分辨率。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205101656670.png" style="zoom:50%;" /></p>
+</blockquote>
+<hr />
+<p>Hiller基于像素的方法计算WCVD，将其扩展到了线和多边形。</p>
+<p>这个方法让对象可以旋转，需要去确定几何距和主要惯性轴。</p>
+<p>算法的输入是一组在平面上的对象<span class="math inline">\(\{Q_i\}_{i=1}^k\)</span>和一个密度函数<span class="math inline">\(\rho\)</span></p>
+<p>输出是松弛的质心Voronoi镶嵌和松弛的对象分布</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">确定对象Q的质心和对象的主要惯性轴</span><br><span class="line">repeat</span><br><span class="line">	确定每一个对象的Voronoi图</span><br><span class="line">	for i=1 to k do begin</span><br><span class="line">		计算每一个Voronoi图的质心z</span><br><span class="line">		将对象的质心c移动到Voronoi图的质心z中</span><br><span class="line">		调用ORIENTATION(根据角度phi调整对象的主轴角度)</span><br><span class="line">	end</span><br><span class="line">until 点z满足收敛准则</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ORIENTAION():</span><br><span class="line">	输入：Voronoi区域V和对象Q，他们俩的质心重叠</span><br><span class="line">	输出：对象Q围绕着其质心旋转角度phi</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205101806374.png" style="zoom:50%;" /></p>
+<hr />
+<p>Balzer等人解决了WCVD的主要问题之一——<strong>结果倾向于规律的伪影，例如可见链</strong></p>
+<p>他们证明：传统的WCVD会产生规律的伪影是因为迭代乜有及时停止，似乎没有理想的时间点来停止迭代。</p>
+<p>他们在松弛过程中为每个区域引入了容量约束来使得约束收敛到无伪影分布。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205101809281.png" style="zoom:50%;" /></p>
+<p>定义站点<span class="math inline">\(s_i\)</span>对应的Voronoi <span class="math inline">\(V_i\)</span>的容量计算如下： <span class="math display">\[
+c(s_i)=\int_{V_i}\rho(x)dx
+\]</span> 所有点的分布最佳适应密度函数<span class="math inline">\(c^*\)</span>为： <span class="math display">\[
+c^*=\frac{\int_\Omega\rho(x)dx}{n}
+\]</span> 容量约束就是<span class="math inline">\(c(s_i)=c^*\)</span></p>
+<p>一个站点的容量相当于其相应的Voronoi区域的面积，该区域用密度函数加权。因此，我们的容量限制要求分布中的每个站点都同等重要。</p>
+<ol type="1">
+<li>先从随机分配开始：<span class="math inline">\(A: X \to S\)</span>，其中X有m个点，S有n个站点，这些都满足容量约束</li>
+<li>在初始化之后，最小化<span class="math inline">\(F&#39;(X,A)=\sum^m_{i=1}|x_i-A(x_i)|^2\)</span>，通过交换X中属于不同站点的点来最小化<span class="math inline">\(F&#39;\)</span></li>
+<li>对交换操作的限制保证了容量约束 C 在整个最小化过程中保持不变。</li>
+<li>执行分配交换，直到没有进一步的交换减少能量并且算法停止在代表 <span class="math inline">\(F&#39;\)</span> 的局部最小值的稳定状态。</li>
+</ol>
+<blockquote>
+<p>这种局部最小值是通过优化分配A来实现的，而不是像Lloyd放法那样通过重新放置站点s来实现的。</p>
+</blockquote>
+<h3 id="分布函数">分布函数</h3>
+<p>Secord基于从输入图像派生的概率密度函数，该函数用于重新分布一组初始均匀分布的随机点。这种方法不仅消除了迭代处理，而且还允许创建帧连贯动画，因为 PDF 会针对动画图像序列不断变化。</p>
+<p><strong>从一维PDF中获得随机点（二维同理）：</strong></p>
+<p>已知PDF为<span class="math inline">\(p(x)\)</span></p>
+<ol type="1">
+<li>将<span class="math inline">\(p(x)\)</span>进行积分:<span class="math inline">\(C(x)=\int_0^xp(t)dt\)</span></li>
+<li>将<span class="math inline">\(C(x)\)</span>进行反函数操作得到：<span class="math inline">\(x&#39;=C^{-1}(x)\)</span></li>
+<li>在y轴等距离采点，在x轴上就可以得到密度分布</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205101937995.png" style="zoom:50%;" /></p>
+<hr />
+<p>Kopf提出了一种快速算法：渐进式蓝噪声<code>Wang tile</code></p>
+<p>通过使用飞镖投掷算法来生成蓝噪声图块，其中飞镖的半径会逐渐减少来获得一个密度增加的点的渐进序列。这样的图块可以快速生成具有任意非均匀密度的点集。</p>
+<p>为了避免伪影重复，我们使用<code>Wang tile</code>，<strong>难点在于，不同密度的<code>Wang tile</code>相互拼接会导致边缘不符合泊松盘属性。</strong></p>
+<p>因此，我们的想法是：通过合并几个渐进的环形源块来创建一组<code>Wang tile</code></p>
+<p>目标是生成：<span class="math inline">\(2K^2\)</span>个<code>Wang tile</code></p>
+<ol type="1">
+<li>首先应该为每一个K创建一个源砖</li>
+<li>将其余对应边缘的源砖合并</li>
+<li>合并后，我们定义结果点的顺序排序来使得图块渐进</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205102015127.png" /></p>
+<blockquote>
+<p>按照上文所述，我们先创建一个源砖T，并合并到与其边缘颜色对应的其他四个源砖N、E、S、W。</p>
+<p>为了合并两个图块，我们需要计算连接的接缝，由于两个源砖都是蓝噪声砖，所以接缝两侧的点都较好的分离</p>
+<p>所以目标是：<strong>寻找一个接缝，避免缝左右的点不符合蓝噪声</strong></p>
+</blockquote>
+<p>做法就是：将两个源砖做并集，然后利用Voronoi图来将集中的相邻点分开，最后的缝就是用Voronoi图的边构成。我们使用Dijkstra的最短路径来计算s,t的最短路径（s，t就是两个砖拼接起来的端点）。</p>
+<p>这样的好处是：防止接缝进入瓷砖的内部太深</p>
+<hr />
+<p>Jones介绍了一种基于 Voronoi 图的<span class="math inline">\(O(NlogN)\)</span> 算法，但没有松弛。在每一步中，算法都会搜索剩余空间最多的区域来放置一个新点。</p>
+<p>Dunbar 和 Humphreys描述了一种类似的增量算法来计算泊松盘分布，该算法基于专用数据结构以及对仅具有线性运行时间的类泊松磁盘分布的修改。</p>
+<hr />
+<p>Xu 开发了一种基于 Delaunay 三角剖分的容量受限版本的方法。 在某种程度上，这形成了和 Balzer 等人引入的容量受限的 Voronoi 镶嵌一样的效果。但计算时间更快。</p>
+<p>Delaunay三角就是将站点当做点，然后和相邻的两个点连接起来形成一个三角形，优化的目标函数如下： <span class="math display">\[
+T=argmin\frac{1}{m}\sum_{t\in T}(A_t-\frac{1}{m}\sum_{t\in T}A_t)^2
+\]</span> <span class="math inline">\(A_t\)</span>是三角形的面积，<span class="math inline">\(m\)</span>是三角形的数量。</p>
+<p>如果是不均匀的图像，则优化的目标函数如下： <span class="math display">\[
+T=argmin\frac{1}{m}\sum_{t\in T}(A_td_t-\frac{1}{m}\sum_{t\in T}A_td_t)^2
+\]</span> <span class="math inline">\(d_t\)</span>表示的是每个三角形t内的平均像素密度。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205102048762.png" /></p>
+<h3 id="通用分布函数">通用分布函数</h3>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/overview/" rel="tag"># overview</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/06/%E9%98%85%E8%AF%BB%E3%80%8ASource-of-Transfer-in-Multilingual-NER%E3%80%8B/" rel="prev" title="NLP领域背景知识Tutorial">
+      <i class="fa fa-chevron-left"></i> NLP领域背景知识Tutorial
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%82%B9%E7%94%BB"><span class="nav-number">1.</span> <span class="nav-text">传统点画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E7%82%B9%E7%94%BB"><span class="nav-number">2.</span> <span class="nav-text">数字点画</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%B9%E7%9A%84%E6%8E%92%E5%88%97"><span class="nav-number">2.1.</span> <span class="nav-text">点的排列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%B9%E7%9A%84%E7%89%B9%E5%BE%81"><span class="nav-number">2.2.</span> <span class="nav-text">点的特征</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%B9%E7%94%BB%E6%8A%80%E6%9C%AF"><span class="nav-number">3.</span> <span class="nav-text">点画技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%A8%E5%BF%83voronoi%E5%9B%BE"><span class="nav-number">3.1.</span> <span class="nav-text">质心Voronoi图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">分布函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">通用分布函数</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="PhoenixDai"
+      src="/images/Phoenix-Logo-White.png">
+  <p class="site-author-name" itemprop="name">PhoenixDai</p>
+  <div class="site-description" itemprop="description">Anything that doesn't kill me makes me stronger</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2022-01 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PhoenixDai</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='48,0,65' opacity='0.9' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
