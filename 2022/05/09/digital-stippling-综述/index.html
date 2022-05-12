@@ -39,8 +39,14 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205101937995.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205102015127.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205102048762.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205120933946.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205120936965.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205121202273.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205121125327.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205121138807.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205121143390.png">
 <meta property="article:published_time" content="2022-05-09T10:13:27.000Z">
-<meta property="article:modified_time" content="2022-05-10T13:19:19.813Z">
+<meta property="article:modified_time" content="2022-05-12T04:13:27.535Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="overview">
 <meta name="twitter:card" content="summary">
@@ -207,7 +213,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-10 21:19:19" itemprop="dateModified" datetime="2022-05-10T21:19:19+08:00">2022-05-10</time>
+                <time title="Modified: 2022-05-12 12:13:27" itemprop="dateModified" datetime="2022-05-12T12:13:27+08:00">2022-05-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -389,6 +395,74 @@ T=argmin\frac{1}{m}\sum_{t\in T}(A_td_t-\frac{1}{m}\sum_{t\in T}A_td_t)^2
 \]</span> <span class="math inline">\(d_t\)</span>表示的是每个三角形t内的平均像素密度。</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205102048762.png" /></p>
 <h3 id="通用分布函数">通用分布函数</h3>
+<p>在平面上分布点的问题，其应用远不止点画。 例如，点分布的通常目标是符合一些数学属性，例如蓝噪声。 然后，它们可以用于多种应用，如纹理、基于点的渲染、蒙特卡洛方法等； 点画只是其中一种可能性。</p>
+<hr />
+<p>Ebeida展示了一种计算均匀泊松盘分布的方法，该分布既是最大的又是无偏差的，并且可以在非凸域上使用。</p>
+<p>算法有如下步骤：</p>
+<ol type="1">
+<li>建立一个背景网格；标注好内部网格和边缘网格</li>
+<li>阶段一，向网格中扔飞镖，去除掉击中的飞镖</li>
+<li>生成剩余空隙的多边形近似值</li>
+<li>阶段二，向空隙扔飞镖，更新剩余区域</li>
+</ol>
+<p>我们通过生成覆盖输入域边界框的统一网格来启动算法。单元边为长度<span class="math inline">\(r/\sqrt{2}\)</span>，单元对角线为长度<span class="math inline">\(r\)</span>，因此<strong>每个单元只能容纳单个样本。</strong>每个单元格都有两个属性。有效单元格是可能接受样本的单元格；边界单元格与一个或多个输入边相交。</p>
+<p>在有效的单元格中扔飞镖，如果这个飞镖命中了非空盘区域或者边界之外，就认定此次迭代未命中，如果命中则将其命中的网格更改为无效。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205120933946.png" style="zoom:67%;" /></p>
+<p>第二步就是对于每一个有效的网格，去找其空盘的区域，也就是说<strong>圆弧与网格线界定的封闭区域，</strong>为了方便计算，用弦来代替弧</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205120936965.png" /></p>
+<p>第三步和第一步类似，就是将第二步产生的多边形去代替步骤一中的网格。</p>
+<hr />
+<p>施洛默提出了一种方法，该方法应用将点从样本迭代移动到最远点或样本中所有点的策略，以增加每对点之间的总距离，从而获得几乎最佳的蓝噪声特性。</p>
+<p>基本算法非常简单：每一步从一组点<span class="math inline">\(X\)</span>中去一个点，并试图将其移动到一个新的位置，该位置尽可能原理其余点，即最远点。</p>
+<p>本文利用Delaunay三角剖分，最远距离计时所有Delaunay三角剖分中的最大外接圆圆心。即要移动<span class="math inline">\(x\)</span>，则将其从三角剖分中移除，然后检查剩余的三角形来找到最远的点<span class="math inline">\(f\)</span>，将<span class="math inline">\(x\)</span>插入到<span class="math inline">\(f\)</span>中</p>
+<hr />
+<p>Heck等人解决了点分布中的混叠问题，并根据高频中的振荡水平定义了两种新类型的蓝噪声采样模式: <u>步进蓝噪声和单峰蓝噪声</u>。它们产生的模式防止了结构化的混叠。</p>
+<h3 id="基于示例">基于示例</h3>
+<blockquote>
+<p>旨在直接从特定示例中提取特定属性，并在基于示例的方法中使用这些属性来生成新图像，或者通过使用用于分布点画点的示例 (即，基于示例的点画) 或通过使用示例创建点画点 (即基于示例的点画)。</p>
+</blockquote>
+<p>Barla使用基于示例的方法来捕获绘制的输入图案的样式，然后以相同的样式合成更大的图案。他们通过评估元素集群及其分布来捕获输入模式的组织特征。基于此分析，他们使用<strong>邻域匹配算法</strong>合成了新的模式，以生成新的感知相似的笔画簇以及其中的几组。合成依赖于Lloyd的方法来生成种子位置，然后将学习到的特征用于实际元素和笔画放置。Barla等人的技术存在的问题是：<em>它只生成模式本身，而不考虑目标色调</em>。</p>
+<p>Kim在示例图中考虑了一整套点画图案，为不同的色调提取不同的补丁。 然后，他们提取点画的中心，计算得到的分布纹理的<strong>灰度共生矩阵 (GLCM)</strong>，并使用它来记录几个纹理统计数据。 然后，他们可以使用拒绝采样为每个不同的色调级别合成新的分布纹理，从而最大限度地减少样本和合成补丁之间的统计测量之间的误差。 他们要么直接使用合成结果，要么根据来自示例的扫描将点画点纹理放置在新位置。 这种整体方法适用于浅色调和深色调，但<em>在手绘示例中点画可以合并的中间色调存在问题</em>。</p>
+<blockquote>
+<p>灰度共生矩阵：</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205121202273.png" style="zoom:50%;" /></p>
+<p>以（1，1）点为例，GLCM（1，1）值为1说明只有一对灰度为1的像素水平相邻。GLCM（1，2）值为2，是因为有两对灰度为1和2的像素水平相邻。</p>
+</blockquote>
+<p>Martín通过将点不再视为完全黑色的标记来解决后一问题-它们捕获并使用点画点示例作为灰度/彩色纹理。</p>
+<h3 id="结构感知">结构感知</h3>
+<p><strong>强调图像边缘，</strong>Mould提出了一种方法：</p>
+<p>首先从输入图像中构造一个图：图中的每一个像素都是一个节点，每个节点的重要性计算为<span class="math inline">\(\alpha d+\beta g\)</span>，其中<span class="math inline">\(d\)</span>是黑暗程度，<span class="math inline">\(g\)</span>是梯度幅度，<span class="math inline">\(\alpha=1/\sum d\)</span>，<span class="math inline">\(\beta = 1/\sum g\)</span>。</p>
+<blockquote>
+<p>渐进式算法从距离为零的单个站点 (例如，图像的一个角) 开始，并向外扩散，从而计算图形中的最短路径。当最短路径超过阈值长度时，将放置距离为零的新站点; 我们继续直到探索整个图。</p>
+</blockquote>
+<p>初始种子放置在图像中的某个位置。Dijkstra的算法用于扩展种子周围的区域；当新扩展的节点的路径成本超过阈值时，扩展步骤会触发添加新的点画。<strong>新的点画位置是具有最高梯度幅度的前沿节点，因为我们希望将点画优先放置在图像边缘上</strong>。至关重要的是，新站点的距离设置为零，因此扩展最初发生在新站点附近 (因为堆中的所有其他节点都具有至少阈值的距离)。当图形的任何部分都没有待扩展时，渐进算法终止。</p>
+<ol type="1">
+<li>围绕第一个中心展开一个区域；</li>
+<li>在边界上选择了一个新的中心；</li>
+<li>新区域被扩展，直到再次达到阈值；</li>
+<li>第三个中心被放置，并扩展</li>
+</ol>
+<p>在图中，黑色轮廓表示距离中心点画最近的节点集，类似于Voronoi区域。在放置新点画时，边界是灰色和白色区域之间的边界。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205121125327.png" /></p>
+<hr />
+<p>Li和mould后来推出了一种方法，该方法在强调线性特征的同时，产生了更好地保留原始图像的色调和对比度的结果。他们的总体方法是按照输入图像的像素对对比度和结构极端 (黑色或白色) 像素的重要性得出的优先级顺序来处理输入图像的像素。然后，如果放置点画点，则引入的误差将分布在相邻像素之间，从而导致其优先级的更新。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205121138807.png" /></p>
+<h3 id="hedcut">Hedcut</h3>
+<p>Kim通过提取图像中的特征线来模拟手动过程，使用这些特征线生成距离场，然后依次使用这些特征线生成平行的引导线，沿着这些引导线，点画点使用约束Lloyd算法进行排列。对于最终的图像，作者通过基于色调图像调节点画的大小来控制色调。</p>
+<p>之后他们不仅使用图像特征提取引导线，还考虑了等照度线。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202205121143390.png" /></p>
+<p>Son等人进一步改进了结果，不仅从特征图中提取了一组平行线，而且提取了一个特征矢量场，并从中提取了一个结构网格用于<kbd>hatch</kbd>,此结构网格遵循垂直和平行于从图像中提取的特征的方向。然后在网格线相交的位置排列点画点，并根据结构网格和色调图对点进行参数化。</p>
+<h3 id="衡量与基准">衡量与基准</h3>
+<p>Halper研究了心理学和NPR之间的关系，从而提出了关于不同渲染风格如何改变观看者对各自图像的感知和交互的建议。</p>
+<p>研究人员使用了知觉研究（即使用人类参与者）或对结果进行物理分析（即不涉及人类；例如光谱分析）。</p>
+<p>Isenberg等人进行了一项实验，比较了手绘插图和计算机生成的插图，包括点画作为插图风格。他们发现，<strong>人们可以很容易地区分这两种类型的点画，特别是由于WCVD驱动的点画放置伪影，以及在计算机生成的图像中使用大量点画点的倾向</strong>。然而，参与者表示，他们欣赏计算机生成的图像的准确性，而他们喜欢手绘图像的“角色”</p>
+<h2 id="数字点画与半色调">数字点画与半色调</h2>
+<p>点画和半色调都有共同的目标，即代表二进制介质的连续色调图像。</p>
+<p>然而，我们从观察到手工点画是一种艺术形式，与其他用于双调再现的技术 (例如半色调) 相反，半色调纯粹是转换图像的算法方法。</p>
+<p>前者导致相对规则的表示，而后者产生更随机的结果。在这两个极端之间，绿色噪声半色调结合了这两种方法的特性。</p>
+<p>尽管如此，所有形式的半色调都使用像素或打印机点作为它们的主要原语，他的目的是放置点，使它们的图案导致<strong>对正确色调的感知</strong>，理想情况下根本<strong>看不到各个点</strong>。</p>
+<p>传统点画的目标与其相反：每个点都更大，并且有一个目的： 除了简单地再现色调外，圆点还经常被放置在图像中的特征和细节引导下，有时会与其他基元 (例如线条) 组合并相互作用。</p>
+<p>然而，在迄今为止的数字点画中，这种控制是缺乏的——仅存在部分 (算法) 解决方案 。因此，今天的数字点画在很大程度上缺乏传统艺术中的美学控制，就像半色调一样，虽然它能够再现通常以艺术示例的方式放置的大点的方面。</p>
 
     </div>
 
@@ -469,7 +543,7 @@ T=argmin\frac{1}{m}\sum_{t\in T}(A_td_t-\frac{1}{m}\sum_{t\in T}A_td_t)^2
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%82%B9%E7%94%BB"><span class="nav-number">1.</span> <span class="nav-text">传统点画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E7%82%B9%E7%94%BB"><span class="nav-number">2.</span> <span class="nav-text">数字点画</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%B9%E7%9A%84%E6%8E%92%E5%88%97"><span class="nav-number">2.1.</span> <span class="nav-text">点的排列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%B9%E7%9A%84%E7%89%B9%E5%BE%81"><span class="nav-number">2.2.</span> <span class="nav-text">点的特征</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%B9%E7%94%BB%E6%8A%80%E6%9C%AF"><span class="nav-number">3.</span> <span class="nav-text">点画技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%A8%E5%BF%83voronoi%E5%9B%BE"><span class="nav-number">3.1.</span> <span class="nav-text">质心Voronoi图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">分布函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">通用分布函数</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%82%B9%E7%94%BB"><span class="nav-number">1.</span> <span class="nav-text">传统点画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E7%82%B9%E7%94%BB"><span class="nav-number">2.</span> <span class="nav-text">数字点画</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%B9%E7%9A%84%E6%8E%92%E5%88%97"><span class="nav-number">2.1.</span> <span class="nav-text">点的排列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%B9%E7%9A%84%E7%89%B9%E5%BE%81"><span class="nav-number">2.2.</span> <span class="nav-text">点的特征</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%B9%E7%94%BB%E6%8A%80%E6%9C%AF"><span class="nav-number">3.</span> <span class="nav-text">点画技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%A8%E5%BF%83voronoi%E5%9B%BE"><span class="nav-number">3.1.</span> <span class="nav-text">质心Voronoi图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">分布函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">通用分布函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.4.</span> <span class="nav-text">基于示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E6%84%9F%E7%9F%A5"><span class="nav-number">3.5.</span> <span class="nav-text">结构感知</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hedcut"><span class="nav-number">3.6.</span> <span class="nav-text">Hedcut</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A1%E9%87%8F%E4%B8%8E%E5%9F%BA%E5%87%86"><span class="nav-number">3.7.</span> <span class="nav-text">衡量与基准</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E7%82%B9%E7%94%BB%E4%B8%8E%E5%8D%8A%E8%89%B2%E8%B0%83"><span class="nav-number">4.</span> <span class="nav-text">数字点画与半色调</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
