@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Phoenix-Logo-16B.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Phoenix-Logo-16B.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="BC-based Trusted Trafic Offloading in SAGIN  预备知识（PBFT、MDP、AC算法） 论文解读">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSAC Papers&#39; Comprehension">
+<meta property="og:url" content="http://example.com/2022/10/22/JSAC%20Papers'%20Comprehension/index.html">
+<meta property="og:site_name" content="Sycamore">
+<meta property="og:description" content="BC-based Trusted Trafic Offloading in SAGIN  预备知识（PBFT、MDP、AC算法） 论文解读">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210231027074.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210231040105.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210231101263.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210231103910.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232051558.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210231133925.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210231723119.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232005171.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232006876.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232009738.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232017275.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232043053.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232048041.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232059365.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232108820.png">
+<meta property="article:published_time" content="2022-10-22T12:56:43.000Z">
+<meta property="article:modified_time" content="2022-10-23T13:25:11.316Z">
+<meta property="article:author" content="PhoenixDai">
+<meta property="article:tag" content="BGFL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210231027074.png">
+
+<link rel="canonical" href="http://example.com/2022/10/22/JSAC%20Papers'%20Comprehension/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>JSAC Papers' Comprehension | Sycamore</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sycamore</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Phoenix reborns from the ashe</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/22/JSAC%20Papers'%20Comprehension/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Phoenix-Logo-White.png">
+      <meta itemprop="name" content="PhoenixDai">
+      <meta itemprop="description" content="Anything that doesn't kill me makes me stronger">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sycamore">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JSAC Papers' Comprehension
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-10-22 20:56:43" itemprop="dateCreated datePublished" datetime="2022-10-22T20:56:43+08:00">2022-10-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-10-23 21:25:11" itemprop="dateModified" datetime="2022-10-23T21:25:11+08:00">2022-10-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/XF-TANK/" itemprop="url" rel="index"><span itemprop="name">XF-TANK</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li>BC-based Trusted Trafic Offloading in SAGIN
+<ul>
+<li>预备知识（PBFT、MDP、AC算法）</li>
+<li>论文解读</li>
+</ul></li>
+</ul>
+<p><span id="more"></span></p>
+<h1 id="blockchain-based-trusted-trafﬁc-ofﬂoading-in-saginfrl-approach">Blockchain-based Trusted Trafﬁc Ofﬂoading in SAGIN:FRL Approach</h1>
+<blockquote>
+<p>网址：<a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/9918062">https://ieeexplore.ieee.org/document/9918062</a></p>
+<p>F. Tang, C. Wen, L. Luo, M. Zhao and N. Kato, "Blockchain-based Trusted Traffic Offloading in Space-Air-Ground Integrated Networks (SAGIN): A Federated Reinforcement Learning Approach," in IEEE Journal on Selected Areas in Communications, 2022, doi: 10.1109/JSAC.2022.3213317.</p>
+</blockquote>
+<h2 id="预备知识">预备知识</h2>
+<h3 id="pbft">PBFT</h3>
+<p>在讨论PBFT之前，我需要先讲述一下区块链网络中的共识机制。</p>
+<p>由于区块链是一个完全公开的数据链，所有人都可以匿名接入，所以共识机制的出现就是为了防止区块链的不稳定和被攻击。按大白话来说：共识机制就是如何网络中的所有节点<strong>达成共识，获得一样的结果</strong>。普遍的共识机制有PoW，PoS等等。</p>
+<p>在区块链中：一个矿工挖矿之后，必须通过共识才可以上链，上链即意味着：可以存储到所有的账本之中，这项交易被记录。</p>
+<p><strong>这里讲一下PBFT算法（实用拜占庭容错算法）</strong></p>
+<p>这个算法的本质就是：任何一个节点收到了Leader节点的消息，都要去怀疑这个命令是否正确，而为了能确保消息的准确，我要和团队中的其他节点进行确认，只有大多数人认为Leader的命令是正确的时候，节点才会去执行这个命令。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210231027074.png" alt="image-20221023102256914" style="zoom: 30%;" /></p>
+<ul>
+<li><p><strong>Pre-prepare</strong>：负责执行区块，产生签名包，并将签名包广播给所有共识节点；</p>
+<p><span class="math inline">\(&lt;&lt;PRE-PREPARE,v,n,d&gt;,m&gt;\)</span></p>
+<p>其中v是视图数，这个阶段为了给request排序</p></li>
+<li><p><strong>Prepare</strong>：负责收集签名包，某节点收集满<code>2*f+1</code>的签名包后，表明自身达到可以提交区块的状态，开始广播Commit包；</p>
+<p><span class="math inline">\(&lt;PREPARE,v,n,d,i&gt;\)</span></p>
+<p>从节点告诉其他节点：表明自己已经收到了Leader的建议，然后将该建议分发给所有节点，去核实信息。</p>
+<p>每一个节点达到prepare状态时，并不知道其他节点的状态（恶意节点会给不同的节点发送不同的信息），所以还需要广播commit包</p></li>
+<li><p><strong>Commit</strong>：负责收集Commit包，某节点收集满<code>2*f+1</code>的Commit包后，直接将本地缓存的最新区块提交到数据库。</p></li>
+</ul>
+<p>​ 收集到prepare包，表明自己已经收到了和大多数节点一致的主节点命令，我可以在本地提交；广播给大家之后，收集到<code>2f+1</code>个commit包之后，就表明大多数已经在本地提交，此时可以区块落盘。</p>
+<p>​ 在这里需要对request的序号达成共识，<strong>这些节点可能会在不同的视图中提交</strong>。</p>
+<p><strong>视图：</strong></p>
+<p>如果说主节点宕机或者主节点是恶意节点，就需要进行视图切换。</p>
+<p>从节点发现主节点有问题，就需要广播切换视图的数据包，只要从节点发现就需要发送该数据包。新的主节点（主节点候选人）收到<code>2f+1</code>个切换视图的数据包，就会进行视图切换。该新主节点就会广播NewView数据包，从节点收到数据包之后进行校验，校验成功之后会进入新的视图。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210231040105.png" alt="image-20221023104048072" style="zoom:30%;" /></p>
+<p>在上图中node3是恶意节点，在0号view中，node0-2分别当Leader节点，此时是没有问题的，但是当node3成为Leader节点之后，其他节点发现主节点是恶意节点，此时触发视图切换，重新选择主节点，就变成了1号view，此时node0成为了主节点。</p>
+<h3 id="马尔科夫决策过程-mdp">马尔科夫决策过程 MDP</h3>
+<p>第一个概念是马尔科夫性：</p>
+<p>指该系统的下一个状态<span class="math inline">\(s_{t+1}\)</span>只与当前状态<span class="math inline">\(s_t\)</span>有关，和之前的状态没有关系。公式表示：<span class="math inline">\(P[s_{t+1}|s_t] = P[s_{t+1}|s_1,...,s_t]\)</span></p>
+<p>第二个概念是马尔科夫过程：</p>
+<p>该过程的定义：马尔科夫过程是一个二元组<span class="math inline">\((S,P)\)</span>，且满足：<span class="math inline">\(S\)</span>是有限状态集合， <span class="math inline">\(P\)</span>是状态转移概率。状态转移概率矩阵为：<span class="math inline">\(P = \begin{bmatrix} P_{11} &amp; ...&amp;P_{1n} \\ . &amp; . &amp; .\\P_{n1} &amp; ...&amp;P_{nn} \end{bmatrix}\)</span></p>
+<p>具体来说就是每一个状态转换到下一个不同的状态都会自己不同的<strong>概率</strong>，只知道开始与结束是不能确定中间的过程的。比如说一个学生从课1 到 睡觉，之间就会有很多不同的状态序列。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210231101263.png" style="zoom:100%;" /></p>
+<p><strong>第三个概念是马尔科夫决策过程</strong></p>
+<p>马尔科夫决策过程由元组<span class="math inline">\((S,A,P,R,γ)\)</span>描述，其中：<span class="math inline">\(S\)</span>为有限的状态集, $A $为有限的动作集, <span class="math inline">\(P\)</span> 为状态转移概率,$ R$为回报函数, <span class="math inline">\(γ\)</span> 为折扣因子，用来计算累积回报。</p>
+<p><em>注意：跟马尔科夫过程的不同点是，马尔科夫决策过程的状态转移概率是包含动作的。</em></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210231103910.png" style="zoom:100%;" /></p>
+<p>在上图中，学生总共有五个状态<span class="math inline">\(S = \{s_1,s_2,s_3,s_4,s_5\}\)</span>，动作也有五个<span class="math inline">\(A=\{玩、退出、学习、发论文、睡觉\}\)</span>，其中每一个动作都会有一个立即汇报<span class="math inline">\(R\)</span></p>
+<p>一般来说，在马尔科夫决策过程上的强化学习目标都是寻找最优策略。策略<span class="math inline">\(\pi\)</span>就是状态到动作的映射，它是指给定状态<span class="math inline">\(s\)</span>时，动作集的一个分布，即<span class="math inline">\(\pi(a|s)=p[A_t=a|S_t=s]\)</span></p>
+<p>含义是：策略<span class="math inline">\(π\)</span>在每个状态<span class="math inline">\(s\)</span>指定一个动作的概率。如果给出的策略<span class="math inline">\(π\)</span>是确定性的，那么策略<span class="math inline">\(π\)</span>在每个状态<span class="math inline">\(s\)</span>指定一个确定的动作。</p>
+<p>例如：其中一个学生的策略为玩<span class="math inline">\(π_1(玩|s_1)=0.8\)</span>，是指该学生在状态<span class="math inline">\(s1\)</span>时玩的概率为0.8，不玩的概率是0.2，显然这个学生更喜欢玩。</p>
+<p>强化学习的目标就是找到最优的策略，这里的策略是指得到的<strong>总回报</strong>最大</p>
+<p>累计回报计算公式：<span class="math inline">\(G_t=R_{t+1}+\gamma R_{t+2}+...=\sum_{k=0}^{\infty}\gamma^{k}R_{t+k+1}\)</span></p>
+<hr />
+<p><strong>讲解一下<span class="math inline">\(\gamma\)</span>的用处：</strong></p>
+<p>为游戏里，越接近游戏开始处的奖励，就越容易获得；而随着游戏的进行，后面的奖励就没有那么容易拿到了。</p>
+<p>把智能体想成一只<strong>小老鼠</strong>，对手是只猫。它的目标就是在被猫吃掉之前，<strong>吃到最多的奶酪</strong>。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232051558.png" alt="image-20221023205137426" style="zoom:80%;" /></p>
+<p>就像图中，<strong>离老鼠最近的奶酪很容易吃</strong>，<strong>而从猫眼皮底下顺走奶酪就难了</strong>。离猫越近，就越危险。</p>
+<p>结果就是，从猫身旁获取的奖励会<strong>打折扣</strong>：吃到的可能性小，就算奶酪放得很密集也没用。</p>
+<hr />
+<p>假设从状态<span class="math inline">\(s_1\)</span>出发，给定了策略<span class="math inline">\(\pi\)</span>，那么学生的状态序列可能为：</p>
+<p><span class="math inline">\(s_1\to s_2 \to s_3 \to s_4\to s_5\)</span>；<span class="math inline">\(s_1 \to s_2 \to s_3 \to s_5\)</span></p>
+<p>所以说在给定了策略<span class="math inline">\(\pi\)</span>后，由于过程的不确定，那么<span class="math inline">\(G_1\)</span>也有不同的值，为了更好的评价状态<span class="math inline">\(s_1\)</span>的价值，我们需要定义一个确定的量来表示该价值，所以我们利用期望来作为状态值函数的定义。</p>
+<p><strong>状态值函数（在某个状态有多好）：</strong></p>
+<p>当智能体采用策略<span class="math inline">\(π\)</span>时，累积回报服从一个分布，累积回报在状态<span class="math inline">\(s\)</span>处的期望值定义为状态-值函数： <span class="math display">\[
+v_\pi(s)= E_\pi[\sum^{\infty}_{k=0}\gamma_kR_{t+k+1}|S_t=s]
+\]</span> 这个含义就是在状态<span class="math inline">\(s\)</span>上，到最后目标状态的所有路径的回报期望值。</p>
+<p><em>注意：状态值函数是与策略<span class="math inline">\(π\)</span>相对应的，这是因为策略<span class="math inline">\(π\)</span>决定了累积回报<span class="math inline">\(G\)</span>的状态分布。</em></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210231133925.png" alt="image-20221023113305866"  /></p>
+<p>红色部分是每一个状态的状态值函数。</p>
+<p><strong>状态-行为值函数（在某个状态选择某个动作有多好）：</strong> <span class="math display">\[
+q_\pi(s,a)= E_\pi[\sum^{\infty}_{k=0}\gamma_kR_{t+k+1}|S_t=s, A_t=a]
+\]</span></p>
+<h3 id="actor-critic算法">Actor-Critic算法</h3>
+<p>我们将 Actor-Critic 分为两个部分：Actor（策略网络）和 Critic（价值网络）</p>
+<ul>
+<li>Actor 要做的是与环境交互，并在 Critic 价值函数的指导下用策略梯度学习一个更好的策略。</li>
+<li>Critic 要做的是通过 Actor 与环境交互收集的数据学习一个价值函数，这个价值函数会用于判断在当前状态什么动作是好的，什么动作不是好的，进而帮助 Actor 进行策略更新。</li>
+</ul>
+<p>Actor 的更新采用<strong>策略梯度</strong>的原则，那 Critic 如何更新呢？</p>
+<p>我们将 Critic 价值网络表示为<span class="math inline">\(V_\omega\)</span>，参数为<span class="math inline">\(\omega\)</span>。于是，我们可以采取时序差分残差的学习方式，对于单个数据定义如下价值函数的损失函数： <span class="math display">\[
+L(\omega)=\frac{1}{2}(r+\gamma V_\omega(s_{t+1})-V_\omega (s_t))^2
+\]</span> 与 DQN 中一样，我们采取类似于目标网络的方法，将上式中<span class="math inline">\(r+\gamma V_\omega(s_{t+1})\)</span>作为时序差分目标，不会产生梯度来更新价值函数。因此，价值函数的梯度为： <span class="math display">\[
+\nabla_\omega L(\omega)=-(r+\gamma V_\omega(s_{t+1})-V_\omega (s_t))\nabla_\omega V_\omega(s_t)
+\]</span> 然后使用梯度下降方法来更新 Critic 价值网络参数即可。</p>
+<p>Actor-Critic 算法的具体流程如下：</p>
+<ul>
+<li>初始化策略网络参数<span class="math inline">\(\theta\)</span>，价值网络参数<span class="math inline">\(\omega\)</span></li>
+<li><strong>for</strong> 序列<span class="math inline">\(e=1\to E\)</span> <strong>do</strong> :</li>
+<li>用当前策略<span class="math inline">\(\pi_{\theta}\)</span>采样轨迹<span class="math inline">\(\{s_1,a_1,r_1...\}\)</span></li>
+<li>为每一步数据计算: <span class="math inline">\(\delta_t=r_t +\gamma V_\omega(s_{t+1})-V_\omega (s_t)\)</span></li>
+<li>更新价值参数<span class="math inline">\(\omega=\omega + \alpha_\omega \sum_t\delta_t \nabla_\omega V_\omega(s_t)\)</span></li>
+<li>更新策略参数<span class="math inline">\(\theta = \theta + \alpha_{\theta}\sum_t\delta_t \nabla_\omega log\pi_{\theta}(a_t|s_t)\)</span></li>
+<li><strong>end for</strong></li>
+</ul>
+<h2 id="论文解读">论文解读</h2>
+<h3 id="遇到的问题">遇到的问题</h3>
+<ul>
+<li>如今单靠地面无线技术来满足超高服务质量需求是一个挑战，以为预计到2023年，将有超过5000亿个物联网设备投入使用，这就导致了不同物联网设备之间的数据和信息交换数量激增，但是由于地面上的网段的覆盖范围和容量有限，没有办法对偏远或非地面的设备提供稳定的网络接入。</li>
+<li>为了解决上述问题，研究人员<strong>选择了使用<code>Space-Air-Ground</code>网络来缓解上述压力。</strong>但是由于卫星和无人机的高机动性和异构性，又会导致没办法用基于固定规则的流量卸载方法来处理该问题。<strong>这里使用到了强化学习方法</strong>来取代正常的流量卸载方法。</li>
+<li>由于SAGIN巨大的网络空间，传统的机器学习需要全局数据将成为较大的开销，同时原始训练数据的交换将显著增加隐私担忧。</li>
+<li>研究人员<strong>选择使用联邦学习来缓解上述问题</strong>，但是中心服务器的入侵也会导致联邦学习的学习效果下降。</li>
+<li><strong>该模型引入了区块链</strong>来保证联邦学习不会受到恶意入侵的剧烈影响。</li>
+</ul>
+<h3 id="场景描述">场景描述</h3>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210231723119.png" alt="image-20221023172309069" style="zoom:100%;" /></p>
+<p>地面上有两种设备：一个是用户的设备：UE，一个是类似基站的东西：BS</p>
+<p>空中有一种设备：无人机UAV</p>
+<p>太空上有两个设备：低轨卫星LEO，同步卫星GEO</p>
+<p>我们现在要做的就是：两个UE设备要进行数据交换，通过强化学习的方法来<strong>找到一个最优的路径来连接两个UE</strong>，无论是卸载到BS还是UAV还是LEO、GEO，总之目的就是数据交换。</p>
+<p>部分安全分数较高的BS作为本地训练节点，BS中安全分数最高的一部分是中心共识节点。</p>
+<p>UAV、LEO、GEO都是区块链的轻节点（不存全部的信息）</p>
+<h3 id="创新点">创新点</h3>
+<ol type="1">
+<li><p>为了实现网络信息在节点间的安全共享，引入了区块链技术。</p>
+<p>引入联邦学习技术来保护数据隐私，减少SAGIN中传输原始数据的开销。</p>
+<p>提出了一种新的基于区块链的联邦学习架构。</p>
+<p>基于上述框架，提出了一种双区块链结构。</p></li>
+<li><p>为了解决流量卸载中的安全节点选择问题，设计了一种节点安全评估机制。</p></li>
+<li><p>提出了一种共识节点选择机制，然后在此基础上提出了一种改进的实用拜占庭容错算法(EPBFT)。</p></li>
+<li><p>我们将SAGIN中基于区块链的流量卸载问题抽象为MDP，并提出了基于RL的方法来解决该问题。</p>
+<p>我们提出了一种无模型的A3C算法来动态学习网络拓扑结构，并做出优化决策，以使系统总时延最小</p></li>
+</ol>
+<h4 id="总体框架">总体框架</h4>
+<p><strong>本地训练层</strong></p>
+<p>本地训练层由地上的BS组成，当BS超过负载的时候，系统启用卸载方案，本地节点会收集相邻节点的拓扑信息（包含连通性、安全评估信息）</p>
+<p><strong>中心共识层</strong></p>
+<p>通过安全评估机制选择的BS节点组成中心共识层，该层收集本地训练层上传的拓扑信息和局部模型参数，并对训练结果进行评估。中心共识层都是共识节点，来作为分布式的区块链来运行，该层的节点可以通过区块链与其他节点共享模型参数。</p>
+<p><strong>区块链系统</strong></p>
+<p>该文章提出了一个双区块链系统，一个用来存储网络的拓扑信息，一个用来存储模型信息。中心共识节点都作为区块链的全节点，参与公示过程，本地训练节点和其他设备节点（UAV等）都是轻节点，并不参与共识</p>
+<ul>
+<li>拓扑链：拓扑信息包括：本地训练节点一跳、两跳的设备集（BS、UAV、GEO、LEO）；节点队列；安全评估信息。共识层会将其打包到区块链中，在模型验证中起到必不可少的作用</li>
+<li>模型链：本地训练节点将本地模型上传，共识层进行聚合然后打包成块，添加到区块链中。此外共识层还需要对本地模型进行验证来作为安全评估。</li>
+</ul>
+<h4 id="系统模型">系统模型</h4>
+<p>文章将整个SAGIN看成了一个加权有向图，节点包括各个设备，加权的赋值为0,1（0为两个设备没有建立连接，1代表两个设备建立了连接）</p>
+<p><strong>通信模型</strong></p>
+<ul>
+<li><p>UAV-Ground通信：即BS和UAV的通信，公式如下 <span class="math display">\[
+tr_t^{UB}=W_{UB}log_2(1+ \frac{P_{UB}·10^{-\frac{L}{10}}}{\sigma^2_{UB}})
+\]</span> <span class="math inline">\(W_{ub}\)</span>表示无人机与BS之间的信道带宽，<span class="math inline">\(P_{ub}\)</span>表示无人机与BS之间的发射功率，<span class="math inline">\(σ^2_{UB}\)</span>表示无人机与BS之间的噪声功率，<span class="math inline">\(L\)</span>表示无人机与BS之间的平均路径损耗。</p></li>
+<li><p>UAV-Sat通信：这里需要考虑雨水对信号的影响。由于无人机的运动相比于卫星的运动很小，所以可以看做UAV的运动是静止的。 <span class="math display">\[
+tr_t^{US}=W_{US}log_2(1+ \frac{P_{US}·I^2_{US}}{\sigma^2_{US}})
+\]</span> <span class="math inline">\(I_{US}\)</span>表示雨水对信号的缩减。</p></li>
+</ul>
+<p><strong>区块链延迟模型</strong></p>
+<p>区块链中的延迟主要是共识延迟和节点更新延迟，文章定义每m次共识之后需要进行一次节点更新，所以区块链的平均延迟为 <span class="math display">\[
+T_c^b(t)=\frac{MT_{con}(t)+T_{upd}(t)}{M}
+\]</span> 为了保证避免恶意节点对于SAGIN的影响，我们需要对平均延迟做一个约束，即<span class="math inline">\(T_c^b(t)\leq(T_c^b)_{min}\)</span></p>
+<p><strong>流量卸载延迟模型</strong></p>
+<p>端到端时延是源节点到目的节点路径上所有时延分量的总和，分为<strong>链路上时延</strong>和<strong>排队时延</strong>两个分量。 另外，链路上的时延又分为<strong>传播时延</strong>和<strong>传输时延</strong>。</p>
+<blockquote>
+<p>传播时延：信号在传播过程中的延迟</p>
+<p>传输时延：由于信号是由大小的，传输这个数据所需要的延迟</p>
+</blockquote>
+<p><span class="math display">\[
+T_{path_{i,j}}=\frac{x_{i,j}}{\iota}+\frac{l}{tr_t^{i,j}}+\eta \frac{l}{tr_t^{i,j}}
+\]</span></p>
+<p><strong>最终的问题描述就是，我们需要找到一个路径使得在约束条件下，流量卸载的延迟是最小的。</strong></p>
+<h4 id="节点安全评估和共识机制">节点安全评估和共识机制</h4>
+<h5 id="节点安全评估">节点安全评估</h5>
+<p>我们假设恶意节点有以下三种行为</p>
+<ol type="1">
+<li>恶意节点有一定的几率丢包</li>
+<li>恶意节点可能不按照指定的路由路径或卸载方案传输包</li>
+<li>恶意节点可能将性能不佳的模型上传中心共识层</li>
+</ol>
+<p>针对上述三种行为，文章给出了以下三个安全评估指标</p>
+<ol type="1">
+<li><p>计算节点的投递率，投递率越高该节点丢包几率越小，越安全：<span class="math inline">\(\frac{传出数量}{传入数量}\)</span></p></li>
+<li><p>本地训练节点接收到数据包时，检测最后一跳是否采取了最优路径，如果没有采用，就检测错误，将该值归一化</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232005171.png" alt="image-20221023200559139"  /></p></li>
+<li><p>通过测试上传模型的性能来评估是否为恶意节点，将不正确的模型与正确模型相比，然后归一化。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232006876.png" alt="image-20221023200614804"  /></p></li>
+</ol>
+<p>最后将三个值相乘，得出最后的安全评估指数，由于三个值的区间全是<span class="math inline">\((0,1]\)</span>，所以最后的值也是<span class="math inline">\((0,1]\)</span></p>
+<h5 id="共识机制epbft">共识机制EPBFT</h5>
+<p>这个算法与PBFT的区别就是增加了动态添加和删除节点的功能。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232009738.png" alt="image-20221023200933662"  /></p>
+<p><strong>更新共识节点步骤：</strong></p>
+<ol type="1">
+<li>在共识M次之后，启动节点更新进程，将安全评估值最低的共识节点发送给其他节点（node 4）</li>
+<li>在共识节点收到该消息之后，向其他共识节点发送消息，如果收到<code>2f+1</code>以上的机制，将公式列表更新</li>
+<li>如果删除成功，那么所有节点向安全值最高的节点发送INVITE消息</li>
+<li>候选人收到消息之后，向每一个向他发送INVITE的节点发送INVITE-ACK回复</li>
+<li>共识节点收到ACK消息之后，共识节点向其他节点发送UPDATE消息，每一个共识节点收到<code>2f+1</code>个UPDATE消息，将候选节点正式变成共识节点</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232017275.png" alt="image-20221023201752246" /></p>
+<p><strong>共识步骤：</strong></p>
+<ol type="1">
+<li><p>中继节点（BS、UAV、SAT）向最近的共识节点发送自己的信息</p></li>
+<li><p>共识节点收到之后向主节点打包发送</p></li>
+<li><p>主节点将该信息广播给其他共识，主节点验证MAC之后，<strong>开始PBFT传统过程</strong></p></li>
+</ol>
+<h4 id="联邦强化学习下的流量卸载">联邦强化学习下的流量卸载</h4>
+<h5 id="mdp">MDP</h5>
+<p>(<a href="#%20马尔科夫决策过程%20MDP">马尔科夫决策MDP</a>)</p>
+<ul>
+<li><p><strong>状态空间</strong></p>
+<p>一个多维数组，包含节点周围所有的一跳和两跳邻居的相关信息</p></li>
+<li><p><strong>动作空间</strong></p>
+<p><span class="math inline">\(a(t) = \{0,RN_i\}\)</span>，0代表着采用最开始的路由路径，<span class="math inline">\(RN\)</span>代表着根据写在决策来卸载到邻居节点如BS、UAV、SAT</p></li>
+<li><p><strong>转移概率</strong></p>
+<p>由于无人机等带来的不确定性，这一方面是很难建模的，所以要利用机器学习</p></li>
+<li><p><strong>回报函数</strong></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232043053.png" alt="image-20221023204335967"  /></p>
+<p>如果消息传到了目的节点，那么取其倒数，传播事件越长汇报越小</p>
+<p>如果消息没有达到目的节点，那么直接取反，回报函数会随着时间显著减小</p></li>
+<li><p><strong>价值函数</strong></p>
+<p>和MDP一样，取其期望。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232048041.png" alt="image-20221023204828960" style="zoom:80%;" /></p></li>
+<li><p><strong>决策</strong></p></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232059365.png" alt="image-20221023205901276"  /></p>
+<p>在状态<span class="math inline">\(s\)</span>选择<span class="math inline">\(s&#39;\)</span>的概率×(在s状态选择a动作的回报 + 在<span class="math inline">\(s&#39;\)</span> 的状态下采用<span class="math inline">\(\pi&#39;\)</span>的价值)</p>
+<p><strong>在状态S下选择动作A的最优策略π，使包延迟最小</strong></p>
+<h5 id="bfa3c-联邦强化学习">BFA3C 联邦强化学习</h5>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232108820.png" alt="image-20221023210804783"  /></p>
+<p><strong>框架</strong></p>
+<p>BFA3C有一个全局神经网络模型（即中心权重矩阵），它包含一个Actor网络和一个Critic网络，以及几个由局部Actor网络和局部Critic网络组成的局部网络模型（即局部权重矩阵）。</p>
+<p>每个局部训练节点都有其局部网络，局部网络单独探索环境，并周期性地将局部网络学习的结果馈送到中心共识层。 同时将本地网获取的拓扑信息上传到中心共识层。 该拓扑信息在共识处理后添加到拓扑链中。</p>
+<p>中心共识层聚合上传的本地模型，并将全局模型打包到一个块中，将其添加到模型链中。</p>
+<p>局部训练节点从模型链中获取最新的全局模型，并对局部模型进行更新。</p>
+<p>此外，中心共识层从拓扑链中获取拓扑信息作为模型输入，对本地模型进行验证，验证结果将添加到拓扑链中，更新节点安全评估信息。</p>
+<p><strong>BFA3C流量卸载算法如下：</strong></p>
+<ul>
+<li><p>该算法首先在中心共识层初始化Actor网络和Critic网络参数。</p></li>
+<li><p>当本地训练节点开始接收对传输包的请求时，本地训练节点从模型链中获取相应的预训练模型并进行在线学习。</p></li>
+<li><p>本地训练节点通过收集来自周围邻近节点的信息作为模型的输入，根据本地参与者网络中的策略选择用于卸载决策的动作。</p></li>
+<li><p>局部评价网络生成最后一个时间序列位置<span class="math inline">\(s_t\)</span>的奖励值，并计算每个时刻的累积折扣函数。 最后，分别计算了局部Actor和Critic网络的梯度。</p></li>
+<li><p>在本地训练时，作为运行BFA3C的本地训练节点进行异步训练，并周期性地将新的模型参数上传到中心控制层。</p></li>
+<li><p>中心共识节点在从本地训练节点接收到本地网络模型后，中心共识层从拓扑信息链中获取拓扑信息，以验证本地模型的性能。</p></li>
+<li><p>中心共识层根据模型的性能更新本地训练节点的安全评估值。 中心共识层在整合局部模型后，将全局模型放入区块，执行共识过程。</p></li>
+<li><p>最后，局部学习节点从模型链中获取最新的全局网络模型，并更新其局部网络模型。</p></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BGFL/" rel="tag"># BGFL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/09/digital-stippling-%E7%BB%BC%E8%BF%B0/" rel="prev" title="Digital Stippling 综述">
+      <i class="fa fa-chevron-left"></i> Digital Stippling 综述
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#blockchain-based-trusted-traf%EF%AC%81c-of%EF%AC%82oading-in-saginfrl-approach"><span class="nav-number">1.</span> <span class="nav-text">Blockchain-based Trusted Trafﬁc Ofﬂoading in SAGIN:FRL Approach</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="nav-number">1.1.</span> <span class="nav-text">预备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pbft"><span class="nav-number">1.1.1.</span> <span class="nav-text">PBFT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E5%86%B3%E7%AD%96%E8%BF%87%E7%A8%8B-mdp"><span class="nav-number">1.1.2.</span> <span class="nav-text">马尔科夫决策过程 MDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#actor-critic%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.3.</span> <span class="nav-text">Actor-Critic算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB"><span class="nav-number">1.2.</span> <span class="nav-text">论文解读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.1.</span> <span class="nav-text">遇到的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">场景描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E6%96%B0%E7%82%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">创新点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E4%BD%93%E6%A1%86%E6%9E%B6"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">总体框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">系统模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E5%AE%89%E5%85%A8%E8%AF%84%E4%BC%B0%E5%92%8C%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">节点安全评估和共识机制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E5%AE%89%E5%85%A8%E8%AF%84%E4%BC%B0"><span class="nav-number">1.2.3.3.1.</span> <span class="nav-text">节点安全评估</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6epbft"><span class="nav-number">1.2.3.3.2.</span> <span class="nav-text">共识机制EPBFT</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B8%8B%E7%9A%84%E6%B5%81%E9%87%8F%E5%8D%B8%E8%BD%BD"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">联邦强化学习下的流量卸载</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mdp"><span class="nav-number">1.2.3.4.1.</span> <span class="nav-text">MDP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#bfa3c-%E8%81%94%E9%82%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.2.3.4.2.</span> <span class="nav-text">BFA3C 联邦强化学习</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="PhoenixDai"
+      src="/images/Phoenix-Logo-White.png">
+  <p class="site-author-name" itemprop="name">PhoenixDai</p>
+  <div class="site-description" itemprop="description">Anything that doesn't kill me makes me stronger</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZimingDai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZimingDai" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:phoenixdai2001@163.com" title="E-Mail → mailto:phoenixdai2001@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2022-01 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PhoenixDai</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='48,0,65' opacity='0.9' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
