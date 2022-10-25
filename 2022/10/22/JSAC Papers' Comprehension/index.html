@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="BC-based Trusted Trafic Offloading in SAGIN  预备知识（PBFT、MDP、AC算法） 论文解读  A Fast BC-based FL Framework with Compressed Communications">
+  <meta name="description" content="BC-based Trusted Trafic Offloading in SAGIN  预备知识（PBFT、MDP、AC算法） 论文解读  A Fast BC-based FL Framework with Compressed Communications  预备知识（FL过程） 论文解读">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2022JSAC Papers&#39; Comprehension">
 <meta property="og:url" content="http://example.com/2022/10/22/JSAC%20Papers'%20Comprehension/index.html">
 <meta property="og:site_name" content="Sycamore">
-<meta property="og:description" content="BC-based Trusted Trafic Offloading in SAGIN  预备知识（PBFT、MDP、AC算法） 论文解读  A Fast BC-based FL Framework with Compressed Communications">
+<meta property="og:description" content="BC-based Trusted Trafic Offloading in SAGIN  预备知识（PBFT、MDP、AC算法） 论文解读  A Fast BC-based FL Framework with Compressed Communications  预备知识（FL过程） 论文解读">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210231027074.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210231040105.png">
@@ -44,8 +44,12 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232048041.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232059365.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232108820.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210251519944.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210251541759.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210251555677.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210251555980.png">
 <meta property="article:published_time" content="2022-10-22T12:56:43.000Z">
-<meta property="article:modified_time" content="2022-10-24T09:56:29.049Z">
+<meta property="article:modified_time" content="2022-10-25T07:56:41.824Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="BGFL">
 <meta name="twitter:card" content="summary">
@@ -212,7 +216,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-10-24 17:56:29" itemprop="dateModified" datetime="2022-10-24T17:56:29+08:00">2022-10-24</time>
+                <time title="Modified: 2022-10-25 15:56:41" itemprop="dateModified" datetime="2022-10-25T15:56:41+08:00">2022-10-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -241,7 +245,11 @@
 <li>预备知识（PBFT、MDP、AC算法）</li>
 <li>论文解读</li>
 </ul></li>
-<li>A Fast BC-based FL Framework with Compressed Communications</li>
+<li>A Fast BC-based FL Framework with Compressed Communications
+<ul>
+<li>预备知识（FL过程）</li>
+<li>论文解读</li>
+</ul></li>
 </ul>
 <p><span id="more"></span></p>
 <h1 id="blockchain-based-trusted-trafﬁc-ofﬂoading-in-saginfrl-approach">Blockchain-based Trusted Trafﬁc Ofﬂoading in SAGIN:FRL Approach</h1>
@@ -480,6 +488,54 @@ T_{path_{i,j}}=\frac{x_{i,j}}{\iota}+\frac{l}{tr_t^{i,j}}+\eta \frac{l}{tr_t^{i,
 <p>L. Cui, X. Su and Y. Zhou, "A Fast Blockchain-based Federated Learning Framework with Compressed Communications," in IEEE Journal on Selected Areas in Communications, 2022, doi: 10.1109/JSAC.2022.3213345.</p>
 </blockquote>
 <h2 id="预备知识-1">预备知识</h2>
+<h3 id="fl过程">FL过程</h3>
+<p>在联邦学习中，数据样本分布在多个客户端。我们假设有N个客户端，客户端<span class="math inline">\(i\)</span>的数据集为<span class="math inline">\(D_i\)</span>，那么这个客户端的局部损失函数定义为： <span class="math display">\[
+G_i(w,D_i)=\frac{1}{|D|}\sum_{\xi\in D_i}f(w,\xi)
+\]</span> 其中<span class="math inline">\(w\)</span>表示模型参数，<span class="math inline">\(D_i\)</span>表示局部数据集的大小，<span class="math inline">\(\xi\)</span>表示特定的数据样本，<span class="math inline">\(f\)</span>为损失函数。联邦学习的目标是训练一个使全局损失函数最小化的模型即 <span class="math display">\[
+minF(w)=min\sum_{i=1}^{N}p_iF_i(w,D_i)
+\]</span> <span class="math inline">\(p_i\)</span>表示每一个客户端的权重，一般根据该客户端数据集大小占据总共数据集的多少</p>
+<p><strong>FedAvg</strong>由多次全局迭代组成，在每一次迭代<span class="math inline">\(t\)</span>中，参数服务器将随机选择<span class="math inline">\(K\)</span>个客户端作为<span class="math inline">\(K_t\)</span>，选择的客户端将从服务器端下载最新的模型<span class="math inline">\(w_t\)</span>，之后在每一个客户端上进行局部迭代，每一个epoch的梯度下降如下所示。 <span class="math display">\[
+w_{t+1}^{i}=w_t^i-\eta \nabla F_i(w_t^i,B_t^i)
+\]</span> <span class="math inline">\(B^i_t\)</span>是客户端的数据集<span class="math inline">\(D_i\)</span>中的一个小批量样本，之后将在局部进行<span class="math inline">\(E\)</span>个局部epoch来对模型进行更新<span class="math inline">\(g_{t+E}^i=w_{t+E}^i-w_t^i\)</span> <span class="math display">\[
+w_{t+E}=w_t+\sum p_ig_{t+E}^i
+\]</span> 即在原始的全局模型中将每一个客户端的更新梯度进行相加。之后将客户端的模型更新为新的模型。</p>
+<p>一般来说，全局模型只会在局部模型进行E的整数倍训练之后进行更新。<span class="math inline">\(t\in I=\{E,2E,3E\}\)</span></p>
+<h2 id="论文解读-1">论文解读</h2>
+<h3 id="解决问题">解决问题</h3>
+<p>该文章解决的问题主要是：<strong>BFL面临的通信延迟长和训练效率低</strong></p>
+<p>这可以归结为：</p>
+<ol type="1">
+<li>在BFL中，所有的中间模型的更新都会广播给所有旷工来维护区块链</li>
+<li>每个客户端需要下载所有中建模型进行更新，以便本地进行模型聚合</li>
+</ol>
+<p>所以作者就希望可以<strong>减少中建模型更新的数量</strong>来提高BFL的通信效率，利TOPK算法对每个局部模型进行压缩，来减轻通信负载</p>
+<h3 id="bcfl流程">BCFL流程</h3>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210251519944.png" alt="image-20221025151915830"  /></p>
+<p><strong>基础设定</strong></p>
+<p>区块链系统中有N个客户端，M个矿工。我们假设每一个客户端都连接着一个特定的矿工，这个矿工用来上传和下载模型的更新。在文章的系统中，使用的是TOPK算法和PoW的共识机制（这些可以进行更换）</p>
+<p><strong>主要步骤</strong></p>
+<ol type="1">
+<li><p>本地模型训练</p>
+<p>每个客户端使用梯度下降来更新本地的模型参数，更新公式如:<span class="math inline">\(w_{t+\frac{1}{2}}^{i}=w_t^i-\eta \nabla F_i(w_t^i,B_t^i)\)</span>，和传统FL一样，<span class="math inline">\(B\)</span>是本地数据集中的一个batch，注意的是，这里并不是<span class="math inline">\(t+1\)</span>，而是<span class="math inline">\(t+\frac{1}{2}\)</span> ，当且仅当在这次迭代之后需要上传模型时，才会令<span class="math inline">\(w_{t+1}^i=w^i_{t+\frac{1}{2}}\)</span>。</p>
+<p>我们将模型的更新定义<span class="math inline">\(g_{t}^i=w_{t+\frac{1}{2}}^i-w_{t+1-E}^i-m^i_{t+1-E}\)</span></p>
+<p>这里和传统FL的区别就是，我们减去了一个<span class="math inline">\(m\)</span>，这个<span class="math inline">\(m\)</span>就是补偿误差（去缓解压缩带来的误差）</p>
+<p><span class="math inline">\(Top_k\)</span>算法其实就是设定一个阈值，如果模型更改的大小没有超过这个阈值，我们就认为这次更改并不是一个大更新，就不会将这次更新上传。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210251541759.png" /></p>
+<p>这里的阈值就是模型更改大小绝对值的第<span class="math inline">\(l+1\)</span>个，也就是说，我们更新<span class="math inline">\(l\)</span>次，就要保证这<span class="math inline">\(l\)</span>次更新的变化都在所有更新的前<span class="math inline">\(l\)</span>个。</p></li>
+<li><p>模型上传</p>
+<p>假设模型的维度是d，每次模型更新的通信量为s字节</p>
+<p>在BFCL中，k个模型上传所需要上传的字节为：<span class="math inline">\(k(s+\frac{log_2d}{8})\)</span>，传统的模型需要上传<span class="math inline">\(kd\)</span>字节</p>
+<p>中间相差的误差由<span class="math inline">\(m\)</span>来弥补。</p></li>
+<li><p>跨事务</p>
+<p>在这一步骤中，客户端上传的所有模型更新豆浆存储在候选块中，之后每一个矿工（连接着一个服务器）将其服务器上的模型更新分发给其他矿工。这样所有矿工都会拥有全部节点的模型更新参数。</p></li>
+<li><p>挖矿和广播</p>
+<p>在这一步骤中，每个矿工尝试生成一个区块（挖矿）来将客户端的所有模型更新存储到区块链上。</p></li>
+<li><p>模型下载</p>
+<p>获胜的矿工将成功生成一个区块，所有的客户端都需要从区块链上下载最新的区块来更新自己的训练模型。</p></li>
+<li><p>模型聚合</p>
+<p>一旦客户端获取到了最新的区块，他们就可以聚合模型更新来获得模型参数。</p></li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210251555677.png" alt="image-20221025155542639" style="zoom:120%;" /><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210251555980.png" alt="image-20221025155556825" style="zoom:120%;" /></p>
 
     </div>
 
@@ -577,7 +633,7 @@ T_{path_{i,j}}=\frac{x_{i,j}}{\iota}+\frac{l}{tr_t^{i,j}}+\eta \frac{l}{tr_t^{i,
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#blockchain-based-trusted-traf%EF%AC%81c-of%EF%AC%82oading-in-saginfrl-approach"><span class="nav-number">1.</span> <span class="nav-text">Blockchain-based Trusted Trafﬁc Ofﬂoading in SAGIN:FRL Approach</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="nav-number">1.1.</span> <span class="nav-text">预备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pbft"><span class="nav-number">1.1.1.</span> <span class="nav-text">PBFT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E5%86%B3%E7%AD%96%E8%BF%87%E7%A8%8B-mdp"><span class="nav-number">1.1.2.</span> <span class="nav-text">马尔科夫决策过程 MDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#actor-critic%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.3.</span> <span class="nav-text">Actor-Critic算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB"><span class="nav-number">1.2.</span> <span class="nav-text">论文解读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.1.</span> <span class="nav-text">遇到的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">场景描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E6%96%B0%E7%82%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">创新点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E4%BD%93%E6%A1%86%E6%9E%B6"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">总体框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">系统模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E5%AE%89%E5%85%A8%E8%AF%84%E4%BC%B0%E5%92%8C%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">节点安全评估和共识机制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E5%AE%89%E5%85%A8%E8%AF%84%E4%BC%B0"><span class="nav-number">1.2.3.3.1.</span> <span class="nav-text">节点安全评估</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6epbft"><span class="nav-number">1.2.3.3.2.</span> <span class="nav-text">共识机制EPBFT</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B8%8B%E7%9A%84%E6%B5%81%E9%87%8F%E5%8D%B8%E8%BD%BD"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">联邦强化学习下的流量卸载</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mdp"><span class="nav-number">1.2.3.4.1.</span> <span class="nav-text">MDP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#bfa3c-%E8%81%94%E9%82%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.2.3.4.2.</span> <span class="nav-text">BFA3C 联邦强化学习</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#a-fast-bc-based-fl-framework-with-compressed-communications"><span class="nav-number">2.</span> <span class="nav-text">A Fast BC-based FL Framework with Compressed Communications</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86-1"><span class="nav-number">2.1.</span> <span class="nav-text">预备知识</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#blockchain-based-trusted-traf%EF%AC%81c-of%EF%AC%82oading-in-saginfrl-approach"><span class="nav-number">1.</span> <span class="nav-text">Blockchain-based Trusted Trafﬁc Ofﬂoading in SAGIN:FRL Approach</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="nav-number">1.1.</span> <span class="nav-text">预备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pbft"><span class="nav-number">1.1.1.</span> <span class="nav-text">PBFT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E5%86%B3%E7%AD%96%E8%BF%87%E7%A8%8B-mdp"><span class="nav-number">1.1.2.</span> <span class="nav-text">马尔科夫决策过程 MDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#actor-critic%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.3.</span> <span class="nav-text">Actor-Critic算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB"><span class="nav-number">1.2.</span> <span class="nav-text">论文解读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.1.</span> <span class="nav-text">遇到的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">场景描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E6%96%B0%E7%82%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">创新点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E4%BD%93%E6%A1%86%E6%9E%B6"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">总体框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">系统模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E5%AE%89%E5%85%A8%E8%AF%84%E4%BC%B0%E5%92%8C%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">节点安全评估和共识机制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E5%AE%89%E5%85%A8%E8%AF%84%E4%BC%B0"><span class="nav-number">1.2.3.3.1.</span> <span class="nav-text">节点安全评估</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6epbft"><span class="nav-number">1.2.3.3.2.</span> <span class="nav-text">共识机制EPBFT</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B8%8B%E7%9A%84%E6%B5%81%E9%87%8F%E5%8D%B8%E8%BD%BD"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">联邦强化学习下的流量卸载</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mdp"><span class="nav-number">1.2.3.4.1.</span> <span class="nav-text">MDP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#bfa3c-%E8%81%94%E9%82%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.2.3.4.2.</span> <span class="nav-text">BFA3C 联邦强化学习</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#a-fast-bc-based-fl-framework-with-compressed-communications"><span class="nav-number">2.</span> <span class="nav-text">A Fast BC-based FL Framework with Compressed Communications</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86-1"><span class="nav-number">2.1.</span> <span class="nav-text">预备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fl%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.1.</span> <span class="nav-text">FL过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB-1"><span class="nav-number">2.2.</span> <span class="nav-text">论文解读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98"><span class="nav-number">2.2.1.</span> <span class="nav-text">解决问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bcfl%E6%B5%81%E7%A8%8B"><span class="nav-number">2.2.2.</span> <span class="nav-text">BCFL流程</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
