@@ -27,11 +27,17 @@
 <meta property="og:url" content="http://example.com/2022/10/26/BGFL-Improve-Cluster(GraphDiv)/index.html">
 <meta property="og:site_name" content="Sycamore">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211061809284.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211062034003.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211062036637.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211062044237.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211062048700.png">
 <meta property="article:published_time" content="2022-10-26T08:56:15.000Z">
-<meta property="article:modified_time" content="2022-11-04T13:35:56.642Z">
+<meta property="article:modified_time" content="2022-11-06T14:29:19.282Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="BGFL-Improve">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211061809284.png">
 
 <link rel="canonical" href="http://example.com/2022/10/26/BGFL-Improve-Cluster(GraphDiv)/">
 
@@ -195,7 +201,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-04 21:35:56" itemprop="dateModified" datetime="2022-11-04T21:35:56+08:00">2022-11-04</time>
+                <time title="Modified: 2022-11-06 22:29:19" itemprop="dateModified" datetime="2022-11-06T22:29:19+08:00">2022-11-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -218,7 +224,51 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p><span id="more"></span></p>
+<h2 id="预备知识">预备知识</h2>
+<h3 id="超图">超图</h3>
+<p><strong>超图是什么？</strong></p>
+<p>简单的来说，对于我们熟悉的图而言，它的一个边（edge）只能和<strong>两个</strong>点连接；而对于超图来讲，人们定义它的边（这里叫超边，hyperedge, nets）可以和<strong>任意个数</strong>的顶点连接。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211061809284.png" /></p>
+<p>上图看的很清楚，所谓的超图就是每个边连接的顶点数不再是两个，而是任意一个。而<strong>均匀超图</strong>的概念就是每一个边所连接的点的个数是相同的，即：</p>
+<ul>
+<li>2-均匀超图 = 图</li>
+</ul>
+<p>在数学层面上，超图的定义为<span class="math inline">\(H = (X, E)\)</span>，其中<span class="math inline">\(X\)</span>是点（vertices）的集合，<span class="math inline">\(E\)</span>是边的集合，这里的<span class="math inline">\(E\)</span>就变成了顶点集合<span class="math inline">\(X\)</span>的子集，因为每一个边都由<strong>若干个点的集合</strong>来表示。每一条超边中的点我们称之为针（pin）</p>
+<p>加权无向超图：<span class="math inline">\(H=(V,E,c,\omega)\)</span>，其中<span class="math inline">\(c\)</span>是顶点权重，<span class="math inline">\(\omega\)</span>是超边的权重</p>
+<h2 id="标签传播算法">标签传播算法</h2>
+<p>标签传播算法简称<strong>LPA</strong>，是一种常用的半监督学习算法，用于向未标记（unlabel）的样本分配标签。LPA的核心思想非常简单：<strong>相似的数据应该拥有同样的标签。</strong>标签传播算法通过将所有样本依据相似性构建一个有权重的图，然后各个样本在其相邻的样本之间进行标签传播。</p>
+<p>算法图如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211062034003.png" /></p>
+<ul>
+<li>红色的数字代表对应节点的权重</li>
+<li>黑色的数字代表边上的权重。</li>
+</ul>
+<p>最终的输出图如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211062036637.png" /></p>
+<p><strong>LPA原理：</strong></p>
+<p>对于网络中的每一个节点，在初始阶段，LPA对每个节点初始化一个唯一的标签，在每次的迭代过程中，每个节点<strong>根据与其相连的节点所属的标签改变自己的标签</strong>，更改的原则是选择与其相连的节点中所属<strong>标签最多的社区标签</strong>为自己的社区标签，这便是标签传播的含义。</p>
+<p>LPA包括两大步骤：1. 构造相似矩阵；2. 标签传播</p>
+<p>构造相似矩阵：</p>
+<p>因为LPA依赖图，所以我们第一步要构建一个Graph，图的节点就是我们的数据点，包含了Label和Unlabel的数据；边代表两个节点之间的相似度，相似度的计算公式如下所示，<span class="math inline">\(\alpha\)</span>是超参： <span class="math display">\[
+w_{ij}=exp(-\frac{||x_i-x_j||^2}{\alpha^2})
+\]</span> 标签传播：</p>
+<p>在一开始，每一个节点都有自己的标签，即每一个节点都属于不同的社区，当社区的标签在节点间传播的时候，紧密相连的节点迅速取得一致的标签</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211062044237.png" /></p>
+<ol type="1">
+<li>对于c节点，由于周围节点都属于不同的社区，所以随机选择a社区</li>
+<li>对于d节点，相邻属于a社区的最多，所以将标签改成a</li>
+<li>同理对于b节点，相邻的节点中都是属于a社区的，所以标签改变成a</li>
+</ol>
+<p>在标签的更新中分为：同步更新；异步更新</p>
+<p>同步更新是指对于一个节点<span class="math inline">\(x\)</span>，在<span class="math inline">\(t\)</span>时刻的更新，根据的是邻居节点在<span class="math inline">\(t-1\)</span>时刻的标签。 <span class="math display">\[
+C_x(t)=f(C_{x_1}(t-1),...,C_{x_k}(t-1))
+\]</span> 但是这种问题可能会导致标签震荡如下图：</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211062048700.png" /></p>
+<p>在第一步的更新中，若左侧节点的标签更改为 a，右侧节点的标签更改为 b，在第二步中，左侧的节点又会更改为 b，右侧的节点又会更改为 a，如此往复，两边的标签会在社区标签 a 和 b 间不停地震荡。</p>
+<p>对于异步更新方式： <span class="math display">\[
+C_x(t)=f(C_{x_{i1}}(t),...,C_{x_{im}}(t),C_{x_{i(m+1)}}(t-1),...,C_{x_{ik}}(t-1))
+\]</span> 其中，邻居节点<span class="math inline">\(x_{i1},...,x_{im}\)</span>的社区标签在第t代已经更新过，则使用其最新的社区标签。而邻居节点<span class="math inline">\(x_{i(m+1),...,x_{ik}}\)</span>在第<span class="math inline">\(t\)</span>代时还没有更新，则对于这些邻居节点还是用其在第<span class="math inline">\(t-1\)</span>代时的社区标签。</p>
 
     </div>
 
@@ -319,6 +369,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">预备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%85%E5%9B%BE"><span class="nav-number">1.1.</span> <span class="nav-text">超图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">标签传播算法</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
