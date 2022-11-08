@@ -23,8 +23,8 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="BGFL-Improve-Cluster(GraphDiv)">
-<meta property="og:url" content="http://example.com/2022/10/26/BGFL-Improve-Cluster(GraphDiv)/index.html">
+<meta property="og:title" content="BGFL-Improve-GraphDiv">
+<meta property="og:url" content="http://example.com/2022/10/26/BGFL-Improve-GraphDiv/index.html">
 <meta property="og:site_name" content="Sycamore">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211061809284.png">
@@ -37,15 +37,18 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071102464.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071106259.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071108206.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211081537063.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071229778.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211081543191.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211081649225.png">
 <meta property="article:published_time" content="2022-10-26T08:56:15.000Z">
-<meta property="article:modified_time" content="2022-11-08T07:34:09.962Z">
+<meta property="article:modified_time" content="2022-11-08T09:35:18.511Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="BGFL-Improve">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211061809284.png">
 
-<link rel="canonical" href="http://example.com/2022/10/26/BGFL-Improve-Cluster(GraphDiv)/">
+<link rel="canonical" href="http://example.com/2022/10/26/BGFL-Improve-GraphDiv/">
 
 
 <script id="page-configurations">
@@ -58,7 +61,7 @@
   };
 </script>
 
-  <title>BGFL-Improve-Cluster(GraphDiv) | Sycamore</title>
+  <title>BGFL-Improve-GraphDiv | Sycamore</title>
   
 
 
@@ -176,7 +179,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/BGFL-Improve-Cluster(GraphDiv)/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/BGFL-Improve-GraphDiv/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/Phoenix-Logo-White.png">
@@ -189,7 +192,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          BGFL-Improve-Cluster(GraphDiv)
+          BGFL-Improve-GraphDiv
         </h1>
 
         <div class="post-meta">
@@ -207,7 +210,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-08 15:34:09" itemprop="dateModified" datetime="2022-11-08T15:34:09+08:00">2022-11-08</time>
+                <time title="Modified: 2022-11-08 17:35:18" itemprop="dateModified" datetime="2022-11-08T17:35:18+08:00">2022-11-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -310,7 +313,8 @@ C_x(t)=f(C_{x_{i1}}(t),...,C_{x_{im}}(t),C_{x_{i(m+1)}}(t-1),...,C_{x_{ik}}(t-1)
 <p>虽然经过了第一次的移动<span class="math inline">\(gain(f)\)</span>的值是最大的，但是f有区域的移动约束（<strong>要是移动了f，便导致了左边的元件数量远远大于右边的元件数量，所以f不能移动</strong>），选择d元件进行移动</p>
 <p><em>注意：已经移动过的节点不需要再重新计算gain，避免产生算法不收敛的情况。</em></p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071108206.png" /></p></li>
-<li><p>一直移动到所有的点都不需要重新计算gain。</p></li>
+<li><p>一直移动到所有的点都不需要重新计算gain。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211081537063.png" /></p></li>
 </ol>
 <h3 id="图的粗化">图的粗化</h3>
 <p>图的粗化（graph coarsening）是一种图压缩的算法。</p>
@@ -372,6 +376,27 @@ L_{max}=(1+\epsilon)(\frac{C(v)}{k})
 \epsilon&#39;=((1+\epsilon)\frac{c(V)}{k}·\frac{k&#39;}{c(V&#39;)})^{\frac{1}{log_2(k&#39;)}-1}
 \]</span></p>
 <h3 id="generic-deep-mgp">Generic Deep MGP</h3>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211081543191.png" /></p>
+<p>首先，我们输入图<span class="math inline">\(G_1=(V_1,E_1)\)</span>，然后建立一系列越来越粗的图<span class="math inline">\(G_1, G_2,..,G_l\)</span>。图粗化的办法是对每一个<span class="math inline">\(G_i\)</span>的图进行聚类，然后将类别压缩成一个点来获得<span class="math inline">\(G_{i+1}\)</span>。这个过程直到步骤收敛或者图节点拥有不超过<span class="math inline">\(2C\)</span>个节点。对应算法1:2-3</p>
+<p>之后，我们开始以下操作：1. 使用递归二划分来将当前的图划分成更多的块；2. 重新平衡分区并利用k-way局部改进；3。 将分区映射到前一个图<span class="math inline">\(G_{l-1}\)</span>。在这些操作期间，我们保证以下量不变</p>
+<ol type="1">
+<li>一个粗图<span class="math inline">\(G_i\)</span>划分成<span class="math inline">\(k_i=ceil_2(|V_i|/C)\)</span>个块</li>
+<li><span class="math inline">\(G_i\)</span>的<span class="math inline">\(k_i\)</span>-way分区应该满足平衡约束</li>
+</ol>
+<blockquote>
+<p>解释一下<span class="math inline">\(ceil_2\)</span>，<span class="math inline">\(ceil_2(x)\)</span>的意思是，将x向上取到2的幂次。</p>
+<p>eg. <span class="math inline">\(ceil_2(10) \to 16\)</span></p>
+<p>所以1条件，就是每一个图分成的块的数量必须是2的幂，这样才能保证二划分。3C个点就要分成4块。</p>
+</blockquote>
+<p>理想的情况下，算法会产生一个图层次结构，其中节点数在两个层次之间减半，最粗的图有2C个节点。在这种情况下，对最粗的图G进行一次二划分就足以满足1条件。为了在去粗化的时候（将当前图中的节点数增加一倍）后恢复不变量，必须将当前分区的每一个块进行一次二分区。</p>
+<p>一般的条件下，粗化会将图缩小大于1/2，因此使用递归二划分来保持1条件。也就是说，每当图<span class="math inline">\(G_i\)</span>的划分不满足1条件，就要递归的对每一个块进行二划分，直到拥有<span class="math inline">\(k_i\)</span>个块。对应算法1:7-10</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211081649225.png" style="zoom:80%;" /></p>
+<h3 id="merits">Merits</h3>
+<p>它成功地结合了经典的直接k-way划分和递归二划分的优点。 与直接K-way划分相似，深度MGP只对图进行一次粗化和去粗化，并允许使用K-way局部改进算法。 当k较大时，它不会遇到可伸缩性问题，并且比递归二划分具有更好的渐近运行时间</p>
+<h2 id="sampling-based-label-propagation-for-balanced-graph-partitioning">Sampling-based Label Propagation for Balanced Graph Partitioning</h2>
+<blockquote>
+<p>El Moussawi, Adnan, Ricardo Rojas Ruiz, and Nacéra Bennacer Seghouani. "Sampling-based Label Propagation for Balanced Graph Partitioning." <em>Proceedings of the 2022 ACM/SPEC on International Conference on Performance Engineering</em>. 2022.</p>
+</blockquote>
 
     </div>
 
@@ -387,7 +412,7 @@ L_{max}=(1+\epsilon)(\frac{C(v)}{k})
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="http://example.com/2022/10/26/BGFL-Improve-Cluster(GraphDiv)/" title="BGFL-Improve-Cluster(GraphDiv)">http://example.com/2022/10/26/BGFL-Improve-Cluster(GraphDiv)/</a>
+    <a href="http://example.com/2022/10/26/BGFL-Improve-GraphDiv/" title="BGFL-Improve-GraphDiv">http://example.com/2022/10/26/BGFL-Improve-GraphDiv/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -472,7 +497,7 @@ L_{max}=(1+\epsilon)(\frac{C(v)}{k})
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#preliminaries"><span class="nav-number">1.</span> <span class="nav-text">Preliminaries</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%85%E5%9B%BE"><span class="nav-number">1.1.</span> <span class="nav-text">超图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fm%E7%AE%97%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">FM算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E7%B2%97%E5%8C%96"><span class="nav-number">1.4.</span> <span class="nav-text">图的粗化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#source-method-parallel-graph-partitioning-for-complex-networks"><span class="nav-number">2.</span> <span class="nav-text">Source Method: &quot;Parallel Graph Partitioning for Complex Networks&quot;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E6%9C%89%E5%B0%BA%E5%AF%B8%E7%BA%A6%E6%9D%9F%E7%9A%84%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">带有尺寸约束的标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E5%B1%82%E9%9D%A2"><span class="nav-number">2.2.</span> <span class="nav-text">并行层面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deep-multilevel-graph-partitioning"><span class="nav-number">3.</span> <span class="nav-text">Deep Multilevel Graph Partitioning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#generic-deep-mgp"><span class="nav-number">3.1.</span> <span class="nav-text">Generic Deep MGP</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#preliminaries"><span class="nav-number">1.</span> <span class="nav-text">Preliminaries</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%85%E5%9B%BE"><span class="nav-number">1.1.</span> <span class="nav-text">超图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fm%E7%AE%97%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">FM算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E7%B2%97%E5%8C%96"><span class="nav-number">1.4.</span> <span class="nav-text">图的粗化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#source-method-parallel-graph-partitioning-for-complex-networks"><span class="nav-number">2.</span> <span class="nav-text">Source Method: &quot;Parallel Graph Partitioning for Complex Networks&quot;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E6%9C%89%E5%B0%BA%E5%AF%B8%E7%BA%A6%E6%9D%9F%E7%9A%84%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">带有尺寸约束的标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E5%B1%82%E9%9D%A2"><span class="nav-number">2.2.</span> <span class="nav-text">并行层面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deep-multilevel-graph-partitioning"><span class="nav-number">3.</span> <span class="nav-text">Deep Multilevel Graph Partitioning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#generic-deep-mgp"><span class="nav-number">3.1.</span> <span class="nav-text">Generic Deep MGP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#merits"><span class="nav-number">3.2.</span> <span class="nav-text">Merits</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sampling-based-label-propagation-for-balanced-graph-partitioning"><span class="nav-number">4.</span> <span class="nav-text">Sampling-based Label Propagation for Balanced Graph Partitioning</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
