@@ -32,8 +32,14 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211062036637.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211062044237.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211062048700.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071033532.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071038811.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071102464.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071106259.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071108206.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071229778.png">
 <meta property="article:published_time" content="2022-10-26T08:56:15.000Z">
-<meta property="article:modified_time" content="2022-11-06T14:29:19.282Z">
+<meta property="article:modified_time" content="2022-11-08T07:34:09.962Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="BGFL-Improve">
 <meta name="twitter:card" content="summary">
@@ -201,7 +207,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-06 22:29:19" itemprop="dateModified" datetime="2022-11-06T22:29:19+08:00">2022-11-06</time>
+                <time title="Modified: 2022-11-08 15:34:09" itemprop="dateModified" datetime="2022-11-08T15:34:09+08:00">2022-11-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -225,7 +231,7 @@
 
       
         <p><span id="more"></span></p>
-<h2 id="预备知识">预备知识</h2>
+<h2 id="preliminaries">Preliminaries</h2>
 <h3 id="超图">超图</h3>
 <p><strong>超图是什么？</strong></p>
 <p>简单的来说，对于我们熟悉的图而言，它的一个边（edge）只能和<strong>两个</strong>点连接；而对于超图来讲，人们定义它的边（这里叫超边，hyperedge, nets）可以和<strong>任意个数</strong>的顶点连接。</p>
@@ -236,7 +242,7 @@
 </ul>
 <p>在数学层面上，超图的定义为<span class="math inline">\(H = (X, E)\)</span>，其中<span class="math inline">\(X\)</span>是点（vertices）的集合，<span class="math inline">\(E\)</span>是边的集合，这里的<span class="math inline">\(E\)</span>就变成了顶点集合<span class="math inline">\(X\)</span>的子集，因为每一个边都由<strong>若干个点的集合</strong>来表示。每一条超边中的点我们称之为针（pin）</p>
 <p>加权无向超图：<span class="math inline">\(H=(V,E,c,\omega)\)</span>，其中<span class="math inline">\(c\)</span>是顶点权重，<span class="math inline">\(\omega\)</span>是超边的权重</p>
-<h2 id="标签传播算法">标签传播算法</h2>
+<h3 id="标签传播算法">标签传播算法</h3>
 <p>标签传播算法简称<strong>LPA</strong>，是一种常用的半监督学习算法，用于向未标记（unlabel）的样本分配标签。LPA的核心思想非常简单：<strong>相似的数据应该拥有同样的标签。</strong>标签传播算法通过将所有样本依据相似性构建一个有权重的图，然后各个样本在其相邻的样本之间进行标签传播。</p>
 <p>算法图如下所示：</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211062034003.png" /></p>
@@ -269,6 +275,103 @@ C_x(t)=f(C_{x_1}(t-1),...,C_{x_k}(t-1))
 <p>对于异步更新方式： <span class="math display">\[
 C_x(t)=f(C_{x_{i1}}(t),...,C_{x_{im}}(t),C_{x_{i(m+1)}}(t-1),...,C_{x_{ik}}(t-1))
 \]</span> 其中，邻居节点<span class="math inline">\(x_{i1},...,x_{im}\)</span>的社区标签在第t代已经更新过，则使用其最新的社区标签。而邻居节点<span class="math inline">\(x_{i(m+1),...,x_{ik}}\)</span>在第<span class="math inline">\(t\)</span>代时还没有更新，则对于这些邻居节点还是用其在第<span class="math inline">\(t-1\)</span>代时的社区标签。</p>
+<h3 id="fm算法">FM算法</h3>
+<p>FM算法是一种改进网络分区的线性时间启发式算法，旨在减少不同分区之间的连接数。</p>
+<p>FM主要用在超图的<em>双分区问题</em>。</p>
+<p><strong>For Example</strong></p>
+<p>我们对下面的电路图进行超图建模：</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071033532.png" /></p>
+<ul>
+<li>(a)图中的每一个导线都连接多个门电路，这就是超图的超边</li>
+<li>例如a,e,c由一根导线连接</li>
+<li>(b)图即超图的直观表现</li>
+</ul>
+<p><strong>步骤如下：</strong></p>
+<ol type="1">
+<li><p>初始化分区</p>
+<p>左图为超图，不同的线代表不同的超边，右图是超边集合</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071038811.png" /></p>
+<p>现随机将超图进行双分区，节点：a, c, d, g 在左边；节点：d, e, f, h在右边</p></li>
+<li><p>计算gain值和初始化</p>
+<ul>
+<li><span class="math inline">\(FS(i)\)</span>：每当有超边包含节点<span class="math inline">\(i\)</span>，并且有且仅有<span class="math inline">\(i\)</span>在<span class="math inline">\(i\)</span>所属的分区：<span class="math inline">\(FS(i)=FS(i)+1\)</span>，初始值为0</li>
+<li><span class="math inline">\(TE(i)\)</span>：每当有超边包含节点<span class="math inline">\(i\)</span>，且超边中所有的节点都在<span class="math inline">\(i\)</span>所属分区：<span class="math inline">\(TE(i)=TE(i)+1\)</span>，初始值为0</li>
+<li><span class="math inline">\(gain(i)\)</span>：<span class="math inline">\(FS(i)+TE(i)\)</span></li>
+</ul>
+<p>对于元件c，c包含在超边<span class="math inline">\(n1=\{a,c,e\}，n3=\{c,f,e\}，n2=\{b,c,d\}\)</span>中，其中在超边n3中，只有元件c在左边的集合中，其他的元件都在右边的集合中，因此<span class="math inline">\(FS(c)+1\)</span>。</p>
+<p>并没有超边中所有的元组都在左边，因此<span class="math inline">\(TE(c)=0\)</span>。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071102464.png" /></p></li>
+<li><p>第一次移动</p>
+<p>由上面第二步计算出所有元件的gain值，其中元件g和元件e的值都是2是最大的，而且对于g和e都是没有移动约束的。</p>
+<p><strong>移动约束：尽量使得两边的元件数量维持一致，不能有太大的偏差，左边的数量和右边的数量要尽量维持相等</strong></p>
+<p>根据字母顺序，将e从右边移动到左边，重新计算gain值。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071106259.png" /></p></li>
+<li><p>第二次移动</p>
+<p>虽然经过了第一次的移动<span class="math inline">\(gain(f)\)</span>的值是最大的，但是f有区域的移动约束（<strong>要是移动了f，便导致了左边的元件数量远远大于右边的元件数量，所以f不能移动</strong>），选择d元件进行移动</p>
+<p><em>注意：已经移动过的节点不需要再重新计算gain，避免产生算法不收敛的情况。</em></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071108206.png" /></p></li>
+<li><p>一直移动到所有的点都不需要重新计算gain。</p></li>
+</ol>
+<h3 id="图的粗化">图的粗化</h3>
+<p>图的粗化（graph coarsening）是一种图压缩的算法。</p>
+<p>计算出的聚类被压缩以获得一个更粗的图。 收缩聚类的工作方式如下：<strong>聚类的每个块收缩为单个节点。</strong></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071229778.png" /></p>
+<ul>
+<li>节点的权重设置为原来块中所有节点权重的和</li>
+<li>如果聚类中的两个对应块在G中相邻，则收缩图中的两个节点U和V之间存在边，即块U和块V至少有一条边相连，边的权重设为在聚类的块A和块B之间运行的边的权重之和</li>
+</ul>
+<h2 id="source-method-parallel-graph-partitioning-for-complex-networks">Source Method: "Parallel Graph Partitioning for Complex Networks"</h2>
+<blockquote>
+<p>Meyerhenke, Henning, Peter Sanders, and Christian Schulz. "Parallel graph partitioning for complex networks." <em>IEEE Transactions on Parallel and Distributed Systems</em> 28.9 (2017): 2625-2638.</p>
+</blockquote>
+<h3 id="带有尺寸约束的标签传播算法">带有尺寸约束的标签传播算法</h3>
+<blockquote>
+<p>Meyerhenke, Henning, Peter Sanders, and Christian Schulz. "Partitioning complex networks via size-constrained clustering." <em>International Symposium on Experimental Algorithms</em>. Springer, Cham, 2014.</p>
+</blockquote>
+<p>算法大体流程：先利用标签传播算法进行聚类(有修改)，然后利用图的粗化将图压缩。</p>
+<p>本论文意图将图分割成大小相近的多个块，所以定义了一个约束条件，即每一个块不能超过的权重大小<span class="math inline">\(L_{max}\)</span>。 <span class="math display">\[
+L_{max}=(1+\epsilon)(\frac{C(v)}{k})
+\]</span> 其中<span class="math inline">\(C(v)\)</span>是图中所有节点权重的和，<span class="math inline">\(\epsilon\)</span>是一个范围参数</p>
+<p>我们对于每一个节点都设置一个属于他们自己的ID，然后随机遍历每一个节点，将这个节点移动到与之最为相连(边的权重最大)的块中。但是我们要对其尺寸进行约束，每一个block的上界规定为上文的<span class="math inline">\(max(max_vc(v),W)\)</span>。我们定义如果节点<span class="math inline">\(v\)</span>归入到<span class="math inline">\(V_l\)</span>块中，这个块的权重并不会超过上限，那么这个块认为是合格的；反之，则认为其不合格。所以在遍历每一个节点，这个节点要被归入到合格的块中关联最紧密的那个。这样在收缩聚类之后，每一个块都符合约束。上文中的<span class="math inline">\(W=\frac{L_{max}}{f}\)</span>，<span class="math inline">\(f\)</span>是调优参数。</p>
+<p>回忆传统的标签传播算法，LPA算法是随机遍历每一个节点，在这里我们规定：<strong>首先遍历度小的节点</strong></p>
+<p>聚类+粗化的过程将被递归执行下去，直到图已经变得足够小（每一个粗节点都被划分到了同一个类中）</p>
+<h3 id="并行层面">并行层面</h3>
+<p><strong>并行化的标签传播（聚类）：</strong></p>
+<p>首先我们将图分成不同的子图放入到每一个PE（处理单元 process element）中，每一个PE获得的子图是节点ID在<span class="math inline">\([a,b]\)</span>中的节点，以及这些节点相关的边，还有一些边的端点（不在区间范围里）（我们称作为ghost节点）。这就意味着，每一个PE可能有将该子图连接到其他PE中的子图中的边。</p>
+<p>每一个PE并不使用输入图的节点ID（<span class="math inline">\([a,b]\)</span>），而是将其映射到<span class="math inline">\([0,n_p-1]\)</span>，其中<span class="math inline">\(n_p\)</span>是子图中的节点数量（这里是包括ghost的）。</p>
+<p>-&gt; 区间内节点的映射规律为：<span class="math inline">\(i-a\)</span></p>
+<p>-&gt; ghost节点的映射到剩下的<span class="math inline">\([b-a, n_p-(b-a+1)]\)</span>，先后顺序根据遍历顺序确定。</p>
+<p>我们将区间内节点，下文称为<strong>本地节点</strong>存储到一个数组中，其本地ID和全局ID仅仅相差<span class="math inline">\(a\)</span>；将ghost节点通过哈希表存储全局ID到本地ID的映射，并将其存储到另一个数组中。</p>
+<p>我们在每一个PE中都执行PLA，这里注意，由于每一个PE中的节点的ID都被映射到了<span class="math inline">\([0,n_p-1]\)</span>中，所以节点的集群ID也落在这个区间中。</p>
+<p><strong>平衡、尺寸约束：</strong></p>
+<p>这里文章中使用了两种不同的办法来保持平衡，一个用在粗化中，另一个用在去粗化中。在粗化的过程中，块比较多，所以约束比较软（<span class="math inline">\(\frac{L_{max}}{f}\)</span>）；在去粗化中，块比较少，约束比较严（<span class="math inline">\(L_{max}\)</span>）。</p>
+<p>-&gt; 在粗化过程中，PE只维护和更新其本地节点和ghost节点的块的局部节点权重。 由于标签传播算法的初始化方式，每个PE一开始就知道本地节点块和鬼节点块的准确权重。 然后标签传播使用本地信息来绑定块权重。 一旦节点改变其块，本地块权重就会更新。</p>
+<p>-&gt; 在去粗化中，每一个PE先本地计算自己块的精确权重，然后将本地块的权重聚合并广播到所有的PE中。现在每个PE都知道所有k个区块的全局区块权重。利用LPA更新本地权重。</p>
+<p><strong>并行收缩与去粗化：</strong></p>
+<p>-&gt; 并行收缩：每一个PE上聚类的ID可以任意分布在<span class="math inline">\([0,n-1]\)</span>上（n是当前层次下所有的节点数量），因此通过寻找不同聚类id的数量（粗节点的数量）来启动收缩算法。因此，每个PE <span class="math inline">\(p\)</span> 计算ID在区间<span class="math inline">\(I_p=p[\frac{n}{P}]+1...(p+1)[\frac{n}{P}]\)</span>的不同聚类数量（<span class="math inline">\(P\)</span>是使用PE的总数）<strong><em>对应前文的<span class="math inline">\([a,b]\)</span>。</em></strong>这也就意味着每个PE要迭代本地的节点，<u>收集非本地的集群ID <span class="math inline">\(a\)</span>（<span class="math inline">\(a \notin I_p\)</span>），然后将非本地集群的ID发送给对应的PE。</u></p>
+<p>设<span class="math inline">\(n&#39;\)</span>是不同聚类ID数，这也是执行收缩后的粗节点数。下一步就是要计算从<span class="math inline">\(C:[0,n-1] \to [0,n&#39;-1]\)</span>的映射。当映射结束后，新的PE <span class="math inline">\(p\)</span> 就会负责<span class="math inline">\(p[\frac{n&#39;}{P}]+1...(p+1)[\frac{n&#39;}{P}]\)</span>的子图。</p>
+<p>-&gt; 去粗化：并行去粗化算法实现简单。 每个PE知道子图中所有节点的粗节点（通过映射<span class="math inline">\(C\)</span>）。 因此，PE从保存相应粗节点的PE请求代表精细节点的粗节点的块ID。</p>
+<p><strong>整个并行系统的工作方式如下：</strong></p>
+<p>我们使用并行尺寸约束标记传播算法的迭代来计算图簇并并行收缩它们。 我们递归地这样做，直到剩余的图剩下不到20,000个节点。 然后在每个PE上收集分布式粗图，即每个PE拥有的完整最粗图的副本。 将该图作为粗粒度分布式进化算法Kaffpae的输入，得到其高质量的K-划分（我们已经修改了Kaffpae，以使用组合操作，这些操作也使用了上面基于聚类的粗化方案）。 然后将进化算法的最优解广播给所有PEs，这些PEs将解转移到分布粗图的局部。 然后，我们使用并行去粗化算法将当前级的解传递到下一个更细的级，并在原划分问题的大小约束下（设置<span class="math inline">\(W=L_{max}\)</span>)应用并行标记传播算法的r次迭代来改进当前级的解。 我们在层次结构的每一个层次上都这样做，并最终获得输入网络的良好分区。</p>
+<h2 id="deep-multilevel-graph-partitioning">Deep Multilevel Graph Partitioning</h2>
+<blockquote>
+<p>Gottesbüren, Lars, et al. "Deep multilevel graph partitioning." <em>arXiv preprint arXiv:2105.02022</em> (2021).</p>
+</blockquote>
+<p><strong>多层级图划分：</strong></p>
+<p>这是许多高质量图划分器采用的范式：1. 粗化阶段；2. 初始划分；3. 细化</p>
+<p>-&gt; 粗化阶段：算法建立一个较小的图，根据聚类方法，将同一类的图压缩成一个节点</p>
+<p>-&gt; 初始划分：当粗图的节点数低于某一个阈值或粗化算法收敛，计算最粗图的一个划分</p>
+<p>-&gt; 细化：撤销粗化执行的操作，在更精细的图上局部改进</p>
+<p>使用多层级范式将图划分为k个block，一般有两种办法：1. 直接k-way划分；2. 递归二划分</p>
+<p>-&gt; 直接k-way：将图粗化到只剩下<span class="math inline">\(k·C\)</span>个节点后，计算k-way分区</p>
+<p>-&gt; 递归二划分：首先计算一个二划分<span class="math inline">\(\{V_1, V_2\}\)</span>，然后将<span class="math inline">\(V_1\)</span>分成<span class="math inline">\(\frac{k}{2}\)</span>块，同理对待<span class="math inline">\(V_2\)</span>，之后递归。</p>
+<p><em>许多使用直接k-way在初始划分的时候也会选择递归二划分。</em></p>
+<p><strong>保持平衡约束：</strong></p>
+<p>Kahypar提出了一种办法：通过递归二分法获得k-way分区时单独调整每个二分法的不平衡比<span class="math inline">\(\epsilon\)</span>来使得最终的k分区平衡。</p>
+<p>设<span class="math inline">\(G[V&#39;]\)</span>是当前二分区的一个子图，他应该递归地规划为<span class="math inline">\(k&#39;&lt;k\)</span>个块。则<span class="math inline">\(\epsilon&#39;\)</span>为二分区的不平衡比。 <span class="math display">\[
+\epsilon&#39;=((1+\epsilon)\frac{c(V)}{k}·\frac{k&#39;}{c(V&#39;)})^{\frac{1}{log_2(k&#39;)}-1}
+\]</span></p>
+<h3 id="generic-deep-mgp">Generic Deep MGP</h3>
 
     </div>
 
@@ -369,7 +472,7 @@ C_x(t)=f(C_{x_{i1}}(t),...,C_{x_{im}}(t),C_{x_{i(m+1)}}(t-1),...,C_{x_{ik}}(t-1)
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">预备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%85%E5%9B%BE"><span class="nav-number">1.1.</span> <span class="nav-text">超图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">标签传播算法</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#preliminaries"><span class="nav-number">1.</span> <span class="nav-text">Preliminaries</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%85%E5%9B%BE"><span class="nav-number">1.1.</span> <span class="nav-text">超图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fm%E7%AE%97%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">FM算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E7%B2%97%E5%8C%96"><span class="nav-number">1.4.</span> <span class="nav-text">图的粗化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#source-method-parallel-graph-partitioning-for-complex-networks"><span class="nav-number">2.</span> <span class="nav-text">Source Method: &quot;Parallel Graph Partitioning for Complex Networks&quot;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E6%9C%89%E5%B0%BA%E5%AF%B8%E7%BA%A6%E6%9D%9F%E7%9A%84%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">带有尺寸约束的标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E5%B1%82%E9%9D%A2"><span class="nav-number">2.2.</span> <span class="nav-text">并行层面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deep-multilevel-graph-partitioning"><span class="nav-number">3.</span> <span class="nav-text">Deep Multilevel Graph Partitioning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#generic-deep-mgp"><span class="nav-number">3.1.</span> <span class="nav-text">Generic Deep MGP</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
