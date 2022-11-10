@@ -44,7 +44,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211081543191.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211081649225.png">
 <meta property="article:published_time" content="2022-10-26T08:56:15.000Z">
-<meta property="article:modified_time" content="2022-11-09T05:47:54.441Z">
+<meta property="article:modified_time" content="2022-11-09T06:41:48.562Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="BGFL-Improve">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-09 13:47:54" itemprop="dateModified" datetime="2022-11-09T13:47:54+08:00">2022-11-09</time>
+                <time title="Modified: 2022-11-09 14:41:48" itemprop="dateModified" datetime="2022-11-09T14:41:48+08:00">2022-11-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -247,7 +247,7 @@
 <hr />
 <p><span id="more"></span></p>
 <h2 id="preliminaries">Preliminaries</h2>
-<h3 id="超图">超图</h3>
+<h3 id="super-graph">Super Graph</h3>
 <p><strong>超图是什么？</strong></p>
 <p>简单的来说，对于我们熟悉的图而言，它的一个边（edge）只能和<strong>两个</strong>点连接；而对于超图来讲，人们定义它的边（这里叫超边，hyperedge, nets）可以和<strong>任意个数</strong>的顶点连接。</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211061809284.png" /></p>
@@ -290,7 +290,7 @@ C_x(t)=f(C_{x_1}(t-1),...,C_{x_k}(t-1))
 <p>对于异步更新方式： <span class="math display">\[
 C_x(t)=f(C_{x_{i1}}(t),...,C_{x_{im}}(t),C_{x_{i(m+1)}}(t-1),...,C_{x_{ik}}(t-1))
 \]</span> 其中，邻居节点<span class="math inline">\(x_{i1},...,x_{im}\)</span>的社区标签在第t代已经更新过，则使用其最新的社区标签。而邻居节点<span class="math inline">\(x_{i(m+1),...,x_{ik}}\)</span>在第<span class="math inline">\(t\)</span>代时还没有更新，则对于这些邻居节点还是用其在第<span class="math inline">\(t-1\)</span>代时的社区标签。</p>
-<h3 id="fm算法">FM算法</h3>
+<h3 id="fm-algorithm">FM Algorithm</h3>
 <p>FM算法是一种改进网络分区的线性时间启发式算法，旨在减少不同分区之间的连接数。</p>
 <p>FM主要用在超图的<em>双分区问题</em>。</p>
 <p><strong>For Example</strong></p>
@@ -328,7 +328,7 @@ C_x(t)=f(C_{x_{i1}}(t),...,C_{x_{im}}(t),C_{x_{i(m+1)}}(t-1),...,C_{x_{ik}}(t-1)
 <li><p>一直移动到所有的点都不需要重新计算gain。</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211081537063.png" /></p></li>
 </ol>
-<h3 id="图的粗化">图的粗化</h3>
+<h3 id="graph-coarsening">Graph Coarsening</h3>
 <p>图的粗化（graph coarsening）是一种图压缩的算法。</p>
 <p>计算出的聚类被压缩以获得一个更粗的图。 收缩聚类的工作方式如下：<strong>聚类的每个块收缩为单个节点。</strong></p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071229778.png" /></p>
@@ -405,10 +405,6 @@ L_{max}=(1+\epsilon)(\frac{C(v)}{k})
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211081649225.png" style="zoom:80%;" /></p>
 <h3 id="merits">Merits</h3>
 <p>它成功地结合了经典的直接k-way划分和递归二划分的优点。 与直接K-way划分相似，深度MGP只对图进行一次粗化和去粗化，并允许使用K-way局部改进算法。 当k较大时，它不会遇到可伸缩性问题，并且比递归二划分具有更好的渐近运行时间</p>
-<h2 id="sampling-based-label-propagation-for-balanced-graph-partitioning">Sampling-based Label Propagation for Balanced Graph Partitioning</h2>
-<blockquote>
-<p>El Moussawi, Adnan, Ricardo Rojas Ruiz, and Nacéra Bennacer Seghouani. "Sampling-based Label Propagation for Balanced Graph Partitioning." <em>Proceedings of the 2022 ACM/SPEC on International Conference on Performance Engineering</em>. 2022.</p>
-</blockquote>
 
     </div>
 
@@ -444,7 +440,7 @@ L_{max}=(1+\epsilon)(\frac{C(v)}{k})
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/10/22/JSAC%20Papers'%20Comprehension/" rel="prev" title="2022JSAC Papers' Comprehension">
+    <a href="/2022/10/22/2022JSAC%20Papers'%20Comprehension/" rel="prev" title="2022JSAC Papers' Comprehension">
       <i class="fa fa-chevron-left"></i> 2022JSAC Papers' Comprehension
     </a></div>
       <div class="post-nav-item">
@@ -509,7 +505,7 @@ L_{max}=(1+\epsilon)(\frac{C(v)}{k})
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#paper-name"><span class="nav-number">1.</span> <span class="nav-text">Paper Name</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#solve-probs-merits"><span class="nav-number">1.1.</span> <span class="nav-text">Solve probs, Merits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#main-work"><span class="nav-number">1.2.</span> <span class="nav-text">Main work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conclusion"><span class="nav-number">1.3.</span> <span class="nav-text">Conclusion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#preliminaries"><span class="nav-number">2.</span> <span class="nav-text">Preliminaries</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%85%E5%9B%BE"><span class="nav-number">2.1.</span> <span class="nav-text">超图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fm%E7%AE%97%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">FM算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E7%B2%97%E5%8C%96"><span class="nav-number">2.4.</span> <span class="nav-text">图的粗化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#source-method-parallel-graph-partitioning-for-complex-networks"><span class="nav-number">3.</span> <span class="nav-text">Source Method: &quot;Parallel Graph Partitioning for Complex Networks&quot;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E6%9C%89%E5%B0%BA%E5%AF%B8%E7%BA%A6%E6%9D%9F%E7%9A%84%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">带有尺寸约束的标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E5%B1%82%E9%9D%A2"><span class="nav-number">3.2.</span> <span class="nav-text">并行层面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deep-multilevel-graph-partitioning"><span class="nav-number">4.</span> <span class="nav-text">Deep Multilevel Graph Partitioning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#generic-deep-mgp"><span class="nav-number">4.1.</span> <span class="nav-text">Generic Deep MGP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#merits"><span class="nav-number">4.2.</span> <span class="nav-text">Merits</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sampling-based-label-propagation-for-balanced-graph-partitioning"><span class="nav-number">5.</span> <span class="nav-text">Sampling-based Label Propagation for Balanced Graph Partitioning</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#paper-name"><span class="nav-number">1.</span> <span class="nav-text">Paper Name</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#solve-probs-merits"><span class="nav-number">1.1.</span> <span class="nav-text">Solve probs, Merits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#main-work"><span class="nav-number">1.2.</span> <span class="nav-text">Main work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conclusion"><span class="nav-number">1.3.</span> <span class="nav-text">Conclusion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#preliminaries"><span class="nav-number">2.</span> <span class="nav-text">Preliminaries</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#super-graph"><span class="nav-number">2.1.</span> <span class="nav-text">Super Graph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fm-algorithm"><span class="nav-number">2.3.</span> <span class="nav-text">FM Algorithm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#graph-coarsening"><span class="nav-number">2.4.</span> <span class="nav-text">Graph Coarsening</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#source-method-parallel-graph-partitioning-for-complex-networks"><span class="nav-number">3.</span> <span class="nav-text">Source Method: &quot;Parallel Graph Partitioning for Complex Networks&quot;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E6%9C%89%E5%B0%BA%E5%AF%B8%E7%BA%A6%E6%9D%9F%E7%9A%84%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">带有尺寸约束的标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E5%B1%82%E9%9D%A2"><span class="nav-number">3.2.</span> <span class="nav-text">并行层面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deep-multilevel-graph-partitioning"><span class="nav-number">4.</span> <span class="nav-text">Deep Multilevel Graph Partitioning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#generic-deep-mgp"><span class="nav-number">4.1.</span> <span class="nav-text">Generic Deep MGP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#merits"><span class="nav-number">4.2.</span> <span class="nav-text">Merits</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
