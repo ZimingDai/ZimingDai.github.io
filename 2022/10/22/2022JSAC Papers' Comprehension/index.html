@@ -49,7 +49,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210251555677.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210251555980.png">
 <meta property="article:published_time" content="2022-10-22T12:56:43.000Z">
-<meta property="article:modified_time" content="2022-11-09T06:51:25.577Z">
+<meta property="article:modified_time" content="2022-11-11T08:36:29.910Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="Top-Papers">
 <meta name="twitter:card" content="summary">
@@ -217,7 +217,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-09 14:51:25" itemprop="dateModified" datetime="2022-11-09T14:51:25+08:00">2022-11-09</time>
+                <time title="Modified: 2022-11-11 16:36:29" itemprop="dateModified" datetime="2022-11-11T16:36:29+08:00">2022-11-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -294,7 +294,7 @@
 <p>马尔科夫决策过程由元组<span class="math inline">\((S,A,P,R,γ)\)</span>描述，其中：<span class="math inline">\(S\)</span>为有限的状态集, $A $为有限的动作集, <span class="math inline">\(P\)</span> 为状态转移概率,$ R$为回报函数, <span class="math inline">\(γ\)</span> 为折扣因子，用来计算累积回报。</p>
 <p><em>注意：跟马尔科夫过程的不同点是，马尔科夫决策过程的状态转移概率是包含动作的。</em></p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210231103910.png" style="zoom:100%;" /></p>
-<p>在上图中，学生总共有五个状态<span class="math inline">\(S = \{s_1,s_2,s_3,s_4,s_5\}\)</span>，动作也有五个<span class="math inline">\(A=\{玩、退出、学习、发论文、睡觉\}\)</span>，其中每一个动作都会有一个立即汇报<span class="math inline">\(R\)</span></p>
+<p>在上图中，学生总共有五个状态<span class="math inline">\(S = \{s_1,s_2,s_3,s_4,s_5\}\)</span>，动作也有五个<span class="math inline">\(A=\{玩、退出、学习、发论文、睡觉\}\)</span>，其中每一个动作都会有一个立即回报R$</p>
 <p>一般来说，在马尔科夫决策过程上的强化学习目标都是寻找最优策略。策略<span class="math inline">\(\pi\)</span>就是状态到动作的映射，它是指给定状态<span class="math inline">\(s\)</span>时，动作集的一个分布，即<span class="math inline">\(\pi(a|s)=p[A_t=a|S_t=s]\)</span></p>
 <p>含义是：策略<span class="math inline">\(π\)</span>在每个状态<span class="math inline">\(s\)</span>指定一个动作的概率。如果给出的策略<span class="math inline">\(π\)</span>是确定性的，那么策略<span class="math inline">\(π\)</span>在每个状态<span class="math inline">\(s\)</span>指定一个确定的动作。</p>
 <p>例如：其中一个学生的策略为玩<span class="math inline">\(π_1(玩|s_1)=0.8\)</span>，是指该学生在状态<span class="math inline">\(s1\)</span>时玩的概率为0.8，不玩的概率是0.2，显然这个学生更喜欢玩。</p>
@@ -377,35 +377,41 @@ L(\omega)=\frac{1}{2}(r+\gamma V_\omega(s_{t+1})-V_\omega (s_t))^2
 <p><strong>中心共识层</strong></p>
 <p>通过安全评估机制选择的BS节点组成中心共识层，该层收集本地训练层上传的拓扑信息和局部模型参数，并对训练结果进行评估。中心共识层都是共识节点，来作为分布式的区块链来运行，该层的节点可以通过区块链与其他节点共享模型参数。</p>
 <p><strong>区块链系统</strong></p>
-<p>该文章提出了一个双区块链系统，一个用来存储网络的拓扑信息，一个用来存储模型信息。中心共识节点都作为区块链的全节点，参与公示过程，本地训练节点和其他设备节点（UAV等）都是轻节点，并不参与共识</p>
+<p>该文章提出了一个双区块链系统，一个用来存储网络的拓扑信息，一个用来存储模型信息。中心共识节点都作为区块链的全节点，参与共识过程，本地训练节点和其他设备节点（UAV等）都是轻节点，并不参与共识</p>
 <ul>
 <li>拓扑链：拓扑信息包括：本地训练节点一跳、两跳的设备集（BS、UAV、GEO、LEO）；节点队列；安全评估信息。共识层会将其打包到区块链中，在模型验证中起到必不可少的作用</li>
 <li>模型链：本地训练节点将本地模型上传，共识层进行聚合然后打包成块，添加到区块链中。此外共识层还需要对本地模型进行验证来作为安全评估。</li>
 </ul>
 <h4 id="系统模型">系统模型</h4>
-<p>文章将整个SAGIN看成了一个加权有向图，节点包括各个设备，加权的赋值为0,1（0为两个设备没有建立连接，1代表两个设备建立了连接）</p>
+<p>文章将整个SAGIN看成了一个加权有向图，节点包括各个设备，加权的赋值为0,1（0为两个设备没有建立连接，1代表两个设备建立了连接）。系统节点分为UN和RN，UN就是BE（生成数据包并将其传输到其他的BE），RN就是无人机等中继节点（relay nodes）。在每一个时间<span class="math inline">\(t\)</span>，每一个UE会生成一个大小为<span class="math inline">\((\mu, \omega^2)\)</span>正态分布的数据包，按照一个预设好的路径传输给另一个UE：<span class="math inline">\(path=\{un_s \to un_d\}\)</span></p>
 <p><strong>通信模型</strong></p>
 <ul>
-<li><p>UAV-Ground通信：即BS和UAV的通信，公式如下 <span class="math display">\[
+<li><p>UAV-Ground通信<strong>传输速率</strong>：即BS和UAV的通信，公式如下 <span class="math display">\[
 tr_t^{UB}=W_{UB}log_2(1+ \frac{P_{UB}·10^{-\frac{L}{10}}}{\sigma^2_{UB}})
 \]</span> <span class="math inline">\(W_{ub}\)</span>表示无人机与BS之间的信道带宽，<span class="math inline">\(P_{ub}\)</span>表示无人机与BS之间的发射功率，<span class="math inline">\(σ^2_{UB}\)</span>表示无人机与BS之间的噪声功率，<span class="math inline">\(L\)</span>表示无人机与BS之间的平均路径损耗。</p></li>
-<li><p>UAV-Sat通信：这里需要考虑雨水对信号的影响。由于无人机的运动相比于卫星的运动很小，所以可以看做UAV的运动是静止的。 <span class="math display">\[
+<li><p>UAV-Satellite通信<strong>传输速率</strong>：这里需要考虑雨水对信号的影响。由于无人机的运动相比于卫星的运动很小，所以可以看做UAV的运动是静止的。 <span class="math display">\[
 tr_t^{US}=W_{US}log_2(1+ \frac{P_{US}·I^2_{US}}{\sigma^2_{US}})
-\]</span> <span class="math inline">\(I_{US}\)</span>表示雨水对信号的缩减。</p></li>
+\]</span> <span class="math inline">\(I_{US}\)</span>表示雨水对信号的缩减（基于Weibull）。</p></li>
 </ul>
 <p><strong>区块链延迟模型</strong></p>
 <p>区块链中的延迟主要是共识延迟和节点更新延迟，文章定义每m次共识之后需要进行一次节点更新，所以区块链的平均延迟为 <span class="math display">\[
 T_c^b(t)=\frac{MT_{con}(t)+T_{upd}(t)}{M}
-\]</span> 为了保证避免恶意节点对于SAGIN的影响，我们需要对平均延迟做一个约束，即<span class="math inline">\(T_c^b(t)\leq(T_c^b)_{min}\)</span></p>
+\]</span> 为了保证避免恶意节点对于SAGIN的影响，我们需要对平均延迟做一个约束，即<span class="math inline">\(T_c^b(t)\leq(T_c^b)_{min}\)</span>，<span class="math inline">\((T_c^b)_{min}\)</span>是为了安全所设定的限制。</p>
 <p><strong>流量卸载延迟模型</strong></p>
 <p>端到端时延是源节点到目的节点路径上所有时延分量的总和，分为<strong>链路上时延</strong>和<strong>排队时延</strong>两个分量。 另外，链路上的时延又分为<strong>传播时延</strong>和<strong>传输时延</strong>。</p>
 <blockquote>
 <p>传播时延：信号在传播过程中的延迟</p>
-<p>传输时延：由于信号是由大小的，传输这个数据所需要的延迟</p>
+<p>传输时延：由于信号信息是有大小的，传输这个数据所需要的延迟</p>
 </blockquote>
 <p><span class="math display">\[
 T_{path_{i,j}}=\frac{x_{i,j}}{\iota}+\frac{l}{tr_t^{i,j}}+\eta \frac{l}{tr_t^{i,j}}
 \]</span></p>
+<p>其中<span class="math inline">\(x_{i,j}\)</span>是节点之间的物理距离，<span class="math inline">\(\iota\)</span>是信号的物理传输速度；<span class="math inline">\(l\)</span>是信号的长度，<span class="math inline">\(tr_t^{i,j}\)</span>是节点<span class="math inline">\(i\)</span>和节点<span class="math inline">\(j\)</span>之间的传输速率，<span class="math inline">\(\eta\)</span>是排队的位次</p>
+<ul>
+<li>第一项：两节点之间的传播时延</li>
+<li>第二项：本信号的传输时延</li>
+<li>第三项：排队时延</li>
+</ul>
 <p><strong>最终的问题描述就是，我们需要找到一个路径使得在约束条件下，流量卸载的延迟是最小的。</strong></p>
 <h4 id="节点安全评估和共识机制">节点安全评估和共识机制</h4>
 <h5 id="节点安全评估">节点安全评估</h5>
@@ -454,7 +460,7 @@ T_{path_{i,j}}=\frac{x_{i,j}}{\iota}+\frac{l}{tr_t^{i,j}}+\eta \frac{l}{tr_t^{i,
 <p>由于无人机等带来的不确定性，这一方面是很难建模的，所以要利用机器学习</p></li>
 <li><p><strong>回报函数</strong></p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210232043053.png" alt="image-20221023204335967"  /></p>
-<p>如果消息传到了目的节点，那么取其倒数，传播事件越长汇报越小</p>
+<p>如果消息传到了目的节点，那么取其倒数，传播事件越长回报越小</p>
 <p>如果消息没有达到目的节点，那么直接取反，回报函数会随着时间显著减小</p></li>
 <li><p><strong>价值函数</strong></p>
 <p>和MDP一样，取其期望。</p>
