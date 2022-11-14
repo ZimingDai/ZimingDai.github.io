@@ -51,7 +51,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210251555677.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210251555980.png">
 <meta property="article:published_time" content="2022-10-22T12:56:43.000Z">
-<meta property="article:modified_time" content="2022-11-12T14:35:28.783Z">
+<meta property="article:modified_time" content="2022-11-14T10:11:09.066Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="Top-Papers">
 <meta name="twitter:card" content="summary">
@@ -219,7 +219,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-12 22:35:28" itemprop="dateModified" datetime="2022-11-12T22:35:28+08:00">2022-11-12</time>
+                <time title="Modified: 2022-11-14 18:11:09" itemprop="dateModified" datetime="2022-11-14T18:11:09+08:00">2022-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -511,7 +511,7 @@ T_{path_{i,j}}=\frac{x_{i,j}}{\iota}+\frac{l}{tr_t^{i,j}}+\eta \frac{l}{tr_t^{i,
 <p>联邦学习并不是训练一次就结束了：他是下载模型，然后训练更新之后，上传聚合之后，再下载，再训练……</p>
 <p>所以说，每一个时隙t中都要进行拓扑结构的更新，模型的训练。期间数据的传输按照模型链上的最新模型进行指导。</p>
 <p>拓扑结构的更新是每一个BS（训练节点）收集其连接的一跳、二跳的BS、UAV、SAT。（并不是全连接）</p>
-<p>？？貌似只有训练节点才有安全值？？</p>
+<p><em>？？貌似只有训练节点才有安全值？？</em></p>
 <hr />
 <p>在每一次本地训练节点收到传输的请求的时候，它首先从模型链中获取模型，然后将周围邻居节点的信息作为输入，获得决策动作。</p>
 </blockquote>
@@ -548,24 +548,38 @@ w_{t+E}=w_t+\sum p_ig_{t+E}^i
 <p>区块链系统中有N个客户端，M个矿工。我们假设每一个客户端都连接着一个特定的矿工，这个矿工用来上传和下载模型的更新。在文章的系统中，使用的是TOPK算法和PoW的共识机制（这些可以进行更换）</p>
 <p><strong>主要步骤</strong></p>
 <ol type="1">
-<li><p>本地模型训练</p>
+<li><p><strong>本地模型训练</strong></p>
 <p>每个客户端使用梯度下降来更新本地的模型参数，更新公式如:<span class="math inline">\(w_{t+\frac{1}{2}}^{i}=w_t^i-\eta \nabla F_i(w_t^i,B_t^i)\)</span>，和传统FL一样，<span class="math inline">\(B\)</span>是本地数据集中的一个batch，注意的是，这里并不是<span class="math inline">\(t+1\)</span>，而是<span class="math inline">\(t+\frac{1}{2}\)</span> ，当且仅当在这次迭代之后需要上传模型时，才会令<span class="math inline">\(w_{t+1}^i=w^i_{t+\frac{1}{2}}\)</span>。</p>
 <p>我们将模型的更新定义<span class="math inline">\(g_{t}^i=w_{t+\frac{1}{2}}^i-w_{t+1-E}^i-m^i_{t+1-E}\)</span></p>
 <p>这里和传统FL的区别就是，我们减去了一个<span class="math inline">\(m\)</span>，这个<span class="math inline">\(m\)</span>就是补偿误差（去缓解压缩带来的误差）</p>
 <p><span class="math inline">\(Top_k\)</span>算法其实就是设定一个阈值，如果模型更改的大小没有超过这个阈值，我们就认为这次更改并不是一个大更新，就不会将这次更新上传。</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210251541759.png" /></p>
-<p>这里的阈值就是模型更改大小绝对值的第<span class="math inline">\(l+1\)</span>个，也就是说，我们更新<span class="math inline">\(l\)</span>次，就要保证这<span class="math inline">\(l\)</span>次更新的变化都在所有更新的前<span class="math inline">\(l\)</span>个。</p></li>
-<li><p>模型上传</p>
-<p>假设模型的维度是d，每次模型更新的通信量为s字节</p>
-<p>在BFCL中，k个模型上传所需要上传的字节为：<span class="math inline">\(k(s+\frac{log_2d}{8})\)</span>，传统的模型需要上传<span class="math inline">\(kd\)</span>字节</p>
-<p>中间相差的误差由<span class="math inline">\(m\)</span>来弥补。</p></li>
-<li><p>跨事务</p>
-<p>在这一步骤中，客户端上传的所有模型更新豆浆存储在候选块中，之后每一个矿工（连接着一个服务器）将其服务器上的模型更新分发给其他矿工。这样所有矿工都会拥有全部节点的模型更新参数。</p></li>
-<li><p>挖矿和广播</p>
+<ul>
+<li>这里<span class="math inline">\(g^i_t\)</span>是更新的梯度，其中应该有多个参数（和模型的维度<span class="math inline">\(d\)</span>一样）</li>
+<li>这里的阈值<span class="math inline">\(\phi\)</span>就是这<span class="math inline">\(d\)</span>个更新梯度中的第<span class="math inline">\(k+1\)</span>个，也就是说，在这<span class="math inline">\(d\)</span>个维度数据中，我们只取其前<span class="math inline">\(k\)</span>大个数据，其他维度的国内新能数据设置为0。</li>
+</ul></li>
+<li><p><strong>模型上传</strong></p>
+<p>假设模型的维度是<span class="math inline">\(d\)</span>（每一个维度对应一个更新梯度）每个维度更新的通信量为<span class="math inline">\(s\)</span>字节</p>
+<p>在BFCL中，k个模型上传所需要上传的字节为：<span class="math inline">\(k(s+\frac{log_2d}{8})\)</span>，传统的模型需要上传<span class="math inline">\(ds\)</span>字节</p>
+<ul>
+<li><p><span class="math inline">\(k\)</span>是我们选择的更新最大的<span class="math inline">\(k\)</span>个维度，每个维度是<span class="math inline">\(s\)</span>字节，剩下的一项是其索引的字节数。</p></li>
+<li><p>中间相差的误差由<span class="math inline">\(m\)</span>来弥补。</p></li>
+</ul></li>
+<li><p><strong>跨事务</strong></p>
+<p>在这一步骤中，客户端上传的所有模型更新都将存储在候选块中，之后每一个矿工（连接着一个服务器）将其服务器上的模型更新分发给其他矿工。这样所有矿工都会拥有全部节点的模型更新参数。</p>
+<p>每一个矿工收取数据所需要的时间： <span class="math display">\[
+T_{cross,j}=\frac{(N-N_j)k(s+\frac{log_2d}{8})}{u_j}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(N-N_j\)</span>代表有多少个服务器没有连接到矿工<span class="math inline">\(j\)</span>上</li>
+<li><span class="math inline">\(u_j\)</span>就是下载速率</li>
+<li>上式：除去连接到矿工上的服务器，矿工需要下载其他所有服务器的更新数据，更新数据大小为2中定义</li>
+</ul></li>
+<li><p><strong>挖矿和广播</strong></p>
 <p>在这一步骤中，每个矿工尝试生成一个区块（挖矿）来将客户端的所有模型更新存储到区块链上。</p></li>
-<li><p>模型下载</p>
+<li><p><strong>模型下载</strong></p>
 <p>获胜的矿工将成功生成一个区块，所有的客户端都需要从区块链上下载最新的区块来更新自己的训练模型。</p></li>
-<li><p>模型聚合</p>
+<li><p><strong>模型聚合</strong></p>
 <p>一旦客户端获取到了最新的区块，他们就可以聚合模型更新来获得模型参数。</p></li>
 </ol>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210251555677.png" alt="image-20221025155542639" style="zoom:120%;" /><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202210251555980.png" alt="image-20221025155556825" style="zoom:120%;" /></p>
