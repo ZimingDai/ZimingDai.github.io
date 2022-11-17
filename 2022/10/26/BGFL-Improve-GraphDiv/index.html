@@ -44,7 +44,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211081543191.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211081649225.png">
 <meta property="article:published_time" content="2022-10-26T08:56:15.000Z">
-<meta property="article:modified_time" content="2022-11-16T10:03:58.895Z">
+<meta property="article:modified_time" content="2022-11-17T13:25:54.324Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="BGFL-Improve">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-16 18:03:58" itemprop="dateModified" datetime="2022-11-16T18:03:58+08:00">2022-11-16</time>
+                <time title="Modified: 2022-11-17 21:25:54" itemprop="dateModified" datetime="2022-11-17T21:25:54+08:00">2022-11-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -235,8 +235,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <hr />
-<p><strong>Paper Name</strong></p>
+        <p><strong>Paper Name</strong></p>
 <blockquote>
 <p>Web: <a href="http://phoenixdai.cn">http://phoenixdai.cn</a></p>
 <p>Citing info.</p>
@@ -336,12 +335,15 @@ C_x(t)=f(C_{x_{i1}}(t),...,C_{x_{im}}(t),C_{x_{i(m+1)}}(t-1),...,C_{x_{ik}}(t-1)
 <li>节点的权重设置为原来块中所有节点权重的和</li>
 <li>如果聚类中的两个对应块在G中相邻，则收缩图中的两个节点U和V之间存在边，即块U和块V至少有一条边相连，边的权重设为在聚类的块A和块B之间运行的边的权重之和</li>
 </ul>
+<hr />
 <h2 id="复杂网络的平衡图分割">复杂网络的平衡图分割</h2>
 <blockquote>
+<p>网址：<a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/7859409">https://ieeexplore.ieee.org/document/7859409</a></p>
 <p>Meyerhenke, Henning, Peter Sanders, and Christian Schulz. "Parallel graph partitioning for complex networks." <em>IEEE Transactions on Parallel and Distributed Systems</em> 28.9 (2017): 2625-2638.</p>
 </blockquote>
 <h3 id="带有尺寸约束的标签传播算法">带有尺寸约束的标签传播算法</h3>
 <blockquote>
+<p>网址：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1402.3281">https://arxiv.org/abs/1402.3281</a></p>
 <p>Meyerhenke, Henning, Peter Sanders, and Christian Schulz. "Partitioning complex networks via size-constrained clustering." <em>International Symposium on Experimental Algorithms</em>. Springer, Cham, 2014.</p>
 </blockquote>
 <p>算法大体流程：先利用标签传播算法进行聚类(有修改)，然后利用图的粗化将图压缩。</p>
@@ -369,10 +371,26 @@ L_{max}=(1+\epsilon)(\frac{C(v)}{k})
 <p>-&gt; 去粗化：并行去粗化算法实现简单。 每个PE知道子图中所有节点的粗节点（通过映射<span class="math inline">\(C\)</span>）。 因此，PE从保存相应粗节点的PE请求代表精细节点的粗节点的块ID。</p>
 <p><strong>整个并行系统的工作方式如下：</strong></p>
 <p>我们使用并行尺寸约束标记传播算法的迭代来计算图簇并并行收缩它们。 我们递归地这样做，直到剩余的图剩下不到20,000个节点。 然后在每个PE上收集分布式粗图，即每个PE拥有的完整最粗图的副本。 将该图作为粗粒度分布式进化算法Kaffpae的输入，得到其高质量的K-划分（我们已经修改了Kaffpae，以使用组合操作，这些操作也使用了上面基于聚类的粗化方案）。 然后将进化算法的最优解广播给所有PEs，这些PEs将解转移到分布粗图的局部。 然后，我们使用并行去粗化算法将当前级的解传递到下一个更细的级，并在原划分问题的大小约束下（设置<span class="math inline">\(W=L_{max}\)</span>)应用并行标记传播算法的r次迭代来改进当前级的解。 我们在层次结构的每一个层次上都这样做，并最终获得输入网络的良好分区。</p>
+<hr />
 <h2 id="深度多层图分割">深度多层图分割</h2>
 <blockquote>
+<p>网址：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2105.02022">https://arxiv.org/abs/2105.02022</a></p>
 <p>Gottesbüren, Lars, et al. "Deep multilevel graph partitioning." <em>arXiv preprint arXiv:2105.02022</em> (2021).</p>
 </blockquote>
+<h4 id="notation"><strong>Notation：</strong></h4>
+<p><strong>本文章的平衡约束设置为：</strong><span class="math inline">\(\forall i \in \{1..k\}:c(V_i)\leq L_{max,k}=max\{(1+\epsilon)\frac{c(V)}{k},\frac{c(V)}{k}+max_vc(v)\}\)</span></p>
+<ul>
+<li>这里有两个约束，并不在是像其他文章只有第一个约束，这里的最大阈值取了两个值的最大值</li>
+<li>原因是：找到<span class="math inline">\((1+\epsilon)\frac{c(V)}{k}\)</span>是一个<em>NP完全问题</em>，而<span class="math inline">\(L_{max,k}\)</span>则不是</li>
+</ul>
+<p><strong>文章的目标：</strong></p>
+<ul>
+<li><p>将图划分成尽可能均匀的子图</p></li>
+<li><p><em><u>切割边的权重是最小的</u></em></p>
+<blockquote>
+<p>这里可能和BGFL的思路有一些不同，因为我们进行分组是要尽可能组与组之间的差异足够大，组内的差异足够小，所以应该是让分割边的权重最大。🤔</p>
+</blockquote></li>
+</ul>
 <p><strong>多层级图划分：</strong></p>
 <p>这是许多高质量图划分器采用的范式：1. 粗化阶段；2. 初始划分；3. 细化</p>
 <p>-&gt; 粗化阶段：算法建立一个较小的图，根据聚类方法，将同一类的图压缩成一个节点</p>
@@ -380,8 +398,10 @@ L_{max}=(1+\epsilon)(\frac{C(v)}{k})
 <p>-&gt; 细化：撤销粗化执行的操作，在更精细的图上局部改进</p>
 <p>使用多层级范式将图划分为k个block，一般有两种办法：1. 直接k-way划分；2. 递归二划分</p>
 <p>-&gt; 直接k-way：将图粗化到只剩下<span class="math inline">\(k·C\)</span>个节点后，计算k-way分区</p>
-<p>-&gt; 递归二划分：首先计算一个二划分<span class="math inline">\(\{V_1, V_2\}\)</span>，然后将<span class="math inline">\(V_1\)</span>分成<span class="math inline">\(\frac{k}{2}\)</span>块，同理对待<span class="math inline">\(V_2\)</span>，之后递归。</p>
+<p>-&gt; 递归二划分：首先计算一个二划分<span class="math inline">\(\{V_1, V_2\}\)</span>，然后将<span class="math inline">\(V_1\)</span>分成<span class="math inline">\(\frac{k}{2}\)</span>块，同理对待<span class="math inline">\(V_2\)</span>，之后变成在两个子图中分<span class="math inline">\(\frac{k}{2}\)</span>块，继续重复操作。</p>
 <p><em>许多使用直接k-way在初始划分的时候也会选择递归二划分。</em></p>
+<p><strong>尺寸约束的标签传播算法：</strong></p>
+<p><a href="#%20带有尺寸约束的标签传播算法">带有尺寸约束的标签传播算法</a></p>
 <p><strong>保持平衡约束：</strong></p>
 <p>Kahypar提出了一种办法：通过递归二分法获得k-way分区时单独调整每个二分法的不平衡比<span class="math inline">\(\epsilon\)</span>来使得最终的k分区平衡。</p>
 <p>设<span class="math inline">\(G[V&#39;]\)</span>是当前二分区的一个子图，他应该递归地规划为<span class="math inline">\(k&#39;&lt;k\)</span>个块。则<span class="math inline">\(\epsilon&#39;\)</span>为二分区的不平衡比。 <span class="math display">\[
@@ -505,7 +525,7 @@ L_{max}=(1+\epsilon)(\frac{C(v)}{k})
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#preliminaries"><span class="nav-number">1.</span> <span class="nav-text">Preliminaries</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#super-graph"><span class="nav-number">1.1.</span> <span class="nav-text">Super Graph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fm-algorithm"><span class="nav-number">1.3.</span> <span class="nav-text">FM Algorithm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#graph-coarsening"><span class="nav-number">1.4.</span> <span class="nav-text">Graph Coarsening</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E7%BD%91%E7%BB%9C%E7%9A%84%E5%B9%B3%E8%A1%A1%E5%9B%BE%E5%88%86%E5%89%B2"><span class="nav-number">2.</span> <span class="nav-text">复杂网络的平衡图分割</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E6%9C%89%E5%B0%BA%E5%AF%B8%E7%BA%A6%E6%9D%9F%E7%9A%84%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">带有尺寸约束的标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E5%B1%82%E9%9D%A2"><span class="nav-number">2.2.</span> <span class="nav-text">并行层面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%A4%9A%E5%B1%82%E5%9B%BE%E5%88%86%E5%89%B2"><span class="nav-number">3.</span> <span class="nav-text">深度多层图分割</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#generic-deep-mgp"><span class="nav-number">3.1.</span> <span class="nav-text">Generic Deep MGP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#merits"><span class="nav-number">3.2.</span> <span class="nav-text">Merits</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#preliminaries"><span class="nav-number">1.</span> <span class="nav-text">Preliminaries</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#super-graph"><span class="nav-number">1.1.</span> <span class="nav-text">Super Graph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fm-algorithm"><span class="nav-number">1.3.</span> <span class="nav-text">FM Algorithm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#graph-coarsening"><span class="nav-number">1.4.</span> <span class="nav-text">Graph Coarsening</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E7%BD%91%E7%BB%9C%E7%9A%84%E5%B9%B3%E8%A1%A1%E5%9B%BE%E5%88%86%E5%89%B2"><span class="nav-number">2.</span> <span class="nav-text">复杂网络的平衡图分割</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E6%9C%89%E5%B0%BA%E5%AF%B8%E7%BA%A6%E6%9D%9F%E7%9A%84%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">带有尺寸约束的标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E5%B1%82%E9%9D%A2"><span class="nav-number">2.2.</span> <span class="nav-text">并行层面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%A4%9A%E5%B1%82%E5%9B%BE%E5%88%86%E5%89%B2"><span class="nav-number">3.</span> <span class="nav-text">深度多层图分割</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#notation"><span class="nav-number">3.0.1.</span> <span class="nav-text">Notation：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#generic-deep-mgp"><span class="nav-number">3.1.</span> <span class="nav-text">Generic Deep MGP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#merits"><span class="nav-number">3.2.</span> <span class="nav-text">Merits</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
