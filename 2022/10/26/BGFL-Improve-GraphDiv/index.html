@@ -44,7 +44,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211081543191.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211081649225.png">
 <meta property="article:published_time" content="2022-10-26T08:56:15.000Z">
-<meta property="article:modified_time" content="2022-11-17T13:25:54.324Z">
+<meta property="article:modified_time" content="2022-11-17T14:32:09.822Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="BGFL-Improve">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-17 21:25:54" itemprop="dateModified" datetime="2022-11-17T21:25:54+08:00">2022-11-17</time>
+                <time title="Modified: 2022-11-17 22:32:09" itemprop="dateModified" datetime="2022-11-17T22:32:09+08:00">2022-11-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -328,6 +328,7 @@ C_x(t)=f(C_{x_{i1}}(t),...,C_{x_{im}}(t),C_{x_{i(m+1)}}(t-1),...,C_{x_{ik}}(t-1)
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211081537063.png" /></p></li>
 </ol>
 <h3 id="graph-coarsening">Graph Coarsening</h3>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=o0mhbHdfgTA">Graph Coarsening视频讲解</a></p>
 <p>图的粗化（graph coarsening）是一种图压缩的算法。</p>
 <p>计算出的聚类被压缩以获得一个更粗的图。 收缩聚类的工作方式如下：<strong>聚类的每个块收缩为单个节点。</strong></p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211071229778.png" /></p>
@@ -377,7 +378,7 @@ L_{max}=(1+\epsilon)(\frac{C(v)}{k})
 <p>网址：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2105.02022">https://arxiv.org/abs/2105.02022</a></p>
 <p>Gottesbüren, Lars, et al. "Deep multilevel graph partitioning." <em>arXiv preprint arXiv:2105.02022</em> (2021).</p>
 </blockquote>
-<h4 id="notation"><strong>Notation：</strong></h4>
+<h3 id="notation"><strong>Notation</strong></h3>
 <p><strong>本文章的平衡约束设置为：</strong><span class="math inline">\(\forall i \in \{1..k\}:c(V_i)\leq L_{max,k}=max\{(1+\epsilon)\frac{c(V)}{k},\frac{c(V)}{k}+max_vc(v)\}\)</span></p>
 <ul>
 <li>这里有两个约束，并不在是像其他文章只有第一个约束，这里的最大阈值取了两个值的最大值</li>
@@ -398,19 +399,36 @@ L_{max}=(1+\epsilon)(\frac{C(v)}{k})
 <p>-&gt; 细化：撤销粗化执行的操作，在更精细的图上局部改进</p>
 <p>使用多层级范式将图划分为k个block，一般有两种办法：1. 直接k-way划分；2. 递归二划分</p>
 <p>-&gt; 直接k-way：将图粗化到只剩下<span class="math inline">\(k·C\)</span>个节点后，计算k-way分区</p>
-<p>-&gt; 递归二划分：首先计算一个二划分<span class="math inline">\(\{V_1, V_2\}\)</span>，然后将<span class="math inline">\(V_1\)</span>分成<span class="math inline">\(\frac{k}{2}\)</span>块，同理对待<span class="math inline">\(V_2\)</span>，之后变成在两个子图中分<span class="math inline">\(\frac{k}{2}\)</span>块，继续重复操作。</p>
-<p><em>许多使用直接k-way在初始划分的时候也会选择递归二划分。</em></p>
+<p>-&gt; 递归二划分：首先计算一个二划分<span class="math inline">\(\{V_1, V_2\}\)</span>，然后将<span class="math inline">\(V_1\)</span>分成<span class="math inline">\(\frac{k}{2}\)</span>块，同理对待<span class="math inline">\(V_2\)</span>，之后变成问题：<strong>在两个子图中分<span class="math inline">\(\frac{k}{2}\)</span>块，</strong>继续重复操作。</p>
+<p>==许多使用直接k-way在初始划分的时候也会选择递归二划分。==</p>
 <p><strong>尺寸约束的标签传播算法：</strong></p>
-<p><a href="#%20带有尺寸约束的标签传播算法">带有尺寸约束的标签传播算法</a></p>
+<p><a href="#带有尺寸约束的标签传播算法">带有尺寸约束的标签传播算法</a></p>
 <p><strong>保持平衡约束：</strong></p>
-<p>Kahypar提出了一种办法：通过递归二分法获得k-way分区时单独调整每个二分法的不平衡比<span class="math inline">\(\epsilon\)</span>来使得最终的k分区平衡。</p>
+<p>为了满足平衡约束：<span class="math inline">\(1+\epsilon)\frac{c(V)}{k}\)</span>，这个问题是一个NP完全问题，因此他可以简化为在相同的并行机器上的调度作业问题，因此，人们采用了一些技术：通过惩罚大权重的节点的收缩 / 强制执行节点权重的严格上限 来防止生成重节点。</p>
+<p><u>但是如果我们将<span class="math inline">\(L_{k}\)</span>更换成<span class="math inline">\(L_{max,k}\)</span>，则可以在多项式时间找到平衡分区</u></p>
+<p>如果在递归双分区的时候，对每个双分区输入<span class="math inline">\(\epsilon\)</span>，那么在最后的k-way分区的时候就会违反约束。</p>
+<p>Therefore，Kahypar提出了一种办法：通过递归二分法获得k-way分区时单独调整每个二分法的不平衡比<span class="math inline">\(\epsilon\)</span>来使得最终的k分区平衡。</p>
 <p>设<span class="math inline">\(G[V&#39;]\)</span>是当前二分区的一个子图，他应该递归地规划为<span class="math inline">\(k&#39;&lt;k\)</span>个块。则<span class="math inline">\(\epsilon&#39;\)</span>为二分区的不平衡比。 <span class="math display">\[
 \epsilon&#39;=((1+\epsilon)\frac{c(V)}{k}·\frac{k&#39;}{c(V&#39;)})^{\frac{1}{log_2(k&#39;)}-1}
 \]</span></p>
+<p>如果每一个二分区都是<span class="math inline">\(\epsilon’-balanced\)</span>，那么最后的k-way分区就是<span class="math inline">\(\epsilon-balanced\)</span>。</p>
 <h3 id="generic-deep-mgp">Generic Deep MGP</h3>
+<p><strong>大体流程：</strong></p>
+<p>输入一个图，然后将其进行粗化，一直到只剩下2C个分区（这里C是输入参数），这就是最粗的图了。</p>
+<p>然后，我们将这个最粗的图通过二分区，分成两个块。</p>
+<p>在去粗化的过程中（将归并的节点还原成多个节点），要保证<span class="math inline">\(n&#39;\)</span>个节点要分成<span class="math inline">\(min\{k,ceil_2(|V_i|/C)\}\)</span>个块，这样每次进行二分区都能在大约2C个点上工作。</p>
+<p>直到分出k组。</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211081543191.png" /></p>
-<p>首先，我们输入图<span class="math inline">\(G_1=(V_1,E_1)\)</span>，然后建立一系列越来越粗的图<span class="math inline">\(G_1, G_2,..,G_l\)</span>。图粗化的办法是对每一个<span class="math inline">\(G_i\)</span>的图进行聚类，然后将类别压缩成一个点来获得<span class="math inline">\(G_{i+1}\)</span>。这个过程直到步骤收敛或者图节点拥有不超过<span class="math inline">\(2C\)</span>个节点。对应算法1:2-3</p>
-<p>之后，我们开始以下操作：1. 使用递归二划分来将当前的图划分成更多的块；2. 重新平衡分区并利用k-way局部改进；3。 将分区映射到前一个图<span class="math inline">\(G_{l-1}\)</span>。在这些操作期间，我们保证以下量不变</p>
+<p><strong>详细流程：</strong></p>
+<p>首先，我们输入图<span class="math inline">\(G_1=(V_1,E_1)\)</span>，然后建立一系列越来越粗的图<span class="math inline">\(G_1, G_2,..,G_l\)</span>。图粗化的办法是对每一个<span class="math inline">\(G_i\)</span>的图进行聚类，然后将类别压缩成一个点来获得<span class="math inline">\(G_{i+1}\)</span>。这个过程直到步骤收敛或者图节点拥有不超过<span class="math inline">\(2C\)</span>个节点。<em>对应算法1:2-3</em></p>
+<p><u>此时图中仅有2C个节点，且此时2C个节点并没有分块。</u></p>
+<p>之后，我们开始以下操作：</p>
+<ol type="1">
+<li>使用递归二划分来将当前的图划分成<span class="math inline">\(k_l\)</span>个块；</li>
+<li>重新平衡分区并利用k-way局部改进；</li>
+<li>将分区映射到前一个图<span class="math inline">\(G_{l-1}\)</span>。</li>
+</ol>
+<p>在这些操作期间，我们保证以下量不变</p>
 <ol type="1">
 <li>一个粗图<span class="math inline">\(G_i\)</span>划分成<span class="math inline">\(k_i=ceil_2(|V_i|/C)\)</span>个块</li>
 <li><span class="math inline">\(G_i\)</span>的<span class="math inline">\(k_i\)</span>-way分区应该满足平衡约束</li>
@@ -421,7 +439,17 @@ L_{max}=(1+\epsilon)(\frac{C(v)}{k})
 <p>所以1条件，就是每一个图分成的块的数量必须是2的幂，这样才能保证二划分。3C个点就要分成4块。</p>
 </blockquote>
 <p>理想的情况下，算法会产生一个图层次结构，其中节点数在两个层次之间减半，最粗的图有2C个节点。在这种情况下，对最粗的图G进行一次二划分就足以满足1条件。为了在去粗化的时候（将当前图中的节点数增加一倍）后恢复不变量，必须将当前分区的每一个块进行一次二分区。</p>
+<blockquote>
+<p>eg.</p>
+<p>现在最大的图有2C个点，此时需要分区<span class="math inline">\(ceil_2(2C/C)=2\)</span>，所以二分区将其分成两个块</p>
+<p>之后映射到前一个图，此时节点变成了4C个，需要分区<span class="math inline">\(cel_2(4C/C)=4\)</span>，在第一步的时候已经分出了两个块，所以再在两个块中分别进行一次二分区就满足了。</p>
+</blockquote>
 <p>一般的条件下，粗化会将图缩小大于1/2，因此使用递归二划分来保持1条件。也就是说，每当图<span class="math inline">\(G_i\)</span>的划分不满足1条件，就要递归的对每一个块进行二划分，直到拥有<span class="math inline">\(k_i\)</span>个块。对应算法1:7-10</p>
+<blockquote>
+<p>eg.</p>
+<p>现在最大的图有2C个点，此时需要分区<span class="math inline">\(ceil_2(2C/C)=2\)</span>，所以二分区将其分成两个块</p>
+<p>之后映射到前一个图，此时大概率会变成大于4C个节点，比如说6C个，所以此时分组要分成<span class="math inline">\(cel_2(6C/C)=8\)</span>，此时就需要递归进行二分区，在已经存在的两块中进行二分区，变成4个块，再在4个 块中进行二分区，变成8个块。</p>
+</blockquote>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202211081649225.png" style="zoom:80%;" /></p>
 <h3 id="merits">Merits</h3>
 <p>它成功地结合了经典的直接k-way划分和递归二划分的优点。 与直接K-way划分相似，深度MGP只对图进行一次粗化和去粗化，并允许使用K-way局部改进算法。 当k较大时，它不会遇到可伸缩性问题，并且比递归二划分具有更好的渐近运行时间</p>
@@ -525,7 +553,7 @@ L_{max}=(1+\epsilon)(\frac{C(v)}{k})
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#preliminaries"><span class="nav-number">1.</span> <span class="nav-text">Preliminaries</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#super-graph"><span class="nav-number">1.1.</span> <span class="nav-text">Super Graph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fm-algorithm"><span class="nav-number">1.3.</span> <span class="nav-text">FM Algorithm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#graph-coarsening"><span class="nav-number">1.4.</span> <span class="nav-text">Graph Coarsening</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E7%BD%91%E7%BB%9C%E7%9A%84%E5%B9%B3%E8%A1%A1%E5%9B%BE%E5%88%86%E5%89%B2"><span class="nav-number">2.</span> <span class="nav-text">复杂网络的平衡图分割</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E6%9C%89%E5%B0%BA%E5%AF%B8%E7%BA%A6%E6%9D%9F%E7%9A%84%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">带有尺寸约束的标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E5%B1%82%E9%9D%A2"><span class="nav-number">2.2.</span> <span class="nav-text">并行层面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%A4%9A%E5%B1%82%E5%9B%BE%E5%88%86%E5%89%B2"><span class="nav-number">3.</span> <span class="nav-text">深度多层图分割</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#notation"><span class="nav-number">3.0.1.</span> <span class="nav-text">Notation：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#generic-deep-mgp"><span class="nav-number">3.1.</span> <span class="nav-text">Generic Deep MGP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#merits"><span class="nav-number">3.2.</span> <span class="nav-text">Merits</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#preliminaries"><span class="nav-number">1.</span> <span class="nav-text">Preliminaries</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#super-graph"><span class="nav-number">1.1.</span> <span class="nav-text">Super Graph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fm-algorithm"><span class="nav-number">1.3.</span> <span class="nav-text">FM Algorithm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#graph-coarsening"><span class="nav-number">1.4.</span> <span class="nav-text">Graph Coarsening</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E7%BD%91%E7%BB%9C%E7%9A%84%E5%B9%B3%E8%A1%A1%E5%9B%BE%E5%88%86%E5%89%B2"><span class="nav-number">2.</span> <span class="nav-text">复杂网络的平衡图分割</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E6%9C%89%E5%B0%BA%E5%AF%B8%E7%BA%A6%E6%9D%9F%E7%9A%84%E6%A0%87%E7%AD%BE%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">带有尺寸约束的标签传播算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E5%B1%82%E9%9D%A2"><span class="nav-number">2.2.</span> <span class="nav-text">并行层面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%A4%9A%E5%B1%82%E5%9B%BE%E5%88%86%E5%89%B2"><span class="nav-number">3.</span> <span class="nav-text">深度多层图分割</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#notation"><span class="nav-number">3.1.</span> <span class="nav-text">Notation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#generic-deep-mgp"><span class="nav-number">3.2.</span> <span class="nav-text">Generic Deep MGP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#merits"><span class="nav-number">3.3.</span> <span class="nav-text">Merits</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
