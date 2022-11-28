@@ -22,33 +22,30 @@
     var CONFIG = {"hostname":"phoenixdai.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="个人简介">
+  <meta name="description" content="Anything that doesn&#39;t kill me makes me stronger">
 <meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://phoenixdai.cn/about/index.html">
+<meta property="og:title" content="Sycamore">
+<meta property="og:url" content="http://phoenixdai.cn/page/2/index.html">
 <meta property="og:site_name" content="Sycamore">
-<meta property="og:description" content="个人简介">
+<meta property="og:description" content="Anything that doesn&#39;t kill me makes me stronger">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-01-20T03:12:10.000Z">
-<meta property="article:modified_time" content="2022-05-04T08:56:05.419Z">
 <meta property="article:author" content="PhoenixDai">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://phoenixdai.cn/about/">
+<link rel="canonical" href="http://phoenixdai.cn/page/2/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
+    isHome : true,
     isPost : false,
     lang   : 'en'
   };
 </script>
 
-  <title>about | Sycamore
-</title>
+  <title>Sycamore</title>
   
 
 
@@ -158,44 +155,106 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content index posts-expand">
             
-
-    
-    
-    
-    <div class="post-block" lang="en">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">about
-</h1>
-
-<div class="post-meta">
+      
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://phoenixdai.cn/2022/05/02/Handscript-of-%E3%80%8AAuction-Based-VM-Allocation-%E3%80%8B/">
 
-</div>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Phoenix-Logo-White.png">
+      <meta itemprop="name" content="PhoenixDai">
+      <meta itemprop="description" content="Anything that doesn't kill me makes me stronger">
+    </span>
 
-</header>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sycamore">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/02/Handscript-of-%E3%80%8AAuction-Based-VM-Allocation-%E3%80%8B/" class="post-title-link" itemprop="url">Handscript of 《Auction-Based VM Allocation...》</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-05-02 10:36:11" itemprop="dateCreated datePublished" datetime="2022-05-02T10:36:11+08:00">2022-05-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-11-04 21:33:34" itemprop="dateModified" datetime="2022-11-04T21:33:34+08:00">2022-11-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/XF-TANK/" itemprop="url" rel="index"><span itemprop="name">XF-TANK</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-      
-      
-      <div class="post-body">
-          <p>个人简介</p>
-
-      </div>
-      
-      
+          <blockquote>
+<p>Gao, Guoju, et al. "Auction-based VM allocation for deadline-sensitive tasks in distributed edge cloud." <em>IEEE Transactions on Services Computing</em> (2019).</p>
+</blockquote>
+<ol type="1">
+<li>我们形式化了三层边缘云结构中对期限敏感的任务的竞争性虚拟机资源分配问题，并提出了基于拍卖的虚拟机资源分配（AVA）机制，该机制主要由<strong>贪婪中标选择算法</strong>和<strong>支付确定算法</strong>组成.</li>
+<li>我们证明了AVA的中标选择问题是NP难问题。我们首先去除最后期限约束，然后将三层边缘云结构转换为两层边缘云结构。在此基础上，提出了一种贪婪中标选择算法，并进一步分析了其近似比。</li>
+<li>我们还设计了一个真实支付判定算法。然后，我们证明了AVA机制具有真实性、个体合理性和计算效率。</li>
+<li>我们对真实轨迹进行了广泛的模拟，以评估所提出的 AVA 机制的性能。结果表明，AVA不仅比对比算法取得了更好的社会福利性能，而且保证了真实性、个体理性和计算效率。</li>
+</ol>
+<p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/05/02/Handscript-of-%E3%80%8AAuction-Based-VM-Allocation-%E3%80%8B/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
-    
 
     
     
     
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+  
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
 
 
           </div>
@@ -372,6 +431,59 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
