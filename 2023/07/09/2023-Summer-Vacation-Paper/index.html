@@ -22,16 +22,26 @@
     var CONFIG = {"hostname":"phoenixdai.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="本博客为在2023.07.01-2023.08.01期间阅读的20余篇论文笔记。 主题为：联邦学习、异构性、异步联邦学习、分层联邦学习 文章大体上来自于A、B会和A刊，少数几篇与GLOBECOM相似的出处不限。">
+<meta property="og:type" content="article">
 <meta property="og:title" content="2023 Summer Vacation Paper">
 <meta property="og:url" content="http://phoenixdai.cn/2023/07/09/2023-Summer-Vacation-Paper/index.html">
 <meta property="og:site_name" content="Sycamore">
+<meta property="og:description" content="本博客为在2023.07.01-2023.08.01期间阅读的20余篇论文笔记。 主题为：联邦学习、异构性、异步联邦学习、分层联邦学习 文章大体上来自于A、B会和A刊，少数几篇与GLOBECOM相似的出处不限。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091442638.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091445675.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091449111.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091506783.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091552130.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091552043.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091557971.png">
 <meta property="article:published_time" content="2023-07-09T03:31:04.000Z">
-<meta property="article:modified_time" content="2023-07-09T03:35:20.154Z">
+<meta property="article:modified_time" content="2023-07-09T08:18:14.081Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="Top-Papers">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091442638.png">
 
 <link rel="canonical" href="http://phoenixdai.cn/2023/07/09/2023-Summer-Vacation-Paper/">
 
@@ -189,7 +199,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-07-09 11:31:04 / Modified: 11:35:20" itemprop="dateCreated datePublished" datetime="2023-07-09T11:31:04+08:00">2023-07-09</time>
+              <time title="Created: 2023-07-09 11:31:04 / Modified: 16:18:14" itemprop="dateCreated datePublished" datetime="2023-07-09T11:31:04+08:00">2023-07-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -212,7 +222,52 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p>本博客为在2023.07.01-2023.08.01期间阅读的20余篇论文笔记。</p>
+<p><strong><em>主题为：联邦学习、异构性、异步联邦学习、分层联邦学习</em></strong></p>
+<p>文章大体上来自于A、B会和A刊，少数几篇与GLOBECOM相似的出处不限。</p>
+<p><span id="more"></span></p>
+<h3 id="asynchronous-hierarchical-federated-learningskim">Asynchronous Hierarchical Federated Learning(skim)</h3>
+<blockquote>
+<p>Wang, Xing, and Yijun Wang. "Asynchronous hierarchical federated learning." <em>arXiv preprint arXiv:2206.00054</em> (2022).</p>
+</blockquote>
+<p>本文提出了一种<strong>异步</strong>的<strong>分层</strong>联邦学习，创新点为：1. 利用网络拓扑或聚类算法进行分组；2. 采用异步联邦学习容忍异构性；</p>
+<p>在联邦学习聚合的时候，每一个群组的leader会有一个队列，这个队列会存储来自每个客户机的参数，周期性地将结果聚合，不用等待一些掉队者的结果。并且作者提出，模型参数越过时，误差越大。因此文章<strong>采用了一个过时函数来控制每个客户机参数的影响程度</strong>。 <span class="math display">\[
+\alpha_{t&#39;}=\alpha \times \sigma(t&#39;-t)
+\]</span> 这里<span class="math inline">\(\sigma\)</span>是一个单调递减的函数用来控制影响程度。<span class="math inline">\(t&#39;\)</span>为聚合器收到中央服务器下发的最新模型的时间，那些尚未没有被聚合，仍然在队列中的模型参数的时间戳为<span class="math inline">\(t\)</span>，所以<span class="math inline">\(t&#39;&gt;t\)</span>是一定成立的，而<span class="math inline">\(t\)</span>越小，说明这个模型参数越过时，所以<span class="math inline">\(\sigma\)</span>来降低其权重。</p>
+<p>在中央服务器上，也有一个队列来存储聚合器的更新，由于异步学习，那么每个聚合器接收到的客户机的更新个数也不一样，所以聚合器上传要将聚合次数<span class="math inline">\(n_k\)</span>、模型参数和时间戳<span class="math inline">\(t&#39;\)</span>一起上传。文章假设最新的全局模型的时间戳为<span class="math inline">\(t&#39;&#39;\)</span>,<span class="math inline">\(t&#39;&#39; &gt; t&#39;\)</span>。和上一层一样，中心聚合器也利用<span class="math inline">\(\sigma\)</span>来权衡每个聚合器的权重，不同的是，聚合器接受的更新个数越多，也会相应提升其贡献。 <span class="math display">\[
+\alpha_{t&#39;&#39;}=\frac{n_k}{N}\sigma(t&#39;&#39;-t&#39;)\alpha
+\]</span> 其中<span class="math inline">\(N\)</span>为所有的客户机的总数。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091442638.png" alt="image-20230709144148540" style="zoom:110%;" /></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091445675.png" alt="image-20230709144512623" style="zoom:100%;" /></p>
+<p>从结果来看，分层会大大增加学习系统的复杂性，使其收敛速度慢并且不稳定（橙色）。但是文章提出的异步操作缓解了分层的速度慢和稳定性差的问题。并且随着设备数的不断上升，文章的方法（红色）的优势更加明显。</p>
+<p>不过另一层面：文章还统计了通信次数，也可以看出来分层其实是很显著地减少<strong>中心聚合器的负担</strong>。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091449111.png" alt="image-20230709144956065" style="zoom:67%;" /></p>
+<p>对于本文的未来研究方向，有几个有趣的方向可以追求<strong>。首先，正如我们在论文中提到的，我们的加权机制偏向于对于计算和通信速度更快的设备进行学习，这在数据在客户端上是独立同分布（i.i.d.）的情况下效果很好。如果涉及到非独立同分布（non-i.i.d.）的数据，我们需要设计一个更复杂的加权机制来适应异步联邦学习。</strong>第二个有趣的研究方向是修改本地客户端学习中的简单L2正则化方法。我们还需要完成理论分析的推导和证明。</p>
+<h3 id="wscc-a-weight-similarity-based-client-clustering-approach-for-non-iid-federated-learningskim">WSCC: A weight-similarity-based client clustering approach for non-IID federated learning(skim)</h3>
+<blockquote>
+<p>Tian, Pu, et al. "WSCC: A weight-similarity-based client clustering approach for non-IID federated learning." IEEE Internet of Things Journal 9.20 (2022): 20243-20256.</p>
+</blockquote>
+<p>本文提出了一种基于权重相似度的<strong>非iid</strong>联邦学习客户端<strong>聚类</strong>方法，创新点：1. 利用余弦距离度量来确定客户端集群；2. 不产生格外数据的情况下优化了通信开销。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091506783.png" alt="image-20230709150621729" style="zoom:100%;" /></p>
+<p>非IID类型：</p>
+<ol type="1">
+<li>标签分布：在这种情况下，节点之间的标签比例并不均匀分布。例如，一个节点可能具有某些标签的较高比例，而其他节点上可能没有出现某些标签。</li>
+<li>特征不平衡：这指的是具有相同标签的样本具有不同特征，或者反过来。例如，在手写识别任务中，同一个数字可能有不同来源采集的各种特征。</li>
+<li>数据集规模差异：当不同传感器收集的数据量大小不平等时，就会出现这种情况。样本较少的节点容易受到影响。</li>
+</ol>
+<p>目前的问题是在联邦学习开始时候，各个节点的初始DNN模型是相同的，经过训练之后，如果仍然利用加权平均聚合，没有办法反应非IID的实际全局权重。</p>
+<p>因此在非IID情况下，不能把目标函数定义为最小化加权平均的损失函数。而是应该保证每个节点都找到最小化的损失函数。 <span class="math display">\[
+w_i^*=argmin_{w_i}\{F_i(w_i)\}
+\]</span> 为了解决这个问题，<strong>文章根据数据集的分布将一个联邦学习任务分解成多个同时进行的联邦学习任务，每个集群内部仍然使用IID模型，并用FedAvg协作。</strong></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091552130.png" alt="image-20230709155220077" style="zoom:90%;" /> <img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091552043.png" alt="image-20230709155241994" style="zoom:90%;" /></p>
+<p><strong>在客户端层面：</strong>每个节点的初始模型参数是相同的，但是由于其各自的数据都是非IID的，所以在训练的时候，梯度也会发散，就如同下图一样。每个不同颜色的箭头代表一个分布。相似分布的梯度方向很可能会接近收敛。因此，在<strong>这项工作中，我们将联邦学习训练中的非独立同分布问题视为通过它们的分布对客户端进行聚类，并在同一聚类中聚合权重。</strong></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091557971.png" alt="image-20230709155740910" style="zoom:100%;" /></p>
+<p><em>这里使用余弦相似性的原因为：余弦相似性不受到缩放效应的影响，特别是对于DNN模型的高维权重向量。</em></p>
+<p>在每一轮聚合中，我们随机选择一个接收到的参数作为基准，用于计算余弦距离。然后使用距离向量作为后续聚类过程的输入（第5行）</p>
+<p>这里文章中使用了AP聚类算法，具体可以见<kbd>ChatGPT</kbd>。对于非独立同分布物联网联邦学习任务，自适应聚类（AP）方法是理想的解决方案，因为它可以自动确定聚类数量。对于存在不确定节点的联邦学习任务，节点分布是未知的。</p>
+<p><strong>在节点层面：</strong></p>
+<p>这里有一个验证的阶段，节点将会对下发的全局模型进行验证，如果这个模型的准确性与节点内的本地模型的准确性低的程度大于阈值，就放弃该全局模型，继续使用原模型计算。</p>
+<h3 id="learn-from-others-and-be-yourself-in-heterogeneous-federated-learning">Learn from Others and Be Yourself in Heterogeneous Federated Learning</h3>
 
     </div>
 
@@ -310,6 +365,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#asynchronous-hierarchical-federated-learningskim"><span class="nav-number">1.</span> <span class="nav-text">Asynchronous Hierarchical Federated Learning(skim)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wscc-a-weight-similarity-based-client-clustering-approach-for-non-iid-federated-learningskim"><span class="nav-number">2.</span> <span class="nav-text">WSCC: A weight-similarity-based client clustering approach for non-IID federated learning(skim)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#learn-from-others-and-be-yourself-in-heterogeneous-federated-learning"><span class="nav-number">3.</span> <span class="nav-text">Learn from Others and Be Yourself in Heterogeneous Federated Learning</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
