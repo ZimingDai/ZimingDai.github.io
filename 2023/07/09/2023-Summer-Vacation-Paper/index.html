@@ -36,8 +36,12 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091552130.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091552043.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091557971.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091928203.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307101548971.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307101611546.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307101614108.png">
 <meta property="article:published_time" content="2023-07-09T03:31:04.000Z">
-<meta property="article:modified_time" content="2023-07-09T08:18:14.081Z">
+<meta property="article:modified_time" content="2023-07-10T08:15:16.710Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="Top-Papers">
 <meta name="twitter:card" content="summary">
@@ -197,10 +201,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2023-07-09 11:31:04 / Modified: 16:18:14" itemprop="dateCreated datePublished" datetime="2023-07-09T11:31:04+08:00">2023-07-09</time>
+              <time title="Created: 2023-07-09 11:31:04" itemprop="dateCreated datePublished" datetime="2023-07-09T11:31:04+08:00">2023-07-09</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-07-10 16:15:16" itemprop="dateModified" datetime="2023-07-10T16:15:16+08:00">2023-07-10</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -231,6 +241,7 @@
 <p>Wang, Xing, and Yijun Wang. "Asynchronous hierarchical federated learning." <em>arXiv preprint arXiv:2206.00054</em> (2022).</p>
 </blockquote>
 <p>本文提出了一种<strong>异步</strong>的<strong>分层</strong>联邦学习，创新点为：1. 利用网络拓扑或聚类算法进行分组；2. 采用异步联邦学习容忍异构性；</p>
+<p>主要解决同步分层联邦学习的慢。</p>
 <p>在联邦学习聚合的时候，每一个群组的leader会有一个队列，这个队列会存储来自每个客户机的参数，周期性地将结果聚合，不用等待一些掉队者的结果。并且作者提出，模型参数越过时，误差越大。因此文章<strong>采用了一个过时函数来控制每个客户机参数的影响程度</strong>。 <span class="math display">\[
 \alpha_{t&#39;}=\alpha \times \sigma(t&#39;-t)
 \]</span> 这里<span class="math inline">\(\sigma\)</span>是一个单调递减的函数用来控制影响程度。<span class="math inline">\(t&#39;\)</span>为聚合器收到中央服务器下发的最新模型的时间，那些尚未没有被聚合，仍然在队列中的模型参数的时间戳为<span class="math inline">\(t\)</span>，所以<span class="math inline">\(t&#39;&gt;t\)</span>是一定成立的，而<span class="math inline">\(t\)</span>越小，说明这个模型参数越过时，所以<span class="math inline">\(\sigma\)</span>来降低其权重。</p>
@@ -248,6 +259,7 @@
 <p>Tian, Pu, et al. "WSCC: A weight-similarity-based client clustering approach for non-IID federated learning." IEEE Internet of Things Journal 9.20 (2022): 20243-20256.</p>
 </blockquote>
 <p>本文提出了一种基于权重相似度的<strong>非iid</strong>联邦学习客户端<strong>聚类</strong>方法，创新点：1. 利用余弦距离度量来确定客户端集群；2. 不产生格外数据的情况下优化了通信开销。</p>
+<p>主要就是为了解决non-iid的问题</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091506783.png" alt="image-20230709150621729" style="zoom:100%;" /></p>
 <p>非IID类型：</p>
 <ol type="1">
@@ -268,6 +280,42 @@ w_i^*=argmin_{w_i}\{F_i(w_i)\}
 <p><strong>在节点层面：</strong></p>
 <p>这里有一个验证的阶段，节点将会对下发的全局模型进行验证，如果这个模型的准确性与节点内的本地模型的准确性低的程度大于阈值，就放弃该全局模型，继续使用原模型计算。</p>
 <h3 id="learn-from-others-and-be-yourself-in-heterogeneous-federated-learning">Learn from Others and Be Yourself in Heterogeneous Federated Learning</h3>
+<blockquote>
+<p>Huang, Wenke, Mang Ye, and Bo Du. "Learn from others and be yourself in heterogeneous federated learning." <em>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</em>. 2022.</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/WenkeHuang/FCCL">FCCL github源代码</a></p>
+</blockquote>
+<p>本文提出了一种联邦互相关和连续学习FCCL（Federated Cross-Correlation and Continual Learning），创新点：1. 通过利用未标记的公共数据和自我监督学习来实现异构模型的可泛化表示；2. 通过使用更新后的模型和预训练模型进行跨领域和内部领域的知识蒸馏，平衡来自其他模型和自身模型的知识。</p>
+<p>本文解决的主要问题：1. 怎么在异构的联邦学习中学习到一种泛化表示，可以减轻域偏移的问题；2. 怎么平衡多种知识来减少灾难性的遗忘（在本地训练的时候过拟合当前知识而忘记之前的知识），在域间或域内都能表现较好的性能。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091928203.png" alt="image-20230709192850136" style="zoom:100%;" /></p>
+<h4 id="方法">方法</h4>
+<p>这个文章总体上提出了两种不同的学习架构：<strong>联邦交叉相关学习（Federated Cross-Correlation Learning）、联邦持续学习（Federated Continual Learning）</strong></p>
+<h5 id="联邦交叉相关学习">联邦交叉相关学习</h5>
+<p>这个方法受到了自监督学习的启发，自监督学习可以获得一个具有普适性的表示，这对于我们希望得到的可泛化表示是有利的。但是在这个工作中，由于异构的数据，导致相同标签的特征是有明显差异的，所以对于模型来说需<strong>要鼓励相同维度的不变性和不同维度的多样性。</strong>同时不同的模型承载不同的数据，这个数据是具有隐私性的，不适合自监督学习，为了保证安全，文章利用了无标签的公共数据。</p>
+<p>通过在不同维度上促进相同维度的不变性和不同维度的多样性，我们可以学习到一个在领域转移下具有普适性的表示。这样的表示能够尽可能地保留关于图像的信息，并在不同领域中具有一定的不变性。</p>
+<p>文章构建了一种交叉相关矩阵：对于每个模型的logit输出为<span class="math inline">\(Z_i\)</span>，计算第<span class="math inline">\(i\)</span>个参与者的交叉相关矩阵： <span class="math display">\[
+M_i^{uv}=\frac{\sum_b||Z_i^{b,u}||\space||\overline{Z}^{b,v}||}{\sqrt{\sum_b||Z_i^{b,u}||^2}\sqrt{\sum_b||\overline{Z}^{b,v}||^2}}
+\]</span> 其中<span class="math inline">\(b\)</span>是批处理样本，<span class="math inline">\(u,v\)</span>均表示logits层的维度索引。<span class="math inline">\(||·||\)</span>是沿着批维度的归一化操作。最终得到<span class="math inline">\(M_i\)</span>是一个维度为<span class="math inline">\(C\)</span>的方阵，其中数据介于-1到1（不相似到相似）。协作的loss值设置为 <span class="math display">\[
+L_i^{Col}=\sum_{u}(1-M^{uu})^2+\lambda_{Col}\sum_{u}\sum_{v\neq u}(1+M_{i}^{uv})^2
+\]</span> <span class="math inline">\(\lambda_{Col}\)</span>用来权衡两项的重要性，当交叉相关矩阵的对角线元素取值+1时，它鼓励来自不同参与者的logits输出相似；当交叉相关矩阵的非对角线元素取值-1时，它鼓励logits输出的多样性，因为这些logits输出的不同维度将彼此不相关。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307101548971.png" alt="image-20230710154829891" style="zoom:67%;" /></p>
+<h5 id="联邦持续学习">联邦持续学习</h5>
+<p>传统的监督损失函数会引发两个问题：<strong>1. 在局部更新中，由于没有其他参与者的监督，模型容易过拟合当前数据分布；2. 目标设计通常只根据先验概率独立地对预测结果进行惩罚，这提供了有限且较为僵硬的领域内信息。</strong></p>
+<p>因此文章中提出了一种兼顾领域内和领域间的知识蒸馏方法。</p>
+<p>在每次中央服务器下发模型之后，每个参与者会获得一个<span class="math inline">\(\theta_i^{t-1}\)</span>，这个模型是通过全局聚合得到的，所以拥有其他参与者学到的知识。</p>
+<p>那么组间的知识蒸馏loss就为 <span class="math display">\[
+L_i^{Inter}=\sigma(Z_{i,pvt}^{t-1})log\frac{\sigma(Z_{i,pvt}^{t-1})}{\sigma(Z_{i,pvt}^{t,im})}
+\]</span> 目的是在保持隐私的同时，不断向他人学习，来保证域间的性能，缓解联邦学习中的灾难性遗忘。</p>
+<p>此外对于第<span class="math inline">\(i\)</span>个参与者，我们可以使其在自己的私有数据上对模型进行预训练获得<span class="math inline">\(\theta_i^*\)</span>，然后利用其的logit输出<span class="math inline">\(Z_{i,pvt}^*\)</span>来对域内进行知识蒸馏： <span class="math display">\[
+L_i^{Intra}=\sigma(Z_{i,pvt}^*)log\frac{\sigma(Z_{i,pvt}^*)}{\sigma(Z_{i,pvt}^{t,im})}
+\]</span> 在一定程度上，上述的两个模型分别代表了域间的老师模型和域内的老师模型（<span class="math inline">\(\theta_i^{t-1}\)</span>，<span class="math inline">\(\theta_i^*\)</span>）</p>
+<p>所以最后双向知识蒸馏的loss为两者相加。 <span class="math display">\[
+L_i^{Dual}=L_i^{Inter}+L_i^{Intra}
+\]</span> 联邦持续学习的整体loss为： <span class="math display">\[
+L_i^{Loc}=L_i^{CE}+\lambda_{Loc}L_i^{Dual}
+\]</span> <span class="math inline">\(L_i^{CE}\)</span>为传统的交叉熵损失。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307101611546.png" alt="image-20230710161140453" style="zoom:100%;" /></p>
+<p>利用双向知识蒸馏学习到的特征在领域内和领域间都更加紧凑且分离。模型展现出更好的区分特征，产生了有前景的领域内和领域间性能。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307101614108.png" alt="image-20230710161456999"  /></p>
 
     </div>
 
@@ -365,7 +413,7 @@ w_i^*=argmin_{w_i}\{F_i(w_i)\}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#asynchronous-hierarchical-federated-learningskim"><span class="nav-number">1.</span> <span class="nav-text">Asynchronous Hierarchical Federated Learning(skim)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wscc-a-weight-similarity-based-client-clustering-approach-for-non-iid-federated-learningskim"><span class="nav-number">2.</span> <span class="nav-text">WSCC: A weight-similarity-based client clustering approach for non-IID federated learning(skim)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#learn-from-others-and-be-yourself-in-heterogeneous-federated-learning"><span class="nav-number">3.</span> <span class="nav-text">Learn from Others and Be Yourself in Heterogeneous Federated Learning</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#asynchronous-hierarchical-federated-learningskim"><span class="nav-number">1.</span> <span class="nav-text">Asynchronous Hierarchical Federated Learning(skim)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wscc-a-weight-similarity-based-client-clustering-approach-for-non-iid-federated-learningskim"><span class="nav-number">2.</span> <span class="nav-text">WSCC: A weight-similarity-based client clustering approach for non-IID federated learning(skim)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#learn-from-others-and-be-yourself-in-heterogeneous-federated-learning"><span class="nav-number">3.</span> <span class="nav-text">Learn from Others and Be Yourself in Heterogeneous Federated Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E4%BA%A4%E5%8F%89%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.1.</span> <span class="nav-text">联邦交叉相关学习</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.2.</span> <span class="nav-text">联邦持续学习</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
