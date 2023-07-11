@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307101611546.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307101614108.png">
 <meta property="article:published_time" content="2023-07-09T03:31:04.000Z">
-<meta property="article:modified_time" content="2023-07-10T08:15:16.710Z">
+<meta property="article:modified_time" content="2023-07-10T10:44:38.705Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="Top-Papers">
 <meta name="twitter:card" content="summary">
@@ -209,7 +209,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-07-10 16:15:16" itemprop="dateModified" datetime="2023-07-10T16:15:16+08:00">2023-07-10</time>
+                <time title="Modified: 2023-07-10 18:44:38" itemprop="dateModified" datetime="2023-07-10T18:44:38+08:00">2023-07-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,7 +236,7 @@
 <p><strong><em>主题为：联邦学习、异构性、异步联邦学习、分层联邦学习</em></strong></p>
 <p>文章大体上来自于A、B会和A刊，少数几篇与GLOBECOM相似的出处不限。</p>
 <p><span id="more"></span></p>
-<h3 id="asynchronous-hierarchical-federated-learningskim">Asynchronous Hierarchical Federated Learning(skim)</h3>
+<h2 id="asynchronous-hierarchical-federated-learningskim">Asynchronous Hierarchical Federated Learning(skim)</h2>
 <blockquote>
 <p>Wang, Xing, and Yijun Wang. "Asynchronous hierarchical federated learning." <em>arXiv preprint arXiv:2206.00054</em> (2022).</p>
 </blockquote>
@@ -254,7 +254,7 @@
 <p>不过另一层面：文章还统计了通信次数，也可以看出来分层其实是很显著地减少<strong>中心聚合器的负担</strong>。</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091449111.png" alt="image-20230709144956065" style="zoom:67%;" /></p>
 <p>对于本文的未来研究方向，有几个有趣的方向可以追求<strong>。首先，正如我们在论文中提到的，我们的加权机制偏向于对于计算和通信速度更快的设备进行学习，这在数据在客户端上是独立同分布（i.i.d.）的情况下效果很好。如果涉及到非独立同分布（non-i.i.d.）的数据，我们需要设计一个更复杂的加权机制来适应异步联邦学习。</strong>第二个有趣的研究方向是修改本地客户端学习中的简单L2正则化方法。我们还需要完成理论分析的推导和证明。</p>
-<h3 id="wscc-a-weight-similarity-based-client-clustering-approach-for-non-iid-federated-learningskim">WSCC: A weight-similarity-based client clustering approach for non-IID federated learning(skim)</h3>
+<h2 id="wscc-a-weight-similarity-based-client-clustering-approach-for-non-iid-federated-learningskim">WSCC: A weight-similarity-based client clustering approach for non-IID federated learning(skim)</h2>
 <blockquote>
 <p>Tian, Pu, et al. "WSCC: A weight-similarity-based client clustering approach for non-IID federated learning." IEEE Internet of Things Journal 9.20 (2022): 20243-20256.</p>
 </blockquote>
@@ -279,7 +279,7 @@ w_i^*=argmin_{w_i}\{F_i(w_i)\}
 <p>这里文章中使用了AP聚类算法，具体可以见<kbd>ChatGPT</kbd>。对于非独立同分布物联网联邦学习任务，自适应聚类（AP）方法是理想的解决方案，因为它可以自动确定聚类数量。对于存在不确定节点的联邦学习任务，节点分布是未知的。</p>
 <p><strong>在节点层面：</strong></p>
 <p>这里有一个验证的阶段，节点将会对下发的全局模型进行验证，如果这个模型的准确性与节点内的本地模型的准确性低的程度大于阈值，就放弃该全局模型，继续使用原模型计算。</p>
-<h3 id="learn-from-others-and-be-yourself-in-heterogeneous-federated-learning">Learn from Others and Be Yourself in Heterogeneous Federated Learning</h3>
+<h2 id="learn-from-others-and-be-yourself-in-heterogeneous-federated-learning">Learn from Others and Be Yourself in Heterogeneous Federated Learning</h2>
 <blockquote>
 <p>Huang, Wenke, Mang Ye, and Bo Du. "Learn from others and be yourself in heterogeneous federated learning." <em>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</em>. 2022.</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/WenkeHuang/FCCL">FCCL github源代码</a></p>
@@ -287,9 +287,9 @@ w_i^*=argmin_{w_i}\{F_i(w_i)\}
 <p>本文提出了一种联邦互相关和连续学习FCCL（Federated Cross-Correlation and Continual Learning），创新点：1. 通过利用未标记的公共数据和自我监督学习来实现异构模型的可泛化表示；2. 通过使用更新后的模型和预训练模型进行跨领域和内部领域的知识蒸馏，平衡来自其他模型和自身模型的知识。</p>
 <p>本文解决的主要问题：1. 怎么在异构的联邦学习中学习到一种泛化表示，可以减轻域偏移的问题；2. 怎么平衡多种知识来减少灾难性的遗忘（在本地训练的时候过拟合当前知识而忘记之前的知识），在域间或域内都能表现较好的性能。</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091928203.png" alt="image-20230709192850136" style="zoom:100%;" /></p>
-<h4 id="方法">方法</h4>
+<h3 id="方法">方法</h3>
 <p>这个文章总体上提出了两种不同的学习架构：<strong>联邦交叉相关学习（Federated Cross-Correlation Learning）、联邦持续学习（Federated Continual Learning）</strong></p>
-<h5 id="联邦交叉相关学习">联邦交叉相关学习</h5>
+<h4 id="联邦交叉相关学习">联邦交叉相关学习</h4>
 <p>这个方法受到了自监督学习的启发，自监督学习可以获得一个具有普适性的表示，这对于我们希望得到的可泛化表示是有利的。但是在这个工作中，由于异构的数据，导致相同标签的特征是有明显差异的，所以对于模型来说需<strong>要鼓励相同维度的不变性和不同维度的多样性。</strong>同时不同的模型承载不同的数据，这个数据是具有隐私性的，不适合自监督学习，为了保证安全，文章利用了无标签的公共数据。</p>
 <p>通过在不同维度上促进相同维度的不变性和不同维度的多样性，我们可以学习到一个在领域转移下具有普适性的表示。这样的表示能够尽可能地保留关于图像的信息，并在不同领域中具有一定的不变性。</p>
 <p>文章构建了一种交叉相关矩阵：对于每个模型的logit输出为<span class="math inline">\(Z_i\)</span>，计算第<span class="math inline">\(i\)</span>个参与者的交叉相关矩阵： <span class="math display">\[
@@ -298,7 +298,7 @@ M_i^{uv}=\frac{\sum_b||Z_i^{b,u}||\space||\overline{Z}^{b,v}||}{\sqrt{\sum_b||Z_
 L_i^{Col}=\sum_{u}(1-M^{uu})^2+\lambda_{Col}\sum_{u}\sum_{v\neq u}(1+M_{i}^{uv})^2
 \]</span> <span class="math inline">\(\lambda_{Col}\)</span>用来权衡两项的重要性，当交叉相关矩阵的对角线元素取值+1时，它鼓励来自不同参与者的logits输出相似；当交叉相关矩阵的非对角线元素取值-1时，它鼓励logits输出的多样性，因为这些logits输出的不同维度将彼此不相关。</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307101548971.png" alt="image-20230710154829891" style="zoom:67%;" /></p>
-<h5 id="联邦持续学习">联邦持续学习</h5>
+<h4 id="联邦持续学习">联邦持续学习</h4>
 <p>传统的监督损失函数会引发两个问题：<strong>1. 在局部更新中，由于没有其他参与者的监督，模型容易过拟合当前数据分布；2. 目标设计通常只根据先验概率独立地对预测结果进行惩罚，这提供了有限且较为僵硬的领域内信息。</strong></p>
 <p>因此文章中提出了一种兼顾领域内和领域间的知识蒸馏方法。</p>
 <p>在每次中央服务器下发模型之后，每个参与者会获得一个<span class="math inline">\(\theta_i^{t-1}\)</span>，这个模型是通过全局聚合得到的，所以拥有其他参与者学到的知识。</p>
@@ -316,6 +316,11 @@ L_i^{Loc}=L_i^{CE}+\lambda_{Loc}L_i^{Dual}
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307101611546.png" alt="image-20230710161140453" style="zoom:100%;" /></p>
 <p>利用双向知识蒸馏学习到的特征在领域内和领域间都更加紧凑且分离。模型展现出更好的区分特征，产生了有前景的领域内和领域间性能。</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307101614108.png" alt="image-20230710161456999"  /></p>
+<h2 id="feddc-federated-learning-with-non-iid-data-via-local-drift-decoupling-and-correction">FedDC: Federated Learning with Non-IID Data via Local Drift Decoupling and Correction</h2>
+<blockquote>
+<p>Gao, Liang, et al. "Feddc: Federated learning with non-iid data via local drift decoupling and correction." <em>Proceedings of the IEEE/CVF conference on computer vision and pattern recognition</em>. 2022.</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/gaoliang13/FedDC">FedDC github源代码</a></p>
+</blockquote>
 
     </div>
 
@@ -413,7 +418,7 @@ L_i^{Loc}=L_i^{CE}+\lambda_{Loc}L_i^{Dual}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#asynchronous-hierarchical-federated-learningskim"><span class="nav-number">1.</span> <span class="nav-text">Asynchronous Hierarchical Federated Learning(skim)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wscc-a-weight-similarity-based-client-clustering-approach-for-non-iid-federated-learningskim"><span class="nav-number">2.</span> <span class="nav-text">WSCC: A weight-similarity-based client clustering approach for non-IID federated learning(skim)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#learn-from-others-and-be-yourself-in-heterogeneous-federated-learning"><span class="nav-number">3.</span> <span class="nav-text">Learn from Others and Be Yourself in Heterogeneous Federated Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E4%BA%A4%E5%8F%89%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.1.</span> <span class="nav-text">联邦交叉相关学习</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.2.</span> <span class="nav-text">联邦持续学习</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#asynchronous-hierarchical-federated-learningskim"><span class="nav-number">1.</span> <span class="nav-text">Asynchronous Hierarchical Federated Learning(skim)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wscc-a-weight-similarity-based-client-clustering-approach-for-non-iid-federated-learningskim"><span class="nav-number">2.</span> <span class="nav-text">WSCC: A weight-similarity-based client clustering approach for non-IID federated learning(skim)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#learn-from-others-and-be-yourself-in-heterogeneous-federated-learning"><span class="nav-number">3.</span> <span class="nav-text">Learn from Others and Be Yourself in Heterogeneous Federated Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E4%BA%A4%E5%8F%89%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.1.</span> <span class="nav-text">联邦交叉相关学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.2.</span> <span class="nav-text">联邦持续学习</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#feddc-federated-learning-with-non-iid-data-via-local-drift-decoupling-and-correction"><span class="nav-number">4.</span> <span class="nav-text">FedDC: Federated Learning with Non-IID Data via Local Drift Decoupling and Correction</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
