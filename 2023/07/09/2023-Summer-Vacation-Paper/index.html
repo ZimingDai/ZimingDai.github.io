@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307101614108.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307161531550.png">
 <meta property="article:published_time" content="2023-07-09T03:31:04.000Z">
-<meta property="article:modified_time" content="2023-07-16T07:43:23.085Z">
+<meta property="article:modified_time" content="2023-07-16T08:38:56.850Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="Top-Papers">
 <meta name="twitter:card" content="summary">
@@ -210,7 +210,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-07-16 15:43:23" itemprop="dateModified" datetime="2023-07-16T15:43:23+08:00">2023-07-16</time>
+                <time title="Modified: 2023-07-16 16:38:56" itemprop="dateModified" datetime="2023-07-16T16:38:56+08:00">2023-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -254,7 +254,7 @@
 <p>从结果来看，分层会大大增加学习系统的复杂性，使其收敛速度慢并且不稳定（橙色）。但是文章提出的异步操作缓解了分层的速度慢和稳定性差的问题。并且随着设备数的不断上升，文章的方法（红色）的优势更加明显。</p>
 <p>不过另一层面：文章还统计了通信次数，也可以看出来分层其实是很显著地减少<strong>中心聚合器的负担</strong>。</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091449111.png" alt="image-20230709144956065" style="zoom:67%;" /></p>
-<p>对于本文的未来研究方向，有几个有趣的方向可以追求<strong>。首先，正如我们在论文中提到的，我们的加权机制偏向于对于计算和通信速度更快的设备进行学习，这在数据在客户端上是独立同分布（i.i.d.）的情况下效果很好。如果涉及到非独立同分布（non-i.i.d.）的数据，我们需要设计一个更复杂的加权机制来适应异步联邦学习。</strong>第二个有趣的研究方向是修改本地客户端学习中的简单L2正则化方法。我们还需要完成理论分析的推导和证明。</p>
+<p>对于本文的未来研究方向，有几个有趣的方向可以追求<strong>。首先，正如作者在论文中提到的，作者的加权机制偏向于对于计算和通信速度更快的设备进行学习，这在数据在客户端上是独立同分布（i.i.d.）的情况下效果很好。如果涉及到非独立同分布（non-i.i.d.）的数据，作者需要设计一个更复杂的加权机制来适应异步联邦学习。</strong>第二个有趣的研究方向是修改本地客户端学习中的简单L2正则化方法。作者还需要完成理论分析的推导和证明。</p>
 <h2 id="wscc-a-weight-similarity-based-client-clustering-approach-for-non-iid-federated-learningskim">WSCC: A weight-similarity-based client clustering approach for non-IID federated learning(skim)</h2>
 <blockquote>
 <p>Tian, Pu, et al. "WSCC: A weight-similarity-based client clustering approach for non-IID federated learning." IEEE Internet of Things Journal 9.20 (2022): 20243-20256.</p>
@@ -273,10 +273,10 @@
 w_i^*=argmin_{w_i}\{F_i(w_i)\}
 \]</span> 为了解决这个问题，<strong>文章根据数据集的分布将一个联邦学习任务分解成多个同时进行的联邦学习任务，每个集群内部仍然使用IID模型，并用FedAvg协作。</strong></p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091552130.png" alt="image-20230709155220077" style="zoom:90%;" /> <img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091552043.png" alt="image-20230709155241994" style="zoom:90%;" /></p>
-<p><strong>在客户端层面：</strong>每个节点的初始模型参数是相同的，但是由于其各自的数据都是非IID的，所以在训练的时候，梯度也会发散，就如同下图一样。每个不同颜色的箭头代表一个分布。相似分布的梯度方向很可能会接近收敛。因此，在<strong>这项工作中，我们将联邦学习训练中的非独立同分布问题视为通过它们的分布对客户端进行聚类，并在同一聚类中聚合权重。</strong></p>
+<p><strong>在客户端层面：</strong>每个节点的初始模型参数是相同的，但是由于其各自的数据都是非IID的，所以在训练的时候，梯度也会发散，就如同下图一样。每个不同颜色的箭头代表一个分布。相似分布的梯度方向很可能会接近收敛。因此，在<strong>这项工作中，作者将联邦学习训练中的非独立同分布问题视为通过它们的分布对客户端进行聚类，并在同一聚类中聚合权重。</strong></p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091557971.png" alt="image-20230709155740910" style="zoom:100%;" /></p>
 <p><em>这里使用余弦相似性的原因为：余弦相似性不受到缩放效应的影响，特别是对于DNN模型的高维权重向量。</em></p>
-<p>在每一轮聚合中，我们随机选择一个接收到的参数作为基准，用于计算余弦距离。然后使用距离向量作为后续聚类过程的输入（第5行）</p>
+<p>在每一轮聚合中，作者随机选择一个接收到的参数作为基准，用于计算余弦距离。然后使用距离向量作为后续聚类过程的输入（第5行）</p>
 <p>这里文章中使用了AP聚类算法，具体可以见<kbd>ChatGPT</kbd>。对于非独立同分布物联网联邦学习任务，自适应聚类（AP）方法是理想的解决方案，因为它可以自动确定聚类数量。对于存在不确定节点的联邦学习任务，节点分布是未知的。</p>
 <p><strong>在节点层面：</strong></p>
 <p>这里有一个验证的阶段，节点将会对下发的全局模型进行验证，如果这个模型的准确性与节点内的本地模型的准确性低的程度大于阈值，就放弃该全局模型，继续使用原模型计算。</p>
@@ -291,8 +291,8 @@ w_i^*=argmin_{w_i}\{F_i(w_i)\}
 <h3 id="方法">方法</h3>
 <p>这个文章总体上提出了两种不同的学习架构：<strong>联邦交叉相关学习（Federated Cross-Correlation Learning）、联邦持续学习（Federated Continual Learning）</strong></p>
 <h4 id="联邦交叉相关学习">联邦交叉相关学习</h4>
-<p>这个方法受到了自监督学习的启发，自监督学习可以获得一个具有普适性的表示，这对于我们希望得到的可泛化表示是有利的。但是在这个工作中，由于异构的数据，导致相同标签的特征是有明显差异的，所以对于模型来说需<strong>要鼓励相同维度的不变性和不同维度的多样性。</strong>同时不同的模型承载不同的数据，这个数据是具有隐私性的，不适合自监督学习，为了保证安全，文章利用了无标签的公共数据。</p>
-<p>通过在不同维度上促进相同维度的不变性和不同维度的多样性，我们可以学习到一个在领域转移下具有普适性的表示。这样的表示能够尽可能地保留关于图像的信息，并在不同领域中具有一定的不变性。</p>
+<p>这个方法受到了自监督学习的启发，自监督学习可以获得一个具有普适性的表示，这对于作者希望得到的可泛化表示是有利的。但是在这个工作中，由于异构的数据，导致相同标签的特征是有明显差异的，所以对于模型来说需<strong>要鼓励相同维度的不变性和不同维度的多样性。</strong>同时不同的模型承载不同的数据，这个数据是具有隐私性的，不适合自监督学习，为了保证安全，文章利用了无标签的公共数据。</p>
+<p>通过在不同维度上促进相同维度的不变性和不同维度的多样性，作者可以学习到一个在领域转移下具有普适性的表示。这样的表示能够尽可能地保留关于图像的信息，并在不同领域中具有一定的不变性。</p>
 <p>文章构建了一种交叉相关矩阵：对于每个模型的logit输出为<span class="math inline">\(Z_i\)</span>，计算第<span class="math inline">\(i\)</span>个参与者的交叉相关矩阵： <span class="math display">\[
 M_i^{uv}=\frac{\sum_b||Z_i^{b,u}||\space||\overline{Z}^{b,v}||}{\sqrt{\sum_b||Z_i^{b,u}||^2}\sqrt{\sum_b||\overline{Z}^{b,v}||^2}}
 \]</span> 其中<span class="math inline">\(b\)</span>是批处理样本，<span class="math inline">\(u,v\)</span>均表示logits层的维度索引。<span class="math inline">\(||·||\)</span>是沿着批维度的归一化操作。最终得到<span class="math inline">\(M_i\)</span>是一个维度为<span class="math inline">\(C\)</span>的方阵，其中数据介于-1到1（不相似到相似）。协作的loss值设置为 <span class="math display">\[
@@ -306,7 +306,7 @@ L_i^{Col}=\sum_{u}(1-M^{uu})^2+\lambda_{Col}\sum_{u}\sum_{v\neq u}(1+M_{i}^{uv})
 <p>那么组间的知识蒸馏loss就为 <span class="math display">\[
 L_i^{Inter}=\sigma(Z_{i,pvt}^{t-1})log\frac{\sigma(Z_{i,pvt}^{t-1})}{\sigma(Z_{i,pvt}^{t,im})}
 \]</span> 目的是在保持隐私的同时，不断向他人学习，来保证域间的性能，缓解联邦学习中的灾难性遗忘。</p>
-<p>此外对于第<span class="math inline">\(i\)</span>个参与者，我们可以使其在自己的私有数据上对模型进行预训练获得<span class="math inline">\(\theta_i^*\)</span>，然后利用其的logit输出<span class="math inline">\(Z_{i,pvt}^*\)</span>来对域内进行知识蒸馏： <span class="math display">\[
+<p>此外对于第<span class="math inline">\(i\)</span>个参与者，作者可以使其在自己的私有数据上对模型进行预训练获得<span class="math inline">\(\theta_i^*\)</span>，然后利用其的logit输出<span class="math inline">\(Z_{i,pvt}^*\)</span>来对域内进行知识蒸馏： <span class="math display">\[
 L_i^{Intra}=\sigma(Z_{i,pvt}^*)log\frac{\sigma(Z_{i,pvt}^*)}{\sigma(Z_{i,pvt}^{t,im})}
 \]</span> 在一定程度上，上述的两个模型分别代表了域间的老师模型和域内的老师模型（<span class="math inline">\(\theta_i^{t-1}\)</span>，<span class="math inline">\(\theta_i^*\)</span>）</p>
 <p>所以最后双向知识蒸馏的loss为两者相加。 <span class="math display">\[
@@ -322,7 +322,7 @@ L_i^{Loc}=L_i^{CE}+\lambda_{Loc}L_i^{Dual}
 <p>Gao, Liang, et al. "Feddc: Federated learning with non-iid data via local drift decoupling and correction." <em>Proceedings of the IEEE/CVF conference on computer vision and pattern recognition</em>. 2022.</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/gaoliang13/FedDC">FedDC github源代码</a></p>
 </blockquote>
-<p>我们提出了一种新的局部漂移解耦与修正的联邦学习算法(FedDC)，创新点为：1. 动态更新每个客户端的局部目标函数（1. 约束惩罚项：表示全局参数、飘逸变量和局部参数之间的关系；2. 梯度修正项：减少每一轮训练中的梯度漂移）；2. 在训练过程中通过引入漂移变量对局部模型和全局模型进行解耦，减小了局部漂移对全局目标的影响，使其收敛速度更快，达到更好的性能。</p>
+<p>作者提出了一种新的局部漂移解耦与修正的联邦学习算法(FedDC)，创新点为：1. 动态更新每个客户端的局部目标函数（1. 约束惩罚项：表示全局参数、飘逸变量和局部参数之间的关系；2. 梯度修正项：减少每一轮训练中的梯度漂移）；2. 在训练过程中通过引入漂移变量对局部模型和全局模型进行解耦，减小了局部漂移对全局目标的影响，使其收敛速度更快，达到更好的性能。</p>
 <p>本文解决的主要问题就是<strong>联邦学习中的客户端漂移问题</strong></p>
 <p>在异构的联邦学习中，客户端的局部最优点和全局最优点是不一致的。</p>
 <p><strong>客户端漂移</strong></p>
@@ -332,6 +332,25 @@ L_i^{Loc}=L_i^{CE}+\lambda_{Loc}L_i^{Dual}
 <p>假设模型中存在一个<strong><em>非线性的</em></strong>变换函数<span class="math inline">\(f\)</span>，<span class="math inline">\(\theta_1\)</span>和<span class="math inline">\(\theta_2\)</span>是两个客户端的局部参数，<span class="math inline">\(w_c\)</span>为理想的模型参数，<span class="math inline">\(w_f\)</span>是FedAvg获得的参数。客户端的漂移用<span class="math inline">\(h\)</span>表示，那么<span class="math inline">\(h_1 = w_c-\theta_1\)</span>，<span class="math inline">\(h_2=w_c-\theta_2\)</span>。<span class="math inline">\(x\)</span>是一个数据点，那么客户端1对应的输出应该是<span class="math inline">\(y_1=f(\theta_1, x)\)</span>，同样的客户端2的输出为：<span class="math inline">\(y_2=f(\theta_2, x)\)</span>。利用FedAvg获得的模型参数<span class="math inline">\(w_f=\frac{\theta_1+\theta_2}{2}\)</span>，而理想的模型参数应该为<span class="math inline">\(w_c=f^{-1}(\frac{y_1+y_2}{2})/x\)</span>，因为<span class="math inline">\(f\)</span>不是一个线性函数，所以<span class="math inline">\(w_c\neq w_f\)</span>，<span class="math inline">\(f(w_f,x)\neq\frac{y_1+y_2}{2}\)</span>。</p>
 <p>这就说明FedAvg的全局模型是漂移的，因此本文章要<strong>学习全局和局部模型之间的局部漂移，并在将局部模型参数上传到服务器之间将局部漂移桥接起来。</strong></p>
 <h3 id="方法-1">方法</h3>
+<h4 id="优化目标与参数更新">优化目标与参数更新</h4>
+<p>首先，文章为每个客户端定义了一个局部漂移变量<span class="math inline">\(h_i\)</span>，在理想的情况下，局部漂移变量应该为<span class="math inline">\(h_i=w-\theta_i\)</span>，这里<span class="math inline">\(w\)</span>为全局模型参数，<span class="math inline">\(\theta_i\)</span>是客户端<span class="math inline">\(i\)</span>的局部模型参数。在训练过程中，需要保持这个限制，所以作者将其作为惩罚项 <span class="math display">\[
+R_i(\theta_i, h_i,w)=||h_i+\theta_i-w||^2
+\]</span> 通过引入<span class="math inline">\(R\)</span>，作者将方程约束优化，变成无约束优化问题。</p>
+<p>最后的目标函数为 <span class="math display">\[
+F(\theta_i,h_i,D_i,w)=L_i(\theta_i)+\frac{\alpha}{2}R_i(\theta_i, h_i,w)+G_i(\theta_i,g_i,g)
+\]</span> 其中，<span class="math inline">\(L\)</span>是经验损失函数，<span class="math inline">\(G\)</span>是梯度修正项（<span class="math inline">\(G_i(\theta_i,g_i,g)=\frac{1}{\eta K}&lt;\theta_1,g_i-g&gt;\)</span>，其中<span class="math inline">\(\eta\)</span>是学习率，<span class="math inline">\(K\)</span>是一轮训练的迭代次数，<span class="math inline">\(g_i\)</span>是客户端i上一轮本地参数的更新值，<span class="math inline">\(g\)</span>是所有客户端上一轮本地参数的平均更新值。在第t轮，<span class="math inline">\(g_i=\theta_i^t-\theta_i^{t-1},g=E_{i\in[N]}g_i\)</span>），其作用是减少局部梯度的方差。 <span class="math display">\[
+\theta_i^{t,k+1}=\theta_i^{t,k}-\eta\frac{\partial F(\theta_i^{t,k},h_i^t,D_i,w^t)}{\partial \theta_i^{t,k}}
+\]</span> 👆🏻这个是在第t轮的第k个局部训练迭代中，局部模型参数更新方程，这个方程会在一轮中运行K次。</p>
+<p>对于<strong>局部漂移参数的更新</strong>，如果假设局部参数不变，那么更新公式应该是<span class="math inline">\(h_i^+=h_i+(w^+-w)\)</span>，这里的<span class="math inline">\(+\)</span>表示新参数。但是由于全局数据不可用，不可能直接获得全局的最新参数。</p>
+<p>因此作者利用<span class="math inline">\(\theta_i\)</span>来代替<span class="math inline">\(w\)</span>，这是因为在每轮开始，都会有<span class="math inline">\(\theta_i=w\)</span>；利用<span class="math inline">\(\theta_i^+\)</span>代替<span class="math inline">\(w^+\)</span>，因为<span class="math inline">\(\theta_i^+\)</span>是对<span class="math inline">\(w^+\)</span>的估计。 <span class="math display">\[
+h_i^+=h_i+(w^+-w) \approx h_i+(\theta^+_i-\theta_i)
+\]</span> 那么局部模型的参数更新就可以将局部漂移参数引入来减少漂移问题，即<span class="math inline">\(\theta_i^++h_i^+\)</span>，所以聚合方程变成了： <span class="math display">\[
+w^+=\sum_{i=1}^N=\frac{D_i}{D}(\theta_i^++h_i^+)
+\]</span></p>
+<h2 id="fine-tuning-global-model-via-data-free-knowledge-distillation-for-non-iid-federated-learning">Fine-tuning Global Model via Data-Free Knowledge Distillation for Non-IID Federated Learning</h2>
+<blockquote>
+<p>Zhang, Lin, et al. "Fine-tuning global model via data-free knowledge distillation for non-iid federated learning." <em>Proceedings of the IEEE/CVF conference on computer vision and pattern recognition</em>. 2022.</p>
+</blockquote>
 
     </div>
 
@@ -429,7 +448,7 @@ L_i^{Loc}=L_i^{CE}+\lambda_{Loc}L_i^{Dual}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#asynchronous-hierarchical-federated-learningskim"><span class="nav-number">1.</span> <span class="nav-text">Asynchronous Hierarchical Federated Learning(skim)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wscc-a-weight-similarity-based-client-clustering-approach-for-non-iid-federated-learningskim"><span class="nav-number">2.</span> <span class="nav-text">WSCC: A weight-similarity-based client clustering approach for non-IID federated learning(skim)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#learn-from-others-and-be-yourself-in-heterogeneous-federated-learning"><span class="nav-number">3.</span> <span class="nav-text">Learn from Others and Be Yourself in Heterogeneous Federated Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E4%BA%A4%E5%8F%89%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.1.</span> <span class="nav-text">联邦交叉相关学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.2.</span> <span class="nav-text">联邦持续学习</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#feddc-federated-learning-with-non-iid-data-via-local-drift-decoupling-and-correction"><span class="nav-number">4.</span> <span class="nav-text">FedDC: Federated Learning with Non-IID Data via Local Drift Decoupling and Correction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-1"><span class="nav-number">4.1.</span> <span class="nav-text">方法</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#asynchronous-hierarchical-federated-learningskim"><span class="nav-number">1.</span> <span class="nav-text">Asynchronous Hierarchical Federated Learning(skim)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wscc-a-weight-similarity-based-client-clustering-approach-for-non-iid-federated-learningskim"><span class="nav-number">2.</span> <span class="nav-text">WSCC: A weight-similarity-based client clustering approach for non-IID federated learning(skim)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#learn-from-others-and-be-yourself-in-heterogeneous-federated-learning"><span class="nav-number">3.</span> <span class="nav-text">Learn from Others and Be Yourself in Heterogeneous Federated Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E4%BA%A4%E5%8F%89%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.1.</span> <span class="nav-text">联邦交叉相关学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.2.</span> <span class="nav-text">联邦持续学习</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#feddc-federated-learning-with-non-iid-data-via-local-drift-decoupling-and-correction"><span class="nav-number">4.</span> <span class="nav-text">FedDC: Federated Learning with Non-IID Data via Local Drift Decoupling and Correction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-1"><span class="nav-number">4.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E7%9B%AE%E6%A0%87%E4%B8%8E%E5%8F%82%E6%95%B0%E6%9B%B4%E6%96%B0"><span class="nav-number">4.1.1.</span> <span class="nav-text">优化目标与参数更新</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fine-tuning-global-model-via-data-free-knowledge-distillation-for-non-iid-federated-learning"><span class="nav-number">5.</span> <span class="nav-text">Fine-tuning Global Model via Data-Free Knowledge Distillation for Non-IID Federated Learning</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
