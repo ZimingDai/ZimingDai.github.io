@@ -45,8 +45,13 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307171130478.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307171507557.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307171537350.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181026935.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181948523.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181953470.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181956792.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307182026462.png">
 <meta property="article:published_time" content="2023-07-09T03:31:04.000Z">
-<meta property="article:modified_time" content="2023-07-17T07:38:17.467Z">
+<meta property="article:modified_time" content="2023-07-18T12:29:23.725Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="Top-Papers">
 <meta name="twitter:card" content="summary">
@@ -214,7 +219,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-07-17 15:38:17" itemprop="dateModified" datetime="2023-07-17T15:38:17+08:00">2023-07-17</time>
+                <time title="Modified: 2023-07-18 20:29:23" itemprop="dateModified" datetime="2023-07-18T20:29:23+08:00">2023-07-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -290,7 +295,7 @@ w_i^*=argmin_{w_i}\{F_i(w_i)\}
 <p><a target="_blank" rel="noopener" href="https://github.com/WenkeHuang/FCCL">FCCL github源代码</a></p>
 </blockquote>
 <p>本文提出了一种联邦互相关和连续学习FCCL（Federated Cross-Correlation and Continual Learning），创新点：1. 通过利用未标记的公共数据和自我监督学习来实现异构模型的可泛化表示；2. 通过使用更新后的模型和预训练模型进行跨领域和内部领域的知识蒸馏，平衡来自其他模型和自身模型的知识。</p>
-<p>👀本文解决的主要问题：1. 怎么在异构的联邦学习中学习到一种泛化表示，可以减轻域偏移的问题；2. 怎么平衡多种知识来减少灾难性的遗忘（在本地训练的时候过拟合当前知识而忘记之前的知识），在域间或域内都能表现较好的性能。</p>
+<p>👀本文解决的主要问题：1. 怎么在异构的联邦学习中学习到一种泛化表示，可以减轻域漂移的问题；2. 怎么平衡多种知识来减少灾难性的遗忘（在本地训练的时候过拟合当前知识而忘记之前的知识），在域间或域内都能表现较好的性能。</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091928203.png" alt="image-20230709192850136" style="zoom:100%;" /></p>
 <h3 id="方法">方法</h3>
 <p>这个文章总体上提出了两种不同的学习架构：<strong>联邦交叉相关学习（Federated Cross-Correlation Learning）、联邦持续学习（Federated Continual Learning）</strong></p>
@@ -408,10 +413,57 @@ c_j\approx g_j(y_i)\quad and\quad c\approx \frac{1}{N}\sum_j g_j(y_i)
 \]</span> 因此： <span class="math display">\[
 (g_i(y_i)-c_i+c)\approx \frac{1}{N}\sum_j g_j(y_i)
 \]</span> <img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307171537350.png" alt="image-20230717153717189" style="zoom:100%;" /></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181026935.png" alt="image-20230718102637720" style="zoom:50%;" /></p>
 <h2 id="fine-tuning-global-model-via-data-free-knowledge-distillation-for-non-iid-federated-learning">Fine-tuning Global Model via Data-Free Knowledge Distillation for Non-IID Federated Learning</h2>
 <blockquote>
 <p>Zhang, Lin, et al. "Fine-tuning global model via data-free knowledge distillation for non-iid federated learning." <em>Proceedings of the IEEE/CVF conference on computer vision and pattern recognition</em>. 2022.</p>
 </blockquote>
+<h2 id="addressing-heterogeneity-in-federated-learning-via-distributional-transformation">Addressing Heterogeneity in Federated Learning via Distributional Transformation</h2>
+<blockquote>
+<p>Yuan, Haolin, et al. "Addressing heterogeneity in federated learning via distributional transformation." <em>European Conference on Computer Vision</em>. Cham: Springer Nature Switzerland, 2022.</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/hyhmia/DisTrans">DisTrans github源代码</a></p>
+</blockquote>
+<p>文章提出了联邦学习分布式转换框架，称为DisTrans。创新点：1. 其不仅仅通过漂移量更改模型，与此同时还通过漂移量更改数据；2. 设计了双通道的神经网络结构；2. 提出了<span class="math inline">\(DH\)</span>异构量化，并利用神经网络进行聚合。</p>
+<p>👀解决的问题是<strong>联邦学习中的客户端漂移</strong></p>
+<h3 id="动机">动机</h3>
+<p>利用漂移量转换每个客户端的训练和测试数据，来提高异构数据下的联邦学习，为了证明其可行性，文章利用了两个例子。</p>
+<p><strong>对于非凸训练模型</strong></p>
+<p>假设<span class="math inline">\(f(x)=cos(wx)\)</span>，对于每个客户端，通过本地数据<span class="math inline">\(x\)</span>获得<span class="math inline">\(y\)</span>：<span class="math inline">\(y=cos(w_{client_k}^{true}x)+\epsilon_{clinet_k}\)</span>，其中<span class="math inline">\(x\)</span>是从高斯分布中绘制的IID数据，<span class="math inline">\(\epsilon_{clinet_k}\)</span>是均值为0的高斯噪声，漂移量为<span class="math inline">\(px+q\)</span>，<span class="math inline">\(p\)</span>是连个客户端处的固定值，<span class="math inline">\(q\)</span>是通过暴力搜索来选择的。图(a)显示了有漂移的模型更加一致。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181948523.png" alt="image-20230718194856349" style="zoom:100%;" /></p>
+<p><strong>聚合服务器的线性回归问题</strong></p>
+<p>作者训练了两个局部线性模型，<span class="math inline">\(f(x)=wx\)</span>，在服务器上进行聚合，重复联邦学习步骤直到收敛。本地训练数据是异构的，生成<span class="math inline">\(y=w^{true}_{clinet_k}x+\epsilon_{clinet_k}\)</span>。当存在漂移时，聚合模型收敛。</p>
+<h3 id="方法-2">方法</h3>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181953470.png" alt="image-20230718195331301" style="zoom:100%;" /></p>
+<p>在每一轮中，每个客户端学习一个本地模型和一个漂移量，并将其发送给服务器。服务器聚合客户端的本地模型和漂移量，并将其送回客户端。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181956792.png" alt="image-20230718195614617" style="zoom:70%;" /></p>
+<p>对于本地、全局模型，DisTrans使用了<strong>双输入通道神经体系结构</strong>，如上图所示</p>
+<p>文章的神经网络架构有一个共享的backbone，一个密集层链接两个通道的输出，一个logit层合并输出。这两个通道使用相同的漂移量<span class="math inline">\(t\)</span>，以两种方式移动本地数据分布： <span class="math display">\[
+x_t=((1-\alpha)x+\alpha t,\quad(1+\alpha)x-\alpha t)
+\]</span> 在优化中，每个客户端的目标是实现以下两个目标：</p>
+<ol type="1">
+<li>优化漂移量，使局部数据更符合局部模型</li>
+<li>优化局部模型以适应便宜的局部数据分布</li>
+</ol>
+<p><span style="background-color: yellow;">这和别的文章不一样，本文章是数据和模型同时漂移。</span></p>
+<p>将这两个目标合一获得以下目标方程： <span class="math display">\[
+min_{\theta_i^r,t_i^r}L_i^r=\frac{1}{N}\sum_{z_t\in D_{ti}}l(\theta_i^r,z_t)
+\]</span> 其中<span class="math inline">\(\theta_i^r\)</span>为客户端<span class="math inline">\(i\)</span>的模型，<span class="math inline">\(t_i^r\)</span>是客户端<span class="math inline">\(i\)</span>的漂移量，<span class="math inline">\(L\)</span>是客户端的损失函数（交叉熵损失），<span class="math inline">\(z_t=(x_t,y)\)</span>是训练样本用漂移量进行漂移，<span class="math inline">\(D_{ti}\)</span>是对于客户端<span class="math inline">\(i\)</span>漂移后的局部训练数据集。</p>
+<p>获得<span class="math inline">\(\theta\)</span>是为了解决Goal 2，获得<span class="math inline">\(t\)</span>是为了解决Goal 1。</p>
+<p><strong>聚合</strong></p>
+<p>文章采用了基于度量的偏移量聚合方式，其提出了一种对异构性的度量方式： <span class="math display">\[
+DH=1-\frac{\sum_{j\in [1,N]}c_j}{N\times C}
+\]</span> <span class="math inline">\(N\)</span>是所有的类别，<span class="math inline">\(C\)</span>是客户端数量，<span class="math inline">\(c_j\)</span>的定义如下： <span class="math display">\[
+c_j=\left\{  
+             \begin{array}{**lr**}  
+             0,\quad if\space only\space one \space client\space has\space data\space from\space class\space j\\  
+             k,\quad if\space k&gt;1\space clients\space have\space data\space from\space class\space j
+             \end{array}  
+\right.
+\]</span> <span class="math inline">\(DH\)</span>是一个<span class="math inline">\([0\%,100\%]\)</span>的量，DisTrans在聚合的时候，如果分布异构性非常大，一个客户端的漂移量可能无法为另一个客户机的漂移量提供信息，因为他们俩数据分布有本质区别，因此文章只会在异构性小于<span class="math inline">\(50\%\)</span>时聚合客户的偏移量。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307182026462.png" alt="image-20230718202636252" style="zoom:67%;" /></p>
+<p>假设联邦学习系统的异构性小于阈值。聚合客户端漂移量的一种简单方法是将其平均值作为全局偏移量计算，然后将其发送回所有客户端。然而，这种朴素的聚合方法对所有的客户端使用相同的全局漂移量，从而达到了<strong>次优精度</strong>。</p>
+<p>因此，文章提出了基于神经网络的聚合方法。</p>
+<p>其将客户端特定的嵌入向量<span class="math inline">\(e\in R^{1\times N}\)</span>和客户端偏移量作为输入，并为客户端输出一个聚合的偏移量：其中嵌入向量的条目<span class="math inline">\(e_i\)</span>就是客户端对类别<span class="math inline">\(i\)</span>的训练数据的训练分数。服务器在训练过程中将聚合作为一个回归问题来学习。在每一轮中，服务器收取一组<span class="math inline">\((t_i,t&#39;_i)\)</span>，其中<span class="math inline">\(t_i\)</span>是当前轮钟来自客户端<span class="math inline">\(i\)</span>的漂移量，<span class="math inline">\(t&#39;_i\)</span>是上一轮的漂移量，服务器利用SGD来最小化两者的距离。</p>
 
     </div>
 
@@ -509,7 +561,7 @@ c_j\approx g_j(y_i)\quad and\quad c\approx \frac{1}{N}\sum_j g_j(y_i)
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#asynchronous-hierarchical-federated-learningskim"><span class="nav-number">1.</span> <span class="nav-text">Asynchronous Hierarchical Federated Learning(skim)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wscc-a-weight-similarity-based-client-clustering-approach-for-non-iid-federated-learningskim"><span class="nav-number">2.</span> <span class="nav-text">WSCC: A weight-similarity-based client clustering approach for non-IID federated learning(skim)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#learn-from-others-and-be-yourself-in-heterogeneous-federated-learning"><span class="nav-number">3.</span> <span class="nav-text">Learn from Others and Be Yourself in Heterogeneous Federated Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E4%BA%A4%E5%8F%89%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.1.</span> <span class="nav-text">联邦交叉相关学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.2.</span> <span class="nav-text">联邦持续学习</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#feddc-federated-learning-with-non-iid-data-via-local-drift-decoupling-and-correction"><span class="nav-number">4.</span> <span class="nav-text">FedDC: Federated Learning with Non-IID Data via Local Drift Decoupling and Correction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-1"><span class="nav-number">4.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E7%9B%AE%E6%A0%87%E4%B8%8E%E5%8F%82%E6%95%B0%E6%9B%B4%E6%96%B0"><span class="nav-number">4.1.1.</span> <span class="nav-text">优化目标与参数更新</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scaffold-stochastic-controlled-averaging-for-federated-learning"><span class="nav-number">5.</span> <span class="nav-text">SCAFFOLD: Stochastic Controlled Averaging for Federated Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E%E9%83%A8%E5%88%86"><span class="nav-number">5.1.</span> <span class="nav-text">证明部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#fedavg%E7%9A%84%E8%81%9A%E5%90%88"><span class="nav-number">5.1.1.</span> <span class="nav-text">FedAvg的聚合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E6%9E%84%E6%80%A7%E5%BD%B1%E5%93%8D"><span class="nav-number">5.1.2.</span> <span class="nav-text">异构性影响</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E9%83%A8%E5%88%86"><span class="nav-number">5.2.</span> <span class="nav-text">算法部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fine-tuning-global-model-via-data-free-knowledge-distillation-for-non-iid-federated-learning"><span class="nav-number">6.</span> <span class="nav-text">Fine-tuning Global Model via Data-Free Knowledge Distillation for Non-IID Federated Learning</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#asynchronous-hierarchical-federated-learningskim"><span class="nav-number">1.</span> <span class="nav-text">Asynchronous Hierarchical Federated Learning(skim)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wscc-a-weight-similarity-based-client-clustering-approach-for-non-iid-federated-learningskim"><span class="nav-number">2.</span> <span class="nav-text">WSCC: A weight-similarity-based client clustering approach for non-IID federated learning(skim)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#learn-from-others-and-be-yourself-in-heterogeneous-federated-learning"><span class="nav-number">3.</span> <span class="nav-text">Learn from Others and Be Yourself in Heterogeneous Federated Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E4%BA%A4%E5%8F%89%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.1.</span> <span class="nav-text">联邦交叉相关学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.2.</span> <span class="nav-text">联邦持续学习</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#feddc-federated-learning-with-non-iid-data-via-local-drift-decoupling-and-correction"><span class="nav-number">4.</span> <span class="nav-text">FedDC: Federated Learning with Non-IID Data via Local Drift Decoupling and Correction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-1"><span class="nav-number">4.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E7%9B%AE%E6%A0%87%E4%B8%8E%E5%8F%82%E6%95%B0%E6%9B%B4%E6%96%B0"><span class="nav-number">4.1.1.</span> <span class="nav-text">优化目标与参数更新</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scaffold-stochastic-controlled-averaging-for-federated-learning"><span class="nav-number">5.</span> <span class="nav-text">SCAFFOLD: Stochastic Controlled Averaging for Federated Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E%E9%83%A8%E5%88%86"><span class="nav-number">5.1.</span> <span class="nav-text">证明部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#fedavg%E7%9A%84%E8%81%9A%E5%90%88"><span class="nav-number">5.1.1.</span> <span class="nav-text">FedAvg的聚合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E6%9E%84%E6%80%A7%E5%BD%B1%E5%93%8D"><span class="nav-number">5.1.2.</span> <span class="nav-text">异构性影响</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E9%83%A8%E5%88%86"><span class="nav-number">5.2.</span> <span class="nav-text">算法部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fine-tuning-global-model-via-data-free-knowledge-distillation-for-non-iid-federated-learning"><span class="nav-number">6.</span> <span class="nav-text">Fine-tuning Global Model via Data-Free Knowledge Distillation for Non-IID Federated Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#addressing-heterogeneity-in-federated-learning-via-distributional-transformation"><span class="nav-number">7.</span> <span class="nav-text">Addressing Heterogeneity in Federated Learning via Distributional Transformation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%9C%BA"><span class="nav-number">7.1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-2"><span class="nav-number">7.2.</span> <span class="nav-text">方法</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
