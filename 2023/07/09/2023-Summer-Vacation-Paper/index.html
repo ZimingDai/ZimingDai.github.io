@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"phoenixdai.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="本博客为在2023.07.01-2023.08.01期间阅读的20余篇论文笔记。 主题为：联邦学习、异构性、异步联邦学习、分层联邦学习 文章大体上来自于A、B会和A刊，少数几篇与GLOBECOM相似的出处不限。">
+  <meta name="description" content="本博客为在2023.07.01-2023.08.01期间阅读的10余篇论文笔记。 主题为：联邦学习、异构性、异步联邦学习、分层联邦学习 文章大体上来自于A、B会和A刊，少数几篇与GLOBECOM相似的出处不限。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2023 Summer Vacation Paper">
 <meta property="og:url" content="http://phoenixdai.cn/2023/07/09/2023-Summer-Vacation-Paper/index.html">
 <meta property="og:site_name" content="Sycamore">
-<meta property="og:description" content="本博客为在2023.07.01-2023.08.01期间阅读的20余篇论文笔记。 主题为：联邦学习、异构性、异步联邦学习、分层联邦学习 文章大体上来自于A、B会和A刊，少数几篇与GLOBECOM相似的出处不限。">
+<meta property="og:description" content="本博客为在2023.07.01-2023.08.01期间阅读的10余篇论文笔记。 主题为：联邦学习、异构性、异步联邦学习、分层联邦学习 文章大体上来自于A、B会和A刊，少数几篇与GLOBECOM相似的出处不限。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091442638.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091445675.png">
@@ -41,29 +41,12 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307101611546.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307101614108.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307161531550.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307171055108.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307171130478.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307171507557.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307171537350.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181026935.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181948523.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181953470.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181956792.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307182026462.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720171827615.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720184041806.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720185330298.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720194001656.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720201142553.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720201204506.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230722121524066.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230721155049273.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230721155648891.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230722113703820.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230722121854703.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230723142735003.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230723171004865.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230723171904557.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727143532842.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727144456484.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727144642711.png">
@@ -77,8 +60,28 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727202325397.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727203439409.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727203603670.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307171055108.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307171130478.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307171507557.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307171537350.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181026935.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181948523.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181953470.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181956792.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307182026462.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230722121524066.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230721155049273.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230721155648891.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230722113703820.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230722121854703.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230723142735003.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230723171004865.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230723171904557.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230728162029756.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230728163422155.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230728163941025.png">
 <meta property="article:published_time" content="2023-07-09T03:31:04.000Z">
-<meta property="article:modified_time" content="2023-07-27T12:44:35.805Z">
+<meta property="article:modified_time" content="2023-07-28T08:49:15.244Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="Top-Papers">
 <meta name="twitter:card" content="summary">
@@ -246,7 +249,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-07-27 20:44:35" itemprop="dateModified" datetime="2023-07-27T20:44:35+08:00">2023-07-27</time>
+                <time title="Modified: 2023-07-28 16:49:15" itemprop="dateModified" datetime="2023-07-28T16:49:15+08:00">2023-07-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,11 +272,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本博客为在2023.07.01-2023.08.01期间阅读的20余篇论文笔记。</p>
+        <p>本博客为在2023.07.01-2023.08.01期间阅读的10余篇论文笔记。</p>
 <p><strong><em>主题为：联邦学习、异构性、异步联邦学习、分层联邦学习</em></strong></p>
 <p>文章大体上来自于A、B会和A刊，少数几篇与GLOBECOM相似的出处不限。</p>
 <p><span id="more"></span></p>
-<h2 id="asynchronous-hierarchical-federated-learningskim">Asynchronous Hierarchical Federated Learning(skim)</h2>
+<h2 id="skimasynchronous-hierarchical-federated-learning">（Skim）Asynchronous Hierarchical Federated Learning</h2>
 <blockquote>
 <p>Wang, Xing, and Yijun Wang. "Asynchronous hierarchical federated learning." <em>arXiv preprint arXiv:2206.00054</em> (2022).</p>
 </blockquote>
@@ -295,7 +298,7 @@
 <p>不过另一层面：文章还统计了通信次数，也可以看出来分层其实是很显著地减少<strong>中心聚合器的负担</strong>。</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091449111.png" alt="image-20230709144956065" style="zoom:67%;" /></p>
 <p>对于本文的未来研究方向，有几个有趣的方向可以追求<strong>。首先，正如作者在论文中提到的，作者的加权机制偏向于对于计算和通信速度更快的设备进行学习，这在数据在客户端上是独立同分布（i.i.d.）的情况下效果很好。如果涉及到非独立同分布（non-i.i.d.）的数据，作者需要设计一个更复杂的加权机制来适应异步联邦学习。</strong>第二个有趣的研究方向是修改本地客户端学习中的简单L2正则化方法。作者还需要完成理论分析的推导和证明。</p>
-<h2 id="wscc-a-weight-similarity-based-client-clustering-approach-for-non-iid-federated-learningskim">WSCC: A weight-similarity-based client clustering approach for non-IID federated learning(skim)</h2>
+<h2 id="skimwscc-a-weight-similarity-based-client-clustering-approach-for-non-iid-federated-learning">（Skim）WSCC: A weight-similarity-based client clustering approach for non-IID federated learning</h2>
 <blockquote>
 <p>Tian, Pu, et al. "WSCC: A weight-similarity-based client clustering approach for non-IID federated learning." IEEE Internet of Things Journal 9.20 (2022): 20243-20256.</p>
 </blockquote>
@@ -324,7 +327,7 @@ w_i^*=argmin_{w_i}\{F_i(w_i)\}
 <p>这里文章中使用了AP聚类算法，具体可以见<kbd>ChatGPT</kbd>。对于非独立同分布物联网联邦学习任务，自适应聚类（AP）方法是理想的解决方案，因为它可以自动确定聚类数量。对于存在不确定节点的联邦学习任务，节点分布是未知的。</p>
 <p><strong>在节点层面：</strong></p>
 <p>这里有一个验证的阶段，节点将会对下发的全局模型进行验证，如果这个模型的准确性与节点内的本地模型的准确性低的程度大于阈值，就放弃该全局模型，继续使用原模型计算。</p>
-<h2 id="learn-from-others-and-be-yourself-in-heterogeneous-federated-learningcvpr">Learn from Others and Be Yourself in Heterogeneous Federated Learning(CVPR)</h2>
+<h2 id="cvprlearn-from-others-and-be-yourself-in-heterogeneous-federated-learning">（CVPR）Learn from Others and Be Yourself in Heterogeneous Federated Learning</h2>
 <blockquote>
 <p>Huang, Wenke, Mang Ye, and Bo Du. "Learn from others and be yourself in heterogeneous federated learning." <em>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</em>. 2022.</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/WenkeHuang/FCCL">FCCL github源代码</a></p>
@@ -365,7 +368,7 @@ L_i^{Loc}=L_i^{CE}+\lambda_{Loc}L_i^{Dual}
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307101611546.png" alt="image-20230710161140453" style="zoom:100%;" /></p>
 <p>利用双向知识蒸馏学习到的特征在领域内和领域间都更加紧凑且分离。模型展现出更好的区分特征，产生了有前景的领域内和领域间性能。</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307101614108.png" alt="image-20230710161456999"  /></p>
-<h2 id="feddc-federated-learning-with-non-iid-data-via-local-drift-decoupling-and-correctioncvpr">FedDC: Federated Learning with Non-IID Data via Local Drift Decoupling and Correction(CVPR)</h2>
+<h2 id="cvprfeddc-federated-learning-with-non-iid-data-via-local-drift-decoupling-and-correction">（CVPR）FedDC: Federated Learning with Non-IID Data via Local Drift Decoupling and Correction</h2>
 <blockquote>
 <p>Gao, Liang, et al. "Feddc: Federated learning with non-iid data via local drift decoupling and correction." <em>Proceedings of the IEEE/CVF conference on computer vision and pattern recognition</em>. 2022.</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/gaoliang13/FedDC">FedDC github源代码</a></p>
@@ -400,7 +403,162 @@ h_i^+=h_i+(w^+-w) \approx h_i+(\theta^+_i-\theta_i)
 \]</span> 那么局部模型的参数更新就可以将局部漂移参数引入来减少漂移问题，即<span class="math inline">\(\theta_i^++h_i^+\)</span>，所以聚合方程变成了： <span class="math display">\[
 w^+=\sum_{i=1}^N=\frac{D_i}{D}(\theta_i^++h_i^+)
 \]</span></p>
-<h2 id="scaffold-stochastic-controlled-averaging-for-federated-learning">SCAFFOLD: Stochastic Controlled Averaging for Federated Learning（🧐）</h2>
+<h2 id="cvprfine-tuning-global-model-via-data-free-knowledge-distillation-for-non-iid-federated-learning">（CVPR）Fine-tuning Global Model via Data-Free Knowledge Distillation for Non-IID Federated Learning</h2>
+<blockquote>
+<p>Zhang, Lin, et al. "Fine-tuning global model via data-free knowledge distillation for non-iid federated learning." <em>Proceedings of the IEEE/CVF conference on computer vision and pattern recognition</em>. 2022.</p>
+</blockquote>
+<p>文章提出了一种无需数据的知识蒸馏方法来调整服务器中的全局模型（FedFTG），创新点：</p>
+<ol type="1">
+<li>通过无数据蒸馏对服务器中的全局模型进行微调，提高了模型聚合步骤，充分利用了服务器的计算能力；</li>
+<li>开发了硬样本挖掘来有效地将知识转移到全局模型；提出了定制的标签采样和类级集成，以方便最大限度地利用知识；</li>
+<li>证明了FedFTG与现有的本地优化器是正交的，可以当做插件来使用。</li>
+</ol>
+<p>👀文章解决的问题是：联邦学习中非IID的问题，具体来说是非独立同分布的数据会导致：<strong>局部模型漂移、灾难性遗忘全局知识</strong>。</p>
+<p>现在大多数方法，包括上文的SCAFFOLD都是对局部模型的更新方向进行约束，使得局部和全局优化目标保持一致。<span style="background-color: yellow;">但是SCAFFOLD只通过简单的模型聚合来获取服务器中的全局知识，忽略了局部知识的不兼容性，导致全局的知识遗忘</span>。</p>
+<h3 id="方法-2">方法</h3>
+<h4 id="基于硬样本挖掘的无数据知识提取全局模型微调">基于硬样本挖掘的无数据知识提取全局模型微调</h4>
+<p>在传统的联邦学习基础上，文章使用了一种无数据的知识蒸馏方法来对全局模型进行微调</p>
+<p>服务器维护了一个条件生成器<span class="math inline">\(G\)</span>，它生成伪数据来捕获客户端的数据分布，如下所示： <span class="math display">\[
+\tilde{x}=G(z,y;\theta)
+\]</span> 其中<span class="math inline">\(\theta\)</span>是<span class="math inline">\(G\)</span>的参数，<span class="math inline">\(z\sim N(0,1)\)</span>是标准的高斯噪声，<span class="math inline">\(y\)</span>是预定义分布<span class="math inline">\(p_t(y)\)</span>采样的<span class="math inline">\(\tilde{x}\)</span>的类标号。</p>
+<p><strong>全局模型要解决的目标函数是：</strong></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720171827615.png" alt="image-20230720171827615" style="zoom:70%;" /></p>
+<p><span class="math inline">\(L_{md}^k\)</span>是全局模型<span class="math inline">\(\omega\)</span>和本地模型<span class="math inline">\(\omega_k\)</span>之间的模型差异：<span class="math inline">\(L_{md}^k=D_{KL}(\sigma(D(\tilde{x};\omega))||\sigma(D(\tilde{x};\omega_k)))\)</span>，<span class="math inline">\(D\)</span>是分类器，<span class="math inline">\(\sigma\)</span>是全连接函数，用来输出<span class="math inline">\(\tilde{x}\)</span>的预测分数，<span class="math inline">\(D_{KL}\)</span>指的是Kullback-Leibler散度。<strong>通过最小化<span class="math inline">\(L_{md}^k\)</span>就可以使得<span class="math inline">\(\tilde{x}\)</span>在全局模型上的结果和<span class="math inline">\(x\)</span>在局部模型上的结果相似，即可以将局部模型中的知识转移到全局模型中。</strong></p>
+<p><strong>生成伪数据：</strong></p>
+<p>为了更好地从局部模型中提取知识，伪数据<span class="math inline">\(\tilde{x}\)</span>应该契合局部模型的输入空间，文章使用了语义损失<span class="math inline">\(L_{cls}^k\)</span>来训练生成器<span class="math inline">\(G\)</span>。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720184041806.png" alt="image-20230720184041806" style="zoom:100%;" /></p>
+<p>其中<span class="math inline">\(L_{cls}^k\)</span>是局部模型对伪数据<span class="math inline">\(\tilde{x}\)</span>的预测与类别标签<span class="math inline">\(y\)</span>之间的交叉熵损失：<span class="math inline">\(L_{cls}^{k}=L_{CE}(\sigma(D(\tilde{x};\omega_k)),y)\)</span>，通过最小化该函数，<span class="math inline">\(\tilde{x}\)</span>对<span class="math inline">\(y\)</span>产生更高的预测，因此其更适合<span class="math inline">\(y\)</span>类的数据分布。<span style="background-color: yellow;">只使用生成器会为每个类产生相同的数据</span>，为了解决这个问题，文章使用了多样性损失<span class="math inline">\(L_{dis}\)</span>来提高数据的多样性。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720185330298.png" alt="image-20230720185330298" style="zoom: 67%;" /></p>
+<p><strong>硬数据挖掘：</strong></p>
+<p>使用<span class="math inline">\(L_{cls}\)</span>训练生成器<span class="math inline">\(G\)</span>将生成具有低分类误差的伪数据<span class="math inline">\(\tilde{x}\)</span>，但是这种伪数据有着最容易被区分的特征，这种数据会很易于分类。然而，<strong>朴素的样本并不会导致全局模型和局部模型之间的观测不一致，<span class="math inline">\(L_{md}=0\)</span>。</strong>所以为了有效地利用局部模型中的知识并将其转移到全局模型中，我们使用了全局模型和局部模型预测不一致的硬样本，具体来说：</p>
+<ol type="1">
+<li>强制生成器<span class="math inline">\(G\)</span>生成最大化<span class="math inline">\(L_{md}\)</span>的硬样本</li>
+<li>使用硬样本训练全局模型来最小化<span class="math inline">\(L_{md}\)</span>。</li>
+</ol>
+<p>因此全局模型可以逐渐微调来适应数据分布：</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720194001656.png" alt="image-20230720194001656" style="zoom:80%;" /></p>
+<h4 id="适应标签分布变化实现有效知识蒸馏">适应标签分布变化实现有效知识蒸馏</h4>
+<p>对于数据异构的客户端，有以下两个问题</p>
+<ol type="1">
+<li>客户端的本地数据集是类不均衡的，<span class="math inline">\(D_k\)</span>训练的本地模型包含不均衡的数据信息</li>
+<li>对于一个类，知识的重要性在本地模型中是不同的。</li>
+</ol>
+<p>为此，文章分别提出了<strong>自定义标签采样</strong>和<strong>类集成</strong>来适应这两个问题</p>
+<h5 id="自定义标签采样">自定义标签采样</h5>
+<p>在数据异构的情况下，本地数据是类不平衡的，会出现有些类甚至没有证据。已经证明了：<strong>深度神经网络倾向于学习多数类而忽略少数类。</strong>因此，局部模型的少数类的数据信息可能是错误和误导的，生成的伪数据对于度量模型差异是无效的。</p>
+<p>为了缓解这个问题，文章根据每轮整个训练数据的分布自定义采样概率<span class="math inline">\(p_t(y)\)</span> <span class="math display">\[
+p_t(y)\varpropto \sum_{k\in S_T}\sum_{i=1}^{N_k}E_{(x_k^i,y_k^i)\sim D_k}[1_{y_i=y}]=\sum_{k\in S_t}n^{y}_k
+\]</span> 其中<span class="math inline">\(1_{condition}\)</span>是<span class="math inline">\((condition == true)\)</span>，<span class="math inline">\(n_k^y\)</span>是客户端<span class="math inline">\(k\)</span>中<span class="math inline">\(y\)</span>类的样本数量。这样，多数类的伪数据产生的概率较高。</p>
+<h5 id="类集成">类集成</h5>
+<p>知识蒸馏中广泛使用的集成方法为来自不同教师模型的知识分配相同的权重，即<span class="math inline">\(\alpha_t^{k,y}=\frac{1}{|S_t|}\)</span>。</p>
+<p>但是由于标签分布的变化，对于同一个类，不同的局部模型中知识的重要性是不同的，如果给每个客户端分配相同的权重，重要的知识就不能被正确的理解和利用。</p>
+<p>因此，文章通过客户端<span class="math inline">\(k\)</span>中的<span class="math inline">\(y\)</span>类的数据相对于<span class="math inline">\(S_t\)</span>的总数据的比例来计算<span class="math inline">\(\alpha_t^{k,y}\)</span> <span class="math display">\[
+\alpha_t^{k,y}=n_k^y/\sum_{i\in S_t}n_i^y
+\]</span></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720201142553.png" alt="image-20230720201142553" style="zoom:80%;" /></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720201204506.png" alt="image-20230720201204506" style="zoom:80%;" /></p>
+<h3 id="局限性">局限性</h3>
+<p><span style="background-color: orange;"><strong>该工作的主要局限性在于计算效率。</strong>由于FedFTG在本地训练的基础上增加了对全球模型的训练，因此使得整个训练的时间比其他方法要长。在我们的实验中，FedFTG在每一轮通信中所需的时间大约是FedAVG的两倍。</span></p>
+<h2 id="cvprlayer-wised-model-aggregation-for-personalized-federated-learning">（CVPR）Layer-wised Model Aggregation for Personalized Federated Learning</h2>
+<blockquote>
+<p>Ma, Xiaosong, et al. "Layer-wised model aggregation for personalized federated learning." <em>Proceedings of the IEEE/CVF conference on computer vision and pattern recognition</em>. 2022.</p>
+</blockquote>
+<p>本文提出了一种全新的pFL框架pFedLA，其可以实现<strong>联邦学习个性化的分层聚合</strong>，能够从客户端模型中准确地识别出每一层的效用。</p>
+<p>面向的仍然是客户端的异构，现有的pFL在整个模型参数或不同客户端的损耗值之间应用距离度量，<strong>这不足以利用他们的异构性。可能导致不准确的权重组合或非IID分布式数据的贡献不平衡。</strong></p>
+<p>对于个性化联邦学习，文章发现了利用层间相似度进行聚合比起利用模型相似度进行聚合有更高的模型精度。</p>
+<p>文章还说明了不同的层应用不同的权值，例如全连接层权重较高而卷积层权值较小可以产生显著的性能增益。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727143532842.png" alt="image-20230727143532842" style="zoom:80%;" /></p>
+<blockquote>
+<p>如今的pFL有两中不同的实现方法：</p>
+<ol type="1">
+<li>基于数据的方法：侧重于减少客户端数据集的统计异构性</li>
+<li>基于模型的方法：侧重于为不同的客户生成定制的模型参数或结构</li>
+</ol>
+</blockquote>
+<p>一般来说，为每个客户端生成有效的个性化参数引用 <em>超网络</em> 来实现</p>
+<h3 id="算法部分">算法部分</h3>
+<h4 id="pfedla">pFedLA</h4>
+<p>pFedLA评估了来自不同客户端的<span style="background-color: yellow;">每一层的重要性</span>，以实现分层感知的个性化模型聚合。其在服务器上为每一个客户端应用一个专用的超网络，并训练他们为每个客户端的模型层生成聚合权重值。对于每一个客户端也有一个个个性化的模型。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727144456484.png" alt="image-20230727144456484" style="zoom:80%;" /></p>
+<p>文章在服务器端应用了一组聚合权重矩阵<span class="math inline">\(\alpha_i\)</span>来逐步利用客户端在层次上的相似性。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727144642711.png"  /></p>
+<p>其中<span class="math inline">\(\alpha_i^{ln}\)</span>表示客户端<span class="math inline">\(i\)</span>中第<span class="math inline">\(n\)</span>层的聚合权重向量，<span class="math inline">\(\alpha_i^{ln,N}\)</span>表示剩余客户端<span class="math inline">\(N\)</span>在客户端<span class="math inline">\(i\)</span>第<span class="math inline">\(n\)</span>层聚合的权重，对于所有的<span class="math inline">\(n\)</span>个层，<span class="math inline">\(\sum_{i=1}^N\alpha_{i}^{ln,j}=1\)</span>。</p>
+<p>与其他的pFL不同，pFedLA不是对客户端模型的所有层应用相同的权重，而是考虑神经层的不同效用，为每个层分配不同的权重。</p>
+<p>每个超网络由几个全连接层组成，输入是一个嵌入向量，该向量随模型参数自动更新，输出是<span class="math inline">\(\alpha\)</span>，定义为 <span class="math display">\[
+\alpha_i=HN_i(v_i;\psi_i)
+\]</span> 其中<span class="math inline">\(v_i\)</span>是嵌入向量，<span class="math inline">\(\psi_i\)</span>是超网络的模型参数。设<span class="math inline">\(\{\theta^{l1},...,\theta^{ln}\}\)</span>是本地训练后所有客户端中间参数，<span class="math inline">\(\theta^{ln}=\{\theta_1^{ln},...,\theta_n^{ln}\}\)</span>是所有客户端的第<span class="math inline">\(n\)</span>层的参数集合。在pFedLA中，模型的参数聚合如下： <span class="math display">\[
+\bar{\theta_i}=\{\bar{\theta_i}^{l1},\bar{\theta_i}^{l2},...,\bar{\theta_i}^{ln}\}=\{\theta^{l1},...,\theta^{ln}\} *\alpha_i
+\]</span></p>
+<p><span class="math display">\[
+\bar{\theta_i}^{ln}=\sum_{j=1}^N\theta_j^{ln}\alpha_i^{ln,j}
+\]</span></p>
+<p>因此，pFedLA的目标函数为：</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727150527494.png" alt="image-20230727150527494" style="zoom: 80%;" /></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727151126355.png" alt="image-20230727151126355"  /></p>
+<p>在每一轮通信中，客户端首先从服务器下载最新的个性化模型，然后使用本地SGD基于私有数据进行训练，之后每个客户端的模型更新<span class="math inline">\(\Delta\)</span>将被上传到服务器用来更新<span class="math inline">\(v\)</span>和<span class="math inline">\(\psi\)</span>。</p>
+<h4 id="heurpfedla通信效率的改进">HeurpFedLA：通信效率的改进</h4>
+<p>通信开销主要来自于客户端传输的<span class="math inline">\(\Delta\theta_i\)</span>和服务器发送的<span class="math inline">\(\bar{\theta}_i\)</span>。</p>
+<p>HeurpFedLA将启发地选择哪些层在本地保留，哪些层在全局进行聚合。其关键思想是：启发地选择具有高<span class="math inline">\(k(AT_K)\)</span>的聚合权重去本地更新。具体来说，对于客户端<span class="math inline">\(i\)</span>的所有层，利用聚合权重值：<span class="math inline">\(\alpha_i^{l1,i},...,\alpha_i^{ln,i}\)</span>进行降序排序，并选择相应的最上面的<span class="math inline">\(k\)</span>个层进行保留，并不上传。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727152854258.png" alt="image-20230727152854258" style="zoom:80%;" /></p>
+<p>这个做法的原理是：等级越高的层对于模型个性化的贡献越大，这也意味直接在个性化模型中使用这些层对训练性能的影响很小。</p>
+<h2 id="cvprrobust-federated-learning-with-noisy-and-heterogeneous-clients">（CVPR）Robust Federated Learning with Noisy and Heterogeneous Clients</h2>
+<blockquote>
+<p>Fang, Xiuwen, and Mang Ye. "Robust federated learning with noisy and heterogeneous clients." <em>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</em>. 2022.</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/FangXiuwen/Robust_FL">RHFL github源代码</a></p>
+</blockquote>
+<p>文章提出了一种鲁棒的异构联邦学习（RHFL），其可以同时处理噪声和执行联邦学习，创新点：</p>
+<ol type="1">
+<li>利用公共数据直接对齐模型反馈，不需要格外的共享全局模型进行协作</li>
+<li>采用鲁棒的抗噪损失函数减少负面影响</li>
+<li>设计了一种新的客户信心加权方案，在联邦学习阶段自适应为每个客户分配权重。</li>
+</ol>
+<p>解决的问题是：<strong>模型异构性，以及不同客户端拥有不同的噪声</strong></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727194824314.png" alt="image-20230727194824314" /></p>
+<h3 id="算法部分-1">算法部分</h3>
+<p><strong>问题阐述</strong></p>
+<ul>
+<li>在异构联邦学习设置下，文章考虑了<span class="math inline">\(K\)</span>个客户端和一个服务器，<span class="math inline">\(C\)</span>为客户端的集合，<span class="math inline">\(|C|=K\)</span>，客户端<span class="math inline">\(k\)</span>拥有私有数据集<span class="math inline">\(D_k=\{(x_i^k,y_i^k)\}_{i=1}^{N_k}\)</span>，<span class="math inline">\(y\)</span>用独热向量表示。</li>
+<li>客户端拥有不同的神经架构<span class="math inline">\(\theta_k\)</span>，<span class="math inline">\(f(\cdot)\)</span>表示神经网络，<span class="math inline">\(f(x^k,\theta_k)\)</span>表示输入参数<span class="math inline">\(x^k\)</span>的输出。因为服务端不能访问客户端，所以服务端拥有一个共享数据集<span class="math inline">\(D_0\)</span>。</li>
+<li>在异构联邦学习中，学习过程分为协作学习阶段和局部学习阶段，协作学习有<span class="math inline">\(T_c\)</span>个epoch，局部学习有<span class="math inline">\(T_l\)</span>个epoch。</li>
+<li>文章假设每个客户端都有一个私有的噪声数据集<span class="math inline">\(\tilde{D}_k=\{(x_i^k,\tilde{y}_i^k)\}_{i=1}^{N_k}\)</span>，<span class="math inline">\(\tilde{y}_i^k\)</span>表示噪声的标签，由于噪声模型也是异构的，<span class="math inline">\(f(x,\theta_{k_1})\neq f(x,\theta_{k_2})\)</span>。因此，客户端除了自己本地数据集的噪声以外，还要关注其他客户端的噪声。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727203136245.png" alt="image-20230727203136245"  /></p>
+<h4 id="异构联邦学习">异构联邦学习</h4>
+<p>在联邦学习阶段，文章使用公共数据集<span class="math inline">\(D_0\)</span>作为客户端之间沟通的桥梁，在协作学习时期，客户端<span class="math inline">\(c_k\)</span>利用本地模型<span class="math inline">\(\theta_k^{t_c}\)</span>在公共数据集上的输出来获得该客户端的知识分布<span class="math inline">\(R_k^{t_c}=f(D_0,\theta_k^{t_c})\)</span>。客户端使用KL散度来衡量来自其他客户端的知识分布差异。 <span class="math display">\[
+KL(R_{k_1}^{t_c}||R_{k_2}^{t_c})=\sum R_{k_1}^{t_c}log(\frac{R_{k_1}^{t_c}}{R_{k_2}^{t_c}})
+\]</span> 两个客户端的知识分布差异越大，则两方可以相互学习的越多，因此最小化概率分布<span class="math inline">\(KL\)</span>可以被认为是其中<span class="math inline">\(c_{k_1}\)</span>向<span class="math inline">\(c_{k_2}\)</span>学习的过程。 <span class="math display">\[
+\mathcal{L}_{kl}^{k,t_c}=\sum_{k_0=1,k_0\neq k}^KKL(R_{k_0}^{t_c}||R_{k}^{t_c})
+\]</span> 客户端通过调整知识分布来向他人学习</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727200732405.png" alt="image-20230727200732405" /></p>
+<h4 id="本地噪声学习">本地噪声学习</h4>
+<p>为了减少局部噪声的影响，文章参考了对称交叉熵学习中提到的方法。将<span class="math inline">\(p\)</span>和<span class="math inline">\(q\)</span>分别表示标签类分布和预测类分布，那么交叉熵损失应该为： <span class="math display">\[
+\mathcal{L}_{ce}=-\sum_{i=1}^Np(x_i)log(q(x_i))
+\]</span> 但是由于标签噪声的存在，单纯使用交叉熵损失不能使所有的类都被充分学习或正确分类所有类别，为了完全收敛难学的类，模型会执行更多轮的学习，这就使学习的类更倾向于过拟合嘈杂的标签，使模型整体性能下降。</p>
+<p>一般来说，模型在一定程度上可以正确分类，并且由于噪声的存在，模型的预测结果甚至比标签更加可靠，<strong>所以<span class="math inline">\(p\)</span>可能不是真实的类分布，反而<span class="math inline">\(q\)</span>才是！</strong></p>
+<p>因此文章提出了基于<span class="math inline">\(q\)</span>的损失函数反向交叉熵 <span class="math display">\[
+\mathcal{L}_{rce}=-\sum_{i=1}^Nq(x_i)log(p(x_i))
+\]</span> 通过结合CE损失以及RCE损失，模型可以完全学习难以学习的类，同时防止过拟合（CE损失增强了模型对各类别的拟合效果，RCE损失对标签噪声有鲁棒性） <span class="math display">\[
+\mathcal{L}_{sl}=\lambda\mathcal{L}_{ce}+\mathcal{L}_{rce}
+\]</span> 在本地学习阶段，客户端将使用自己的本地数据集进行更新，以防止遗忘本地知识，在训练迭代过程中，标签噪声会导致模型往错误的方向更新，最终无法收敛。为了避免这个问题，文章采用SL损失来计算模型的损失，局部更新函数为</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727202030871.png" alt="image-20230727202030871" /></p>
+<h4 id="客户端信心重新加权ccr">客户端信心重新加权（CCR）</h4>
+<p>文章提出了客户端的信心重新加权（CCR）的方法，以减少来自其他客户端的标签噪音在协作学习阶段的不利影响。CCR可以在通信过程中<strong>个性化每个客户端的权重，以减少噪声客户端的贡献，并更多地关注具有干净数据集和高效模型的客户端。</strong></p>
+<p>根据上文我们知道SL损失其实是代表了数据集的干净程度，SL越小表明这个数据集噪声越小，因此文章定义了数据集的质量：</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727202325397.png" alt="image-20230727202325397" /></p>
+<p>为了量化客户端的学习效率，我么你在每一轮迭代中计算SL的下降率，SL下降率越大说明其学习效率越高： <span class="math display">\[
+\mathcal{P}(\theta_k^{t_c})=\Delta\mathcal{L}_{sl}^{k,t_c}=L_{sl}^{k,t_c-1}-L_{sl}^{k,t_c}
+\]</span> 那么在协作学习阶段中，同时考虑标签质量和学习效率，文章将循环<span class="math inline">\(t_c\)</span>中的第<span class="math inline">\(k\)</span>个客户端的信心定义为 <span class="math display">\[
+\mathcal{F}_k^{t_c}=\mathcal{Q}_{t_c}(\tilde{D}_k)\cdot\mathcal{P}(\theta_k^{t_c})
+\]</span> 最后的聚合权重为： <span class="math display">\[
+w_k^{t_c}=\frac{1}{K-1}+\eta\frac{\mathcal{F}_k^{t_c}}{\sum_{i=1}^K\mathcal{F}_k^{t_c}}
+\]</span></p>
+<p><span class="math display">\[
+\mathcal{W}_k^{t_c}=\frac{exp(w_k^{t_c})}{\sum_{k=1}^Kexp(w_k^{t_c})}
+\]</span></p>
+<p>所以最后的协作学习阶段的聚合函数如下：</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727203439409.png" alt="image-20230727203439409" /></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727203603670.png" alt="image-20230727203603670" style="zoom:80%;" /></p>
+<h2 id="scaffold-stochastic-controlled-averaging-for-federated-learning">（🧐）SCAFFOLD: Stochastic Controlled Averaging for Federated Learning</h2>
 <blockquote>
 <p>Karimireddy, Sai Praneeth, et al. "Scaffold: Stochastic controlled averaging for federated learning." <em>International conference on machine learning</em>. PMLR, 2020.</p>
 </blockquote>
@@ -434,7 +592,7 @@ min_{x\in R^d}\{f(x)=\frac{1}{N}\sum_{i=1}^{N}(f_i(x)=E_{\zeta_i}[f_i(x;\zeta_i)
 <li>经过不断的训练，客户端1和客户端2的模型不断分散更新，FedAvg获得的模型为灰黑色圆圈</li>
 <li>但是全局最优模型<span class="math inline">\(x^*\)</span>是图中的方块，我们发现普通的平均聚合会导致全局模型与最优模型相差越来越多。</li>
 </ol>
-<h3 id="算法部分">算法部分</h3>
+<h3 id="算法部分-2">算法部分</h3>
 <p>在算法开始的时候，我们定义两个变量：<span class="math inline">\(c\)</span>：服务器控制变量；<span class="math inline">\(c_i\)</span>：客户端控制变量。</p>
 <p>这两个变量的初始化可以均设置为<span class="math inline">\(0\)</span>，但是注意要保证<span class="math inline">\(c=\frac{1}{N}\sum c_i\)</span>，在每一轮的通信中，服务器参数<span class="math inline">\((x,c)\)</span>被传输到了参与客户端<span class="math inline">\(S\subset [N]\)</span>。</p>
 <p>在最初始，每个客户端模型会复制服务器模型：<span class="math inline">\(y_i=x\)</span>，然后他在其本地数据上进行训练，执行K轮更新： <span class="math display">\[
@@ -482,7 +640,7 @@ c_j\approx g_j(y_i)\quad and\quad c\approx \frac{1}{N}\sum_j g_j(y_i)
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181948523.png" alt="image-20230718194856349" style="zoom:100%;" /></p>
 <p><strong>聚合服务器的线性回归问题</strong></p>
 <p>作者训练了两个局部线性模型，<span class="math inline">\(f(x)=wx\)</span>，在服务器上进行聚合，重复联邦学习步骤直到收敛。本地训练数据是异构的，生成<span class="math inline">\(y=w^{true}_{clinet_k}x+\epsilon_{clinet_k}\)</span>。当存在漂移时，聚合模型收敛。</p>
-<h3 id="方法-2">方法</h3>
+<h3 id="方法-3">方法</h3>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181953470.png" alt="image-20230718195331301" style="zoom:100%;" /></p>
 <p>在每一轮中，每个客户端学习一个本地模型和一个漂移量，并将其发送给服务器。服务器聚合客户端的本地模型和漂移量，并将其送回客户端。</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181956792.png" alt="image-20230718195614617" style="zoom:70%;" /></p>
@@ -514,63 +672,7 @@ c_j=\left\{
 <p>假设联邦学习系统的异构性小于阈值。聚合客户端漂移量的一种简单方法是将其平均值作为全局偏移量计算，然后将其发送回所有客户端。然而，这种朴素的聚合方法对所有的客户端使用相同的全局漂移量，从而达到了<strong>次优精度</strong>。</p>
 <p>因此，文章提出了基于神经网络的聚合方法。</p>
 <p>其将客户端特定的嵌入向量<span class="math inline">\(e\in R^{1\times N}\)</span>和客户端偏移量作为输入，并为客户端输出一个聚合的偏移量：其中嵌入向量的条目<span class="math inline">\(e_i\)</span>就是客户端对类别<span class="math inline">\(i\)</span>的训练数据的训练分数。服务器在训练过程中将聚合作为一个回归问题来学习。在每一轮中，服务器收取一组<span class="math inline">\((t_i,t&#39;_i)\)</span>，其中<span class="math inline">\(t_i\)</span>是当前轮钟来自客户端<span class="math inline">\(i\)</span>的漂移量，<span class="math inline">\(t&#39;_i\)</span>是上一轮的漂移量，服务器利用SGD来最小化两者的距离。</p>
-<h2 id="fine-tuning-global-model-via-data-free-knowledge-distillation-for-non-iid-federated-learningcvpr">Fine-tuning Global Model via Data-Free Knowledge Distillation for Non-IID Federated Learning(CVPR)</h2>
-<blockquote>
-<p>Zhang, Lin, et al. "Fine-tuning global model via data-free knowledge distillation for non-iid federated learning." <em>Proceedings of the IEEE/CVF conference on computer vision and pattern recognition</em>. 2022.</p>
-</blockquote>
-<p>文章提出了一种无需数据的知识蒸馏方法来调整服务器中的全局模型（FedFTG），创新点：</p>
-<ol type="1">
-<li>通过无数据蒸馏对服务器中的全局模型进行微调，提高了模型聚合步骤，充分利用了服务器的计算能力；</li>
-<li>开发了硬样本挖掘来有效地将知识转移到全局模型；提出了定制的标签采样和类级集成，以方便最大限度地利用知识；</li>
-<li>证明了FedFTG与现有的本地优化器是正交的，可以当做插件来使用。</li>
-</ol>
-<p>👀文章解决的问题是：联邦学习中非IID的问题，具体来说是非独立同分布的数据会导致：<strong>局部模型漂移、灾难性遗忘全局知识</strong>。</p>
-<p>现在大多数方法，包括上文的SCAFFOLD都是对局部模型的更新方向进行约束，使得局部和全局优化目标保持一致。<span style="background-color: yellow;">但是SCAFFOLD只通过简单的模型聚合来获取服务器中的全局知识，忽略了局部知识的不兼容性，导致全局的知识遗忘</span>。</p>
-<h3 id="方法-3">方法</h3>
-<h4 id="基于硬样本挖掘的无数据知识提取全局模型微调">基于硬样本挖掘的无数据知识提取全局模型微调</h4>
-<p>在传统的联邦学习基础上，文章使用了一种无数据的知识蒸馏方法来对全局模型进行微调</p>
-<p>服务器维护了一个条件生成器<span class="math inline">\(G\)</span>，它生成伪数据来捕获客户端的数据分布，如下所示： <span class="math display">\[
-\tilde{x}=G(z,y;\theta)
-\]</span> 其中<span class="math inline">\(\theta\)</span>是<span class="math inline">\(G\)</span>的参数，<span class="math inline">\(z\sim N(0,1)\)</span>是标准的高斯噪声，<span class="math inline">\(y\)</span>是预定义分布<span class="math inline">\(p_t(y)\)</span>采样的<span class="math inline">\(\tilde{x}\)</span>的类标号。</p>
-<p><strong>全局模型要解决的目标函数是：</strong></p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720171827615.png" alt="image-20230720171827615" style="zoom:70%;" /></p>
-<p><span class="math inline">\(L_{md}^k\)</span>是全局模型<span class="math inline">\(\omega\)</span>和本地模型<span class="math inline">\(\omega_k\)</span>之间的模型差异：<span class="math inline">\(L_{md}^k=D_{KL}(\sigma(D(\tilde{x};\omega))||\sigma(D(\tilde{x};\omega_k)))\)</span>，<span class="math inline">\(D\)</span>是分类器，<span class="math inline">\(\sigma\)</span>是全连接函数，用来输出<span class="math inline">\(\tilde{x}\)</span>的预测分数，<span class="math inline">\(D_{KL}\)</span>指的是Kullback-Leibler散度。<strong>通过最小化<span class="math inline">\(L_{md}^k\)</span>就可以使得<span class="math inline">\(\tilde{x}\)</span>在全局模型上的结果和<span class="math inline">\(x\)</span>在局部模型上的结果相似，即可以将局部模型中的知识转移到全局模型中。</strong></p>
-<p><strong>生成伪数据：</strong></p>
-<p>为了更好地从局部模型中提取知识，伪数据<span class="math inline">\(\tilde{x}\)</span>应该契合局部模型的输入空间，文章使用了语义损失<span class="math inline">\(L_{cls}^k\)</span>来训练生成器<span class="math inline">\(G\)</span>。</p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720184041806.png" alt="image-20230720184041806" style="zoom:100%;" /></p>
-<p>其中<span class="math inline">\(L_{cls}^k\)</span>是局部模型对伪数据<span class="math inline">\(\tilde{x}\)</span>的预测与类别标签<span class="math inline">\(y\)</span>之间的交叉熵损失：<span class="math inline">\(L_{cls}^{k}=L_{CE}(\sigma(D(\tilde{x};\omega_k)),y)\)</span>，通过最小化该函数，<span class="math inline">\(\tilde{x}\)</span>对<span class="math inline">\(y\)</span>产生更高的预测，因此其更适合<span class="math inline">\(y\)</span>类的数据分布。<span style="background-color: yellow;">只使用生成器会为每个类产生相同的数据</span>，为了解决这个问题，文章使用了多样性损失<span class="math inline">\(L_{dis}\)</span>来提高数据的多样性。</p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720185330298.png" alt="image-20230720185330298" style="zoom: 67%;" /></p>
-<p><strong>硬数据挖掘：</strong></p>
-<p>使用<span class="math inline">\(L_{cls}\)</span>训练生成器<span class="math inline">\(G\)</span>将生成具有低分类误差的伪数据<span class="math inline">\(\tilde{x}\)</span>，但是这种伪数据有着最容易被区分的特征，这种数据会很易于分类。然而，<strong>朴素的样本并不会导致全局模型和局部模型之间的观测不一致，<span class="math inline">\(L_{md}=0\)</span>。</strong>所以为了有效地利用局部模型中的知识并将其转移到全局模型中，我们使用了全局模型和局部模型预测不一致的硬样本，具体来说：</p>
-<ol type="1">
-<li>强制生成器<span class="math inline">\(G\)</span>生成最大化<span class="math inline">\(L_{md}\)</span>的硬样本</li>
-<li>使用硬样本训练全局模型来最小化<span class="math inline">\(L_{md}\)</span>。</li>
-</ol>
-<p>因此全局模型可以逐渐微调来适应数据分布：</p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720194001656.png" alt="image-20230720194001656" style="zoom:80%;" /></p>
-<h4 id="适应标签分布变化实现有效知识蒸馏">适应标签分布变化实现有效知识蒸馏</h4>
-<p>对于数据异构的客户端，有以下两个问题</p>
-<ol type="1">
-<li>客户端的本地数据集是类不均衡的，<span class="math inline">\(D_k\)</span>训练的本地模型包含不均衡的数据信息</li>
-<li>对于一个类，知识的重要性在本地模型中是不同的。</li>
-</ol>
-<p>为此，文章分别提出了<strong>自定义标签采样</strong>和<strong>类集成</strong>来适应这两个问题</p>
-<h5 id="自定义标签采样">自定义标签采样</h5>
-<p>在数据异构的情况下，本地数据是类不平衡的，会出现有些类甚至没有证据。已经证明了：<strong>深度神经网络倾向于学习多数类而忽略少数类。</strong>因此，局部模型的少数类的数据信息可能是错误和误导的，生成的伪数据对于度量模型差异是无效的。</p>
-<p>为了缓解这个问题，文章根据每轮整个训练数据的分布自定义采样概率<span class="math inline">\(p_t(y)\)</span> <span class="math display">\[
-p_t(y)\varpropto \sum_{k\in S_T}\sum_{i=1}^{N_k}E_{(x_k^i,y_k^i)\sim D_k}[1_{y_i=y}]=\sum_{k\in S_t}n^{y}_k
-\]</span> 其中<span class="math inline">\(1_{condition}\)</span>是<span class="math inline">\((condition == true)\)</span>，<span class="math inline">\(n_k^y\)</span>是客户端<span class="math inline">\(k\)</span>中<span class="math inline">\(y\)</span>类的样本数量。这样，多数类的伪数据产生的概率较高。</p>
-<h5 id="类集成">类集成</h5>
-<p>知识蒸馏中广泛使用的集成方法为来自不同教师模型的知识分配相同的权重，即<span class="math inline">\(\alpha_t^{k,y}=\frac{1}{|S_t|}\)</span>。</p>
-<p>但是由于标签分布的变化，对于同一个类，不同的局部模型中知识的重要性是不同的，如果给每个客户端分配相同的权重，重要的知识就不能被正确的理解和利用。</p>
-<p>因此，文章通过客户端<span class="math inline">\(k\)</span>中的<span class="math inline">\(y\)</span>类的数据相对于<span class="math inline">\(S_t\)</span>的总数据的比例来计算<span class="math inline">\(\alpha_t^{k,y}\)</span> <span class="math display">\[
-\alpha_t^{k,y}=n_k^y/\sum_{i\in S_t}n_i^y
-\]</span></p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720201142553.png" alt="image-20230720201142553" style="zoom:80%;" /></p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230720201204506.png" alt="image-20230720201204506" style="zoom:80%;" /></p>
-<h3 id="局限性">局限性</h3>
-<p><span style="background-color: orange;"><strong>该工作的主要局限性在于计算效率。</strong>由于FedFTG在本地训练的基础上增加了对全球模型的训练，因此使得整个训练的时间比其他方法要长。在我们的实验中，FedFTG在每一轮通信中所需的时间大约是FedAVG的两倍。</span></p>
-<h2 id="accelerating-federated-learning-with-cluster-construction-and-hierarchical-aggregation">Accelerating Federated Learning With Cluster Construction and Hierarchical Aggregation</h2>
+<h2 id="similaraccelerating-federated-learning-with-cluster-construction-and-hierarchical-aggregation">（Similar）Accelerating Federated Learning With Cluster Construction and Hierarchical Aggregation</h2>
 <blockquote>
 <p>Wang, Zhiyuan, et al. "Accelerating federated learning with cluster construction and hierarchical aggregation." <em>IEEE Transactions on Mobile Computing</em> (2022).</p>
 </blockquote>
@@ -581,7 +683,7 @@ p_t(y)\varpropto \sum_{k\in S_T}\sum_{i=1}^{N_k}E_{(x_k^i,y_k^i)\sim D_k}[1_{y_i
 </ol>
 <p>👀文章解决的问题是：联邦学习可能导致的网络拥塞、客户端资源有限且异构、客户端上计算资源有限</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230722121524066.png" alt="image-20230722121524066" style="zoom: 80%;" /></p>
-<h3 id="算法部分-1">算法部分</h3>
+<h3 id="算法部分-3">算法部分</h3>
 <p>和BGFL很相似，FedCH的训练过程分为三个步骤：本地模型更新，集群内聚合，全局聚合。</p>
 <p>和BGFL不同的地方是：由于FedCH是异步联邦学习，其在分组的时候认为，群组内的设备是同步联邦学习；群组间是异步联邦学习。</p>
 <p>因此其全局聚合的部分采用了异步操作。具体流程如图所示：</p>
@@ -641,7 +743,7 @@ p_t(y)\varpropto \sum_{k\in S_T}\sum_{i=1}^{N_k}E_{(x_k^i,y_k^i)\sim D_k}[1_{y_i
 <p>服务器将采用<span class="math inline">\(s_k\)</span>来记录每一个集群<span class="math inline">\(k\)</span>的掉队情况，如果出现了掉队者则设置<span class="math inline">\(s_k=1\)</span>（比如，集群<span class="math inline">\(k\)</span>两次全局聚合的时间大大增加），反之为<span class="math inline">\(0\)</span>。当<span class="math inline">\(\sum s_k\)</span>到达一定数量的时候，重新聚类算法将会被激活。激活后所有的<span class="math inline">\(s_k\)</span>会被重置回<span class="math inline">\(0\)</span>。</p>
 <h3 id="证明部分-1">证明部分</h3>
 <p>该文章<strong>证明了<span class="math inline">\(K\)</span>的最佳取值</strong>，如果需要分组，可以详细看一看。</p>
-<h2 id="fedhisyn-a-hierarchical-synchronous-federated-learning-framework-for-resource-and-data-heterogeneity">FedHiSyn: A Hierarchical Synchronous Federated Learning Framework for Resource and Data Heterogeneity</h2>
+<h2 id="similarfedhisyn-a-hierarchical-synchronous-federated-learning-framework-for-resource-and-data-heterogeneity">（Similar）FedHiSyn: A Hierarchical Synchronous Federated Learning Framework for Resource and Data Heterogeneity</h2>
 <blockquote>
 <p>Li, Guanghao, et al. "FedHiSyn: A hierarchical synchronous federated learning framework for resource and data heterogeneity." <em>Proceedings of the 51st International Conference on Parallel Processing</em>. 2022.</p>
 </blockquote>
@@ -660,105 +762,59 @@ p_t(y)\varpropto \sum_{k\in S_T}\sum_{i=1}^{N_k}E_{(x_k^i,y_k^i)\sim D_k}[1_{y_i
 <p>由于每一个模型都是在各个设备中循环训练，所以聚合的时候不能采用数据量的方式进行聚合。因为训练时间更快的群组<span class="math inline">\(class_1\)</span>可以经过更多轮的通信，为了避免不让聚合参数偏向这些本地训练时间较短的设备，文章采用了将设备完成本地训练的平均时间作为聚合权重。 <span class="math display">\[
 W_G^{r+1}=\sum^{||S||}_{i=1}\frac{l_i}{L}W_i^{r+1}
 \]</span></p>
-<h2 id="layer-wised-model-aggregation-for-personalized-federated-learningcvpr">Layer-wised Model Aggregation for Personalized Federated Learning(CVPR)</h2>
+<h2 id="similarblockchain-based-two-stage-federated-learning-with-non-iid-data-in-iomt-system">（Similar）Blockchain-Based Two-Stage Federated Learning With Non-IID Data in IoMT System</h2>
 <blockquote>
-<p>Ma, Xiaosong, et al. "Layer-wised model aggregation for personalized federated learning." <em>Proceedings of the IEEE/CVF conference on computer vision and pattern recognition</em>. 2022.</p>
+<p>Lian, Zhuotao, et al. "Blockchain-based two-stage federated learning with non-IID data in IoMT system." <em>IEEE Transactions on Computational Social Systems</em> (2022).</p>
 </blockquote>
-<p>本文提出了一种全新的pFL框架pFedLA，其可以实现<strong>联邦学习个性化的分层聚合</strong>，能够从客户端模型中准确地识别出每一层的效用。</p>
-<p>面向的仍然是客户端的异构，现有的pFL在整个模型参数或不同客户端的损耗值之间应用距离度量，<strong>这不足以利用他们的异构性。可能导致不准确的权重组合或非IID分布式数据的贡献不平衡。</strong></p>
-<p>对于个性化联邦学习，文章发现了利用层间相似度进行聚合比起利用模型相似度进行聚合有更高的模型精度。</p>
-<p>文章还说明了不同的层应用不同的权值，例如全连接层权重较高而卷积层权值较小可以产生显著的性能增益。</p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727143532842.png" alt="image-20230727143532842" style="zoom:80%;" /></p>
-<blockquote>
-<p>如今的pFL有两中不同的实现方法：</p>
+<p>提出了基于区块链的两阶段联邦学习方法，创新点：</p>
 <ol type="1">
-<li>基于数据的方法：侧重于减少客户端数据集的统计异构性</li>
-<li>基于模型的方法：侧重于为不同的客户生成定制的模型参数或结构</li>
+<li>基于区块链的数据共享策略</li>
+<li>客户端选择方案来减少通信开销</li>
 </ol>
-</blockquote>
-<p>一般来说，为每个客户端生成有效的个性化参数引用 <em>超网络</em> 来实现</p>
-<h3 id="算法部分-2">算法部分</h3>
-<h4 id="pfedla">pFedLA</h4>
-<p>pFedLA评估了来自不同客户端的<span style="background-color: yellow;">每一层的重要性</span>，以实现分层感知的个性化模型聚合。其在服务器上为每一个客户端应用一个专用的超网络，并训练他们为每个客户端的模型层生成聚合权重值。对于每一个客户端也有一个个个性化的模型。</p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727144456484.png" alt="image-20230727144456484" style="zoom:80%;" /></p>
-<p>文章在服务器端应用了一组聚合权重矩阵<span class="math inline">\(\alpha_i\)</span>来逐步利用客户端在层次上的相似性。</p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727144642711.png"  /></p>
-<p>其中<span class="math inline">\(\alpha_i^{ln}\)</span>表示客户端<span class="math inline">\(i\)</span>中第<span class="math inline">\(n\)</span>层的聚合权重向量，<span class="math inline">\(\alpha_i^{ln,N}\)</span>表示剩余客户端<span class="math inline">\(N\)</span>在客户端<span class="math inline">\(i\)</span>第<span class="math inline">\(n\)</span>层聚合的权重，对于所有的<span class="math inline">\(n\)</span>个层，<span class="math inline">\(\sum_{i=1}^N\alpha_{i}^{ln,j}=1\)</span>。</p>
-<p>与其他的pFL不同，pFedLA不是对客户端模型的所有层应用相同的权重，而是考虑神经层的不同效用，为每个层分配不同的权重。</p>
-<p>每个超网络由几个全连接层组成，输入是一个嵌入向量，该向量随模型参数自动更新，输出是<span class="math inline">\(\alpha\)</span>，定义为 <span class="math display">\[
-\alpha_i=HN_i(v_i;\psi_i)
-\]</span> 其中<span class="math inline">\(v_i\)</span>是嵌入向量，<span class="math inline">\(\psi_i\)</span>是超网络的模型参数。设<span class="math inline">\(\{\theta^{l1},...,\theta^{ln}\}\)</span>是本地训练后所有客户端中间参数，<span class="math inline">\(\theta^{ln}=\{\theta_1^{ln},...,\theta_n^{ln}\}\)</span>是所有客户端的第<span class="math inline">\(n\)</span>层的参数集合。在pFedLA中，模型的参数聚合如下： <span class="math display">\[
-\bar{\theta_i}=\{\bar{\theta_i}^{l1},\bar{\theta_i}^{l2},...,\bar{\theta_i}^{ln}\}=\{\theta^{l1},...,\theta^{ln}\} *\alpha_i
-\]</span></p>
-<p><span class="math display">\[
-\bar{\theta_i}^{ln}=\sum_{j=1}^N\theta_j^{ln}\alpha_i^{ln,j}
-\]</span></p>
-<p>因此，pFedLA的目标函数为：</p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727150527494.png" alt="image-20230727150527494" style="zoom: 80%;" /></p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727151126355.png" alt="image-20230727151126355"  /></p>
-<p>在每一轮通信中，客户端首先从服务器下载最新的个性化模型，然后使用本地SGD基于私有数据进行训练，之后每个客户端的模型更新<span class="math inline">\(\Delta\)</span>将被上传到服务器用来更新<span class="math inline">\(v\)</span>和<span class="math inline">\(\psi\)</span>。</p>
-<h4 id="heurpfedla通信效率的改进">HeurpFedLA：通信效率的改进</h4>
-<p>通信开销主要来自于客户端传输的<span class="math inline">\(\Delta\theta_i\)</span>和服务器发送的<span class="math inline">\(\bar{\theta}_i\)</span>。</p>
-<p>HeurpFedLA将启发地选择哪些层在本地保留，哪些层在全局进行聚合。其关键思想是：启发地选择具有高<span class="math inline">\(k(AT_K)\)</span>的聚合权重去本地更新。具体来说，对于客户端<span class="math inline">\(i\)</span>的所有层，利用聚合权重值：<span class="math inline">\(\alpha_i^{l1,i},...,\alpha_i^{ln,i}\)</span>进行降序排序，并选择相应的最上面的<span class="math inline">\(k\)</span>个层进行保留，并不上传。</p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727152854258.png" alt="image-20230727152854258" style="zoom:80%;" /></p>
-<p>这个做法的原理是：等级越高的层对于模型个性化的贡献越大，这也意味直接在个性化模型中使用这些层对训练性能的影响很小。</p>
-<h2 id="robust-federated-learning-with-noisy-and-heterogeneous-clientscvpr">Robust Federated Learning with Noisy and Heterogeneous Clients(CVPR)</h2>
-<blockquote>
-<p>Fang, Xiuwen, and Mang Ye. "Robust federated learning with noisy and heterogeneous clients." <em>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</em>. 2022.</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/FangXiuwen/Robust_FL">RHFL github源代码</a></p>
-</blockquote>
-<p>文章提出了一种鲁棒的异构联邦学习（RHFL），其可以同时处理噪声和执行联邦学习，创新点：</p>
-<ol type="1">
-<li>利用公共数据直接对齐模型反馈，不需要格外的共享全局模型进行协作</li>
-<li>采用鲁棒的抗噪损失函数减少负面影响</li>
-<li>设计了一种新的客户信心加权方案，在联邦学习阶段自适应为每个客户分配权重。</li>
-</ol>
-<p>解决的问题是：<strong>模型异构性，以及不同客户端拥有不同的噪声</strong></p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727194824314.png" alt="image-20230727194824314" /></p>
-<h3 id="算法部分-3">算法部分</h3>
-<p><strong>问题阐述</strong></p>
+<p>解决的问题：在共享子数据集的时候，可能会有一些客户端共享虚假的子集；客户端不希望共享的数据被第三方服务提供商访问；还会出现梯度翻转攻击等恶意行为，所以要保护客户端和服务器的隐私。</p>
+<h3 id="算法层面">算法层面</h3>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230728162029756.png" alt="image-20230728162029756" /></p>
 <ul>
-<li>在异构联邦学习设置下，文章考虑了<span class="math inline">\(K\)</span>个客户端和一个服务器，<span class="math inline">\(C\)</span>为客户端的集合，<span class="math inline">\(|C|=K\)</span>，客户端<span class="math inline">\(k\)</span>拥有私有数据集<span class="math inline">\(D_k=\{(x_i^k,y_i^k)\}_{i=1}^{N_k}\)</span>，<span class="math inline">\(y\)</span>用独热向量表示。</li>
-<li>客户端拥有不同的神经架构<span class="math inline">\(\theta_k\)</span>，<span class="math inline">\(f(\cdot)\)</span>表示神经网络，<span class="math inline">\(f(x^k,\theta_k)\)</span>表示输入参数<span class="math inline">\(x^k\)</span>的输出。因为服务端不能访问客户端，所以服务端拥有一个共享数据集<span class="math inline">\(D_0\)</span>。</li>
-<li>在异构联邦学习中，学习过程分为协作学习阶段和局部学习阶段，协作学习有<span class="math inline">\(T_c\)</span>个epoch，局部学习有<span class="math inline">\(T_l\)</span>个epoch。</li>
-<li>文章假设每个客户端都有一个私有的噪声数据集<span class="math inline">\(\tilde{D}_k=\{(x_i^k,\tilde{y}_i^k)\}_{i=1}^{N_k}\)</span>，<span class="math inline">\(\tilde{y}_i^k\)</span>表示噪声的标签，由于噪声模型也是异构的，<span class="math inline">\(f(x,\theta_{k_1})\neq f(x,\theta_{k_2})\)</span>。因此，客户端除了自己本地数据集的噪声以外，还要关注其他客户端的噪声。</li>
+<li>文章首先构造一致的小型全局共享数据集来减少非IID</li>
+<li>文章在收集全局数据集的同时，通过区块链加强隐私保护</li>
+<li>文章还利用了客户端选择算法在联邦学习中选择高质量的客户端</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727203136245.png" alt="image-20230727203136245"  /></p>
-<h4 id="异构联邦学习">异构联邦学习</h4>
-<p>在联邦学习阶段，文章使用公共数据集<span class="math inline">\(D_0\)</span>作为客户端之间沟通的桥梁，在协作学习时期，客户端<span class="math inline">\(c_k\)</span>利用本地模型<span class="math inline">\(\theta_k^{t_c}\)</span>在公共数据集上的输出来获得该客户端的知识分布<span class="math inline">\(R_k^{t_c}=f(D_0,\theta_k^{t_c})\)</span>。客户端使用KL散度来衡量来自其他客户端的知识分布差异。 <span class="math display">\[
-KL(R_{k_1}^{t_c}||R_{k_2}^{t_c})=\sum R_{k_1}^{t_c}log(\frac{R_{k_1}^{t_c}}{R_{k_2}^{t_c}})
-\]</span> 两个客户端的知识分布差异越大，则两方可以相互学习的越多，因此最小化概率分布<span class="math inline">\(KL\)</span>可以被认为是其中<span class="math inline">\(c_{k_1}\)</span>向<span class="math inline">\(c_{k_2}\)</span>学习的过程。 <span class="math display">\[
-\mathcal{L}_{kl}^{k,t_c}=\sum_{k_0=1,k_0\neq k}^KKL(R_{k_0}^{t_c}||R_{k}^{t_c})
-\]</span> 客户端通过调整知识分布来向他人学习</p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727200732405.png" alt="image-20230727200732405" /></p>
-<h4 id="本地噪声学习">本地噪声学习</h4>
-<p>为了减少局部噪声的影响，文章参考了对称交叉熵学习中提到的方法。将<span class="math inline">\(p\)</span>和<span class="math inline">\(q\)</span>分别表示标签类分布和预测类分布，那么交叉熵损失应该为： <span class="math display">\[
-\mathcal{L}_{ce}=-\sum_{i=1}^Np(x_i)log(q(x_i))
-\]</span> 但是由于标签噪声的存在，单纯使用交叉熵损失不能使所有的类都被充分学习或正确分类所有类别，为了完全收敛难学的类，模型会执行更多轮的学习，这就使学习的类更倾向于过拟合嘈杂的标签，使模型整体性能下降。</p>
-<p>一般来说，模型在一定程度上可以正确分类，并且由于噪声的存在，模型的预测结果甚至比标签更加可靠，<strong>所以<span class="math inline">\(p\)</span>可能不是真实的类分布，反而<span class="math inline">\(q\)</span>才是！</strong></p>
-<p>因此文章提出了基于<span class="math inline">\(q\)</span>的损失函数反向交叉熵 <span class="math display">\[
-\mathcal{L}_{rce}=-\sum_{i=1}^Nq(x_i)log(p(x_i))
-\]</span> 通过结合CE损失以及RCE损失，模型可以完全学习难以学习的类，同时防止过拟合（CE损失增强了模型对各类别的拟合效果，RCE损失对标签噪声有鲁棒性） <span class="math display">\[
-\mathcal{L}_{sl}=\lambda\mathcal{L}_{ce}+\mathcal{L}_{rce}
-\]</span> 在本地学习阶段，客户端将使用自己的本地数据集进行更新，以防止遗忘本地知识，在训练迭代过程中，标签噪声会导致模型往错误的方向更新，最终无法收敛。为了避免这个问题，文章采用SL损失来计算模型的损失，局部更新函数为</p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727202030871.png" alt="image-20230727202030871" /></p>
-<h4 id="客户端信心重新加权ccr">客户端信心重新加权（CCR）</h4>
-<p>文章提出了客户端的信心重新加权（CCR）的方法，以减少来自其他客户端的标签噪音在协作学习阶段的不利影响。CCR可以在通信过程中<strong>个性化每个客户端的权重，以减少噪声客户端的贡献，并更多地关注具有干净数据集和高效模型的客户端。</strong></p>
-<p>根据上文我们知道SL损失其实是代表了数据集的干净程度，SL越小表明这个数据集噪声越小，因此文章定义了数据集的质量：</p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727202325397.png" alt="image-20230727202325397" /></p>
-<p>为了量化客户端的学习效率，我么你在每一轮迭代中计算SL的下降率，SL下降率越大说明其学习效率越高： <span class="math display">\[
-\mathcal{P}(\theta_k^{t_c})=\Delta\mathcal{L}_{sl}^{k,t_c}=L_{sl}^{k,t_c-1}-L_{sl}^{k,t_c}
-\]</span> 那么在协作学习阶段中，同时考虑标签质量和学习效率，文章将循环<span class="math inline">\(t_c\)</span>中的第<span class="math inline">\(k\)</span>个客户端的信心定义为 <span class="math display">\[
-\mathcal{F}_k^{t_c}=\mathcal{Q}_{t_c}(\tilde{D}_k)\cdot\mathcal{P}(\theta_k^{t_c})
-\]</span> 最后的聚合权重为： <span class="math display">\[
-w_k^{t_c}=\frac{1}{K-1}+\eta\frac{\mathcal{F}_k^{t_c}}{\sum_{i=1}^K\mathcal{F}_k^{t_c}}
+<p><strong>文章的工作流程如下：</strong></p>
+<ol type="1">
+<li>一阶段：通过区块链系统构建全局共享数据集。
+<ol type="1">
+<li>标识参与联邦学习的客户机，并初始化区块链。</li>
+<li>客户端将小规模<span class="math inline">\(\alpha\)</span>的本地数据<span class="math inline">\(D_\alpha\)</span>上传到区块链系统。</li>
+<li>区块链系统合成全局共享数据集。</li>
+<li>客户端将共享数据集集成到本地数据中。</li>
+</ol></li>
+<li>二阶段：通过客户选择提高非IID数据训练性能。
+<ol type="1">
+<li>服务器选择部分客户端参与全局训练。</li>
+<li>每个选定的客户端都使用全局共享数据集和本地数据集来训练本地联邦学习模型。</li>
+<li>本地培训完成后，客户端将培训结果上传到服务器。</li>
+<li>服务器根据来自参与客户机的本地更新执行全局聚合，以生成新的全局模型。</li>
+<li>服务器将新模型分发到客户机设备，以更新它们的本地模型。</li>
+</ol></li>
+</ol>
+<h4 id="小规模数据共享">小规模数据共享</h4>
+<p>为了避免有些客户端会上传恶意的数据集子集，服务器应该能在不访问数据集的情况下指导这个数据集的来源。必须要保证参与数据共享的用户是可以控制和可追踪的。</p>
+<p>因此文章采用区块链系统实施数据集共享，首先只有选定的客户端才能参与数据共享，参加到区块链网络，由于数量少，所以共识速度也会很快。通过区块链共享数据可以限制其他用户对原始数据的访问，从而保证隐私。</p>
+<p>系统在选择参与全局数据共享的客户端之后，为其建立一条公共区块链。当用户作为数据共享者参与时，可以通过PoW机制计算哈希值，向区块来拿发送共享事务请求。然后客户端将在区块链系统中生成一个区块，并上传本地数据的<span class="math inline">\(\alpha\)</span>部分；当用户作为数据请求者参与，客户端向区块链发送下载数据请求，验证通过后客户端才可以下载。区块链数据共享如图所示：</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230728163422155.png" alt="image-20230728163422155" /></p>
+<p>在客户端下载共享信息之后，将共享数据和本地数据组合:<span class="math inline">\(D_i=D_i+D_g\)</span>，那么全局优化目标则是： <span class="math display">\[
+argmin_{\omega_t}\sum_{i=1}^mp_jl(D_i+D_g,\omega^i)
 \]</span></p>
-<p><span class="math display">\[
-\mathcal{W}_k^{t_c}=\frac{exp(w_k^{t_c})}{\sum_{k=1}^Kexp(w_k^{t_c})}
-\]</span></p>
-<p>所以最后的协作学习阶段的聚合函数如下：</p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727203439409.png" alt="image-20230727203439409" /></p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230727203603670.png" alt="image-20230727203603670" style="zoom:80%;" /></p>
+<h4 id="客户端选择">客户端选择</h4>
+<p>在使用非iid数据的联邦学习中<strong>，共享数据集的质量直观地反映了训练性能</strong>。如果共享数据集不是均匀分布的，而是有偏置的，可能会降低局部训练模型的鲁棒性，影响全局模型训练结果。数据共享阶段已经消耗了客户机的计算能力来保证隐私。因此，必须保证共享数据集的均匀分布和高质量。</p>
+<p>为了获取最有效的数据，文章需要获取本地数据集的相关性。</p>
+<ol type="1">
+<li>文章在客户端生成最具有分布式特征的子数据集</li>
+<li>记录每个客户端子数据集的相似度得分，利用JS散度，越接近1，越说明相似度越低</li>
+<li>首先选择相似度得分较低的客户端来进行训练</li>
+</ol>
+<p><strong>寻找最具分布式特征的子数据集：选择相似度较低的数据放入共享数据集子集中</strong></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230728163941025.png" alt="image-20230728163941025" /></p>
 
     </div>
 
@@ -856,7 +912,7 @@ w_k^{t_c}=\frac{1}{K-1}+\eta\frac{\mathcal{F}_k^{t_c}}{\sum_{i=1}^K\mathcal{F}_k
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#asynchronous-hierarchical-federated-learningskim"><span class="nav-number">1.</span> <span class="nav-text">Asynchronous Hierarchical Federated Learning(skim)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wscc-a-weight-similarity-based-client-clustering-approach-for-non-iid-federated-learningskim"><span class="nav-number">2.</span> <span class="nav-text">WSCC: A weight-similarity-based client clustering approach for non-IID federated learning(skim)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#learn-from-others-and-be-yourself-in-heterogeneous-federated-learningcvpr"><span class="nav-number">3.</span> <span class="nav-text">Learn from Others and Be Yourself in Heterogeneous Federated Learning(CVPR)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E4%BA%A4%E5%8F%89%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.1.</span> <span class="nav-text">联邦交叉相关学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.2.</span> <span class="nav-text">联邦持续学习</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#feddc-federated-learning-with-non-iid-data-via-local-drift-decoupling-and-correctioncvpr"><span class="nav-number">4.</span> <span class="nav-text">FedDC: Federated Learning with Non-IID Data via Local Drift Decoupling and Correction(CVPR)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-1"><span class="nav-number">4.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E7%9B%AE%E6%A0%87%E4%B8%8E%E5%8F%82%E6%95%B0%E6%9B%B4%E6%96%B0"><span class="nav-number">4.1.1.</span> <span class="nav-text">优化目标与参数更新</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scaffold-stochastic-controlled-averaging-for-federated-learning"><span class="nav-number">5.</span> <span class="nav-text">SCAFFOLD: Stochastic Controlled Averaging for Federated Learning（🧐）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E%E9%83%A8%E5%88%86"><span class="nav-number">5.1.</span> <span class="nav-text">证明部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#fedavg%E7%9A%84%E8%81%9A%E5%90%88"><span class="nav-number">5.1.1.</span> <span class="nav-text">FedAvg的聚合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E6%9E%84%E6%80%A7%E5%BD%B1%E5%93%8D"><span class="nav-number">5.1.2.</span> <span class="nav-text">异构性影响</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E9%83%A8%E5%88%86"><span class="nav-number">5.2.</span> <span class="nav-text">算法部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#addressing-heterogeneity-in-federated-learning-via-distributional-transformation"><span class="nav-number">6.</span> <span class="nav-text">Addressing Heterogeneity in Federated Learning via Distributional Transformation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%9C%BA"><span class="nav-number">6.1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-2"><span class="nav-number">6.2.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fine-tuning-global-model-via-data-free-knowledge-distillation-for-non-iid-federated-learningcvpr"><span class="nav-number">7.</span> <span class="nav-text">Fine-tuning Global Model via Data-Free Knowledge Distillation for Non-IID Federated Learning(CVPR)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-3"><span class="nav-number">7.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%A1%AC%E6%A0%B7%E6%9C%AC%E6%8C%96%E6%8E%98%E7%9A%84%E6%97%A0%E6%95%B0%E6%8D%AE%E7%9F%A5%E8%AF%86%E6%8F%90%E5%8F%96%E5%85%A8%E5%B1%80%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83"><span class="nav-number">7.1.1.</span> <span class="nav-text">基于硬样本挖掘的无数据知识提取全局模型微调</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E5%BA%94%E6%A0%87%E7%AD%BE%E5%88%86%E5%B8%83%E5%8F%98%E5%8C%96%E5%AE%9E%E7%8E%B0%E6%9C%89%E6%95%88%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F"><span class="nav-number">7.1.2.</span> <span class="nav-text">适应标签分布变化实现有效知识蒸馏</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%87%E7%AD%BE%E9%87%87%E6%A0%B7"><span class="nav-number">7.1.2.1.</span> <span class="nav-text">自定义标签采样</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%B1%BB%E9%9B%86%E6%88%90"><span class="nav-number">7.1.2.2.</span> <span class="nav-text">类集成</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-number">7.2.</span> <span class="nav-text">局限性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#accelerating-federated-learning-with-cluster-construction-and-hierarchical-aggregation"><span class="nav-number">8.</span> <span class="nav-text">Accelerating Federated Learning With Cluster Construction and Hierarchical Aggregation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E9%83%A8%E5%88%86-1"><span class="nav-number">8.1.</span> <span class="nav-text">算法部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E6%96%B9%E6%B3%95"><span class="nav-number">8.1.1.</span> <span class="nav-text">分组方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E8%81%9A%E7%B1%BB"><span class="nav-number">8.1.2.</span> <span class="nav-text">重新聚类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E%E9%83%A8%E5%88%86-1"><span class="nav-number">8.2.</span> <span class="nav-text">证明部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fedhisyn-a-hierarchical-synchronous-federated-learning-framework-for-resource-and-data-heterogeneity"><span class="nav-number">9.</span> <span class="nav-text">FedHiSyn: A Hierarchical Synchronous Federated Learning Framework for Resource and Data Heterogeneity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#layer-wised-model-aggregation-for-personalized-federated-learningcvpr"><span class="nav-number">10.</span> <span class="nav-text">Layer-wised Model Aggregation for Personalized Federated Learning(CVPR)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E9%83%A8%E5%88%86-2"><span class="nav-number">10.1.</span> <span class="nav-text">算法部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pfedla"><span class="nav-number">10.1.1.</span> <span class="nav-text">pFedLA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#heurpfedla%E9%80%9A%E4%BF%A1%E6%95%88%E7%8E%87%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="nav-number">10.1.2.</span> <span class="nav-text">HeurpFedLA：通信效率的改进</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#robust-federated-learning-with-noisy-and-heterogeneous-clientscvpr"><span class="nav-number">11.</span> <span class="nav-text">Robust Federated Learning with Noisy and Heterogeneous Clients(CVPR)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E9%83%A8%E5%88%86-3"><span class="nav-number">11.1.</span> <span class="nav-text">算法部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E6%9E%84%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0"><span class="nav-number">11.1.1.</span> <span class="nav-text">异构联邦学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%99%AA%E5%A3%B0%E5%AD%A6%E4%B9%A0"><span class="nav-number">11.1.2.</span> <span class="nav-text">本地噪声学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BF%A1%E5%BF%83%E9%87%8D%E6%96%B0%E5%8A%A0%E6%9D%83ccr"><span class="nav-number">11.1.3.</span> <span class="nav-text">客户端信心重新加权（CCR）</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#skimasynchronous-hierarchical-federated-learning"><span class="nav-number">1.</span> <span class="nav-text">（Skim）Asynchronous Hierarchical Federated Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#skimwscc-a-weight-similarity-based-client-clustering-approach-for-non-iid-federated-learning"><span class="nav-number">2.</span> <span class="nav-text">（Skim）WSCC: A weight-similarity-based client clustering approach for non-IID federated learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cvprlearn-from-others-and-be-yourself-in-heterogeneous-federated-learning"><span class="nav-number">3.</span> <span class="nav-text">（CVPR）Learn from Others and Be Yourself in Heterogeneous Federated Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E4%BA%A4%E5%8F%89%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.1.</span> <span class="nav-text">联邦交叉相关学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0"><span class="nav-number">3.1.2.</span> <span class="nav-text">联邦持续学习</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cvprfeddc-federated-learning-with-non-iid-data-via-local-drift-decoupling-and-correction"><span class="nav-number">4.</span> <span class="nav-text">（CVPR）FedDC: Federated Learning with Non-IID Data via Local Drift Decoupling and Correction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-1"><span class="nav-number">4.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E7%9B%AE%E6%A0%87%E4%B8%8E%E5%8F%82%E6%95%B0%E6%9B%B4%E6%96%B0"><span class="nav-number">4.1.1.</span> <span class="nav-text">优化目标与参数更新</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cvprfine-tuning-global-model-via-data-free-knowledge-distillation-for-non-iid-federated-learning"><span class="nav-number">5.</span> <span class="nav-text">（CVPR）Fine-tuning Global Model via Data-Free Knowledge Distillation for Non-IID Federated Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-2"><span class="nav-number">5.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%A1%AC%E6%A0%B7%E6%9C%AC%E6%8C%96%E6%8E%98%E7%9A%84%E6%97%A0%E6%95%B0%E6%8D%AE%E7%9F%A5%E8%AF%86%E6%8F%90%E5%8F%96%E5%85%A8%E5%B1%80%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83"><span class="nav-number">5.1.1.</span> <span class="nav-text">基于硬样本挖掘的无数据知识提取全局模型微调</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%82%E5%BA%94%E6%A0%87%E7%AD%BE%E5%88%86%E5%B8%83%E5%8F%98%E5%8C%96%E5%AE%9E%E7%8E%B0%E6%9C%89%E6%95%88%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F"><span class="nav-number">5.1.2.</span> <span class="nav-text">适应标签分布变化实现有效知识蒸馏</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%87%E7%AD%BE%E9%87%87%E6%A0%B7"><span class="nav-number">5.1.2.1.</span> <span class="nav-text">自定义标签采样</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%B1%BB%E9%9B%86%E6%88%90"><span class="nav-number">5.1.2.2.</span> <span class="nav-text">类集成</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-number">5.2.</span> <span class="nav-text">局限性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cvprlayer-wised-model-aggregation-for-personalized-federated-learning"><span class="nav-number">6.</span> <span class="nav-text">（CVPR）Layer-wised Model Aggregation for Personalized Federated Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E9%83%A8%E5%88%86"><span class="nav-number">6.1.</span> <span class="nav-text">算法部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pfedla"><span class="nav-number">6.1.1.</span> <span class="nav-text">pFedLA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#heurpfedla%E9%80%9A%E4%BF%A1%E6%95%88%E7%8E%87%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="nav-number">6.1.2.</span> <span class="nav-text">HeurpFedLA：通信效率的改进</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cvprrobust-federated-learning-with-noisy-and-heterogeneous-clients"><span class="nav-number">7.</span> <span class="nav-text">（CVPR）Robust Federated Learning with Noisy and Heterogeneous Clients</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E9%83%A8%E5%88%86-1"><span class="nav-number">7.1.</span> <span class="nav-text">算法部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E6%9E%84%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0"><span class="nav-number">7.1.1.</span> <span class="nav-text">异构联邦学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%99%AA%E5%A3%B0%E5%AD%A6%E4%B9%A0"><span class="nav-number">7.1.2.</span> <span class="nav-text">本地噪声学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BF%A1%E5%BF%83%E9%87%8D%E6%96%B0%E5%8A%A0%E6%9D%83ccr"><span class="nav-number">7.1.3.</span> <span class="nav-text">客户端信心重新加权（CCR）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scaffold-stochastic-controlled-averaging-for-federated-learning"><span class="nav-number">8.</span> <span class="nav-text">（🧐）SCAFFOLD: Stochastic Controlled Averaging for Federated Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E%E9%83%A8%E5%88%86"><span class="nav-number">8.1.</span> <span class="nav-text">证明部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#fedavg%E7%9A%84%E8%81%9A%E5%90%88"><span class="nav-number">8.1.1.</span> <span class="nav-text">FedAvg的聚合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E6%9E%84%E6%80%A7%E5%BD%B1%E5%93%8D"><span class="nav-number">8.1.2.</span> <span class="nav-text">异构性影响</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E9%83%A8%E5%88%86-2"><span class="nav-number">8.2.</span> <span class="nav-text">算法部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#addressing-heterogeneity-in-federated-learning-via-distributional-transformation"><span class="nav-number">9.</span> <span class="nav-text">Addressing Heterogeneity in Federated Learning via Distributional Transformation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%9C%BA"><span class="nav-number">9.1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-3"><span class="nav-number">9.2.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#similaraccelerating-federated-learning-with-cluster-construction-and-hierarchical-aggregation"><span class="nav-number">10.</span> <span class="nav-text">（Similar）Accelerating Federated Learning With Cluster Construction and Hierarchical Aggregation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E9%83%A8%E5%88%86-3"><span class="nav-number">10.1.</span> <span class="nav-text">算法部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E6%96%B9%E6%B3%95"><span class="nav-number">10.1.1.</span> <span class="nav-text">分组方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E8%81%9A%E7%B1%BB"><span class="nav-number">10.1.2.</span> <span class="nav-text">重新聚类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E%E9%83%A8%E5%88%86-1"><span class="nav-number">10.2.</span> <span class="nav-text">证明部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#similarfedhisyn-a-hierarchical-synchronous-federated-learning-framework-for-resource-and-data-heterogeneity"><span class="nav-number">11.</span> <span class="nav-text">（Similar）FedHiSyn: A Hierarchical Synchronous Federated Learning Framework for Resource and Data Heterogeneity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#similarblockchain-based-two-stage-federated-learning-with-non-iid-data-in-iomt-system"><span class="nav-number">12.</span> <span class="nav-text">（Similar）Blockchain-Based Two-Stage Federated Learning With Non-IID Data in IoMT System</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%B1%82%E9%9D%A2"><span class="nav-number">12.1.</span> <span class="nav-text">算法层面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E8%A7%84%E6%A8%A1%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB"><span class="nav-number">12.1.1.</span> <span class="nav-text">小规模数据共享</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%89%E6%8B%A9"><span class="nav-number">12.1.2.</span> <span class="nav-text">客户端选择</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
