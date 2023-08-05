@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"phoenixdai.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="本博客为在2023.07.01-2023.08.01期间阅读的10余篇论文笔记。 主题为：联邦学习、异构性、异步联邦学习、分层联邦学习 文章大体上来自于A、B会和A刊，少数几篇与GLOBECOM相似的出处不限。">
+  <meta name="description" content="本博客为在2023.07.01-2023.09.01期间阅读的20余篇论文笔记。 主题为：联邦学习、异构性、异步联邦学习、分层联邦学习 文章大体上来自于A、B会和A刊，少数几篇与GLOBECOM相似的出处不限。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2023 Summer Vacation Paper">
 <meta property="og:url" content="http://phoenixdai.cn/2023/07/09/2023-Summer-Vacation-Paper/index.html">
 <meta property="og:site_name" content="Sycamore">
-<meta property="og:description" content="本博客为在2023.07.01-2023.08.01期间阅读的10余篇论文笔记。 主题为：联邦学习、异构性、异步联邦学习、分层联邦学习 文章大体上来自于A、B会和A刊，少数几篇与GLOBECOM相似的出处不限。">
+<meta property="og:description" content="本博客为在2023.07.01-2023.09.01期间阅读的20余篇论文笔记。 主题为：联邦学习、异构性、异步联邦学习、分层联邦学习 文章大体上来自于A、B会和A刊，少数几篇与GLOBECOM相似的出处不限。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091442638.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091445675.png">
@@ -81,7 +81,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230728163422155.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230728163941025.png">
 <meta property="article:published_time" content="2023-07-09T03:31:04.000Z">
-<meta property="article:modified_time" content="2023-07-31T15:46:48.171Z">
+<meta property="article:modified_time" content="2023-08-05T09:43:53.224Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="Top-Papers">
 <meta name="twitter:card" content="summary">
@@ -249,7 +249,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-07-31 23:46:48" itemprop="dateModified" datetime="2023-07-31T23:46:48+08:00">2023-07-31</time>
+                <time title="Modified: 2023-08-05 17:43:53" itemprop="dateModified" datetime="2023-08-05T17:43:53+08:00">2023-08-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,7 +272,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本博客为在2023.07.01-2023.08.01期间阅读的10余篇论文笔记。</p>
+        <p>本博客为在2023.07.01-2023.09.01期间阅读的20余篇论文笔记。</p>
 <p><strong><em>主题为：联邦学习、异构性、异步联邦学习、分层联邦学习</em></strong></p>
 <p>文章大体上来自于A、B会和A刊，少数几篇与GLOBECOM相似的出处不限。</p>
 <p><span id="more"></span></p>
@@ -332,19 +332,19 @@ w_i^*=argmin_{w_i}\{F_i(w_i)\}
 <p>Huang, Wenke, Mang Ye, and Bo Du. "Learn from others and be yourself in heterogeneous federated learning." <em>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</em>. 2022.</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/WenkeHuang/FCCL">FCCL github源代码</a></p>
 </blockquote>
-<p>本文提出了一种联邦互相关和连续学习FCCL（Federated Cross-Correlation and Continual Learning），创新点：</p>
+<p>本文提出了一种联邦互相关和连续学习 FCCL（Federated Cross-Correlation and Continual Learning），创新点：</p>
 <ol type="1">
-<li>通过利用未标记的公共数据和自我监督学习来实现异构模型的可泛化表示；</li>
+<li>通过利用未标记的公共数据和自我监督学习来实现异构模型的泛化表示；</li>
 <li>通过使用更新后的模型和预训练模型进行跨领域和内部领域的知识蒸馏，平衡来自其他模型和自身模型的知识。</li>
 </ol>
-<p>👀本文解决的主要问题：1. 怎么在异构的联邦学习中学习到一种泛化表示，可以减轻域漂移的问题；2. 怎么平衡多种知识来减少灾难性的遗忘（在本地训练的时候过拟合当前知识而忘记之前的知识），在域间或域内都能表现较好的性能。</p>
+<p>👀本文解决的主要问题：1. 怎么在异构的联邦学习中学习到一种泛化表示，可以减轻漂移的问题；2. 怎么平衡多种知识来减少灾难性的遗忘<strong>（在本地训练的时候过拟合当前知识而忘记之前的知识）</strong>，在域间或域内都能表现较好的性能。</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307091928203.png" alt="image-20230709192850136" style="zoom:100%;" /></p>
 <h3 id="方法">方法</h3>
 <p>这个文章总体上提出了两种不同的学习架构：<strong>联邦交叉相关学习（Federated Cross-Correlation Learning）、联邦持续学习（Federated Continual Learning）</strong></p>
 <h4 id="联邦交叉相关学习">联邦交叉相关学习</h4>
-<p>这个方法受到了自监督学习的启发，自监督学习可以获得一个具有普适性的表示，这对于作者希望得到的可泛化表示是有利的。但是在这个工作中，由于异构的数据，导致相同标签的特征是有明显差异的，所以对于模型来说需<strong>要鼓励相同维度的不变性和不同维度的多样性。</strong>同时不同的模型承载不同的数据，这个数据是具有隐私性的，不适合自监督学习，为了保证安全，文章利用了无标签的公共数据。</p>
-<p>通过在不同维度上促进相同维度的不变性和不同维度的多样性，作者可以学习到一个在领域转移下具有普适性的表示。这样的表示能够尽可能地保留关于图像的信息，并在不同领域中具有一定的不变性。</p>
-<p>文章构建了一种交叉相关矩阵：对于每个模型的logit输出为<span class="math inline">\(Z_i\)</span>，计算第<span class="math inline">\(i\)</span>个参与者的交叉相关矩阵： <span class="math display">\[
+<p>这个方法受到了自监督学习的启发，自监督学习可以获得一个比较泛化的模型。但是在这个工作中，由于异构的数据，导致相同标签的特征是有明显差异的，所以对于模型来说<strong>需要鼓励相同类别特征的不变性和不同类别特征的多样性。</strong>同时不同的模型承载不同的数据，这个数据是具有隐私性的，不适合自监督学习，为了保证安全，文章利用了无标签的公共数据。</p>
+<p>通过自监督学习，增加不同类别之间的多样性和相同类别的不变性来学习一个泛化的模型。这样的表示能够尽可能地保留关于图像的信息，并在不同领域中具有一定的不变性。</p>
+<p>文章构建了一种交叉相关矩阵：对于每个模型的logit输出为<span class="math inline">\(Z_i\)</span>，<span class="math inline">\(\bar{Z}=\frac{1}{K}\sum_iZ_i\)</span>。计算第<span class="math inline">\(i\)</span>个参与者的交叉相关矩阵： <span class="math display">\[
 M_i^{uv}=\frac{\sum_b||Z_i^{b,u}||\space||\overline{Z}^{b,v}||}{\sqrt{\sum_b||Z_i^{b,u}||^2}\sqrt{\sum_b||\overline{Z}^{b,v}||^2}}
 \]</span> 其中<span class="math inline">\(b\)</span>是批处理样本，<span class="math inline">\(u,v\)</span>均表示logits层的维度索引。<span class="math inline">\(||·||\)</span>是沿着批维度的归一化操作。最终得到<span class="math inline">\(M_i\)</span>是一个维度为<span class="math inline">\(C\)</span>的方阵，其中数据介于-1到1（不相似到相似）。协作的loss值设置为 <span class="math display">\[
 L_i^{Col}=\sum_{u}(1-M^{uu})^2+\lambda_{Col}\sum_{u}\sum_{v\neq u}(1+M_{i}^{uv})^2
@@ -375,7 +375,7 @@ L_i^{Loc}=L_i^{CE}+\lambda_{Loc}L_i^{Dual}
 </blockquote>
 <p>作者提出了一种新的局部漂移解耦与修正的联邦学习算法(FedDC)，创新点为：</p>
 <ol type="1">
-<li>动态更新每个客户端的局部目标函数（1. 约束惩罚项：表示全局参数、飘逸变量和局部参数之间的关系；2. 梯度修正项：减少每一轮训练中的梯度漂移）；</li>
+<li>动态更新每个客户端的局部目标函数（1. 约束惩罚项：表示全局参数、漂移变量和局部参数之间的关系；2. 梯度修正项：减少每一轮训练中的梯度漂移）；</li>
 <li>在训练过程中通过引入漂移变量对局部模型和全局模型进行解耦，减小了局部漂移对全局目标的影响，使其收敛速度更快，达到更好的性能。</li>
 </ol>
 <p>👀本文解决的主要问题就是<strong>联邦学习中的客户端漂移问题</strong></p>
@@ -384,7 +384,7 @@ L_i^{Loc}=L_i^{CE}+\lambda_{Loc}L_i^{Dual}
 <p>每个客户端在本地数据集上训练的本地模型和直接在全局数据集上训练的全局模型之间存在漂移，如果忽略漂移，服务器将无法得到较好的模型，而非IID数据是高度倾斜的，所以普通的FedAvg性能会明显降低。</p>
 <p>举个简单的例子：</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307161531550.png" alt="image-20230716153135403" style="zoom:120%;" /></p>
-<p>假设模型中存在一个<strong><em>非线性的</em></strong>变换函数<span class="math inline">\(f\)</span>，<span class="math inline">\(\theta_1\)</span>和<span class="math inline">\(\theta_2\)</span>是两个客户端的局部参数，<span class="math inline">\(w_c\)</span>为理想的模型参数，<span class="math inline">\(w_f\)</span>是FedAvg获得的参数。客户端的漂移用<span class="math inline">\(h\)</span>表示，那么<span class="math inline">\(h_1 = w_c-\theta_1\)</span>，<span class="math inline">\(h_2=w_c-\theta_2\)</span>。<span class="math inline">\(x\)</span>是一个数据点，那么客户端1对应的输出应该是<span class="math inline">\(y_1=f(\theta_1, x)\)</span>，同样的客户端2的输出为：<span class="math inline">\(y_2=f(\theta_2, x)\)</span>。利用FedAvg获得的模型参数<span class="math inline">\(w_f=\frac{\theta_1+\theta_2}{2}\)</span>，而理想的模型参数应该为<span class="math inline">\(w_c=f^{-1}(\frac{y_1+y_2}{2})/x\)</span>，因为<span class="math inline">\(f\)</span>不是一个线性函数，所以<span class="math inline">\(w_c\neq w_f\)</span>，<span class="math inline">\(f(w_f,x)\neq\frac{y_1+y_2}{2}\)</span>。</p>
+<p>假设模型中存在一个 <strong><em>非线性的</em></strong> 变换函数<span class="math inline">\(f\)</span>，<span class="math inline">\(\theta_1\)</span>和<span class="math inline">\(\theta_2\)</span>是两个客户端的局部参数，<span class="math inline">\(w_c\)</span>为理想的模型参数，<span class="math inline">\(w_f\)</span>是FedAvg获得的参数。客户端的漂移用<span class="math inline">\(h\)</span>表示，那么<span class="math inline">\(h_1 = w_c-\theta_1\)</span>，<span class="math inline">\(h_2=w_c-\theta_2\)</span>。<span class="math inline">\(x\)</span>是一个数据点，那么客户端1对应的输出应该是<span class="math inline">\(y_1=f(\theta_1, x)\)</span>，同样的客户端2的输出为：<span class="math inline">\(y_2=f(\theta_2, x)\)</span>。利用FedAvg获得的模型参数<span class="math inline">\(w_f=\frac{\theta_1+\theta_2}{2}\)</span>，而理想的模型参数应该为<span class="math inline">\(w_c=f^{-1}(\frac{y_1+y_2}{2})/x\)</span>，因为<span class="math inline">\(f\)</span>不是一个线性函数，所以<span class="math inline">\(w_c\neq w_f\)</span>，<span class="math inline">\(f(w_f,x)\neq\frac{y_1+y_2}{2}\)</span>。</p>
 <p>这就说明FedAvg的全局模型是漂移的，因此本文章要<strong>学习全局和局部模型之间的局部漂移，并在将局部模型参数上传到服务器之间将局部漂移桥接起来。</strong></p>
 <h3 id="方法-1">方法</h3>
 <h4 id="优化目标与参数更新">优化目标与参数更新</h4>
