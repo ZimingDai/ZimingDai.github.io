@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202308052100917.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202308052101178.png">
 <meta property="article:published_time" content="2023-08-01T02:37:51.000Z">
-<meta property="article:modified_time" content="2023-08-05T13:02:11.430Z">
+<meta property="article:modified_time" content="2023-08-07T02:03:51.755Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="My-Papers">
 <meta name="twitter:card" content="summary">
@@ -203,7 +203,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-08-05 21:02:11" itemprop="dateModified" datetime="2023-08-05T21:02:11+08:00">2023-08-05</time>
+                <time title="Modified: 2023-08-07 10:03:51" itemprop="dateModified" datetime="2023-08-07T10:03:51+08:00">2023-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -301,10 +301,40 @@ s.t.\quad j=\arg\max\  \pi_{ij},\quad j\in N(i)
 <p>总体来说，就是整个系统分成了两层，每个边缘设备被分到了一个群组中，由于文章考虑了两种不同的模型，所以每个群组会有两个leader，这个leader一定是该模型中信用分最高的设备，然后每个群组在leader上聚合后，每个群组的leader会进行最后的聚合来获得最终的全局参数。</p>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202308052101178.png" alt="image-20230805205235356" style="zoom:50%;" /></p>
 <h3 id="审稿意见">审稿意见</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">通常，传播延迟可以忽略不计，因为微波的传播速度非常高。传输延迟不应该与能量消耗结合起来。它应该是优化中的独立约束。</span><br><span class="line">应提供(4)中的详细函数。</span><br><span class="line">应讨论所提出算法的复杂性。</span><br><span class="line">图5在当前版本中很难遵循。最好重新整理一下。评估的指标应标记在 y 轴上。</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">鼓励作者添加有关调度算法和恶意检测技术的其他参考文献，以提供全面的背景并展示该领域的现有方法。这将有助于建立背景并突出所提出方法的新颖性。</span><br><span class="line">进行模拟并展示结果对于证明所提出的方法相对于以前的方法的有效性和优越性至关重要。通过与现有方法进行性能比较，作者可以展示他们提出的算法所实现的优势和改进。</span><br><span class="line">对于作者来说，清楚地解释在设计算法时结合基于图的技术背后的动机非常重要。他们应该强调图表提供的优点和好处，例如捕获复杂的关系，促进有效的信息共享，或实现有效的决策。通过为图表的使用提供清晰的理由，作者可以确定其方法的相关性和潜在影响。</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">添加更多有关基于 FL 的边缘计算中的恶意行为的参考。</span><br><span class="line">[9]似乎没有提到联邦学习。[10]还提出了多粒度指导FL来增强性能，那么这项工作和ref有什么区别呢？作者应该给出更多的解释。</span><br><span class="line">作者应详细解释模拟结果。在第 5 页，本文中的数字有点混乱。1) 图6(a)中缩写“SD of EP”中的“EP”指的是什么？5) 图 7 (b) 中的“目标”指标代表什么？6）此外，作者在本文中没有介绍基线。</span><br><span class="line">结论不完整，没有充分阐述本文的意义。</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">建议添加图2和图3的额外描述，以提供更清晰的MG2FL框架概述。</span><br><span class="line">模拟部分缺乏对所使用的三个基线的充分解释。</span><br><span class="line">图5中的标签看起来很混乱。</span><br><span class="line">当epoch在 100 到 125 之间时，图 7(a) 中观察到了明显的差距。有必要对这一差距提供全面的解释，以更好地理解其原因和含义。</span><br><span class="line">论文缺乏Mg2FL与信用模型收敛速度的数学推导，这将为信用定义的有效性和可靠性提供必要的支持。包含这样的推导将提高论文的可信度并强化所提出的方法。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol type="1">
+<li>通常，传播延迟可以忽略不计，因为微波的传播速度非常高。传输延迟不应该与能量消耗结合起来。它应该是优化中的独立约束。</li>
+<li>应提供(4)中的详细函数。</li>
+<li>应讨论所提出算法的复杂性。</li>
+<li>图5在当前版本中很难遵循。最好重新整理一下。评估的指标应标记在 y 轴上。</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol type="1">
+<li>鼓励作者添加有关调度算法和恶意检测技术的其他参考文献，以提供全面的背景并展示该领域的现有方法。这将有助于建立背景并突出所提出方法的新颖性。</li>
+<li>进行模拟并展示结果对于证明所提出的方法相对于以前的方法的有效性和优越性至关重要。通过与现有方法进行性能比较，作者可以展示他们提出的算法所实现的优势和改进。</li>
+<li>对于作者来说，清楚地解释在设计算法时结合基于图的技术背后的动机非常重要。他们应该强调图表提供的优点和好处，例如捕获复杂的关系，促进有效的信息共享，或实现有效的决策。通过为图表的使用提供清晰的理由，作者可以确定其方法的相关性和潜在影响。</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol type="1">
+<li>添加更多有关基于 FL 的边缘计算中的恶意行为的参考。</li>
+<li>[9]似乎没有提到联邦学习。[10]还提出了多粒度指导FL来增强性能，那么这项工作和ref有什么区别呢？作者应该给出更多的解释。</li>
+<li>作者应详细解释模拟结果。在第 5 页，本文中的数字有点混乱。1) 图6(a)中缩写“SD of EP”中的“EP”指的是什么？2) 图 7 (b) 中的“目标”指标代表什么？3）此外，作者在本文中没有介绍基线。</li>
+<li>结论不完整，没有充分阐述本文的意义。</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol type="1">
+<li>建议添加图2和图3的额外描述，以提供更清晰的MG2FL框架概述。</li>
+<li>模拟部分缺乏对所使用的三个基线的充分解释。</li>
+<li>图5中的标签看起来很混乱。</li>
+<li>当epoch在 100 到 125 之间时，图 7(a) 中观察到了明显的差距。有必要对这一差距提供全面的解释，以更好地理解其原因和含义。</li>
+<li>论文缺乏Mg2FL与信用模型收敛速度的数学推导，这将为信用定义的有效性和可靠性提供必要的支持。包含这样的推导将提高论文的可信度并强化所提出的方法。</li>
+</ol>
+</blockquote>
+<h3 id="扩刊方向">扩刊方向</h3>
+<p>暂略…</p>
 
     </div>
 
@@ -402,7 +432,7 @@ s.t.\quad j=\arg\max\  \pi_{ij},\quad j\in N(i)
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BA%E6%96%87%E5%AF%B9%E5%BA%94%E7%9A%84%E7%97%9B%E7%82%B9%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">论文对应的痛点及解决方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%9E%84%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">模型构建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E5%BC%80%E9%94%80%E5%BB%B6%E8%BF%9F%E4%BC%A0%E8%BE%93%E8%83%BD%E8%80%97"><span class="nav-number">2.1.</span> <span class="nav-text">通信开销（延迟+传输能耗）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%8C%87%E5%AF%BC%E8%92%B8%E9%A6%8F"><span class="nav-number">2.2.</span> <span class="nav-text">模型指导（蒸馏）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%A1%E7%94%A8%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.3.</span> <span class="nav-text">信用模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E9%83%A8%E5%88%86"><span class="nav-number">3.</span> <span class="nav-text">算法部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%AE%AD%E7%BB%83"><span class="nav-number">3.1.</span> <span class="nav-text">测试训练</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E6%9E%84%E5%BB%BA"><span class="nav-number">3.2.</span> <span class="nav-text">图构建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%8C%87%E5%AF%BC"><span class="nav-number">3.3.</span> <span class="nav-text">模型指导</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%A1%E7%94%A8%E5%88%86%E8%81%9A%E5%90%88"><span class="nav-number">3.4.</span> <span class="nav-text">信用分聚合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A1%E7%A8%BF%E6%84%8F%E8%A7%81"><span class="nav-number">4.</span> <span class="nav-text">审稿意见</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BA%E6%96%87%E5%AF%B9%E5%BA%94%E7%9A%84%E7%97%9B%E7%82%B9%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">论文对应的痛点及解决方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%9E%84%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">模型构建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E5%BC%80%E9%94%80%E5%BB%B6%E8%BF%9F%E4%BC%A0%E8%BE%93%E8%83%BD%E8%80%97"><span class="nav-number">2.1.</span> <span class="nav-text">通信开销（延迟+传输能耗）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%8C%87%E5%AF%BC%E8%92%B8%E9%A6%8F"><span class="nav-number">2.2.</span> <span class="nav-text">模型指导（蒸馏）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%A1%E7%94%A8%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.3.</span> <span class="nav-text">信用模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E9%83%A8%E5%88%86"><span class="nav-number">3.</span> <span class="nav-text">算法部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%AE%AD%E7%BB%83"><span class="nav-number">3.1.</span> <span class="nav-text">测试训练</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E6%9E%84%E5%BB%BA"><span class="nav-number">3.2.</span> <span class="nav-text">图构建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%8C%87%E5%AF%BC"><span class="nav-number">3.3.</span> <span class="nav-text">模型指导</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%A1%E7%94%A8%E5%88%86%E8%81%9A%E5%90%88"><span class="nav-number">3.4.</span> <span class="nav-text">信用分聚合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A1%E7%A8%BF%E6%84%8F%E8%A7%81"><span class="nav-number">4.</span> <span class="nav-text">审稿意见</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%88%8A%E6%96%B9%E5%90%91"><span class="nav-number">5.</span> <span class="nav-text">扩刊方向</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
