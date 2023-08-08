@@ -63,6 +63,8 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307171055108.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307171130478.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307171507557.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202308081920809.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202308081915777.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307171537350.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181026935.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202307181948523.png">
@@ -81,7 +83,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230728163422155.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20230728163941025.png">
 <meta property="article:published_time" content="2023-07-09T03:31:04.000Z">
-<meta property="article:modified_time" content="2023-08-08T10:40:58.545Z">
+<meta property="article:modified_time" content="2023-08-08T11:21:39.237Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="Top-Papers">
 <meta name="twitter:card" content="summary">
@@ -249,7 +251,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-08-08 18:40:58" itemprop="dateModified" datetime="2023-08-08T18:40:58+08:00">2023-08-08</time>
+                <time title="Modified: 2023-08-08 19:21:39" itemprop="dateModified" datetime="2023-08-08T19:21:39+08:00">2023-08-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -620,10 +622,15 @@ min_{x\in R^d}\{f(x)=\frac{1}{N}\sum_{i=1}^{N}(f_i(x)=E_{\zeta_i}[f_i(x;\zeta_i)
 </ol>
 <h3 id="算法部分-2">算法部分</h3>
 <p>在算法开始的时候，我们定义两个变量：<span class="math inline">\(c\)</span>：服务器控制变量；<span class="math inline">\(c_i\)</span>：客户端控制变量。</p>
+<p><span class="math inline">\(c\)</span>是全局模型往最优模型的梯度下降方向，<span class="math inline">\(c_i\)</span>是客户端的梯度更新方向</p>
 <p>这两个变量的初始化可以均设置为<span class="math inline">\(0\)</span>，但是注意要保证<span class="math inline">\(c=\frac{1}{N}\sum c_i\)</span>，在每一轮的通信中，服务器参数<span class="math inline">\((x,c)\)</span>被传输到了参与客户端<span class="math inline">\(S\subset [N]\)</span>。</p>
 <p>在最初始，每个客户端模型会复制服务器模型：<span class="math inline">\(y_i=x\)</span>，然后他在其本地数据上进行训练，执行K轮更新： <span class="math display">\[
 y_i=y_i-\eta_l(g_i(y_i)+c-c_i)
-\]</span> 然后，本地服务器控制变量将会得到更新 <span class="math display">\[
+\]</span> <img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202308081920809.png" alt="image-20230808192000434" style="zoom:50%;" /></p>
+<blockquote>
+<p>文章希望通过<span class="math inline">\(c\)</span>和<span class="math inline">\(c_i\)</span>让每个客户端的梯度更新方向向全局最优解的方向进行偏移。</p>
+</blockquote>
+<p>然后，本地服务器控制变量将会得到更新 <span class="math display">\[
 c_i^+=\left\{  
              \begin{array}{**lr**}  
              Option 1.\quad g_i(x), or &amp;  \\  
@@ -632,6 +639,11 @@ c_i^+=\left\{
 \right.
 \]</span></p>
 <p>第一种选择是计算服务器模型x处的梯度；第二个选择是重新使用先前计算的梯度来控制变量。第二种更👍🏻！</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202308081915777.png" alt="image-20230808191515335" style="zoom:50%;" /></p>
+<blockquote>
+<p>在这张图中我们看到，文章利用客户端在K次训练的梯度下降方向的平均值作为下次梯度下降方向的预测方向。</p>
+<p>而全局模型向全局最优解的梯度下降方向近似于客户端梯度下降方向的平均值。</p>
+</blockquote>
 <p>服务器层的更新方程： <span class="math display">\[
 x=x+\frac{\eta_g}{|S|}\sum_{i\in S}(y_i-x)
 \]</span></p>
