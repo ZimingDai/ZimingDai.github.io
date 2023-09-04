@@ -162,6 +162,137 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://phoenixdai.cn/2023/09/04/2023-CVPR-idea/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Phoenix-Logo-White.png">
+      <meta itemprop="name" content="PhoenixDai">
+      <meta itemprop="description" content="Anything that doesn't kill me makes me stronger">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sycamore">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/04/2023-CVPR-idea/" class="post-title-link" itemprop="url">2023 CVPR idea</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-04 16:24:54 / Modified: 16:28:04" itemprop="dateCreated datePublished" datetime="2023-09-04T16:24:54+08:00">2023-09-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/XF-TANK/" itemprop="url" rel="index"><span itemprop="name">XF-TANK</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="联邦学习痛点分析">联邦学习痛点分析</h3>
+<p>现在来看联邦学习面对的主要问题是：</p>
+<ul>
+<li>数据异构性</li>
+<li>模型异构性</li>
+<li>灾难性遗忘（本地训练过拟合，覆盖了全局模型的知识）</li>
+</ul>
+<p>其中数据异构性会导致客户端漂移的情况发生</p>
+<blockquote>
+<p><strong>客户端漂移：</strong></p>
+<p>是指在联邦学习中，参与训练的客户端（设备或节点）在不同轮次的训练中可能产生模型参数的漂移或变化，导致其模型的性能逐渐变差。这种漂移可能是由于不同客户端的数据分布不同，或者在训练过程中客户端本身的模型更新不稳定等原因引起的。</p>
+<p><strong>Example：</strong></p>
+<p>医院A的患者主要是老年人，而医院B的患者主要是年轻人。在训练过程中，医院A的模型可能会逐渐更好地适应老年人的健康情况，导致模型在老年人数据上的准确性提高，但在年轻人数据上性能下降。相反，医院B的模型可能会更好地适应年轻人数据，导致在年轻人数据上的准确性提高，但在老年人数据上性能下降。</p>
+</blockquote>
+<blockquote>
+<p><strong>灾难性遗忘：</strong></p>
+<p>当一个模型在学习新任务时，会导致其在之前已经学习过的任务上性能下降的现象。这种情况可能发生在机器学习中，尤其是在深度学习领域，当一个模型被迫忘记之前学习的知识，以适应新的任务时。</p>
+<p><strong>Example：</strong></p>
+<p>考虑一个语言模型，最初它被训练用于生成英文文本。随后，这个模型被重新调整为执行另一个任务，比如图像分类。在调整过程中，模型需要学习识别图像中的不同对象和特征。然而，由于新任务的训练数据不同于之前的文本数据，模型可能会不可避免地"忘记"如何生成文本。结果是，即使在图像分类任务上性能提高了，模型在生成文本方面的能力可能会受到影响，导致其在之前的任务上的性能下降。</p>
+</blockquote>
+<h3 id="解决客户端漂移的一些方法">解决客户端漂移的一些方法</h3>
+<h4 id="联邦交叉相关学习">联邦交叉相关学习</h4>
+<p>采用自监督学习得到一个泛化模型，采用的是无标签的公共数据，增加相同类别特征的不变性和不同类别特征的差异性。</p>
+<p>核心思想是通过该矩阵捕捉不同设备之间的特征关联性。帮助模型更好地理解不同设备的数据分布和特征分布之间的差异。从而提升模型性能。</p>
+<h4 id="通过过去全局平均下降方向预测全局下降方向对漂移进行修正">通过过去全局平均下降方向预测全局下降方向，对漂移进行修正</h4>
+<p>文章在服务器端和每个客户端中都设置了变量<span class="math inline">\(c\)</span></p>
+<p>服务器端的参数是全局模型往最优模型的梯度下降方向，客户端中的参数是客户端的梯度更新方向</p>
+<p>其实就是服务器端利用客户端在K次训练的<strong>梯度下降方向的平均值</strong>作为<strong>下次梯度下降方向的预测方向。</strong></p>
+<p>每次客户端参数在聚合的时候，要先去除掉之前的平均下降梯度，然后再补充上预测的全局梯度下降方向。</p>
+<h4 id="定义局部漂移变量并将其放入损失函数中">定义局部漂移变量并将其放入损失函数中</h4>
+<p>为客户端定义了局部漂移变量，该变量应该为全局模型与局部模型的差值，将其放入到目标函数中。</p>
+<p>这个方法和SCAFFOLD的区别就是，将惩罚项放入到目标函数中，会在局部模型训练的时候就向全局模型靠拢，然后再加上SCAFFOLD的修正项</p>
+<h4 id="在全局模型聚合后利用本地模型提取的知识微调全局模型">在全局模型聚合后利用本地模型提取的知识微调全局模型</h4>
+<p>在每一轮通信中，FedFTG随机选择一组客户端，向他们广播全局模型。每个客户端使用全局模型初始化本地模型，并使用本地优化器对其进行培训。服务器收集本地模型并将其聚合为一个初步的全局模型。FedFTG没有将聚合的模型直接广播回每个客户机，而是使用<strong>从本地模型中提取的知识在服务器中微调这个初步的全局模型。</strong></p>
+<p>维护一个条件生成器来生成和真实数据分布一样的伪数据，并通过定义损失函数来获得硬样本（不容易区分的样本）作为知识蒸馏所用的训练集。</p>
+<p>利用每个客户端的伪数据和客户端模型进行知识蒸馏微调。</p>
+<h4 id="利用公共数据集作为客户端沟通桥梁">利用公共数据集作为客户端沟通桥梁</h4>
+<p>利用客户端在公共数据集的输出来获得该客户端的知识分布，利用KL散度对知识分布差异进行量化。差异越大越说明这两个客户端之间相互学习的越多。每个客户端都保存其与其他所有客户端的知识分布差异。在训练的时候，保证其与其他客户端的知识分布差异最小。</p>
+<h3 id="解决灾难性遗忘的一些方法">解决灾难性遗忘的一些方法</h3>
+<h4 id="预训练模型和全局模型双重蒸馏">预训练模型和全局模型双重蒸馏</h4>
+<p>为了避免在本地训练的时候模型参数逐渐覆盖之前的参数，该方法通过兼顾本地学习的知识和其他客户端学习知识的蒸馏方法。</p>
+<p>文章将全局模型当做领域间的教师模型，因为这个模型包含了所有客户端的知识，可以用来减少过拟合。</p>
+<p>文章将客户端在本地数据集上预训练的模型当做本地的教师模型，用来传授本地的知识。</p>
+<h3 id="暑假想法">2023.8暑假想法</h3>
+<h4 id="section"><strong>20230727：</strong></h4>
+<p>让服务器保存一个N*N的矩阵，矩阵内部保存每个服务端对应的聚合参数。初始的聚合参数可以通过两个客户端数据分布的相似性(KL散度)进行赋值，相似性高的客户端的权重更高。客户端可以生成一些符合自身数据集分布的伪数据（保证隐私）。为了简化计算，可以进行分组，将尽量相似的客户端分成一组。</p>
+<blockquote>
+<p>借鉴：Layer-wised Model Aggregation for Personalized Federated Learning</p>
+</blockquote>
+<h4 id="section-1"><strong>20230805：</strong></h4>
+<p>我们要解决的问题是什么：异构的数据+异构的模型 -&gt; 非IID导致模型漂移+灾难性遗忘；异构的模型无法直接聚合</p>
+<p>初步的想法：利用20230727的idea构造specialist models，然后借鉴《Distilling……》论文中的方式，通过知识蒸馏将specialist model的知识统一起来。</p>
+<p>如果我们引入了Specialist model，就避免了灾难性遗忘的问题，我们直接就让他遗忘所有知识。</p>
+<h4 id="section-2"><strong>20230807：</strong></h4>
+<p>可不可以将硬样本的数据挖掘出来，通过硬样本的模型蒸馏进一步提升模型性能。</p>
+<p>模型蒸馏：需要的是专才模型，通过专家的指导，可以提升模型在这个层面的能力。</p>
+<p>联邦学习聚合：需要的是相似的模型，通过聚合的形式提升能力。</p>
+<blockquote>
+<p>借鉴：Fine-tuning Global Model via Data-Free Knowledge Distillation for Non-IID Federated Learning</p>
+</blockquote>
+<h4 id="section-3"><strong>20230808：</strong></h4>
+<p>利用specialist models 将全局每个类别性能最好的模型进行蒸馏出一个全局模型</p>
+<p>在SCAFFOLD论文中，作者预测了每个客户端的梯度下降方向，用的是平均值，能否在预测上进行改进？</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+  
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://phoenixdai.cn/2023/08/01/2023-GlobeCom-MG%C2%B2FL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -612,7 +743,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-07-09 11:27:42" itemprop="dateModified" datetime="2023-07-09T11:27:42+08:00">2023-07-09</time>
+                <time title="Modified: 2023-09-04 16:26:19" itemprop="dateModified" datetime="2023-09-04T16:26:19+08:00">2023-09-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -938,98 +1069,6 @@
   
   
   
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://phoenixdai.cn/2022/05/06/Deep-Learning-for-NER-Survey/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/Phoenix-Logo-White.png">
-      <meta itemprop="name" content="PhoenixDai">
-      <meta itemprop="description" content="Anything that doesn't kill me makes me stronger">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sycamore">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/06/Deep-Learning-for-NER-Survey/" class="post-title-link" itemprop="url">Deep Learning for NER Survey</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-05-06 17:01:31" itemprop="dateCreated datePublished" datetime="2022-05-06T17:01:31+08:00">2022-05-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-05 09:36:37" itemprop="dateModified" datetime="2022-11-05T09:36:37+08:00">2022-11-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Wenge/" itemprop="url" rel="index"><span itemprop="name">Wenge</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>Li, Jing, et al. "A survey on deep learning for named entity recognition." <em>IEEE Transactions on Knowledge and Data Engineering</em> 34.1 (2020): 50-70.</p>
-</blockquote>
-<ul>
-<li>我们将深入研究深度学习技术在NER中的应用，以启发和指导该领域的研究人员和从业人员。</li>
-<li>我们以表格形式整合了NER语料库，即现成的NER系统 (来自学术界和工业界)，为NER研究社区提供有用的资源。</li>
-<li>我们提出了一种新的分类法，该分类法沿着三个轴系统地组织基于DL的NER方法: 输入的分布式表示，上下文编码器 (用于捕获标签解码器的上下文相关性) 和标签解码器 (用于预测给定序列中的单词标签)。</li>
-<li>此外，我们还调查了在新的NER问题设置和应用程序中最近应用的深度学习技术的最具代表性的方法。</li>
-<li>最后，我们向读者介绍了NER系统面临的挑战，并概述了该领域的未来方向。</li>
-</ul>
-<p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/05/06/Deep-Learning-for-NER-Survey/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-  
 
   
   <nav class="pagination">
@@ -1101,7 +1140,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1114,7 +1153,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
