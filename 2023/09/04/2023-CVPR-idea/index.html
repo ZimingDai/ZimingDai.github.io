@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Phoenix-Logo-16B.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Phoenix-Logo-16B.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"phoenixdai.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="2023 CVPR idea">
+<meta property="og:url" content="http://phoenixdai.cn/2023/09/04/2023-CVPR-idea/index.html">
+<meta property="og:site_name" content="Sycamore">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-04T08:36:18.000Z">
+<meta property="article:modified_time" content="2023-09-04T08:38:35.123Z">
+<meta property="article:author" content="PhoenixDai">
+<meta property="article:tag" content="My-Papers">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://phoenixdai.cn/2023/09/04/2023-CVPR-idea/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>2023 CVPR idea | Sycamore</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sycamore</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Phoenix reborns from the ashe</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://phoenixdai.cn/2023/09/04/2023-CVPR-idea/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Phoenix-Logo-White.png">
+      <meta itemprop="name" content="PhoenixDai">
+      <meta itemprop="description" content="Anything that doesn't kill me makes me stronger">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sycamore">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2023 CVPR idea
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-09-04 16:36:18 / Modified: 16:38:35" itemprop="dateCreated datePublished" datetime="2023-09-04T16:36:18+08:00">2023-09-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/XF-TANK/" itemprop="url" rel="index"><span itemprop="name">XF-TANK</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><span id="more"></span></p>
+<h3 id="联邦学习痛点分析">联邦学习痛点分析</h3>
+<p>现在来看联邦学习面对的主要问题是：</p>
+<ul>
+<li>数据异构性</li>
+<li>模型异构性</li>
+<li>灾难性遗忘（本地训练过拟合，覆盖了全局模型的知识）</li>
+</ul>
+<p>其中数据异构性会导致客户端漂移的情况发生</p>
+<blockquote>
+<p><strong>客户端漂移：</strong></p>
+<p>是指在联邦学习中，参与训练的客户端（设备或节点）在不同轮次的训练中可能产生模型参数的漂移或变化，导致其模型的性能逐渐变差。这种漂移可能是由于不同客户端的数据分布不同，或者在训练过程中客户端本身的模型更新不稳定等原因引起的。</p>
+<p><strong>Example：</strong></p>
+<p>医院A的患者主要是老年人，而医院B的患者主要是年轻人。在训练过程中，医院A的模型可能会逐渐更好地适应老年人的健康情况，导致模型在老年人数据上的准确性提高，但在年轻人数据上性能下降。相反，医院B的模型可能会更好地适应年轻人数据，导致在年轻人数据上的准确性提高，但在老年人数据上性能下降。</p>
+</blockquote>
+<blockquote>
+<p><strong>灾难性遗忘：</strong></p>
+<p>当一个模型在学习新任务时，会导致其在之前已经学习过的任务上性能下降的现象。这种情况可能发生在机器学习中，尤其是在深度学习领域，当一个模型被迫忘记之前学习的知识，以适应新的任务时。</p>
+<p><strong>Example：</strong></p>
+<p>考虑一个语言模型，最初它被训练用于生成英文文本。随后，这个模型被重新调整为执行另一个任务，比如图像分类。在调整过程中，模型需要学习识别图像中的不同对象和特征。然而，由于新任务的训练数据不同于之前的文本数据，模型可能会不可避免地"忘记"如何生成文本。结果是，即使在图像分类任务上性能提高了，模型在生成文本方面的能力可能会受到影响，导致其在之前的任务上的性能下降。</p>
+</blockquote>
+<h3 id="解决客户端漂移的一些方法">解决客户端漂移的一些方法</h3>
+<h4 id="联邦交叉相关学习">联邦交叉相关学习</h4>
+<p>采用自监督学习得到一个泛化模型，采用的是无标签的公共数据，增加相同类别特征的不变性和不同类别特征的差异性。</p>
+<p>核心思想是通过该矩阵捕捉不同设备之间的特征关联性。帮助模型更好地理解不同设备的数据分布和特征分布之间的差异。从而提升模型性能。</p>
+<h4 id="通过过去全局平均下降方向预测全局下降方向对漂移进行修正">通过过去全局平均下降方向预测全局下降方向，对漂移进行修正</h4>
+<p>文章在服务器端和每个客户端中都设置了变量<span class="math inline">\(c\)</span></p>
+<p>服务器端的参数是全局模型往最优模型的梯度下降方向，客户端中的参数是客户端的梯度更新方向</p>
+<p>其实就是服务器端利用客户端在K次训练的<strong>梯度下降方向的平均值</strong>作为<strong>下次梯度下降方向的预测方向。</strong></p>
+<p>每次客户端参数在聚合的时候，要先去除掉之前的平均下降梯度，然后再补充上预测的全局梯度下降方向。</p>
+<h4 id="定义局部漂移变量并将其放入损失函数中">定义局部漂移变量并将其放入损失函数中</h4>
+<p>为客户端定义了局部漂移变量，该变量应该为全局模型与局部模型的差值，将其放入到目标函数中。</p>
+<p>这个方法和SCAFFOLD的区别就是，将惩罚项放入到目标函数中，会在局部模型训练的时候就向全局模型靠拢，然后再加上SCAFFOLD的修正项</p>
+<h4 id="在全局模型聚合后利用本地模型提取的知识微调全局模型">在全局模型聚合后利用本地模型提取的知识微调全局模型</h4>
+<p>在每一轮通信中，FedFTG随机选择一组客户端，向他们广播全局模型。每个客户端使用全局模型初始化本地模型，并使用本地优化器对其进行培训。服务器收集本地模型并将其聚合为一个初步的全局模型。FedFTG没有将聚合的模型直接广播回每个客户机，而是使用<strong>从本地模型中提取的知识在服务器中微调这个初步的全局模型。</strong></p>
+<p>维护一个条件生成器来生成和真实数据分布一样的伪数据，并通过定义损失函数来获得硬样本（不容易区分的样本）作为知识蒸馏所用的训练集。</p>
+<p>利用每个客户端的伪数据和客户端模型进行知识蒸馏微调。</p>
+<h4 id="利用公共数据集作为客户端沟通桥梁">利用公共数据集作为客户端沟通桥梁</h4>
+<p>利用客户端在公共数据集的输出来获得该客户端的知识分布，利用KL散度对知识分布差异进行量化。差异越大越说明这两个客户端之间相互学习的越多。每个客户端都保存其与其他所有客户端的知识分布差异。在训练的时候，保证其与其他客户端的知识分布差异最小。</p>
+<h3 id="解决灾难性遗忘的一些方法">解决灾难性遗忘的一些方法</h3>
+<h4 id="预训练模型和全局模型双重蒸馏">预训练模型和全局模型双重蒸馏</h4>
+<p>为了避免在本地训练的时候模型参数逐渐覆盖之前的参数，该方法通过兼顾本地学习的知识和其他客户端学习知识的蒸馏方法。</p>
+<p>文章将全局模型当做领域间的教师模型，因为这个模型包含了所有客户端的知识，可以用来减少过拟合。</p>
+<p>文章将客户端在本地数据集上预训练的模型当做本地的教师模型，用来传授本地的知识。</p>
+<h3 id="暑假想法">2023.8暑假想法</h3>
+<h4 id="section"><strong>20230727：</strong></h4>
+<p>让服务器保存一个N*N的矩阵，矩阵内部保存每个服务端对应的聚合参数。初始的聚合参数可以通过两个客户端数据分布的相似性(KL散度)进行赋值，相似性高的客户端的权重更高。客户端可以生成一些符合自身数据集分布的伪数据（保证隐私）。为了简化计算，可以进行分组，将尽量相似的客户端分成一组。</p>
+<blockquote>
+<p>借鉴：Layer-wised Model Aggregation for Personalized Federated Learning</p>
+</blockquote>
+<h4 id="section-1"><strong>20230805：</strong></h4>
+<p>我们要解决的问题是什么：异构的数据+异构的模型 -&gt; 非IID导致模型漂移+灾难性遗忘；异构的模型无法直接聚合</p>
+<p>初步的想法：利用20230727的idea构造specialist models，然后借鉴《Distilling……》论文中的方式，通过知识蒸馏将specialist model的知识统一起来。</p>
+<p>如果我们引入了Specialist model，就避免了灾难性遗忘的问题，我们直接就让他遗忘所有知识。</p>
+<h4 id="section-2"><strong>20230807：</strong></h4>
+<p>可不可以将硬样本的数据挖掘出来，通过硬样本的模型蒸馏进一步提升模型性能。</p>
+<p>模型蒸馏：需要的是专才模型，通过专家的指导，可以提升模型在这个层面的能力。</p>
+<p>联邦学习聚合：需要的是相似的模型，通过聚合的形式提升能力。</p>
+<blockquote>
+<p>借鉴：Fine-tuning Global Model via Data-Free Knowledge Distillation for Non-IID Federated Learning</p>
+</blockquote>
+<h4 id="section-3"><strong>20230808：</strong></h4>
+<p>利用specialist models 将全局每个类别性能最好的模型进行蒸馏出一个全局模型</p>
+<p>在SCAFFOLD论文中，作者预测了每个客户端的梯度下降方向，用的是平均值，能否在预测上进行改进？</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>PhoenixDai
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://phoenixdai.cn/2023/09/04/2023-CVPR-idea/" title="2023 CVPR idea">http://phoenixdai.cn/2023/09/04/2023-CVPR-idea/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/My-Papers/" rel="tag"># My-Papers</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/08/01/2023-GlobeCom-MG%C2%B2FL/" rel="prev" title="2023 GlobeCom MG²FL">
+      <i class="fa fa-chevron-left"></i> 2023 GlobeCom MG²FL
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+  
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E7%97%9B%E7%82%B9%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">联邦学习痛点分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%BC%82%E7%A7%BB%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">解决客户端漂移的一些方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E4%BA%A4%E5%8F%89%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0"><span class="nav-number">2.1.</span> <span class="nav-text">联邦交叉相关学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E8%BF%87%E5%8E%BB%E5%85%A8%E5%B1%80%E5%B9%B3%E5%9D%87%E4%B8%8B%E9%99%8D%E6%96%B9%E5%90%91%E9%A2%84%E6%B5%8B%E5%85%A8%E5%B1%80%E4%B8%8B%E9%99%8D%E6%96%B9%E5%90%91%E5%AF%B9%E6%BC%82%E7%A7%BB%E8%BF%9B%E8%A1%8C%E4%BF%AE%E6%AD%A3"><span class="nav-number">2.2.</span> <span class="nav-text">通过过去全局平均下降方向预测全局下降方向，对漂移进行修正</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%B1%80%E9%83%A8%E6%BC%82%E7%A7%BB%E5%8F%98%E9%87%8F%E5%B9%B6%E5%B0%86%E5%85%B6%E6%94%BE%E5%85%A5%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E4%B8%AD"><span class="nav-number">2.3.</span> <span class="nav-text">定义局部漂移变量并将其放入损失函数中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E5%85%A8%E5%B1%80%E6%A8%A1%E5%9E%8B%E8%81%9A%E5%90%88%E5%90%8E%E5%88%A9%E7%94%A8%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%9E%8B%E6%8F%90%E5%8F%96%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BE%AE%E8%B0%83%E5%85%A8%E5%B1%80%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.4.</span> <span class="nav-text">在全局模型聚合后利用本地模型提取的知识微调全局模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%85%AC%E5%85%B1%E6%95%B0%E6%8D%AE%E9%9B%86%E4%BD%9C%E4%B8%BA%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%B2%9F%E9%80%9A%E6%A1%A5%E6%A2%81"><span class="nav-number">2.5.</span> <span class="nav-text">利用公共数据集作为客户端沟通桥梁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E7%81%BE%E9%9A%BE%E6%80%A7%E9%81%97%E5%BF%98%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">解决灾难性遗忘的一些方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E5%92%8C%E5%85%A8%E5%B1%80%E6%A8%A1%E5%9E%8B%E5%8F%8C%E9%87%8D%E8%92%B8%E9%A6%8F"><span class="nav-number">3.1.</span> <span class="nav-text">预训练模型和全局模型双重蒸馏</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%91%E5%81%87%E6%83%B3%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">2023.8暑假想法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#section"><span class="nav-number">4.1.</span> <span class="nav-text">20230727：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#section-1"><span class="nav-number">4.2.</span> <span class="nav-text">20230805：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#section-2"><span class="nav-number">4.3.</span> <span class="nav-text">20230807：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#section-3"><span class="nav-number">4.4.</span> <span class="nav-text">20230808：</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="PhoenixDai"
+      src="/images/Phoenix-Logo-White.png">
+  <p class="site-author-name" itemprop="name">PhoenixDai</p>
+  <div class="site-description" itemprop="description">Anything that doesn't kill me makes me stronger</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZimingDai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZimingDai" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:phoenixdai2001@163.com" title="E-Mail → mailto:phoenixdai2001@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2022-01 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PhoenixDai</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='48,0,65' opacity='0.9' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
