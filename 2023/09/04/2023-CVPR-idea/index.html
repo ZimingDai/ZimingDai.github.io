@@ -22,13 +22,15 @@
     var CONFIG = {"hostname":"phoenixdai.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="为了解决联邦学习中异构数据导致的客户端漂移以及灾难性遗忘产生的针对下一篇CCF A的idea。">
+<meta property="og:type" content="article">
 <meta property="og:title" content="2023 CVPR idea">
 <meta property="og:url" content="http://phoenixdai.cn/2023/09/04/2023-CVPR-idea/index.html">
 <meta property="og:site_name" content="Sycamore">
+<meta property="og:description" content="为了解决联邦学习中异构数据导致的客户端漂移以及灾难性遗忘产生的针对下一篇CCF A的idea。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-04T08:36:18.000Z">
-<meta property="article:modified_time" content="2023-09-04T08:38:35.123Z">
+<meta property="article:modified_time" content="2023-09-05T09:00:41.572Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="My-Papers">
 <meta name="twitter:card" content="summary">
@@ -187,10 +189,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2023-09-04 16:36:18 / Modified: 16:38:35" itemprop="dateCreated datePublished" datetime="2023-09-04T16:36:18+08:00">2023-09-04</time>
+              <time title="Created: 2023-09-04 16:36:18" itemprop="dateCreated datePublished" datetime="2023-09-04T16:36:18+08:00">2023-09-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-09-05 17:00:41" itemprop="dateModified" datetime="2023-09-05T17:00:41+08:00">2023-09-05</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -212,7 +220,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><span id="more"></span></p>
+        <p>为了解决联邦学习中异构数据导致的客户端漂移以及灾难性遗忘产生的针对下一篇CCF A的idea。</p>
+<span id="more"></span>
 <h3 id="联邦学习痛点分析">联邦学习痛点分析</h3>
 <p>现在来看联邦学习面对的主要问题是：</p>
 <ul>
@@ -256,6 +265,17 @@
 <p>为了避免在本地训练的时候模型参数逐渐覆盖之前的参数，该方法通过兼顾本地学习的知识和其他客户端学习知识的蒸馏方法。</p>
 <p>文章将全局模型当做领域间的教师模型，因为这个模型包含了所有客户端的知识，可以用来减少过拟合。</p>
 <p>文章将客户端在本地数据集上预训练的模型当做本地的教师模型，用来传授本地的知识。</p>
+<h4 id="利用null-space空间清除对过往模型的干扰">利用Null Space空间，清除对过往模型的干扰</h4>
+<blockquote>
+<p>Training networks in null space of feature covariance for continual learning. <em>CVPR</em>. 2021.</p>
+</blockquote>
+<blockquote>
+<p>Learning Federated Visual Prompt in Null Space for MRI Reconstruction. <em>CVPR</em>. 2023.</p>
+</blockquote>
+<p><strong>为什么在零空间内进行梯度下降可以帮助避免灾难性遗忘呢？</strong></p>
+<p>不影响先前任务的方向: 如果你的更新在之前任务的零空间内，那么这意味着你正在在一个方向上更新权重，这个方向不会改变之前任务的输出。因此，通过限制梯度下降的方向在零空间内，你确保了新任务的学习不会“干扰”或“忘记”之前的任务。</p>
+<p>权重空间的分离: 通过限制更新到零空间，你实际上是在权重空间中为不同的任务创建了分离的“子空间”。这意味着每个任务都有自己的特定方向或子空间进行权重更新，而不会影响其他任务。</p>
+<p>充分利用网络容量: 而不是让所有任务共享同一个权重空间，使用零空间技术使得不同任务可以在不同的子空间内找到其最优权重。这有效地利用了整个网络的容量，同时减少了任务间的互相干扰。</p>
 <h3 id="暑假想法">2023.8暑假想法</h3>
 <h4 id="section"><strong>20230727：</strong></h4>
 <p>让服务器保存一个N*N的矩阵，矩阵内部保存每个服务端对应的聚合参数。初始的聚合参数可以通过两个客户端数据分布的相似性(KL散度)进行赋值，相似性高的客户端的权重更高。客户端可以生成一些符合自身数据集分布的伪数据（保证隐私）。为了简化计算，可以进行分组，将尽量相似的客户端分成一组。</p>
@@ -276,6 +296,8 @@
 <h4 id="section-3"><strong>20230808：</strong></h4>
 <p>利用specialist models 将全局每个类别性能最好的模型进行蒸馏出一个全局模型</p>
 <p>在SCAFFOLD论文中，作者预测了每个客户端的梯度下降方向，用的是平均值，能否在预测上进行改进？</p>
+<h4 id="section-4">20230904</h4>
+<p>感觉还是可以通过图分割，每个客户端会根据<strong>KL散度</strong>构建全连通图，然后利用图分割将设备分成各个组，保证每个组内的数据分布是相似的。（多粒度也可以）。然后每个组内的模型通过模型聚合形成<strong>专才模型</strong>。专才模型会对global模型进行一个蒸馏微调操作。</p>
 
     </div>
 
@@ -373,7 +395,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E7%97%9B%E7%82%B9%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">联邦学习痛点分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%BC%82%E7%A7%BB%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">解决客户端漂移的一些方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E4%BA%A4%E5%8F%89%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0"><span class="nav-number">2.1.</span> <span class="nav-text">联邦交叉相关学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E8%BF%87%E5%8E%BB%E5%85%A8%E5%B1%80%E5%B9%B3%E5%9D%87%E4%B8%8B%E9%99%8D%E6%96%B9%E5%90%91%E9%A2%84%E6%B5%8B%E5%85%A8%E5%B1%80%E4%B8%8B%E9%99%8D%E6%96%B9%E5%90%91%E5%AF%B9%E6%BC%82%E7%A7%BB%E8%BF%9B%E8%A1%8C%E4%BF%AE%E6%AD%A3"><span class="nav-number">2.2.</span> <span class="nav-text">通过过去全局平均下降方向预测全局下降方向，对漂移进行修正</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%B1%80%E9%83%A8%E6%BC%82%E7%A7%BB%E5%8F%98%E9%87%8F%E5%B9%B6%E5%B0%86%E5%85%B6%E6%94%BE%E5%85%A5%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E4%B8%AD"><span class="nav-number">2.3.</span> <span class="nav-text">定义局部漂移变量并将其放入损失函数中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E5%85%A8%E5%B1%80%E6%A8%A1%E5%9E%8B%E8%81%9A%E5%90%88%E5%90%8E%E5%88%A9%E7%94%A8%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%9E%8B%E6%8F%90%E5%8F%96%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BE%AE%E8%B0%83%E5%85%A8%E5%B1%80%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.4.</span> <span class="nav-text">在全局模型聚合后利用本地模型提取的知识微调全局模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%85%AC%E5%85%B1%E6%95%B0%E6%8D%AE%E9%9B%86%E4%BD%9C%E4%B8%BA%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%B2%9F%E9%80%9A%E6%A1%A5%E6%A2%81"><span class="nav-number">2.5.</span> <span class="nav-text">利用公共数据集作为客户端沟通桥梁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E7%81%BE%E9%9A%BE%E6%80%A7%E9%81%97%E5%BF%98%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">解决灾难性遗忘的一些方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E5%92%8C%E5%85%A8%E5%B1%80%E6%A8%A1%E5%9E%8B%E5%8F%8C%E9%87%8D%E8%92%B8%E9%A6%8F"><span class="nav-number">3.1.</span> <span class="nav-text">预训练模型和全局模型双重蒸馏</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%91%E5%81%87%E6%83%B3%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">2023.8暑假想法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#section"><span class="nav-number">4.1.</span> <span class="nav-text">20230727：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#section-1"><span class="nav-number">4.2.</span> <span class="nav-text">20230805：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#section-2"><span class="nav-number">4.3.</span> <span class="nav-text">20230807：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#section-3"><span class="nav-number">4.4.</span> <span class="nav-text">20230808：</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0%E7%97%9B%E7%82%B9%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">联邦学习痛点分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%BC%82%E7%A7%BB%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">解决客户端漂移的一些方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E9%82%A6%E4%BA%A4%E5%8F%89%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0"><span class="nav-number">2.1.</span> <span class="nav-text">联邦交叉相关学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E8%BF%87%E5%8E%BB%E5%85%A8%E5%B1%80%E5%B9%B3%E5%9D%87%E4%B8%8B%E9%99%8D%E6%96%B9%E5%90%91%E9%A2%84%E6%B5%8B%E5%85%A8%E5%B1%80%E4%B8%8B%E9%99%8D%E6%96%B9%E5%90%91%E5%AF%B9%E6%BC%82%E7%A7%BB%E8%BF%9B%E8%A1%8C%E4%BF%AE%E6%AD%A3"><span class="nav-number">2.2.</span> <span class="nav-text">通过过去全局平均下降方向预测全局下降方向，对漂移进行修正</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%B1%80%E9%83%A8%E6%BC%82%E7%A7%BB%E5%8F%98%E9%87%8F%E5%B9%B6%E5%B0%86%E5%85%B6%E6%94%BE%E5%85%A5%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E4%B8%AD"><span class="nav-number">2.3.</span> <span class="nav-text">定义局部漂移变量并将其放入损失函数中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E5%85%A8%E5%B1%80%E6%A8%A1%E5%9E%8B%E8%81%9A%E5%90%88%E5%90%8E%E5%88%A9%E7%94%A8%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%9E%8B%E6%8F%90%E5%8F%96%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BE%AE%E8%B0%83%E5%85%A8%E5%B1%80%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.4.</span> <span class="nav-text">在全局模型聚合后利用本地模型提取的知识微调全局模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%85%AC%E5%85%B1%E6%95%B0%E6%8D%AE%E9%9B%86%E4%BD%9C%E4%B8%BA%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%B2%9F%E9%80%9A%E6%A1%A5%E6%A2%81"><span class="nav-number">2.5.</span> <span class="nav-text">利用公共数据集作为客户端沟通桥梁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E7%81%BE%E9%9A%BE%E6%80%A7%E9%81%97%E5%BF%98%E7%9A%84%E4%B8%80%E4%BA%9B%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">解决灾难性遗忘的一些方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E5%92%8C%E5%85%A8%E5%B1%80%E6%A8%A1%E5%9E%8B%E5%8F%8C%E9%87%8D%E8%92%B8%E9%A6%8F"><span class="nav-number">3.1.</span> <span class="nav-text">预训练模型和全局模型双重蒸馏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A9%E7%94%A8null-space%E7%A9%BA%E9%97%B4%E6%B8%85%E9%99%A4%E5%AF%B9%E8%BF%87%E5%BE%80%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%B9%B2%E6%89%B0"><span class="nav-number">3.2.</span> <span class="nav-text">利用Null Space空间，清除对过往模型的干扰</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%91%E5%81%87%E6%83%B3%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">2023.8暑假想法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#section"><span class="nav-number">4.1.</span> <span class="nav-text">20230727：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#section-1"><span class="nav-number">4.2.</span> <span class="nav-text">20230805：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#section-2"><span class="nav-number">4.3.</span> <span class="nav-text">20230807：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#section-3"><span class="nav-number">4.4.</span> <span class="nav-text">20230808：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#section-4"><span class="nav-number">4.5.</span> <span class="nav-text">20230904</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
