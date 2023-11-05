@@ -22,22 +22,27 @@
     var CONFIG = {"hostname":"phoenixdai.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="解决Windows掉在git_bash中不能用clash的情况 如果是MacOS，直接在右上角的Clash选择复制终端代理指令">
+  <meta name="description" content="本教程适配于采用M.2 NVMe SSD的Jetson Xavier NX板子。介绍了采用EMMC作为内置储存的Jetson Xavier NX该如何烧写程序并完成扩容。血🩸与泪😢的旅途。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="终端使用Clash代理加速">
-<meta property="og:url" content="http://phoenixdai.cn/2023/09/23/%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A8Clash%E4%BB%A3%E7%90%86%E5%8A%A0%E9%80%9F/index.html">
+<meta property="og:title" content="Jetson Xavier NX 烧录系统全教程">
+<meta property="og:url" content="http://phoenixdai.cn/2023/11/05/Jetson-Xavier-NX-%E7%83%A7%E5%BD%95%E7%B3%BB%E7%BB%9F%E5%85%A8%E6%95%99%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Sycamore">
-<meta property="og:description" content="解决Windows掉在git_bash中不能用clash的情况 如果是MacOS，直接在右上角的Clash选择复制终端代理指令">
+<meta property="og:description" content="本教程适配于采用M.2 NVMe SSD的Jetson Xavier NX板子。介绍了采用EMMC作为内置储存的Jetson Xavier NX该如何烧写程序并完成扩容。血🩸与泪😢的旅途。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202309231847161.jpg">
-<meta property="article:published_time" content="2023-09-23T08:08:58.000Z">
-<meta property="article:modified_time" content="2023-09-23T11:11:50.065Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311051822011.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311051830172.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311051827116.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311051830604.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311051831051.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311051840015.png">
+<meta property="article:published_time" content="2023-11-05T10:02:21.000Z">
+<meta property="article:modified_time" content="2023-11-05T10:49:27.897Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="Others">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202309231847161.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311051822011.png">
 
-<link rel="canonical" href="http://phoenixdai.cn/2023/09/23/%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A8Clash%E4%BB%A3%E7%90%86%E5%8A%A0%E9%80%9F/">
+<link rel="canonical" href="http://phoenixdai.cn/2023/11/05/Jetson-Xavier-NX-%E7%83%A7%E5%BD%95%E7%B3%BB%E7%BB%9F%E5%85%A8%E6%95%99%E7%A8%8B/">
 
 
 <script id="page-configurations">
@@ -50,7 +55,7 @@
   };
 </script>
 
-  <title>终端使用Clash代理加速 | Sycamore</title>
+  <title>Jetson Xavier NX 烧录系统全教程 | Sycamore</title>
   
 
 
@@ -168,7 +173,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://phoenixdai.cn/2023/09/23/%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A8Clash%E4%BB%A3%E7%90%86%E5%8A%A0%E9%80%9F/">
+    <link itemprop="mainEntityOfPage" href="http://phoenixdai.cn/2023/11/05/Jetson-Xavier-NX-%E7%83%A7%E5%BD%95%E7%B3%BB%E7%BB%9F%E5%85%A8%E6%95%99%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/Phoenix-Logo-White.png">
@@ -181,7 +186,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          终端使用Clash代理加速
+          Jetson Xavier NX 烧录系统全教程
         </h1>
 
         <div class="post-meta">
@@ -193,7 +198,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-09-23 16:08:58 / Modified: 19:11:50" itemprop="dateCreated datePublished" datetime="2023-09-23T16:08:58+08:00">2023-09-23</time>
+              <time title="Created: 2023-11-05 18:02:21 / Modified: 18:49:27" itemprop="dateCreated datePublished" datetime="2023-11-05T18:02:21+08:00">2023-11-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -216,41 +221,48 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>解决Windows掉在<code>git_bash</code>中不能用clash的情况</p>
-<p>如果是MacOS，直接在右上角的Clash选择复制终端代理指令</p>
+        <p>本教程适配于采用M.2 NVMe SSD的Jetson Xavier NX板子。介绍了采用EMMC作为内置储存的Jetson Xavier NX该如何<strong>烧写程序</strong>并<strong>完成扩</strong>容。血🩸与泪😢的旅途。</p>
 <p><span id="more"></span></p>
-<p>MacOS复制的指令为： <code>export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890</code></p>
-<h3 id="环境">环境</h3>
-<p>Windows 11， Clash for Windows</p>
-<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202309231847161.jpg" alt="img_v2_95803079-bf45-4364-9a02-19db79b363cg" style="zoom:67%;" /></p>
-<p><strong><em>这里注意：主程序默认端口为 7890</em></strong></p>
-<h3 id="cmd">cmd</h3>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> http_proxy=http://<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">7890</span></span><br><span class="line"><span class="built_in">set</span> https_proxy=http://<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">7890</span></span><br></pre></td></tr></table></figure>
-<p>还原命令：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> http_proxy=</span><br><span class="line"><span class="built_in">set</span> https_proxy=</span><br></pre></td></tr></table></figure>
-<h3 id="git-bash">Git Bash</h3>
-<p>通过设置<code>http_proxy</code>和<code>https_proxy</code>，可以让终端走指定的代理</p>
-<p>配置脚本如下，在终端直接执行，只会<strong>临时起效：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> http_proxy=http://127.0.0.1:7890</span><br><span class="line"><span class="built_in">export</span> https_proxy=<span class="variable">$http_proxy</span></span><br></pre></td></tr></table></figure>
-<p><code>7890</code>是<code>http</code>代理对应的端口，和<code>clash</code>中的端口号一致。</p>
-<h4 id="便捷脚本">便捷脚本</h4>
-<p>这里提供一个便捷的脚本，里面包含打开、关闭功能：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function proxy_on()&#123;</span><br><span class="line">	export http_proxy=http://127.0.0.1:7890</span><br><span class="line">	export https_proxy=$http_proxy</span><br><span class="line">	echo -e &quot;终端代理已开启。&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function proxy_off()&#123;</span><br><span class="line">	unset http_proxy https_proxy</span><br><span class="line">	echo -e &quot;终端代理已关闭。&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过<code>proxy_on</code>开启，从<code>proxy_off</code>关闭代理。</p>
-<p>接下来需要把脚本写入<code>.bash_profile</code>或者<code>.zprofile</code>这样就可以永久生效。</p>
-<p>至于到底是哪个文件，可以根据指令<code>echo $SHELL</code>返回的结果判断：</p>
-<ul>
-<li><code>/bin/bash</code> -&gt; <code>.bash_profile</code></li>
-<li><code>/bin/zsh</code> -&gt; <code>.zprofile</code></li>
-</ul>
-<p>可以执行安装脚本（追加内容+生效），注意一定根据上面的结果更改<code>.bash_profile</code>：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt; ~/.bash_profile &lt;&lt; EOF</span><br><span class="line">function proxy_on() &#123;</span><br><span class="line">    export http_proxy=http://127.0.0.1:7890</span><br><span class="line">    export https_proxy=\$http_proxy</span><br><span class="line">    echo -e &quot;终端代理已开启。&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function proxy_off()&#123;</span><br><span class="line">    unset http_proxy https_proxy</span><br><span class="line">    echo -e &quot;终端代理已关闭。&quot;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
-<p>打开代理</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy_on</span><br></pre></td></tr></table></figure>
-<p>关闭代理</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy_off</span><br></pre></td></tr></table></figure>
-<p>可以执行<code>curl cip.cc</code>进行验证：（clash开全局）</p>
-<p><strong>但是使用<code>git clone</code>的时候不需要开全局</strong></p>
+<h3 id="host虚拟机准备">HOST虚拟机准备</h3>
+<p>由于Jetson Xavier NX采用的是内置的EMMC为储存卡，而不是采用可以插拔的SD卡，所以我们需要用NVIDIA的SDK Manager进行烧写程序，这个软件的运行环境为Linux。</p>
+<h4 id="下载vmware安装ubuntu">下载VMware，安装Ubuntu</h4>
+<p><strong>VMware17.0获取网址：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/AJ5Rio6aJr_D5NmJMKTRmA?poc_token=HM9qR2WjyYXc_fUVf5vQ3XXmJBvJQUoQ-5gnmRgH">VMware17.0安装教程</a></strong></p>
+<p>在VMware中安装Ubuntu系统，Ubuntu系统的版本注意：</p>
+<ol type="1">
+<li>Ubuntu18.04只可以选择Jetpack4.x</li>
+<li>Ubuntu20.04+可以选择Jetpack5.x</li>
+<li>Jetpack4.x -&gt; Python 3.6</li>
+<li>Jetpack5.x -&gt; Python 3.8</li>
+</ol>
+<p>对python版本有要求的一定要注意Jetpack版本！！</p>
+<p><strong>Ubuntu的下载网址：https://ubuntu.com/download/alternative-downloads</strong></p>
+<p>按照标准的虚拟机安装环境步骤进行安装。</p>
+<h4 id="虚拟机使用主机vpn">虚拟机使用主机VPN</h4>
+<p>由于SDK Manager需要翻墙下载，所以需要虚拟机需要使用主机网络</p>
+<p>参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45910027/article/details/127607439">如何在虚拟机Ubuntu下使用主机网络</a></p>
+<p>首先查看本机的Clash查看VPN端口号是多少？</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311051822011.png" alt="image-20231105182240822" style="zoom: 50%;" /></p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311051830172.jpg" alt="img_v2_e066f759-e810-4163-897c-41f85707ef0g" style="zoom:67%;" /></p>
+<p>Mac端和Windows端类似，去看代理端口是否为：<strong>7890</strong></p>
+<p>在Windows界面使用win+r -&gt; cmd调出terminal</p>
+<p>在terminal中输入<code>ipconfig</code>获取IP地址：</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311051827116.jpg" alt="img_v2_8b9845f9-7414-4278-b164-c551cbb2ae7g" style="zoom:67%;" /></p>
+<p>记住VMware的IPv4地址，然后进入虚拟机界面，在设置中找到network界面。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311051830604.jpg" alt="img_v2_2ba0aee1-701d-4629-9515-551f08ee4c4g" style="zoom: 67%;" /></p>
+<p>点击Network Proxy 进入下面的界面，选择Manual，然后将Proxy后面的IP地址写为在Windows中查看的VMware地址，后面的端口号和Clash中的一致。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311051831051.jpg" alt="img_v2_6215e685-acd9-42ec-8ce2-8717610dbc1g" /></p>
+<p>如此：虚拟机就可以使用主机的VPN了。</p>
+<h4 id="下载sdk-manager">下载SDK Manager</h4>
+<p><strong>SDK Manager的下载地址：https://developer.nvidia.com/sdk-manager</strong></p>
+<p>在虚拟机中下载，下载完成后运行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ./sdkmanager_1.9.2-10899_amd64.deb</span><br></pre></td></tr></table></figure>
+<p><code>.deb</code>前为下载的SDK Manager 安装包名称。</p>
+<h3 id="烧写系统">烧写系统</h3>
+<h4 id="jetson-xavier-nx的准备">Jetson Xavier NX的准备</h4>
+<p>使用接线帽将NX的<code>FC REC</code>引脚和<code>GND</code>引脚短接，让NX进入Recovery模式，用<strong>数据线</strong>连接到电脑上，并插上电源，准备系统的烧录。</p>
+<p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311051840015.png" alt="image-20231105184016942" style="zoom:67%;" /></p>
+<p>由于我需要的是Python3.8+，所以我选择的是Ubuntu20.04系统以及Jetpack5.1.1系统。</p>
+<h4 id="sdk-manager-烧录">SDK Manager 烧录</h4>
 
     </div>
 
@@ -266,7 +278,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="http://phoenixdai.cn/2023/09/23/%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A8Clash%E4%BB%A3%E7%90%86%E5%8A%A0%E9%80%9F/" title="终端使用Clash代理加速">http://phoenixdai.cn/2023/09/23/终端使用Clash代理加速/</a>
+    <a href="http://phoenixdai.cn/2023/11/05/Jetson-Xavier-NX-%E7%83%A7%E5%BD%95%E7%B3%BB%E7%BB%9F%E5%85%A8%E6%95%99%E7%A8%8B/" title="Jetson Xavier NX 烧录系统全教程">http://phoenixdai.cn/2023/11/05/Jetson-Xavier-NX-烧录系统全教程/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -286,13 +298,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/09/04/2023-CVPR-idea/" rel="prev" title="2023 CVPR idea">
-      <i class="fa fa-chevron-left"></i> 2023 CVPR idea
+    <a href="/2023/09/23/%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A8Clash%E4%BB%A3%E7%90%86%E5%8A%A0%E9%80%9F/" rel="prev" title="终端使用Clash代理加速">
+      <i class="fa fa-chevron-left"></i> 终端使用Clash代理加速
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/11/05/Jetson-Xavier-NX-%E7%83%A7%E5%BD%95%E7%B3%BB%E7%BB%9F%E5%85%A8%E6%95%99%E7%A8%8B/" rel="next" title="Jetson Xavier NX 烧录系统全教程">
-      Jetson Xavier NX 烧录系统全教程 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -351,7 +360,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cmd"><span class="nav-number">2.</span> <span class="nav-text">cmd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-bash"><span class="nav-number">3.</span> <span class="nav-text">Git Bash</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%BF%E6%8D%B7%E8%84%9A%E6%9C%AC"><span class="nav-number">3.1.</span> <span class="nav-text">便捷脚本</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#host%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">HOST虚拟机准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDvmware%E5%AE%89%E8%A3%85ubuntu"><span class="nav-number">1.1.</span> <span class="nav-text">下载VMware，安装Ubuntu</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BD%BF%E7%94%A8%E4%B8%BB%E6%9C%BAvpn"><span class="nav-number">1.2.</span> <span class="nav-text">虚拟机使用主机VPN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDsdk-manager"><span class="nav-number">1.3.</span> <span class="nav-text">下载SDK Manager</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%83%A7%E5%86%99%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">烧写系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jetson-xavier-nx%E7%9A%84%E5%87%86%E5%A4%87"><span class="nav-number">2.1.</span> <span class="nav-text">Jetson Xavier NX的准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sdk-manager-%E7%83%A7%E5%BD%95"><span class="nav-number">2.2.</span> <span class="nav-text">SDK Manager 烧录</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
