@@ -19,7 +19,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"phoenixdai.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"phoenixdai.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"default","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="本教程适配于采用M.2 NVMe SSD的Jetson Xavier NX板子。 介绍了采用EMMC作为内置储存的Jetson Xavier NX该如何烧写程序并完成扩容。以及安装CUDA、Pytorch、torchvision教程。 血🩸与泪😢的旅途。">
@@ -58,9 +58,9 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311070841621.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311070928637.png">
 <meta property="article:published_time" content="2023-11-05T10:02:21.000Z">
-<meta property="article:modified_time" content="2023-11-07T11:15:28.341Z">
+<meta property="article:modified_time" content="2023-11-09T02:25:26.959Z">
 <meta property="article:author" content="PhoenixDai">
-<meta property="article:tag" content="Others">
+<meta property="article:tag" content="Tutorial">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311051822011.png">
 
@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-07 19:15:28" itemprop="dateModified" datetime="2023-11-07T19:15:28+08:00">2023-11-07</time>
+                <time title="Modified: 2023-11-09 10:25:26" itemprop="dateModified" datetime="2023-11-09T10:25:26+08:00">2023-11-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -442,7 +442,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Others/" rel="tag"># Others</a>
+              <a href="/tags/Tutorial/" rel="tag"># Tutorial</a>
           </div>
 
         
@@ -454,7 +454,10 @@
     <a href="/2023/09/23/%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A8Clash%E4%BB%A3%E7%90%86%E5%8A%A0%E9%80%9F/" rel="prev" title="终端使用Clash代理加速">
       <i class="fa fa-chevron-left"></i> 终端使用Clash代理加速
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/11/09/Jetson-Nano-SD%E5%8D%A1%E6%89%A9%E5%AE%B9/" rel="next" title="Jetson Nano SD卡扩容">
+      Jetson Nano SD卡扩容 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -529,7 +532,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -542,7 +545,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
