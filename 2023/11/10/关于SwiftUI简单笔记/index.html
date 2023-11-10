@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Phoenix-Logo-16B.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Phoenix-Logo-16B.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"phoenixdai.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":"default","style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="此博客记录在TwT时开发WeiPeiyang 4.0的SwiftUI笔记📒">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于SwiftUI简单笔记">
+<meta property="og:url" content="http://phoenixdai.cn/2023/11/10/%E5%85%B3%E4%BA%8ESwiftUI%E7%AE%80%E5%8D%95%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Sycamore">
+<meta property="og:description" content="此博客记录在TwT时开发WeiPeiyang 4.0的SwiftUI笔记📒">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-11-10T01:40:50.000Z">
+<meta property="article:modified_time" content="2023-11-10T01:44:53.023Z">
+<meta property="article:author" content="PhoenixDai">
+<meta property="article:tag" content="Tutorial">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://phoenixdai.cn/2023/11/10/%E5%85%B3%E4%BA%8ESwiftUI%E7%AE%80%E5%8D%95%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>关于SwiftUI简单笔记 | Sycamore</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sycamore</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Phoenix reborns from the ashe</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://phoenixdai.cn/2023/11/10/%E5%85%B3%E4%BA%8ESwiftUI%E7%AE%80%E5%8D%95%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Phoenix-Logo-White.png">
+      <meta itemprop="name" content="PhoenixDai">
+      <meta itemprop="description" content="Anything that doesn't kill me makes me stronger">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sycamore">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          关于SwiftUI简单笔记
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-11-10 09:40:50 / Modified: 09:44:53" itemprop="dateCreated datePublished" datetime="2023-11-10T09:40:50+08:00">2023-11-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SwiftUI/" itemprop="url" rel="index"><span itemprop="name">SwiftUI</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>此博客记录在TwT时开发WeiPeiyang 4.0的SwiftUI笔记📒</p>
+<p><span id="more"></span></p>
+<h1 id="基础模块">基础模块</h1>
+<h3 id="关于照片变成纯蓝色">关于照片变成纯蓝色</h3>
+<p>如果您发现图像已被某种颜色填充，例如显示为纯蓝色而不是实际图片，则可能是SwiftUI为它们着色以显示它们是可轻敲的。要解决此问题，请使用<code>renderingMode(.original)</code>修饰符强制SwiftUI显示原始图像，而不是重新着色的版本。</p>
+<h2 id="自定义修饰符">1. 自定义修饰符</h2>
+<p>SwiftUI为我们提供了内置的改性剂，如一系列的<code>font()</code>，<code>background()</code>和<code>clipShape()</code>。但是，也可以创建执行特定操作的自定义修饰符。</p>
+<p>例如，我们可能会说应用程序中的所有标题都应具有特定的样式，因此首先我们需要创建一个自定义<code>ViewModifier</code>结构来实现我们想要的功能：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Title</span>: <span class="title">ViewModifier</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">body</span>(<span class="params">content</span>: <span class="type">Content</span>)</span> -&gt; <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        content</span><br><span class="line">            .font(.largeTitle)</span><br><span class="line">            .foregroundColor(.white)</span><br><span class="line">            .padding()</span><br><span class="line">            .background(<span class="type">Color</span>.blue)</span><br><span class="line">            .clipShape(<span class="type">RoundedRectangle</span>(cornerRadius: <span class="number">10</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，我们可以将其与<code>modifier()</code>修饰符一起使用-是的，它是一个称为“修饰符”的修饰符，但是它允许我们将任何种类的修饰符应用于视图，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Text</span>(<span class="string">&quot;Hello World&quot;</span>)</span><br><span class="line">    .modifier(<span class="type">Title</span>())</span><br></pre></td></tr></table></figure>
+<p>使用自定义修饰符时，通常在其上创建扩展<code>View</code>使其易于使用的明智之举。例如，我们可以将<code>Title</code>修饰符包装在如下扩展中：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">titleStyle</span>()</span> -&gt; <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="keyword">self</span>.modifier(<span class="type">Title</span>())</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们现在可以像这样使用修饰符：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Text</span>(<span class="string">&quot;Hello World&quot;</span>)</span><br><span class="line">    .titleStyle()</span><br></pre></td></tr></table></figure>
+<p>自定义修改器不仅可以应用其他现有修改器，还可以做更多的工作-它们还可以根据需要创建新的视图结构。记住，修饰符会返回新对象，而不是修改现有对象，因此我们可以创建一个将视图嵌入堆栈并添加另一个视图的对象：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Watermark</span>: <span class="title">ViewModifier</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> text: <span class="type">String</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">body</span>(<span class="params">content</span>: <span class="type">Content</span>)</span> -&gt; <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">ZStack</span>(alignment: .bottomTrailing) &#123;</span><br><span class="line">            content</span><br><span class="line">            <span class="type">Text</span>(text)</span><br><span class="line">                .font(.caption)</span><br><span class="line">                .foregroundColor(.white)</span><br><span class="line">                .padding(<span class="number">5</span>)</span><br><span class="line">                .background(<span class="type">Color</span>.black)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">watermarked</span>(<span class="params">with</span> <span class="params">text</span>: <span class="type">String</span>)</span> -&gt; <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="keyword">self</span>.modifier(<span class="type">Watermark</span>(text: text))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有了它，我们现在可以为任何视图添加水印，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Color</span>.blue</span><br><span class="line">    .frame(width: <span class="number">300</span>, height: <span class="number">200</span>)</span><br><span class="line">    .watermarked(with: <span class="string">&quot;Hacking with Swift&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="自定义容器">2. 自定义容器</h2>
+<p>尽管您不太可能经常这样做，但我至少想向您展示，在SwiftUI应用程序中完全有可能创建自定义容器。这需要更高级的Swift知识，因为它利用了Swift的一些强大功能，因此，如果发现太多，可以跳过。</p>
+<p>为了进行试验，我们将创建一种称为a的新型堆栈<code>GridStack</code>，这将使我们能够在网格内创建任意数量的视图。我们要说的是，有一个名为struct的新结构<code>GridStack</code>，它符合<code>View</code>协议并且具有一定数量的行和列，并且在网格内部将有很多内容单元格，它们本身必须符合<code>View</code>协议。</p>
+<p>在Swift中，我们可以这样写：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GridStack</span>&lt;<span class="title">Content</span>: <span class="title">View</span>&gt;: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> rows: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">let</span> columns: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">let</span> content: (<span class="type">Int</span>, <span class="type">Int</span>) -&gt; <span class="type">Content</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="comment">// more to come</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第一行– <code>struct GridStack: View</code>使用Swift的一个更高级的功能，称为<em>通用（generics）</em>，在这种情况下，这意味着“您可以提供所需的任何种类的内容，但是无论其内容必须符合<code>View</code>协议。” 在冒号之后，我们<code>View</code>再次重复说，<code>GridStack</code>它本身也符合<code>View</code>协议。</p>
+<p>请特别注意这一<code>let content</code>行–定义了一个闭包，该闭包必须能够接受两个整数并返回我们可以显示的某种内容。</p>
+<p>我们需要通过<code>body</code>组合多个垂直和水平堆栈以创建所需数量的单元格来完成该属性。我们不需要说什么是<em>在</em>每个单元中，因为我们可以得到通过拨打我们<code>content</code>用适当的行和列关闭。</p>
+<p>因此，我们可以这样填写：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">    <span class="type">VStack</span> &#123;</span><br><span class="line">        <span class="type">ForEach</span>(<span class="number">0</span><span class="operator">..&lt;</span>rows, id: \.<span class="keyword">self</span>) &#123; row <span class="keyword">in</span></span><br><span class="line">            <span class="type">HStack</span> &#123;</span><br><span class="line">                <span class="type">ForEach</span>(<span class="number">0</span><span class="operator">..&lt;</span><span class="keyword">self</span>.columns, id: \.<span class="keyword">self</span>) &#123; column <span class="keyword">in</span></span><br><span class="line">                    <span class="keyword">self</span>.content(row, column)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong>在范围上循环时，只有在我们确定范围内的值不会随时间变化时，SwiftUI才能直接使用范围。在这里，我们使用<code>ForEach</code>with <code>0..和</code>0..，这两个值都是<em>可以</em>随时间变化的值-例如，我们可以添加更多行。在这种情况下，我们需要添加第二个参数<code>ForEach</code>，<code>id: \.self</code>以告诉SwiftUI它如何能够识别环路中的每个视图。我们将在项目5中对此进行更详细的介绍。</p>
+<p>现在我们有了一个自定义容器，我们可以使用它来编写一个视图，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ContentView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">GridStack</span>(rows: <span class="number">4</span>, columns: <span class="number">4</span>) &#123; row, col <span class="keyword">in</span></span><br><span class="line">            <span class="type">Text</span>(<span class="string">&quot;R<span class="subst">\(row)</span> C<span class="subst">\(col)</span>&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>GridStack</code>只要符合<code>View</code>协议，我们就能接受任何种类的细胞内容。因此，如果需要，我们可以给单元格一个堆栈：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">GridStack</span>(rows: <span class="number">4</span>, columns: <span class="number">4</span>) &#123; row, col <span class="keyword">in</span></span><br><span class="line">    <span class="type">HStack</span> &#123;</span><br><span class="line">        <span class="type">Image</span>(systemName: <span class="string">&quot;<span class="subst">\(row <span class="operator">*</span> <span class="number">4</span> <span class="operator">+</span> col)</span>.circle&quot;</span>)</span><br><span class="line">        <span class="type">Text</span>(<span class="string">&quot;R<span class="subst">\(row)</span> C<span class="subst">\(col)</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="想走得更远吗">想走得更远吗？</h3>
+<p>为了获得更大的灵活性，我们可以利用SwiftUI的一种称为<em>视图构建器</em>的功能，该功能允许我们发送多个视图并将其形成隐式堆栈。</p>
+<p>要使用此功能，我们需要为我们的<code>GridStack</code>结构创建一个自定义初始化程序，因此我们可以将<code>content</code>关闭标记为使用SwiftUI的视图构建器系统：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">init</span>(<span class="params">rows</span>: <span class="type">Int</span>, <span class="params">columns</span>: <span class="type">Int</span>, <span class="meta">@ViewBuilder</span> <span class="params">content</span>: <span class="keyword">@escaping</span> (<span class="type">Int</span>, <span class="type">Int</span>) -&gt; <span class="type">Content</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">self</span>.rows <span class="operator">=</span> rows</span><br><span class="line">    <span class="keyword">self</span>.columns <span class="operator">=</span> columns</span><br><span class="line">    <span class="keyword">self</span>.content <span class="operator">=</span> content</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>多数情况下，只是将参数直接复制到结构的属性中，但请注意该<code>@ViewBuilder</code>属性在那里。您还将看到该<code>@escaping</code>属性，该属性使我们可以存储闭包，以备后用。</p>
+<p>有了适当的设置，SwiftUI现在将在我们的单元格封闭内部自动创建一个隐式水平堆栈：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">GridStack</span>(rows: <span class="number">4</span>, columns: <span class="number">4</span>) &#123; row, col <span class="keyword">in</span></span><br><span class="line">    <span class="type">Image</span>(systemName: <span class="string">&quot;<span class="subst">\(row <span class="operator">*</span> <span class="number">4</span> <span class="operator">+</span> col)</span>.circle&quot;</span>)</span><br><span class="line">    <span class="type">Text</span>(<span class="string">&quot;R<span class="subst">\(row)</span> C<span class="subst">\(col)</span>&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这两个选项均有效，所以无论您喜欢哪个都可以。</p>
+<h2 id="用步进器输入数字">3. 用步进器输入数字</h2>
+<p>SwiftUI有两种让用户输入数字的方式，我们将在这里使用的一种方式是<code>Stepper</code>：一个简单的-和+按钮，可以点击以选择一个精确的数字。另一个选项是<code>Slider</code>，我们稍后将使用它-它也使我们可以从一系列值中进行选择，但不太精确。</p>
+<p>步进电机是足够聪明，将工作与任何类型的号码类型的你喜欢-你可以绑定他们<code>Int</code>，<code>Double</code>和更多的，它会自动适应。例如，我们可以创建如下属性：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@State</span> <span class="keyword">private</span> <span class="keyword">var</span> sleepAmount <span class="operator">=</span> <span class="number">8.0</span></span><br></pre></td></tr></table></figure>
+<p>然后，我们可以将其绑定到步进器，以使其显示当前值，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Stepper</span>(value: <span class="variable">$sleepAmount</span>) &#123;</span><br><span class="line">    <span class="type">Text</span>(<span class="string">&quot;<span class="subst">\(sleepAmount)</span> hours&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该代码运行时，您会看到800万小时，然后可以按-和+向下跳至7、6、5并变为负数，或者向上跳至9、10、11，依此类推。</p>
+<p>默认情况下，步进器仅受其存储范围的限制。<code>Double</code>在此示例中，我们使用a ，这意味着滑块的最大值将为1.7976931348623157e + 308。这是科学的表示法，但是它的意思是“ 1.79769乘以10的308的幂” –或更简单地说，确实是一个非常大的数字。</p>
+<p><code>Stepper</code>让我们通过提供一个<code>in</code>范围来限制我们想要接受的值，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Stepper</span>(value: <span class="variable">$sleepAmount</span>, in: <span class="number">4</span><span class="operator">...</span><span class="number">12</span>) &#123;</span><br><span class="line">    <span class="type">Text</span>(<span class="string">&quot;<span class="subst">\(sleepAmount)</span> hours&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有了这一更改，步进器将从8开始，然后允许用户在4到12（含）之间移动，但不能超过。这使我们可以控制睡眠范围，以使用户无法尝试24小时不睡觉，但也可以让我们拒绝不可能的值-例如，您不能睡眠-1小时。</p>
+<p>第三个有用的参数是<code>Stepper</code>，它是一个<code>step</code>值-每次将值移动多远-或+被点击。同样，它可以是任何类型的数字，但确实需要匹配用于绑定的类型。因此，如果要绑定到整数，则不能使用a <code>Double</code>作为步长值。</p>
+<p>在这种情况下，我们可以说用户可以选择4到12之间的任何睡眠值，以15分钟为增量移动：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Stepper</span>(value: <span class="variable">$sleepAmount</span>, in: <span class="number">4</span><span class="operator">...</span><span class="number">12</span>, step: <span class="number">0.25</span>) &#123;</span><br><span class="line">    <span class="type">Text</span>(<span class="string">&quot;<span class="subst">\(sleepAmount)</span> hours&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这开始看起来很有用–我们拥有合理范围的精确值，合理的步长增量，并且用户每次都能准确看到他们选择的内容。</p>
+<p>不过，在继续之前，让我们修复该文本：它现在显示为8.000000，这是准确的，但有点<em>过于</em>精确。以前，我们使用如下字符串内插说明符：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Text</span>(<span class="string">&quot;<span class="subst">\(sleepAmount, specifier: <span class="string">&quot;%.2f&quot;</span>)</span> hours&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>我们可以在这里使用它，但看起来很奇怪：“ 8.00小时”似乎过于临床。这是“％g”说明符在其中有用的一个很好的示例，因为它会自动从数字末尾删除不重要的零。因此，它将显示8、8.25、8.5、8.75、9，依此类推，这对于用户而言更自然。</p>
+<h2 id="使用datepicker">4. 使用DatePicker</h2>
+<p>SwiftUI为我们提供了一种专用的选择器类型<code>DatePicker</code>，该类型可以绑定到date属性。是的，Swift有一个专用的日期类型，它被称为–毫不奇怪 <code>Date</code>。</p>
+<p>因此，要使用它，您将从一个<code>@State</code>这样的属性开始：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@State</span> <span class="keyword">private</span> <span class="keyword">var</span> wakeUp <span class="operator">=</span> <span class="type">Date</span>()</span><br></pre></td></tr></table></figure>
+<p>然后，您可以将其绑定到日期选择器，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">    <span class="type">DatePicker</span>(<span class="string">&quot;Please enter a date&quot;</span>, selection: <span class="variable">$wakeUp</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>尝试在模拟器中运行该代码，以便查看其外观。您应该会看到带有日期和时间的手纺车轮，以及左侧的“请输入日期”标签。</p>
+<p>现在，您可能会认为该标签看起来丑陋，并尝试用以下标签替换它：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">DatePicker</span>(<span class="string">&quot;&quot;</span>, selection: <span class="variable">$wakeUp</span>)</span><br></pre></td></tr></table></figure>
+<p>但是，如果这样做，您将遇到<em>两个</em>问题：日期选择器即使标签为空也仍然为标签留出空间，并且屏幕阅读器处于活动状态的用户（我们对VoiceOver更为熟悉）不会知道日期是什么选择器是为。</p>
+<p>有两种选择，都可以解决问题。</p>
+<p>首先，我们可以将包裹在<code>DatePicker</code>中<code>Form</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">    <span class="type">Form</span> &#123;</span><br><span class="line">        <span class="type">DatePicker</span>(<span class="string">&quot;Please enter a date&quot;</span>, selection: <span class="variable">$wakeUp</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>就像常规一样，<code>Picker</code>这会改变SwiftUI呈现视图的方式。但是，这次我们没有得到新的观点<code>NavigationView</code>。取而代之的是，我们得到一个列表行，当点击它时它会折叠成日期选择器。</p>
+<p>这看起来<em>非常</em>好，并且将表单的简洁性与日期选择器熟悉的基于轮的用户界面相结合。可悲的是，现在这些选择器的显示方式有时会出现一些故障。我们稍后再讲。</p>
+<p>除了使用表单，还可以使用<code>labelsHidden()</code>修饰符，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">    <span class="type">DatePicker</span>(<span class="string">&quot;Please enter a date&quot;</span>, selection: <span class="variable">$wakeUp</span>)</span><br><span class="line">        .labelsHidden()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该标签仍包含原始标签，因此屏幕阅读器可以将其用于VoiceOver，但现在它们在屏幕上不再可见-日期选择器将占据屏幕上的所有水平空间。</p>
+<p>日期选择器为我们提供了几个配置选项，以控制它们的工作方式。首先，我们可以<code>displayedComponents</code>用来决定用户应该看到哪种选项：</p>
+<ul>
+<li>如果不提供此参数，则用户会看到一天，一小时和一分钟。</li>
+<li>如果使用<code>.date</code>用户，请查看月，日和年。</li>
+<li>如果使用<code>.hourAndMinute</code>用户，则仅会看到小时和分钟。</li>
+</ul>
+<p>因此，我们可以选择这样的精确时间：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">DatePicker</span>(<span class="string">&quot;Please enter a time&quot;</span>, selection: <span class="variable">$wakeUp</span>, displayedComponents: .hourAndMinute)</span><br></pre></td></tr></table></figure>
+<p>最后，有一个<code>in</code>参数与之作用相同<code>Stepper</code>：我们可以为它提供一个日期范围，并且日期选择器将确保用户不能选择超出范围。</p>
+<p>现在，我们已经使用一段时间了，您已经习惯于看到诸如<code>1 ... 5</code>或的东西<code>0 ..&lt; 10</code>，但是我们也可以将Swift日期与范围一起使用。例如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// when you create a new Date instance it will be set to the current date and time</span></span><br><span class="line"><span class="keyword">let</span> now <span class="operator">=</span> <span class="type">Date</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// create a second Date instance set to one day in seconds from now</span></span><br><span class="line"><span class="keyword">let</span> tomorrow <span class="operator">=</span> <span class="type">Date</span>().addingTimeInterval(<span class="number">86400</span>) </span><br><span class="line"></span><br><span class="line"><span class="comment">// create a range from those two</span></span><br><span class="line"><span class="keyword">let</span> range <span class="operator">=</span> now <span class="operator">...</span> tomorrow</span><br></pre></td></tr></table></figure>
+<p>确实对有用<code>DatePicker</code>，但还有更好的地方：Swift让我们形成<em>一个单边范围</em> –我们指定起始或结束但不同时指定两个范围的范围，而让Swift推断另一边。</p>
+<p>例如，我们可以这样创建一个日期选择器：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">DatePicker</span>(<span class="string">&quot;Please enter a date&quot;</span>, selection: <span class="variable">$wakeUp</span>, in: <span class="type">Date</span>()<span class="operator">...</span>)</span><br></pre></td></tr></table></figure>
+<p>这将允许将来使用所有日期，但不能使用过去的日期-读作“从当前日期到任何日期”。</p>
+<h3 id="datecomponents">DateComponents</h3>
+<p>Swift为此有一种略有不同的类型，称为<code>DateComponents</code>，它使我们可以读取或写入日期的特定部分而不是整个内容。</p>
+<p>因此，如果我们想要一个表示今天上午8点的日期，我们可以编写如下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> components <span class="operator">=</span> <span class="type">DateComponents</span>()</span><br><span class="line">components.hour <span class="operator">=</span> <span class="number">8</span></span><br><span class="line">components.minute <span class="operator">=</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">let</span> date <span class="operator">=</span> <span class="type">Calendar</span>.current.date(from: components)</span><br></pre></td></tr></table></figure>
+<p>现在，由于日期验证方面的困难，该<code>date(from:)</code>方法实际上返回了一个可选日期，因此最好使用nil合并来表示“如果失败，请给我返回当前日期”，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> date <span class="operator">=</span> <span class="type">Calendar</span>.current.date(from: components) <span class="operator">??</span> <span class="type">Date</span>()</span><br></pre></td></tr></table></figure>
+<p>第二个挑战是我们如何阅读他们想要醒来的时间。请记住，<code>DatePicker</code>这势必<code>Date</code>会给我们带来很多信息，因此我们需要找到一种仅提取小时和分钟组成部分的方法。</p>
+<p>再一次，您<code>DateComponents</code>需要进行救援：我们可以要求iOS从某个日期开始提供特定的组件，然后再将其读取。一个令人困扰的事情是，我们<em>要求</em>的值和由于工作方式而<em>获得</em>的值之间存在脱节<code>DateComponents</code>：我们可以要求小时和分钟，但是我们将返回一个<code>DateComponents</code>实例，该实例的所有属性都带有可选值。是的，我们知道小时和分钟会在那儿，因为这些正是我们所要求的，但是我们仍然需要拆开可选件或提供默认值。</p>
+<p>因此，我们可能会编写如下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> components <span class="operator">=</span> <span class="type">Calendar</span>.current.dateComponents([.hour, .minute], from: someDate)</span><br><span class="line"><span class="keyword">let</span> hour <span class="operator">=</span> components.hour <span class="operator">??</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">let</span> minute <span class="operator">=</span> components.minute <span class="operator">??</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h3 id="dateformatter">DateFormatter</h3>
+<p>最后的挑战是如何格式化日期和时间，而Swift再次为我们提供了一种特定的类型来为我们完成大部分工作。这次称为<code>DateFormatter</code>，它使我们可以通过多种方式将日期转换为字符串。</p>
+<p>例如，如果我们只想从日期开始的时间，则可以这样写：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> formatter <span class="operator">=</span> <span class="type">DateFormatter</span>()</span><br><span class="line">formatter.timeStyle <span class="operator">=</span> .short</span><br><span class="line"><span class="keyword">let</span> dateString <span class="operator">=</span> formatter.string(from: <span class="type">Date</span>())</span><br></pre></td></tr></table></figure>
+<p>我们还可以设置<code>.dateStyle</code>为获取日期值，甚至可以使用完全自定义格式进行传递<code>dateFormat</code>，但这超出了该项目的范围！</p>
+<hr />
+<h2 id="self">:self</h2>
+<p>在这个项目中，我们将使用<code>List</code>稍有不同的方法，因为我们将使它在字符串数组上循环。我们已经使用<code>ForEach</code>了很多范围，无论是硬编码（<code>0..&lt;5</code>）还是依赖变量数据（<code>0 ..&lt; students.count</code>），而且效果很好，因为SwiftUI可以根据其在范围内的位置唯一地标识每一行。</p>
+<p>当处理一组数据时，SwiftUI仍然需要知道如何唯一地标识每一行，因此，如果删除了一行，则可以简单地删除该行，而不必重新绘制整个列表。这是传入<code>id</code>参数的地方，并且在这两者中都相同，<code>List</code>并且<code>ForEach</code>–使我们能够准确地告诉SwiftUI是什么使数组中的每个项目变得唯一。</p>
+<p>当使用字符串和数字数组时，使这些值唯一的是值本身。也就是说，如果我们有array <code>[2, 4, 6, 8, 10]</code>，那么这些数字本身就是唯一的标识符。毕竟，我们没有其他可使用的东西了！</p>
+<p>当使用这种列表数据时，我们将使用<code>id: \.self</code>以下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ContentView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> people <span class="operator">=</span> [<span class="string">&quot;Finn&quot;</span>, <span class="string">&quot;Leia&quot;</span>, <span class="string">&quot;Luke&quot;</span>, <span class="string">&quot;Rey&quot;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">List</span>(people, id: \.<span class="keyword">self</span>) &#123;</span><br><span class="line">            <span class="type">Text</span>(<span class="variable">$0</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>与相同<code>ForEach</code>，因此，如果我们想混合使用静态行和动态行，则可以这样写：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">List</span> &#123;</span><br><span class="line">    <span class="type">ForEach</span>(people, id: \.<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="type">Text</span>(<span class="variable">$0</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="num">NUM</h2>
+<p>Here's the new function:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getHaterStatus</span>(<span class="params">weather</span>: <span class="type">WeatherType</span>)</span> -&gt; <span class="type">String</span>? &#123;</span><br><span class="line">    <span class="keyword">switch</span> weather &#123;</span><br><span class="line">    <span class="keyword">case</span> .sun:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">    <span class="keyword">case</span> .wind(<span class="keyword">let</span> speed) <span class="keyword">where</span> speed <span class="operator">&lt;</span> <span class="number">10</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;meh&quot;</span></span><br><span class="line">    <span class="keyword">case</span> .cloud, .wind:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;dislike&quot;</span></span><br><span class="line">    <span class="keyword">case</span> .rain, .snow:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;hate&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getHaterStatus(weather: <span class="type">WeatherType</span>.wind(speed: <span class="number">5</span>))</span><br></pre></td></tr></table></figure>
+<p>You can see <code>.wind</code> appears in there twice, but the first time is true only if the wind is slower than 10 kilometers per hour. If the wind is 10 or above, that won't match. The key is that you use <code>let</code> to get hold of the value inside the enum (i.e. to declare a constant name you can reference) then use a <code>where</code>condition to check.</p>
+<h2 id="property-observers">Property observers</h2>
+<p>Swift lets you add code to be run when a property is about to be changed or has been changed. This is frequently a good way to have a user interface update when a value changes, for example.</p>
+<p>There are two kinds of property observer: <code>willSet</code> and <code>didSet</code>, and they are called before or after a property is changed. In <code>willSet</code> Swift provides your code with a special value called <code>newValue</code> that contains what the new property value is going to be, and in <code>didSet</code> you are given <code>oldValue</code> to represent the previous value.</p>
+<p>Let's attach two property observers to the <code>clothes</code> property of a <code>Person</code> struct:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> clothes: <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">willSet</span> &#123;</span><br><span class="line">            updateUI(msg: <span class="string">&quot;I&#x27;m changing from <span class="subst">\(clothes)</span> to <span class="subst">\(newValue)</span>&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">didSet</span> &#123;</span><br><span class="line">            updateUI(msg: <span class="string">&quot;I just changed from <span class="subst">\(oldValue)</span> to <span class="subst">\(clothes)</span>&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">updateUI</span>(<span class="params">msg</span>: <span class="type">String</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(msg)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> taylor <span class="operator">=</span> <span class="type">Person</span>(clothes: <span class="string">&quot;T-shirts&quot;</span>)</span><br><span class="line">taylor.clothes <span class="operator">=</span> <span class="string">&quot;short skirts&quot;</span></span><br></pre></td></tr></table></figure>
+<p>That will print out the messages "I'm changing from T-shirts to short skirts" and "I just changed from T-shirts to short skirts."</p>
+<h2 id="computed-properties">Computed properties</h2>
+<p>It's possible to make properties that are actually code behind the scenes. We already used the <code>uppercased()</code> method of strings, for example, but there’s also a property called <code>capitalized</code> that gets calculated as needed, rather than every string always storing a capitalized version of itself.</p>
+<p>To make a computed property, place an open brace after your property then use either <code>get</code> or <code>set</code> to make an action happen at the appropriate time. For example, if we wanted to add a <code>ageInDogYears</code>property that automatically returned a person's age multiplied by seven, we'd do this:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> age: <span class="type">Int</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> ageInDogYears: <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> age <span class="operator">*</span> <span class="number">7</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> fan <span class="operator">=</span> <span class="type">Person</span>(age: <span class="number">25</span>)</span><br><span class="line"><span class="built_in">print</span>(fan.ageInDogYears)</span><br></pre></td></tr></table></figure>
+<p>Computed properties are increasingly common in Apple's code, but less common in user code.</p>
+<p><strong>Note:</strong> If you intend to use them only for <em>reading</em> data you can just remove the <code>get</code> part entirely, like this:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ageInDogYears: <span class="type">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> age <span class="operator">*</span> <span class="number">7</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="environment-modifier">Environment modifier</h2>
+<p>As an example, this shows our four text views with the title font, but one has a large title:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">VStack</span> &#123;</span><br><span class="line">    <span class="type">Text</span>(<span class="string">&quot;Gryffindor&quot;</span>)</span><br><span class="line">        .font(.largeTitle)</span><br><span class="line">    <span class="type">Text</span>(<span class="string">&quot;Hufflepuff&quot;</span>)</span><br><span class="line">    <span class="type">Text</span>(<span class="string">&quot;Ravenclaw&quot;</span>)</span><br><span class="line">    <span class="type">Text</span>(<span class="string">&quot;Slytherin&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line">.font(.title)</span><br></pre></td></tr></table></figure>
+<p>There, <code>font()</code> is an environment modifier, which means the Gryffindor text view can override it with a custom font.</p>
+<p>However, this applies a blur effect to the <code>VStack</code> then attempts to disable blurring on one of the text views:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">VStack</span> &#123;</span><br><span class="line">    <span class="type">Text</span>(<span class="string">&quot;Gryffindor&quot;</span>)</span><br><span class="line">        .blur(radius: <span class="number">0</span>)</span><br><span class="line">    <span class="type">Text</span>(<span class="string">&quot;Hufflepuff&quot;</span>)</span><br><span class="line">    <span class="type">Text</span>(<span class="string">&quot;Ravenclaw&quot;</span>)</span><br><span class="line">    <span class="type">Text</span>(<span class="string">&quot;Slytherin&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line">.blur(radius: <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p>That won’t work the same way: <code>blur()</code> is a regular modifier, so any blurs applied to child views are <em>added</em> to the <code>VStack</code> blur rather than replacing it.</p>
+<h2 id="string">5. String</h2>
+<h3 id="components">components</h3>
+<p>Swift提供了一种称为的方法<code>components(separatedBy:)</code>，该方法可以通过在找到另一个字符串的地方将其分解来将单个字符串转换为字符串数组。例如，这将创建数组<code>["a", "b", "c"]</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> input <span class="operator">=</span> <span class="string">&quot;a b c&quot;</span></span><br><span class="line"><span class="keyword">let</span> letters <span class="operator">=</span> input.components(separatedBy: <span class="string">&quot; &quot;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="trimmingcharacter">TrimmingCharacter</h3>
+<p>另一个有用的字符串方法是<code>trimmingCharacters(in:)</code>，它要求Swift从字符串的开头和结尾删除某些种类的字符。这使用了一种称为的新类型<code>CharacterSet</code>，但是大多数时候我们想要一种特殊的行为：删除空格和换行符–指的是同时包含空格，制表符和换行符。</p>
+<p>这种行为非常普遍，它内置在<code>CharacterSet</code>结构中，因此我们可以要求Swift在字符串的开头和结尾处修剪所有空格，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> trimmed <span class="operator">=</span> letter<span class="operator">?</span>.trimmingCharacters(in: .whitespacesAndNewlines)</span><br></pre></td></tr></table></figure>
+<p>### random</p>
+<p>但是Swift提供了另一个有用的选择：该<code>randomElement()</code>方法从数组中返回一个随机项。</p>
+<p>例如，这将从我们的数组中读取一个随机字母：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> letter <span class="operator">=</span> letters.randomElement()</span><br></pre></td></tr></table></figure>
+<p>现在，尽管我们可以看到字母数组将包含三个项目，但是Swift并不知道这一点–例如，也许我们试图拆分一个空字符串。结果，该<code>randomElement()</code>方法返回一个可选字符串，我们必须将其解开或与nil合并一起使用。</p>
+<h3 id="uitextchecker">UITextChecker</h3>
+<p>检查拼写错误的单词的能力。</p>
+<p>该功能通过类提供<code>UITextChecker</code>。您可能没有意识到这一点，但是该名称的“ UI”部分带有两个附加含义：</p>
+<ol type="1">
+<li>此类来自UIKit。但是，这并不意味着我们正在加载所有旧的用户界面框架。我们实际上是通过SwiftUI自动获取的。</li>
+<li>它是使用Apple的较旧语言Objective-C编写的。我们不需要编写Objective-C来使用它，但是对于Swift用户来说，API有点笨拙。</li>
+</ol>
+<p>检查字符串中拼写错误的单词总共需要四个步骤。首先，我们创建一个要检查的单词以及一个<code>UITextChecker</code>可以用来检查该字符串的实例：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> word <span class="operator">=</span> <span class="string">&quot;swift&quot;</span></span><br><span class="line"><span class="keyword">let</span> checker <span class="operator">=</span> <span class="type">UITextChecker</span>()</span><br></pre></td></tr></table></figure>
+<p>其次，我们需要告诉检查器我们要检查多少字符串。如果您想象一个文字处理应用程序中的拼写检查器，则可能只想检查用户选择的文本，而不是整个文档。</p>
+<p>但是，有一个陷阱：Swift使用非常聪明，非常先进的字符串处理方式，从而使其可以使用复杂字符（例如表情符号）的方式与使用英语字母的方式完全相同。然而，Objective-C中并<em>没有</em>使用存储字母的这种方法，这意味着我们需要问swift利用我们的所有字符的整个长度，这样创造一个Objective-C字符串范围：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> range <span class="operator">=</span> <span class="type">NSRange</span>(location: <span class="number">0</span>, length: word.utf16.count)</span><br></pre></td></tr></table></figure>
+<p>UTF-16是所谓的<em>字符编码</em> -一种将字母存储在字符串中的方法。我们在这里使用它，以便Objective-C可以了解Swift的字符串是如何存储的；对于我们来说，这是一种很好的桥接格式。</p>
+<p>第三，我们可以要求文本检查器报告在单词中发现任何拼写错误的地方，传递要检查的范围，在该范围内开始的位置（因此我们可以执行“查找下一个”之类的操作），是否应该换行一旦到达末尾，以及字典使用哪种语言：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> misspelledRange <span class="operator">=</span> checker.rangeOfMisspelledWord(in: word, range: range, startingAt: <span class="number">0</span>, wrap: <span class="literal">false</span>, language: <span class="string">&quot;en&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>这会返回另一个Objective-C字符串范围，告诉我们在哪里发现了拼写错误。即使那样，这里仍然存在一个复杂性：Objective-C没有任何可选概念，因此依赖于特殊值来表示丢失的数据。</p>
+<p>在这种情况下，如果Objective-C范围返回为空（即，因为字符串正确拼写而没有拼写错误），那么我们将返回特殊值<code>NSNotFound</code>。</p>
+<p>因此，我们可以检查拼写结果，看是否有这样的错误：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> allGood <span class="operator">=</span> misspelledRange.location <span class="operator">==</span> <span class="type">NSNotFound</span></span><br></pre></td></tr></table></figure>
+<h2 id="alert">6. Alert</h2>
+<p>基本的SwiftUI警报具有标题，消息和一个关闭按钮，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Alert</span>(title: <span class="type">Text</span>(<span class="string">&quot;Hello SwiftUI!&quot;</span>), message: <span class="type">Text</span>(<span class="string">&quot;This is some detail message&quot;</span>), dismissButton: .default(<span class="type">Text</span>(<span class="string">&quot;OK&quot;</span>)))</span><br></pre></td></tr></table></figure>
+<p>如果需要，您可以添加更多代码来更详细地配置按钮，但这已经足够了。更有趣的是我们如何显示警报：我们不将警报分配给变量，而是编写类似之类的内容<code>myAlert.show()</code>，因为这将支持旧的“事件系列”思维方式。</p>
+<p>相反，我们创建一些状态来跟踪警报是否显示，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@State</span> <span class="keyword">private</span> <span class="keyword">var</span> showingAlert <span class="operator">=</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>然后，我们将警报附加到用户界面的某处，告诉它使用该状态来确定是否显示警报。SwiftUI将监视<code>showingAlert</code>，一旦变为true，它将显示警报。</p>
+<p>放在一起，下面是一些示例代码，当点击按钮时会显示警报：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ContentView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="meta">@State</span> <span class="keyword">private</span> <span class="keyword">var</span> showingAlert <span class="operator">=</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">Button</span>(<span class="string">&quot;Show Alert&quot;</span>) &#123;</span><br><span class="line">            <span class="keyword">self</span>.showingAlert <span class="operator">=</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">        .alert(isPresented: <span class="variable">$showingAlert</span>) &#123;</span><br><span class="line">            <span class="type">Alert</span>(title: <span class="type">Text</span>(<span class="string">&quot;Hello SwiftUI!&quot;</span>), message: <span class="type">Text</span>(<span class="string">&quot;This is some detail message&quot;</span>), dismissButton: .default(<span class="type">Text</span>(<span class="string">&quot;OK&quot;</span>)))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这会将警报附加到按钮上，但是说实话，在何处使用<code>alert()</code>修饰符都没关系–我们要做的只是说警报存在，并且在<code>showingAlert</code>true 时显示。</p>
+<p>仔细看一下<code>alert()</code>修饰符：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.alert(isPresented: <span class="variable">$showingAlert</span>)</span><br></pre></td></tr></table></figure>
+<p>这是另一种双向数据绑定，这是因为在取消<code>showingAlert</code>警报时，SwiftUI会自动设置为false。</p>
+<h2 id="sheet">7. Sheet</h2>
+<p><code>sheet()</code>是和一样的修饰符<code>alert()</code>，因此请立即将此修饰符添加到我们的按钮中：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.sheet(isPresented: <span class="variable">$showingSheet</span>) &#123;</span><br><span class="line">    <span class="comment">// contents of the sheet</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>无论如何，这称为<code>@Environment</code>，它使我们能够创建用于存储外部提供给我们的值的属性。用户处于亮模式还是暗模式？他们是否要求较小或较大的字体？他们在哪个时区？所有这些以及更多都是来自环境的值，在这种情况下，我们将从环境中读取视图的<em>表示方式</em>。</p>
+<p>视图的呈现模式仅包含两个数据，但两者都很有用：一个用于存储视图当前是否显示在屏幕上的属性，以及一种让我们立即关闭视图的方法。</p>
+<p>要尝试将该属性添加到中<code>SecondView</code>，该属性会创建一个称为的属性，该属性<code>presentationMode</code>附加到存储在应用程序环境中的演示模式变量中：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Environment</span>(\.presentationMode) <span class="keyword">var</span> presentationMode</span><br></pre></td></tr></table></figure>
+<p>现在，<code>SecondView</code>用以下按钮替换文本视图：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Button</span>(<span class="string">&quot;Dismiss&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">self</span>.presentationMode.wrappedValue.dismiss()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>加入的<code>wrappedValue</code>在那里是必需的，因为<code>presentationMode</code>实际上是有约束力的，因此它可以由系统自动更新-我们需要里面挖检索实际演示模式为我们关闭该视图。</p>
+<h2 id="ondelete">8. onDelete</h2>
+<p><code>onDelete()</code>修饰符仅存在于上<code>ForEach</code>，因此，如果我们希望用户从列表中删除项目，则必须将项目放在内<code>ForEach</code>。当我们只有动态行时，这的确意味着少量的额外代码，但另一方面，这意味着创建仅可以删除某些行的列表会更容易。</p>
+<p>为了进行<code>onDelete()</code>工作，我们需要实现一个方法，该方法将接收type的单个参数<code>IndexSet</code>。这有点像一组整数，除了它是经过排序的，它只是告诉我们<code>ForEach</code>应该删除的所有项目的位置。</p>
+<p>由于我们<code>ForEach</code>是完全由单个数组创建的，因此实际上我们可以直接将索引集直接传递给我们的<code>numbers</code>数组-它具有<code>remove(atOffsets:)</code>接受索引集的特殊方法。</p>
+<p>因此，<code>ContentView</code>现在添加此方法：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">removeRows</span>(<span class="params">at</span> <span class="params">offsets</span>: <span class="type">IndexSet</span>)</span> &#123;</span><br><span class="line">    numbers.remove(atOffsets: offsets)</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>最后，我们可以<code>ForEach</code>通过将它修改为以下方法，告诉SwiftUI要从中删除数据时调用该方法：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ForEach</span>(numbers, id: \.<span class="keyword">self</span>) &#123;</span><br><span class="line">    <span class="type">Text</span>(<span class="string">&quot;<span class="subst">\(<span class="variable">$0</span>)</span>&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line">.onDelete(perform: removeRows)</span><br></pre></td></tr></table></figure>
+<p>现在继续运行您的应用程序，然后添加一些数字。准备就绪后，从右向左在列表中的任何行上滑动，您会发现出现一个删除按钮。您可以点击它，也可以通过进一步滑动来使用iOS的滑动来删除功能。</p>
+<p>考虑到那是多么容易，我认为结果确实很好。但是SwiftUI还有另外一个技巧：我们可以在导航栏中添加“编辑/完成”按钮，这使用户可以更轻松地删除几行。</p>
+<p>首先，将包裹在<code>VStack</code>中<code>NavigationView</code>，然后将此修饰符添加到中<code>VStack</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.navigationBarItems(leading: <span class="type">EditButton</span>())</span><br></pre></td></tr></table></figure>
+<h2 id="userdefault">9. UserDefault</h2>
+<p><code>UserDefaults</code> 非常适合存储用户设置和其他重要数据-您可能会跟踪用户上次启动该应用程序的时间，他们上次阅读的新闻报道或其他被动收集的信息。</p>
+<p>但是，有一个陷阱：它是<em>字符串类型</em>。这有点像个玩笑的名字，因为“强类型”表示像Swift这样的类型安全语言，其中每个常量和变量都具有特定类型，例如<code>Int</code>或<code>String</code>，而“字符串类型”表示某些代码在它们所处的地方使用字符串可能会引起问题。</p>
+<p>让我们看一些代码。这是一个带有按钮的视图，该视图显示拍子计数，并在每次点击该按钮时递增计数：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ContentView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="meta">@State</span> <span class="keyword">private</span> <span class="keyword">var</span> tapCount <span class="operator">=</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">Button</span>(<span class="string">&quot;Tap count: <span class="subst">\(tapCount)</span>&quot;</span>) &#123;</span><br><span class="line">            <span class="keyword">self</span>.tapCount <span class="operator">+=</span> <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为这显然是一个非常重要的应用程序，所以我们希望保存用户做出的点击次数，因此，当他们将来再次使用该应用程序时，可以从上次停止的地方接听。</p>
+<p>好吧，做到这一点只需要做两个改变。首先，我们需要将抽头计数写入<code>UserDefaults</code>更改的位置，因此请在<code>self.tapCount += 1</code> 以下添加：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">UserDefaults</span>.standard.set(<span class="keyword">self</span>.tapCount, forKey: <span class="string">&quot;Tap&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>在那一行代码中，您可以看到三件事：</p>
+<ol type="1">
+<li>我们需要使用<code>UserDefaults.standard</code>。这是<code>UserDefaults</code>连接到我们应用程序的内置实例，但是在更高级的应用程序中，您可以创建自己的实例。例如，如果要在多个应用程序扩展中共享默认设置，则可以创建自己的<code>UserDefaults</code>实例。</li>
+<li>有一个<code>set()</code>方法可以接受任何类型的数据-整数，布尔值，字符串等。</li>
+<li>我们在此数据上附加一个字符串名称，在本例中为“ Tap”键。就像常规的Swift字符串一样，此键区分大小写，并且很重要–我们需要使用相同的键从中读取数据<code>UserDefaults</code>。</li>
+</ol>
+<p>说回读数据，而不是从<code>tapCount</code>设置为0 开始，相反，我们应该使它<code>UserDefaults</code>像这样从以下位置读回值：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@State</span> <span class="keyword">private</span> <span class="keyword">var</span> tapCount <span class="operator">=</span> <span class="type">UserDefaults</span>.standard.integer(forKey: <span class="string">&quot;Tap&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>注意，它如何使用完全相同的键名，以确保它读取相同的整数值。</p>
+<p>继续尝试一下该应用程序，看看您的想法-您应该能够轻按几次该按钮，返回Xcode，再次运行该应用程序，然后查看确切的数字。</p>
+<p>有两件事情你<em>不能</em>在代码中看到的，但两者的事情。首先，如果我们没有设置“ Tap”键，会发生什么？第一次运行该应用程序时就是这种情况，但是正如您刚刚看到的那样，它可以正常工作–如果找不到密钥，它只会发送回0。</p>
+<h2 id="codable">10.Codable</h2>
+<p><code>Codable</code>：一种专门用于<em>存档</em>和<em>取消存档</em>数据的协议，这是一种“将对象转换为纯文本然后再次转换”的奇特方式。</p>
+<p>我们将<code>Codable</code>在未来的项目中进行更多的研究，但是目前我们的需求很简单：我们想要归档一个自定义类型，以便我们可以将其放入<code>UserDefaults</code>，然后在从中<em>退出</em>时对其进行归档<code>UserDefaults</code>。</p>
+<p>当使用仅具有简单属性的类型（字符串，整数，布尔值，字符串数组等）时，我们需要做的唯一支持归档和取消归档的就是向<code>Codable</code>，添加一个一致性，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">User</span>: <span class="title">Codable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> firstName: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> lastName: <span class="type">String</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Swift会自动为我们生成一些代码，这些代码将<code>User</code>根据需要为我们存档和取消存档实例，但是我们仍然需要告诉Swift <em>何时</em>存档以及如何处理数据。</p>
+<p>该过程的这一部分由称为的新类型提供支持<code>JSONEncoder</code>。它的工作是获取符合条件的东西，<code>Codable</code>然后以JavaScript Object Notation（JSON）的形式发送回该对象-该名称暗示该对象特定于JavaScript，但实际上，我们都使用它，因为它是如此快速和简单。</p>
+<p>该<code>Codable</code>协议不需要我们使用JSON，实际上其他格式也可以使用，但这是迄今为止最常见的格式。在这种情况下，我们实际上并不在乎使用<em>哪种</em>数据，因为它们只会存储在中<code>UserDefaults</code>。</p>
+<p>要将<code>user</code>数据转换为JSON数据，我们需要在上调用<code>encode()</code>方法<code>JSONEncoder</code>。这可能会引发错误，因此应使用<code>try</code>或<code>try?</code>巧妙地调用它。例如，如果我们有一个属性来存储<code>User</code>实例，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@State</span> <span class="keyword">private</span> <span class="keyword">var</span> user <span class="operator">=</span> <span class="type">User</span>(firstName: <span class="string">&quot;Taylor&quot;</span>, lastName: <span class="string">&quot;Swift&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>然后，我们可以创建一个将用户存档并将其保存为<code>UserDefaults</code>这样的按钮：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Button</span>(<span class="string">&quot;Save User&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> encoder <span class="operator">=</span> <span class="type">JSONEncoder</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> data <span class="operator">=</span> <span class="keyword">try?</span> encoder.encode(<span class="keyword">self</span>.user) &#123;</span><br><span class="line">        <span class="type">UserDefaults</span>.standard.set(data, forKey: <span class="string">&quot;UserData&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该<code>data</code>常数是一种新的数据类型，可能会引起混淆<code>Data</code>。它旨在存储您可以想到的任何类型的数据，例如字符串，图像，zip文件等。不过，在这里，我们只关心它是可以直接写入的数据类型之一<code>UserDefaults</code>。</p>
+<p>当我们返回另一种方式时（当我们拥有JSON数据并且想要将其转换为Swift <code>Codable</code>类型时），我们应该使用<code>JSONDecoder</code>而不是<code>JSONEncoder()</code>，但是过程大致相同。</p>
+<h3 id="实例">实例</h3>
+<p>储存：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Published</span> <span class="keyword">var</span> items: [<span class="type">ExpenseItem</span>] &#123;</span><br><span class="line">    <span class="keyword">didSet</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> encoder <span class="operator">=</span> <span class="type">JSONEncoder</span>()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> encoded <span class="operator">=</span> <span class="keyword">try?</span> encoder.encode(items) &#123;</span><br><span class="line">            <span class="type">UserDefaults</span>.standard.set(encoded, forKey: <span class="string">&quot;Items&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>读取：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">init</span>()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> items <span class="operator">=</span> <span class="type">UserDefaults</span>.standard.data(forKey: <span class="string">&quot;Items&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> decoder <span class="operator">=</span> <span class="type">JSONDecoder</span>()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> decoded <span class="operator">=</span> <span class="keyword">try?</span> decoder.decode([<span class="type">ExpenseItem</span>].<span class="keyword">self</span>, from: items) &#123;</span><br><span class="line">            <span class="keyword">self</span>.items <span class="operator">=</span> decoded</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">self</span>.items <span class="operator">=</span> []</span><br></pre></td></tr></table></figure>
+<h2 id="uuid与indentifiable">11. UUID与Indentifiable</h2>
+<p>其实也有一个简单的解决方案，它叫做<code>UUID</code>-短期的“通用唯一标识符”，如果<em>说</em>没有独特的声音，我不知道该怎么做。</p>
+<p>UUID是较长的十六进制字符串，例如：08B15DB4-2F02-4AB8-A965-67A9C90D8A44。因此，这是八位数字，四位数字，四位数字，四位数字，然后是十二位数字，其中唯一的要求是在第三块的第一个数字中有一个4。如果减去固定的4，我们最终得到31个数字，每个数字可以是16个值之一–如果在十亿年的时间里每秒产生1个UUID，则可能有最小的机会产生重复的数字。</p>
+<p>现在，我们可以更新<code>ExpenseItem</code>为具有以下<code>UUID</code>属性：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ExpenseItem</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> id: <span class="type">UUID</span></span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> type: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> amount: <span class="type">Int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那会起作用。但是，这也意味着我们需要手工生成一个UUID，然后加载并保存UUID以及其他数据。因此，在这种情况下，我们将要求Swift <code>UUID</code>像这样自动为我们生成一个：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ExpenseItem</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> id <span class="operator">=</span> <span class="type">UUID</span>()</span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> type: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> amount: <span class="type">Int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，我们无需担心<code>id</code>费用项目的价值– Swift将确保它们始终是唯一的。</p>
+<p>有了这个，我们现在可以修复<code>ForEach</code>，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ForEach</span>(expenses.items, id: \.id) &#123; item <span class="keyword">in</span></span><br><span class="line">    <span class="type">Text</span>(item.name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果现在运行该应用程序，您将看到我们的问题已解决：SwiftUI现在可以准确地看到删除了哪个费用项目，并将正确地动画化所有内容。</p>
+<p>不过，我们尚未完成此步骤。相反，我希望您修改<code>ExpenseItem</code>使其符合名为的新协议<code>Identifiable</code>，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ExpenseItem</span>: <span class="title">Identifiable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> id <span class="operator">=</span> <span class="type">UUID</span>()</span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> type: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> amount: <span class="type">Int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们所做的只是添加<code>Identifiable</code>到协议一致性列表中，仅此而已。这是Swift内置的协议之一，表示“可以唯一地标识此类型”。它只有一个要求，那就是必须有一个<code>id</code>包含唯一标识符的称为属性。我们只是添加了它，所以我们不需要做任何额外的工作–我们的类型<code>Identifiable</code>就可以了。</p>
+<p>现在，您可能想知道为什么要添加它，因为我们的代码之前运行良好。好吧，因为现在可以保证我们的费用项目是唯一可识别的，所以我们不再需要告诉<code>ForEach</code>标识符要使用哪个属性-它知道将有一个<code>id</code>属性并且它将是唯一的，因为这就是<code>Identifiable</code>协议的重点。</p>
+<p>因此，由于此更改，我们可以<code>ForEach</code>再次对此进行修改：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ForEach</span>(expenses.items) &#123; item <span class="keyword">in</span></span><br><span class="line">    <span class="type">Text</span>(item.name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="scrollview">12. ScrollView</h2>
+<p>例如，我们可以创建一个包含100个文本视图的滚动列表，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ScrollView</span>(.vertical) &#123;</span><br><span class="line">    <span class="type">VStack</span>(spacing: <span class="number">10</span>) &#123;</span><br><span class="line">        <span class="type">ForEach</span>(<span class="number">0</span><span class="operator">..&lt;</span><span class="number">100</span>) &#123;</span><br><span class="line">            <span class="type">Text</span>(<span class="string">&quot;Item <span class="subst">\(<span class="variable">$0</span>)</span>&quot;</span>)</span><br><span class="line">                .font(.title)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果您在模拟器中重新运行该代码，则会看到可以自由拖动滚动视图，如果滚动到底部，您还将看到<code>ScrollView</code>将安全区域视为<code>List</code>与<code>Form</code>–其内容位于home指示器<em>下方</em>，但是它们添加了一些额外的填充，因此最终视图是完全可见的。</p>
+<p>您可能还会注意到，直接在中心点击有点烦人-整个区域都可滚动更常见。为了获得<em>这种效果</em>，我们应该<code>VStack</code>占用更多空间，同时保持默认的中心对齐不变，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ScrollView</span>(.vertical) &#123;</span><br><span class="line">    <span class="type">VStack</span>(spacing: <span class="number">10</span>) &#123;</span><br><span class="line">        <span class="type">ForEach</span>(<span class="number">0</span><span class="operator">..&lt;</span><span class="number">100</span>) &#123;</span><br><span class="line">            <span class="type">Text</span>(<span class="string">&quot;Item <span class="subst">\(<span class="variable">$0</span>)</span>&quot;</span>)</span><br><span class="line">                .font(.title)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    .frame(maxWidth: .infinity)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，您可以在屏幕上的任意位置点击并拖动，这更加方便了用户。</p>
+<p>这一切似乎都非常简单，而且确实<code>ScrollView</code>比<code>UIScrollView</code>我们必须与UIKit一起使用的旧版本要容易得多。但是，您需要注意一个重要的问题：将视图添加到滚动视图时，它们会立即创建。</p>
+<p>为了说明这一点，我们可以围绕常规文本视图创建一个简单的包装，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">CustomText</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> text: <span class="type">String</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">Text</span>(text)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">init</span>(<span class="keyword">_</span> <span class="params">text</span>: <span class="type">String</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Creating a new CustomText&quot;</span>)</span><br><span class="line">        <span class="keyword">self</span>.text <span class="operator">=</span> text</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们可以在我们的内部使用它<code>ForEach</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ForEach</span>(<span class="number">0</span><span class="operator">..&lt;</span><span class="number">100</span>) &#123;</span><br><span class="line">    <span class="type">CustomText</span>(<span class="string">&quot;Item <span class="subst">\(<span class="variable">$0</span>)</span>&quot;</span>)</span><br><span class="line">        .font(.title)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果看起来相同，但是现在当您运行该应用程序时，您会在Xcode的日志中看到打印了一百次的“正在创建新的CustomText” – SwiftUI不会等到您向下滚动才能看到它们，它会立即创建它们。</p>
+<p>您可以使用尝试相同的实验<code>List</code>，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">List</span> &#123;</span><br><span class="line">    <span class="type">ForEach</span>(<span class="number">0</span><span class="operator">..&lt;</span><span class="number">100</span>) &#123;</span><br><span class="line">        <span class="type">CustomText</span>(<span class="string">&quot;Item <span class="subst">\(<span class="variable">$0</span>)</span>&quot;</span>)</span><br><span class="line">            .font(.title)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当<em>该</em>代码运行时<em>，</em>您会发现它的行为是懒惰的：它<code>CustomText</code>仅在真正需要时才创建实例。</p>
+<h2 id="navigationlink">13.NavigationLink</h2>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NavigationView</span> &#123;</span><br><span class="line">    <span class="type">VStack</span> &#123;</span><br><span class="line">        <span class="type">NavigationLink</span>(destination: <span class="type">Text</span>(<span class="string">&quot;Detail View&quot;</span>)) &#123;</span><br><span class="line">            <span class="type">Text</span>(<span class="string">&quot;Hello World&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    .navigationBarTitle(<span class="string">&quot;SwiftUI&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在运行代码，看看您的想法。您会看到“ Hello World”现在看起来像一个按钮，点击它会在右侧显示一个新视图，显示为“详细信息视图”。更好的是，您会看到“ SwiftUI”标题会向下移动以使其成为后退按钮，您可以点击该按钮或从左边缘滑动以返回。</p>
+<p>所以，无论是<code>sheet()</code>和<code>NavigationLink</code>允许我们显示从当前一个新的观点，但<em>这样</em>他们这样做是不同的，你应该仔细选择他们：</p>
+<ul>
+<li><code>NavigationLink</code> 用于显示有关用户选择的详细信息，就像您正在深入探讨主题一样。</li>
+<li><code>sheet()</code> 用于显示不相关的内容，例如设置或撰写窗口。</li>
+</ul>
+<p>您看到的最常见的地方<code>NavigationLink</code>是列表，SwiftUI的功能非常出色。</p>
+<p>尝试将您的代码修改为此：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NavigationView</span> &#123;</span><br><span class="line">    <span class="type">List</span>(<span class="number">0</span><span class="operator">..&lt;</span><span class="number">100</span>) &#123; row <span class="keyword">in</span></span><br><span class="line">        <span class="type">NavigationLink</span>(destination: <span class="type">Text</span>(<span class="string">&quot;Detail <span class="subst">\(row)</span>&quot;</span>)) &#123;</span><br><span class="line">            <span class="type">Text</span>(<span class="string">&quot;Row <span class="subst">\(row)</span>&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    .navigationBarTitle(<span class="string">&quot;SwiftUI&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在运行该应用程序时，您将看到100个可以点击以显示详细视图的列表行，但是您还将在右侧看到灰色的显示指示器。这是一种标准的iOS方法，告诉用户在点击该行时另一个屏幕将从右侧滑入，SwiftUI足够聪明，可以在此处自动添加它。如果这些行不是导航链接-如果您注释掉该<code>NavigationLink</code>行及其右括号，您会看到指示消失。</p>
+<h1 id="animation">Animation</h1>
+<h4 id="scaleeffect">ScaleEffect()</h4>
+<p>You provide this with a value from 0 up, and it will be drawn at that size – a value of 1.0 is equivalent to 100%,</p>
+<hr />
+<h3 id="cgfloat">CGFloat</h3>
+<p>由于历史原因，主要是与Apple的旧API交互的原因，我们需要使用一种称为的特定数据类型<code>CGFloat</code>。</p>
+<p><code>CGFloat</code>出于各种意图和目的，它是<code>Double</code>一个不同的名称，但在较旧的硬件上，它使用的数字存储类型较小，称为<code>Float</code>。当这个选择很重要时，<code>CGFloat</code>Apple不必在乎我们要为哪种类型的硬件建造，但如今几乎所有东西都在使用，<code>Double</code>因此，厌恶地盯着我们只是一小块遗产。</p>
+<p>无论如何，所有这些都很重要，因为如果我们使该属性<code>var animationAmount = 1</code>得到一个整数，并且如果我们使用它，<code>var animationAmount = 1.0</code>那么我们得到一个<code>Double</code>，但是没有内置的方法来<code>CGFloat</code>自动获得–我们需要使用类型注释。</p>
+<p>因此，请立即将此属性添加到您的视图中：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@State</span> <span class="keyword">private</span> <span class="keyword">var</span> animationAmount: <span class="type">CGFloat</span> <span class="operator">=</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="d旋转与withanimation">3D旋转与withAnimation</h3>
+<p>这需要另一个新的修改器，<code>rotation3DEffect()</code>可以为其指定以度为单位的旋转量以及确定视图旋转方式的轴。通过您的视图将这条轴想成一串：</p>
+<ul>
+<li>we skewer the view through the X axis (horizontally) then it will be able to spin forwards and backwards.</li>
+<li>If we skewer the view through the Y axis (vertically) then it will be able to spin left and right.</li>
+<li>If we skewer the view through the Z axis (depth) then it will be able to rotate left and right.</li>
+</ul>
+<p>进行这项工作需要我们可以修改的某些状态，并且旋转度指定为<code>Double</code>。因此，请立即添加此属性：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@State</span> <span class="keyword">private</span> <span class="keyword">var</span> animationAmount <span class="operator">=</span> <span class="number">0.0</span></span><br></pre></td></tr></table></figure>
+<p>接下来，我们将要求按钮<code>animationAmount</code>沿其Y轴旋转角度，这意味着它将向左和向右旋转。现在将此修饰符添加到按钮：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.rotation3DEffect(.degrees(animationAmount), axis: (x: <span class="number">0</span>, y: <span class="number">1</span>, z: <span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+<p>现在是重要部分：我们将在按钮的动作中添加一些代码，以便在<code>animationAmount</code>每次点击时将其添加360 。</p>
+<p>如果我们只写，<code>self.animationAmount += 360</code>那么更改将立即发生，因为按钮上没有附加动画修改器。这是显式动画出现的地方：如果我们使用<code>withAnimation()</code>闭包，那么SwiftUI将确保由新状态引起的任何更改都将自动进行动画处理。</p>
+<p><strong><em>因此，现在将其放入按钮的操作中：</em></strong></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">withAnimation &#123;</span><br><span class="line">    <span class="keyword">self</span>.animationAmount <span class="operator">+=</span> <span class="number">360</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在运行该代码，我认为它的外观会给您留下深刻的印象–每次点击该按钮，它就会在3D空间中旋转，并且编写起来非常容易。如果有时间，请对轴进行一些试验，以使您真正了解它们的工作原理。如果您感到好奇，可以一次使用多个轴。</p>
+<p><code>withAnimation()</code>可以使用可以在SwiftUI中其他位置使用的所有相同动画来赋予动画参数。例如，我们可以使用如下<code>withAnimation()</code>调用来使旋转效果使用spring动画：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">withAnimation(.interpolatingSpring(stiffness: <span class="number">5</span>, damping: <span class="number">1</span>)) &#123;</span><br><span class="line">    <span class="keyword">self</span>.animationAmount <span class="operator">+=</span> <span class="number">360</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>.animation 必须放在所有需要附加动画的modifier之后</p>
+<p>可以使用多个animation，每个animation控制之前的动画。</p>
+<p>如果animation(nil)则没有动画，但是不会被之后的animation影响</p>
+</blockquote>
+<hr />
+<h1 id="geometry">Geometry</h1>
+<h2 id="geometryreader">GeometryReader</h2>
+<p>现在，让我们在屏幕上绘制该图像：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ContentView</span>: <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">VStack</span> &#123;</span><br><span class="line">            <span class="type">Image</span>(<span class="string">&quot;Example&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>即使在预览中，您也可以看到对于可用空间来说太大了。图像<code>frame()</code>与其他视图具有相同的修饰符，因此您可以尝试按如下所示将其缩小：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Image</span>(<span class="string">&quot;Example&quot;</span>)</span><br><span class="line">    .frame(width: <span class="number">300</span>, height: <span class="number">300</span>)</span><br></pre></td></tr></table></figure>
+<p>但是，这将行不通–您的图片仍将显示为原尺寸。如果您想知道<em>为什么</em>，请仔细查看预览窗口：您会看到图像已放大，但是中间有一个300x300的蓝色框。的<em>图像视图的</em>帧已被正确设定，但<em>内容</em>的图像仍显示为原始大小。</p>
+<p>尝试将图像更改为此：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Image</span>(<span class="string">&quot;Example&quot;</span>)</span><br><span class="line">    .frame(width: <span class="number">300</span>, height: <span class="number">300</span>)</span><br><span class="line">    .clipped()</span><br></pre></td></tr></table></figure>
+<p>现在您将更清楚地看到事情：我们的图像视图确实是300x300，但这并不是我们想要的。</p>
+<p>如果您也想调整图像<em>内容的</em>大小，则需要使用如下<code>resizable()</code>修饰符：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Image</span>(<span class="string">&quot;Example&quot;</span>)</span><br><span class="line">    .resizable()</span><br><span class="line">    .frame(width: <span class="number">300</span>, height: <span class="number">300</span>)</span><br></pre></td></tr></table></figure>
+<p>更好，但仅此而已。是的，现在可以正确调整图像的大小，但是可能看起来像是被压扁了。我的图像不是方形的，因此，由于它已被调整为方形，因此看上去有些失真。</p>
+<p>要解决此问题，我们需要要求图像按比例调整自身大小，这可以使用<code>aspectRatio()</code>修饰符来完成。这可以让我们提供确切的宽高比以及应如何应用，但是如果我们跳过宽高比本身，SwiftUI将自动使用原始的宽高比。</p>
+<p>当谈到“应该如何应用”部分，SwiftUI称此为<em>内容的模式</em>，给我们两个选择：<code>.fit</code>意味着整个图像放在容器内，即使这意味着离开视图的某些部分清空，并且<code>.fill</code>手段视图将没有空白部分，即使这意味着我们的某些图像位于容器外部。</p>
+<p>尝试它们两者，以自己了解差异。这是<code>.fit</code>应用的模式：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Image</span>(<span class="string">&quot;Example&quot;</span>)</span><br><span class="line">    .resizable()</span><br><span class="line">    .aspectRatio(contentMode: .fit)</span><br><span class="line">    .frame(width: <span class="number">300</span>, height: <span class="number">300</span>)</span><br></pre></td></tr></table></figure>
+<p>这是<code>.fill</code>应用模式：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Image</span>(<span class="string">&quot;Example&quot;</span>)</span><br><span class="line">    .resizable()</span><br><span class="line">    .aspectRatio(contentMode: .fill)</span><br><span class="line">    .frame(width: <span class="number">300</span>, height: <span class="number">300</span>)</span><br></pre></td></tr></table></figure>
+<p>如果我们要使用固定尺寸的图像，那么所有这些方法都很好用，但是通常您希望图像能够自动放大以一维或二维填充屏幕。也就是说，您<em>真正</em>要说的不是“ 硬编码300的宽度”，而是“使此图像充满屏幕的宽度”。</p>
+<p>SwiftUI为此提供了专用类型，称为<code>GeometryReader</code>，并且功能非常强大。是的，我知道许多SwiftUI功能强大，但老实说：您可以做的事<code>GeometryReader</code>会让您震惊。</p>
+<p>我们将<code>GeometryReader</code>在项目15中进行更详细的介绍，但现在，我们将其用于一项工作：确保图像填充其容器视图的整个宽度。</p>
+<p><code>GeometryReader</code>与我们使用过的其他视图一样，它是一个视图，除了在创建视图时，我们将获得一个<code>GeometryProxy</code>要使用的对象。这使我们可以查询环境：容器有多大？我们的立场是什么？是否有安全区域插图？等等。</p>
+<p>我们可以使用此几何代理设置图像的宽度，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">VStack</span> &#123;</span><br><span class="line">    <span class="type">GeometryReader</span> &#123; geo <span class="keyword">in</span></span><br><span class="line">        <span class="type">Image</span>(<span class="string">&quot;Example&quot;</span>)</span><br><span class="line">            .resizable()</span><br><span class="line">            .aspectRatio(contentMode: .fit)</span><br><span class="line">            .frame(width: geo.size.width, height: <span class="number">300</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，无论我们使用哪种设备，图像都将占据我们屏幕的整个宽度。</p>
+<p>对于我们的最后一个技巧，让我们<code>height</code>从图像中删除，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">VStack</span> &#123;</span><br><span class="line">    <span class="type">GeometryReader</span> &#123; geo <span class="keyword">in</span></span><br><span class="line">        <span class="type">Image</span>(<span class="string">&quot;Example&quot;</span>)</span><br><span class="line">            .resizable()</span><br><span class="line">            .aspectRatio(contentMode: .fit)</span><br><span class="line">            .frame(width: geo.size.width)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们为SwiftUI提供了足够的信息，它可以自动计算出高度：它知道原始宽度，知道我们的目标宽度，并且知道我们的内容模式，因此它了解图像的目标高度如何与图像的高度成比例。目标宽度。</p>
+<h2 id="path">Path</h2>
+<p>SwiftUI为我们提供了<code>Path</code>一种用于绘制自定义形状的专用类型。这是一个非常低的级别，我的意思是您通常会希望将其包装在其他内容中以使其更有用，但是由于它是构建其他工作的基础，因此我们将从此处开始。</p>
+<p>就像颜色，渐变和形状一样，路径本身就是视图。这意味着我们可以像使用文本视图和图像一样使用它们，尽管您会看到它有些笨拙。</p>
+<p>让我们从一个简单的形状开始：绘制一个三角形。有几种创建路径的方法，包括一种接受关闭绘图指令的方法。此闭包必须接受单个参数，这是绘制的路径。我意识到一开始这可能有点费劲，因为我们正在创建路径，并且在该路径的初始化程序内将要传递的路径绘制进去，但是这样想：SwiftUI正在创建一个空的路径，然后让我们有机会根据需要添加更多内容。</p>
+<p>路径有很多创建带有正方形，圆形，弧形和直线形的形状的方法。对于我们的三角形，我们需要移动到起始位置，然后添加三行，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">    <span class="type">Path</span> &#123; path <span class="keyword">in</span></span><br><span class="line">        path.move(to: <span class="type">CGPoint</span>(x: <span class="number">200</span>, y: <span class="number">100</span>))</span><br><span class="line">        path.addLine(to: <span class="type">CGPoint</span>(x: <span class="number">100</span>, y: <span class="number">300</span>))</span><br><span class="line">        path.addLine(to: <span class="type">CGPoint</span>(x: <span class="number">300</span>, y: <span class="number">300</span>))</span><br><span class="line">        path.addLine(to: <span class="type">CGPoint</span>(x: <span class="number">200</span>, y: <span class="number">100</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们以前没有使用<code>CGPoint</code>过，但是我确实<code>CGSize</code>在项目6中快速回顾了一下。“ CG”是Core Graphics的缩写，它提供了一些基本类型供您选择，它们使我们可以引用X / Y坐标（<code>CGPoint</code>），宽度和高度（<code>CGSize</code>），矩形框（<code>CGRect</code>）和偶数（<code>CGFloat</code>）。</p>
+<p>当我们的三角形代码运行时，您会看到一个大的黑色三角形。<em>当</em>你看到它相对于你的屏幕取决于什么模拟器使用的是，这是这些原始路径的问题的一部分：我们需要使用精确的坐标，所以如果你想通过自己使用的路径，你要么需要接受调整所有设备的尺寸，或使用类似的方法<code>GeometryReader</code>来相对于其容器缩放它们。</p>
+<p>我们将在短期内寻找更好的选择，但首先让我们着眼于为我们的道路着色。一种选择是使用<code>fill()</code>修饰符，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Path</span> &#123; path <span class="keyword">in</span></span><br><span class="line">    path.move(to: <span class="type">CGPoint</span>(x: <span class="number">200</span>, y: <span class="number">100</span>))</span><br><span class="line">    path.addLine(to: <span class="type">CGPoint</span>(x: <span class="number">100</span>, y: <span class="number">300</span>))</span><br><span class="line">    path.addLine(to: <span class="type">CGPoint</span>(x: <span class="number">300</span>, y: <span class="number">300</span>))</span><br><span class="line">    path.addLine(to: <span class="type">CGPoint</span>(x: <span class="number">200</span>, y: <span class="number">100</span>))</span><br><span class="line">&#125;</span><br><span class="line">.fill(<span class="type">Color</span>.blue)</span><br></pre></td></tr></table></figure>
+<p>我们还可以使用<code>stroke()</code>修饰符在路径周围画图，而不用填充它：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.stroke(<span class="type">Color</span>.blue, lineWidth: <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<p>不过，这看起来不太正确–三角形的底角很好看而且很尖锐，但顶角已损坏。之所以会发生这种情况，是因为SwiftUI确保线与前后的线整齐地连接，而不仅仅是一系列单独的线，但是我们的最后一行之后没有任何内容，因此无法建立连接。</p>
+<p>解决此问题的一种方法是再次绘制第一行，这意味着最后一行具有与之匹配的连接线：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Path</span> &#123; path <span class="keyword">in</span></span><br><span class="line">    path.move(to: <span class="type">CGPoint</span>(x: <span class="number">200</span>, y: <span class="number">100</span>))</span><br><span class="line">    path.addLine(to: <span class="type">CGPoint</span>(x: <span class="number">100</span>, y: <span class="number">300</span>))</span><br><span class="line">    path.addLine(to: <span class="type">CGPoint</span>(x: <span class="number">300</span>, y: <span class="number">300</span>))</span><br><span class="line">    path.addLine(to: <span class="type">CGPoint</span>(x: <span class="number">200</span>, y: <span class="number">100</span>))</span><br><span class="line">    path.addLine(to: <span class="type">CGPoint</span>(x: <span class="number">100</span>, y: <span class="number">300</span>))</span><br><span class="line">&#125;</span><br><span class="line">.stroke(<span class="type">Color</span>.blue, lineWidth: <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<p>如您所见，这很棒。而且它甚至可以很好地与透明度配合使用：如果使用透明的笔触颜色（例如），<code>Color.blue.opacity(0.25)</code>您将看到整个笔划均匀地褪色，而沿第一行则看不到任何双笔划。</p>
+<p>一种替代方法是使用SwiftUI的专用<code>ShapeStyle</code>结构，该结构使我们可以控制每条线在其后应如何连接到该线（线连接），以及在其后没有连接的情况下应如何绘制每条线（线帽）。这是特别有用的，因为join和cap的选项之一是<code>.round</code>，它会创建圆形的形状：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.stroke(<span class="type">Color</span>.blue, style: <span class="type">StrokeStyle</span>(lineWidth: <span class="number">10</span>, lineCap: .round, lineJoin: .round))</span><br></pre></td></tr></table></figure>
+<p>有了这个位置，您就可以从我们的路径中删除多余的行，因为不再需要它。</p>
+<h2 id="shape">Shape</h2>
+<p>SwiftUI <code>Shape</code>使用一个必需的方法作为协议来实现：给定以下矩形，您要绘制什么路径？仍然会像直接使用原始路径一样创建并返回路径，但是由于我们已经掌握了尺寸，因此将使用形状，因为我们确切知道绘制路径的大小–我们不再需要依赖固定坐标。</p>
+<p>例如，以前我们使用来创建了一个三角形<code>Path</code>，但是我们可以将其包装成一个形状以确保它自动占用所有可用空间，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Triangle</span>: <span class="title">Shape</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">path</span>(<span class="params">in</span> <span class="params">rect</span>: <span class="type">CGRect</span>)</span> -&gt; <span class="type">Path</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> path <span class="operator">=</span> <span class="type">Path</span>()</span><br><span class="line"></span><br><span class="line">        path.move(to: <span class="type">CGPoint</span>(x: rect.midX, y: rect.minY))</span><br><span class="line">        path.addLine(to: <span class="type">CGPoint</span>(x: rect.minX, y: rect.maxY))</span><br><span class="line">        path.addLine(to: <span class="type">CGPoint</span>(x: rect.maxX, y: rect.maxY))</span><br><span class="line">        path.addLine(to: <span class="type">CGPoint</span>(x: rect.midX, y: rect.minY))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> path</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过<code>CGRect</code>，该工作变得容易得多，它提供了有用的属性，例如<code>minX</code>（矩形中的最小X值），<code>maxX</code>（矩形中的最大X值）和<code>midX</code>（<code>minX</code>和之间的中点<code>maxX</code>）。</p>
+<p>然后，我们可以创建一个精确尺寸的红色三角形，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Triangle</span>()</span><br><span class="line">    .fill(<span class="type">Color</span>.red)</span><br><span class="line">    .frame(width: <span class="number">300</span>, height: <span class="number">300</span>)</span><br></pre></td></tr></table></figure>
+<p>形状还支持相同的<code>StrokeStyle</code>参数以创建更高级的笔触：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Triangle</span>()</span><br><span class="line">    .stroke(<span class="type">Color</span>.red, style: <span class="type">StrokeStyle</span>(lineWidth: <span class="number">10</span>, lineCap: .round, lineJoin: .round))</span><br><span class="line">    .frame(width: <span class="number">300</span>, height: <span class="number">300</span>)</span><br></pre></td></tr></table></figure>
+<p>理解之间的区别的关键<code>Path</code>，并<code>Shape</code>为可重用性：路径的设计做一个具体的东西，而形状具有绘画空间的灵活性，还可以接受的参数让我们进一步对其进行自定义。</p>
+<p>为了说明这一点，我们可以创建一个<code>Arc</code>接受三个参数的形状：起始角度，终止角度以及是否顺时针绘制圆弧。这似乎很简单，特别是因为它<code>Path</code>有一个<code>addArc()</code>方法，但是如您所见，它有几个有趣的怪癖。</p>
+<p>让我们从最简单的弧形开始：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Arc</span>: <span class="title">Shape</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> startAngle: <span class="type">Angle</span></span><br><span class="line">    <span class="keyword">var</span> endAngle: <span class="type">Angle</span></span><br><span class="line">    <span class="keyword">var</span> clockwise: <span class="type">Bool</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">path</span>(<span class="params">in</span> <span class="params">rect</span>: <span class="type">CGRect</span>)</span> -&gt; <span class="type">Path</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> path <span class="operator">=</span> <span class="type">Path</span>()</span><br><span class="line">        path.addArc(center: <span class="type">CGPoint</span>(x: rect.midX, y: rect.midY), radius: rect.width <span class="operator">/</span> <span class="number">2</span>, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> path</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们现在可以像这样创建一个弧：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Arc</span>(startAngle: .degrees(<span class="number">0</span>), endAngle: .degrees(<span class="number">110</span>), clockwise: <span class="literal">true</span>)</span><br><span class="line">    .stroke(<span class="type">Color</span>.blue, lineWidth: <span class="number">10</span>)</span><br><span class="line">    .frame(width: <span class="number">300</span>, height: <span class="number">300</span>)</span><br></pre></td></tr></table></figure>
+<p>如果您查看我们弧线的预览，很可能它看起来并不像您期望的那样。我们要求顺时针旋转从0度到110度的弧度，但似乎逆时针旋转得到从90度到200度的弧度。</p>
+<p>这里发生了两件事：</p>
+<ol type="1">
+<li>在SwiftUI看来，0度不是笔直向上，而是直接向右。</li>
+<li>形状从左下角而不是左上角测量其坐标，这意味着SwiftUI从一个角度到另一个角度进行了另一种方式。在我看来，这是非常陌生的。</li>
+</ol>
+<p>我们可以使用一种新<code>path(in:)</code>方法来解决这两个问题，该新方法将从起点和终点角度减去90度，并且还改变方向，以便SwiftUI遵循自然预期的方式：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">path</span>(<span class="params">in</span> <span class="params">rect</span>: <span class="type">CGRect</span>)</span> -&gt; <span class="type">Path</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> rotationAdjustment <span class="operator">=</span> <span class="type">Angle</span>.degrees(<span class="number">90</span>)</span><br><span class="line">    <span class="keyword">let</span> modifiedStart <span class="operator">=</span> startAngle <span class="operator">-</span> rotationAdjustment</span><br><span class="line">    <span class="keyword">let</span> modifiedEnd <span class="operator">=</span> endAngle <span class="operator">-</span> rotationAdjustment</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> path <span class="operator">=</span> <span class="type">Path</span>()</span><br><span class="line">    path.addArc(center: <span class="type">CGPoint</span>(x: rect.midX, y: rect.midY), radius: rect.width <span class="operator">/</span> <span class="number">2</span>, startAngle: modifiedStart, endAngle: modifiedEnd, clockwise: <span class="operator">!</span>clockwise)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> path</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>PhoenixDai
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://phoenixdai.cn/2023/11/10/%E5%85%B3%E4%BA%8ESwiftUI%E7%AE%80%E5%8D%95%E7%AC%94%E8%AE%B0/" title="关于SwiftUI简单笔记">http://phoenixdai.cn/2023/11/10/关于SwiftUI简单笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Tutorial/" rel="tag"># Tutorial</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/11/09/GO-%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" rel="prev" title="GO 语言基础">
+      <i class="fa fa-chevron-left"></i> GO 语言基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/11/10/%E5%85%B3%E4%BA%8EJavaScript%E7%9A%84%E7%AE%80%E5%8D%95%E7%AC%94%E8%AE%B0/" rel="next" title="关于JavaScript的简单笔记">
+      关于JavaScript的简单笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+  
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9D%97"><span class="nav-number">1.</span> <span class="nav-text">基础模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E7%85%A7%E7%89%87%E5%8F%98%E6%88%90%E7%BA%AF%E8%93%9D%E8%89%B2"><span class="nav-number">1.0.1.</span> <span class="nav-text">关于照片变成纯蓝色</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">1.1.</span> <span class="nav-text">1. 自定义修饰符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%B9%E5%99%A8"><span class="nav-number">1.2.</span> <span class="nav-text">2. 自定义容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%83%B3%E8%B5%B0%E5%BE%97%E6%9B%B4%E8%BF%9C%E5%90%97"><span class="nav-number">1.2.1.</span> <span class="nav-text">想走得更远吗？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%AD%A5%E8%BF%9B%E5%99%A8%E8%BE%93%E5%85%A5%E6%95%B0%E5%AD%97"><span class="nav-number">1.3.</span> <span class="nav-text">3. 用步进器输入数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8datepicker"><span class="nav-number">1.4.</span> <span class="nav-text">4. 使用DatePicker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#datecomponents"><span class="nav-number">1.4.1.</span> <span class="nav-text">DateComponents</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dateformatter"><span class="nav-number">1.4.2.</span> <span class="nav-text">DateFormatter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#self"><span class="nav-number">1.5.</span> <span class="nav-text">:self</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#num"><span class="nav-number">1.6.</span> <span class="nav-text">NUM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#property-observers"><span class="nav-number">1.7.</span> <span class="nav-text">Property observers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#computed-properties"><span class="nav-number">1.8.</span> <span class="nav-text">Computed properties</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#environment-modifier"><span class="nav-number">1.9.</span> <span class="nav-text">Environment modifier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#string"><span class="nav-number">1.10.</span> <span class="nav-text">5. String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#components"><span class="nav-number">1.10.1.</span> <span class="nav-text">components</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trimmingcharacter"><span class="nav-number">1.10.2.</span> <span class="nav-text">TrimmingCharacter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#uitextchecker"><span class="nav-number">1.10.3.</span> <span class="nav-text">UITextChecker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#alert"><span class="nav-number">1.11.</span> <span class="nav-text">6. Alert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sheet"><span class="nav-number">1.12.</span> <span class="nav-text">7. Sheet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ondelete"><span class="nav-number">1.13.</span> <span class="nav-text">8. onDelete</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#userdefault"><span class="nav-number">1.14.</span> <span class="nav-text">9. UserDefault</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#codable"><span class="nav-number">1.15.</span> <span class="nav-text">10.Codable</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.15.1.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uuid%E4%B8%8Eindentifiable"><span class="nav-number">1.16.</span> <span class="nav-text">11. UUID与Indentifiable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scrollview"><span class="nav-number">1.17.</span> <span class="nav-text">12. ScrollView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#navigationlink"><span class="nav-number">1.18.</span> <span class="nav-text">13.NavigationLink</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#animation"><span class="nav-number">2.</span> <span class="nav-text">Animation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#scaleeffect"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">ScaleEffect()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cgfloat"><span class="nav-number">2.0.1.</span> <span class="nav-text">CGFloat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d%E6%97%8B%E8%BD%AC%E4%B8%8Ewithanimation"><span class="nav-number">2.0.2.</span> <span class="nav-text">3D旋转与withAnimation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#geometry"><span class="nav-number">3.</span> <span class="nav-text">Geometry</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#geometryreader"><span class="nav-number">3.1.</span> <span class="nav-text">GeometryReader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#path"><span class="nav-number">3.2.</span> <span class="nav-text">Path</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shape"><span class="nav-number">3.3.</span> <span class="nav-text">Shape</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="PhoenixDai"
+      src="/images/Phoenix-Logo-White.png">
+  <p class="site-author-name" itemprop="name">PhoenixDai</p>
+  <div class="site-description" itemprop="description">Anything that doesn't kill me makes me stronger</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZimingDai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZimingDai" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:phoenixdai2001@163.com" title="E-Mail → mailto:phoenixdai2001@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2022-01 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PhoenixDai</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='48,0,65' opacity='0.9' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
