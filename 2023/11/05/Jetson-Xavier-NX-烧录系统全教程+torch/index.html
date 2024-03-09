@@ -58,7 +58,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311070841621.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/202311070928637.png">
 <meta property="article:published_time" content="2023-11-05T10:02:21.000Z">
-<meta property="article:modified_time" content="2023-11-09T02:25:26.959Z">
+<meta property="article:modified_time" content="2024-03-09T09:19:48.079Z">
 <meta property="article:author" content="PhoenixDai">
 <meta property="article:tag" content="Tutorial">
 <meta name="twitter:card" content="summary">
@@ -254,7 +254,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-09 10:25:26" itemprop="dateModified" datetime="2023-11-09T10:25:26+08:00">2023-11-09</time>
+                <time title="Modified: 2024-03-09 17:19:48" itemprop="dateModified" datetime="2024-03-09T17:19:48+08:00">2024-03-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -334,6 +334,9 @@
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20231105230310553.png" alt="image-20231105230310553" style="zoom:67%;" /></p>
 <p>在这个界面中，输入虚拟机的密码，进入安装界面。</p>
 <p>安装界面会在一开始跳转到初始化界面，这里确定linux的用户名和密码，Storage Device要选择默认的<code>EMMC/SD</code></p>
+<blockquote>
+<p><strong>注意：设置密码一定不能单一空格，每次都在Linux登录的时候显示密码不对！</strong></p>
+</blockquote>
 <p><img src="https://raw.githubusercontent.com/ZimingDai/Picture/main/img/image-20231105232713834.png" alt="image-20231105232713834" style="zoom:67%;" /></p>
 <p>之后就是等待，可能会到99.83%的时候停止，这里我的<strong>解决办法是换了一根数据线就完成了。</strong>网上说的感觉都没啥用……</p>
 <blockquote>
@@ -390,6 +393,9 @@
 <p>安装纯靠运气，建议听着《好运来》进行安装……</p>
 <blockquote>
 <p>如果一直error，我的做法是重新安装Linux系统。</p>
+<ul>
+<li>可能需要Jetson Xavier处于开机并登录状态，这次是因为这个成功了——2024.3.9（ip error）</li>
+</ul>
 </blockquote>
 <p>下载完之后进入Jetson Xavier NX界面，在<code>Terminal</code>中输入：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvcc -V</span><br></pre></td></tr></table></figure>
@@ -608,7 +614,7 @@
 <div class="copyright">
   
   &copy; 2022-01 – 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
